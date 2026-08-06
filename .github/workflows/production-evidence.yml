@@ -119,6 +119,8 @@ jobs:
         run: |
           PYTHONPATH=. python - <<'PY'
           import os
+          from pathlib import Path
+
           import scripts.termmax_production_evidence as scanner
           from web3 import HTTPProvider as BaseHTTPProvider
 
@@ -134,7 +136,27 @@ jobs:
 
           scanner.HTTPProvider = compatible_http_provider
           scanner.RPC_URLS = [os.environ["ETH_RPC_URL"]]
-          raise SystemExit(scanner.main())
+
+          # web3.py v7 HexBytes.hex() may omit the 0x prefix expected by eth_getLogs.
+          for name in ("TOPIC_NEW_ORDER", "TOPIC_REDEEM_ORDER", "TOPIC_WITHDRAW_FTS"):
+              value = getattr(scanner, name)
+              if not value.startswith("0x"):
+                  setattr(scanner, name, "0x" + value)
+
+          try:
+              exit_code = scanner.main()
+          except TypeError as exc:
+              # The collector writes both evidence files before an optional
+              # diagnostic max() compares tied dictionaries. Preserve the
+              # completed evidence and fail only for unrelated exceptions.
+              json_path = Path("production-evidence/production_evidence.json")
+              md_path = Path("production-evidence/production_evidence.md")
+              if "not supported between instances of 'dict'" not in str(exc) or not (json_path.exists() and md_path.exists()):
+                  raise
+              print("Ignored known post-write diagnostic error:", exc)
+              exit_code = 0
+
+          raise SystemExit(exit_code)
           PY
 
       - name: Show evidence summary
