@@ -7,13 +7,17 @@ on:
     paths:
       - .github/workflows/production-evidence-exact-oracle.yml
       - scripts/termmax_production_evidence_exact_debt_oracle.py
+  pull_request:
+    paths:
+      - .github/workflows/production-evidence-exact-oracle.yml
+      - scripts/termmax_production_evidence_exact_debt_oracle.py
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: termmax-redeem-event-dump
+  group: termmax-redeem-event-dump-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -52,7 +56,7 @@ jobs:
           retention-days: 30
 
       - name: Commit decoded evidence
-        if: success()
+        if: success() && github.event_name == 'push'
         run: |
           set -euo pipefail
           git config user.name "termmax-evidence-bot"
