@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches-ignore:
+      - audit/termmax-production-evidence
   pull_request:
   workflow_dispatch:
 
