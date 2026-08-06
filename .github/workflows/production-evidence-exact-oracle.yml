@@ -1,0 +1,83 @@
+name: TermMax production evidence exact oracle
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-exact-oracle.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-production-exact-oracle-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: One-pass scan with exact debt oracle
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Clone technical branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install dependencies
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Run one-pass exact-oracle scan
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python3 - <<'PY'
+          import time
+          import scripts.termmax_production_evidence_exact_debt_oracle as exact
+          scanner=exact.scanner
+          topics=[scanner.TOPIC_NEW_ORDER,scanner.TOPIC_REDEEM_ORDER,scanner.TOPIC_WITHDRAW_FTS]
+          cache={}
+          def topic0(log): return "0x"+log["topics"][0].hex().removeprefix("0x")
+          def one_pass(w3,address,requested,start,end):
+              key=(address,start,end)
+              if key not in cache:
+                  out=[]; cursor=start; chunk=9000
+                  while cursor<=end:
+                      stop=min(end,cursor+chunk-1)
+                      for attempt in range(8):
+                          try:
+                              out.extend(w3.eth.get_logs({"address":address,"topics":[topics],"fromBlock":cursor,"toBlock":stop}))
+                              cursor=stop+1
+                              if cursor % 180000 < chunk: print(f"progress {cursor}/{end}; logs={len(out)}")
+                              break
+                          except Exception as exc:
+                              if attempt==7: raise
+                              delay=min(30,2**attempt); print(f"retry {cursor}-{stop}: {exc}; sleep={delay}"); time.sleep(delay)
+                  cache[key]=out; print(f"one-pass complete logs={len(out)}")
+              target=requested.lower()
+              return [log for log in cache[key] if topic0(log).lower()==target]
+          scanner.get_logs_chunked=one_pass
+          raise SystemExit(scanner.main())
+          PY
+          cat production-evidence/production_evidence.md
+
+      - name: Commit exact-oracle evidence
+        if: success()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record exact-oracle TermMax production evidence"
+          git push origin HEAD:audit/termmax-production-evidence
