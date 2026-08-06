@@ -1,4 +1,4 @@
-name: TermMax production evidence exact oracle
+name: TermMax production RedeemOrder dump
 
 on:
   push:
@@ -6,78 +6,58 @@ on:
       - audit/termmax-production-evidence
     paths:
       - .github/workflows/production-evidence-exact-oracle.yml
+      - scripts/termmax_production_evidence_exact_debt_oracle.py
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: termmax-production-exact-oracle-${{ github.sha }}
+  group: termmax-redeem-event-dump
   cancel-in-progress: true
 
 jobs:
   collect:
-    name: One-pass scan with exact debt oracle
+    name: Decode production RedeemOrder events
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
-      - name: Clone technical branch
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          git clone --depth 1 --branch audit/termmax-production-evidence \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Install dependencies
-        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+        run: python -m pip install --upgrade "web3==7.13.0"
 
-      - name: Run one-pass exact-oracle scan
-        working-directory: repo
+      - name: Dump target-vault settlement events
         env:
           ETH_RPC_URL: https://eth.drpc.org
         run: |
           set -euo pipefail
-          PYTHONPATH=. python3 - <<'PY'
-          import time
+          PYTHONPATH=. python - <<'PY'
           import scripts.termmax_production_evidence_exact_debt_oracle as exact
-          scanner=exact.scanner
-          topics=[scanner.TOPIC_NEW_ORDER,scanner.TOPIC_REDEEM_ORDER,scanner.TOPIC_WITHDRAW_FTS]
-          cache={}
-          def topic0(log): return "0x"+log["topics"][0].hex().removeprefix("0x")
-          def one_pass(w3,address,requested,start,end):
-              key=(address,start,end)
-              if key not in cache:
-                  out=[]; cursor=start; chunk=9000
-                  while cursor<=end:
-                      stop=min(end,cursor+chunk-1)
-                      for attempt in range(8):
-                          try:
-                              out.extend(w3.eth.get_logs({"address":address,"topics":[topics],"fromBlock":cursor,"toBlock":stop}))
-                              cursor=stop+1
-                              if cursor % 180000 < chunk: print(f"progress {cursor}/{end}; logs={len(out)}")
-                              break
-                          except Exception as exc:
-                              if attempt==7: raise
-                              delay=min(30,2**attempt); print(f"retry {cursor}-{stop}: {exc}; sleep={delay}"); time.sleep(delay)
-                  cache[key]=out; print(f"one-pass complete logs={len(out)}")
-              target=requested.lower()
-              return [log for log in cache[key] if topic0(log).lower()==target]
-          scanner.get_logs_chunked=one_pass
-          raise SystemExit(scanner.main())
+          raise SystemExit(exact.scanner.main())
           PY
           cat production-evidence/production_evidence.md
 
-      - name: Commit exact-oracle evidence
+      - name: Upload decoded event evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: termmax-redeem-events
+          path: production-evidence/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit decoded evidence
         if: success()
-        working-directory: repo
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git config user.name "termmax-evidence-bot"
           git config user.email "actions@users.noreply.github.com"
           git add production-evidence/
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Record exact-oracle TermMax production evidence"
+          git commit -m "Record decoded TermMax RedeemOrder events"
           git push origin HEAD:audit/termmax-production-evidence
