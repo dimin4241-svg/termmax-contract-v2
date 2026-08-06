@@ -1,9 +1,6 @@
 name: TermMax public audit duplicate evidence
 
 on:
-  push:
-    branches:
-      - audit/termmax-production-evidence
   workflow_dispatch:
 
 permissions:
