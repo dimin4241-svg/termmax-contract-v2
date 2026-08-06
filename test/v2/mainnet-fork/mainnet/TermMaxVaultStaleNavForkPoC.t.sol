@@ -33,6 +33,8 @@ interface IProductionTermMaxMarket {
 /// @notice This harness intentionally deploys no contracts, mints no assets, changes no oracle,
 ///         and writes no production storage. It replays a real historical RedeemOrder transaction
 ///         on a pinned Ethereum fork and uses shares already held at that historical state.
+/// @dev The test is fail-closed: a zero-bad-debt settlement, fully covered delivery, insufficient
+///      real liquidity, or a mismatch with the historical event makes the PoC fail.
 ///
 /// Required environment variables:
 /// - MAINNET_RPC_URL
@@ -45,8 +47,6 @@ interface IProductionTermMaxMarket {
 /// - TERM_MAX_EXPECTED_BAD_DEBT_RAW          badDebt emitted by the real transaction
 /// - TERM_MAX_EXPECTED_DELIVERY_RAW          deliveryCollateral emitted by the real transaction
 contract TermMaxVaultStaleNavForkPoC is Test {
-    using Math for uint256;
-
     address internal constant VAULT = 0xF488ccdf04079cC03183cDB6A147d12Cf97F9317;
     uint256 internal constant USD_BASE = 1e8;
 
