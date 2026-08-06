@@ -1,0 +1,40 @@
+name: TermMax stale-NAV fork PoC
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+      - .github/workflows/stale-nav-fork-poc.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  compile:
+    name: Compile production fork harness
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Solidity dependencies
+        run: forge soldeer install
+
+      - name: Check harness formatting
+        run: forge fmt --check test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+
+      - name: Compile and enumerate harness tests
+        run: |
+          forge test \
+            --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol \
+            --list
