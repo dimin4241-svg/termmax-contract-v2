@@ -27,10 +27,51 @@ jobs:
       - name: Install scanner dependencies
         run: python -m pip install --upgrade "web3==7.13.0"
 
+      - name: Select an archive RPC with eth_getLogs support
+        shell: bash
+        run: |
+          set -euo pipefail
+          BLOCK=$(printf '0x%x' 25420689)
+          PAYLOAD=$(printf '{"jsonrpc":"2.0","id":1,"method":"eth_getLogs","params":[{"address":"0xF488ccdf04079cC03183cDB6A147d12Cf97F9317","fromBlock":"%s","toBlock":"%s"}]}' "$BLOCK" "$BLOCK")
+          endpoints=(
+            "https://eth.llamarpc.com"
+            "https://rpc.flashbots.net"
+            "https://eth.drpc.org"
+            "https://ethereum.publicnode.com"
+            "https://eth.merkle.io"
+            "https://1rpc.io/eth"
+          )
+          for rpc in "${endpoints[@]}"; do
+            echo "Probing $rpc"
+            response=$(curl --silent --show-error --max-time 20 \
+              -H 'content-type: application/json' \
+              --data "$PAYLOAD" "$rpc" || true)
+            if python - "$response" <<'PY'
+          import json, sys
+          try:
+              value = json.loads(sys.argv[1])
+              ok = isinstance(value.get("result"), list) and "error" not in value
+          except Exception:
+              ok = False
+          raise SystemExit(0 if ok else 1)
+          PY
+            then
+              echo "Selected $rpc"
+              echo "ETH_RPC_URL=$rpc" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          echo "No tested RPC supports the required historical eth_getLogs call" >&2
+          exit 1
+
       - name: Collect production evidence
-        env:
-          ETH_RPC_URL: https://eth.llamarpc.com
-        run: python scripts/termmax_production_evidence.py
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import os
+          import scripts.termmax_production_evidence as scanner
+          scanner.RPC_URLS = [os.environ["ETH_RPC_URL"]]
+          raise SystemExit(scanner.main())
+          PY
 
       - name: Show evidence summary
         if: always()
