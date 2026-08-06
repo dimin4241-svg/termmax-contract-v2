@@ -1,0 +1,33 @@
+name: TermMax public audit duplicate evidence
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    name: Download and search official audit PDFs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PDF text tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Collect audit evidence
+        run: bash scripts/collect_termmax_audit_evidence.sh
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: termmax-public-audit-evidence
+          path: audit-evidence/
+          if-no-files-found: warn
+          retention-days: 30
