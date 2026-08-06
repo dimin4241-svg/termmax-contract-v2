@@ -1,0 +1,48 @@
+name: TermMax production evidence
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  collect:
+    name: Read-only Ethereum production scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install scanner dependencies
+        run: python -m pip install --upgrade "web3==7.13.0"
+
+      - name: Collect production evidence
+        run: python scripts/termmax_production_evidence.py
+
+      - name: Show evidence summary
+        if: always()
+        run: |
+          if [ -f production-evidence/production_evidence.md ]; then
+            cat production-evidence/production_evidence.md
+          fi
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: termmax-production-evidence
+          path: production-evidence/
+          if-no-files-found: warn
+          retention-days: 30
