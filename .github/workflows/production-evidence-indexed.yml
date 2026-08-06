@@ -1,0 +1,135 @@
+name: TermMax production evidence indexed
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-indexed.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-production-indexed-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: Indexed events plus archive state calls
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Clone technical branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install dependencies
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Collect indexed production evidence
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python3 - <<'PY'
+          import json, os, time, urllib.parse, urllib.request
+          from hexbytes import HexBytes
+          import scripts.termmax_production_evidence_exact_debt_oracle as exact
+          scanner=exact.scanner
+
+          vault=scanner.VAULT
+          base=f"https://eth.blockscout.com/api/v2/addresses/{vault}/logs"
+          params={}
+          items=[]
+          seen=set()
+          for page in range(500):
+              url=base
+              if params: url += "?" + urllib.parse.urlencode(params)
+              req=urllib.request.Request(url,headers={"User-Agent":"curl/8.5.0","Accept":"application/json"})
+              for attempt in range(6):
+                  try:
+                      with urllib.request.urlopen(req,timeout=40) as response:
+                          payload=json.loads(response.read())
+                      break
+                  except Exception as exc:
+                      if attempt==5: raise
+                      time.sleep(2**attempt)
+              batch=payload.get("items",[])
+              for item in batch:
+                  key=(item.get("transaction_hash"),item.get("index"),item.get("block_hash"))
+                  if key not in seen:
+                      seen.add(key); items.append(item)
+              nxt=payload.get("next_page_params")
+              print(f"blockscout page={page+1} batch={len(batch)} total={len(items)} next={bool(nxt)}")
+              if not nxt: break
+              params=nxt
+          else:
+              raise RuntimeError("Blockscout pagination exceeded 500 pages")
+
+          def normalize_topic(value):
+              if value is None: return None
+              if isinstance(value,dict): value=value.get("value") or value.get("hex")
+              text=str(value)
+              return text if text.startswith("0x") else "0x"+text
+
+          normalized=[]
+          for item in items:
+              topics=item.get("topics") or []
+              if not topics and item.get("decoded"):
+                  # Decoded-only items cannot substitute for cryptographic topics.
+                  continue
+              topics=[normalize_topic(x) for x in topics if x is not None]
+              tx_hash=item.get("transaction_hash") or item.get("transactionHash")
+              data=item.get("data") or "0x"
+              block=item.get("block_number") or item.get("blockNumber")
+              if tx_hash is None or block is None or not topics: continue
+              normalized.append({
+                  "address": vault,
+                  "blockNumber": int(block),
+                  "topics": [HexBytes(x) for x in topics],
+                  "data": HexBytes(data),
+                  "transactionHash": HexBytes(tx_hash),
+              })
+
+          targets={x.lower() for x in (scanner.TOPIC_NEW_ORDER,scanner.TOPIC_REDEEM_ORDER,scanner.TOPIC_WITHDRAW_FTS)}
+          selected=[]
+          for log in normalized:
+              topic0="0x"+log["topics"][0].hex().removeprefix("0x")
+              if topic0.lower() in targets: selected.append(log)
+          print(f"normalized logs={len(normalized)} selected vault events={len(selected)}")
+          for topic in targets:
+              print(topic,sum(1 for log in selected if ("0x"+log["topics"][0].hex().removeprefix("0x")).lower()==topic))
+
+          def indexed_logs(w3,address,requested,start,end):
+              target=requested.lower()
+              return [
+                  log for log in selected
+                  if start <= int(log["blockNumber"]) <= end
+                  and ("0x"+log["topics"][0].hex().removeprefix("0x")).lower()==target
+              ]
+          scanner.get_logs_chunked=indexed_logs
+          raise SystemExit(scanner.main())
+          PY
+
+          cat production-evidence/production_evidence.md
+
+      - name: Commit indexed evidence
+        if: success()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record indexed exact-oracle production evidence"
+          git push origin HEAD:audit/termmax-production-evidence
