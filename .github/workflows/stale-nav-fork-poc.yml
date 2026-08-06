@@ -7,6 +7,10 @@ on:
     paths:
       - test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
       - .github/workflows/stale-nav-fork-poc.yml
+  pull_request:
+    paths:
+      - test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+      - .github/workflows/stale-nav-fork-poc.yml
   workflow_dispatch:
 
 permissions:
