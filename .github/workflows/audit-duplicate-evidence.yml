@@ -1,10 +1,20 @@
 name: TermMax public audit duplicate evidence
 
 on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - scripts/collect_termmax_audit_evidence.sh
+      - .github/workflows/audit-duplicate-evidence.yml
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: termmax-audit-evidence-${{ github.sha }}
+  cancel-in-progress: true
 
 jobs:
   collect:
