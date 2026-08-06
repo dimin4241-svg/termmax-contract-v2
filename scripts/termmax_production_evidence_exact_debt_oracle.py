@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Narrow read-only dump of TermMax V2 RedeemOrder production events."""
+"""Narrow read-only dump of TermMax V2 RedeemOrder production events.
+
+The output is deterministic and intentionally limited to the deployed target
+vault plus the exact RedeemOrder topic used by the report.
+"""
 
 from __future__ import annotations
 
