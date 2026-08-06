@@ -22,7 +22,7 @@ env:
 jobs:
   collect:
     name: Read-only Ethereum production scan
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
