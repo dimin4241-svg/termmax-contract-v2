@@ -27,41 +27,84 @@ jobs:
       - name: Install scanner dependencies
         run: python -m pip install --upgrade "web3==7.13.0"
 
-      - name: Select an archive RPC with eth_getLogs support
+      - name: Select an archive RPC with logs and eth_call support
         shell: bash
         run: |
           set -euo pipefail
-          BLOCK=$(printf '0x%x' 25420689)
-          PAYLOAD=$(printf '{"jsonrpc":"2.0","id":1,"method":"eth_getLogs","params":[{"address":"0xF488ccdf04079cC03183cDB6A147d12Cf97F9317","fromBlock":"%s","toBlock":"%s"}]}' "$BLOCK" "$BLOCK")
+          HISTORICAL_BLOCK=$(printf '0x%x' 25420688)
+          LOG_BLOCK=$(printf '0x%x' 25420689)
+          VAULT="0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+          ASSET_SELECTOR="0x38d52e0f"
           endpoints=(
-            "https://eth.llamarpc.com"
-            "https://rpc.flashbots.net"
             "https://eth.drpc.org"
             "https://ethereum.publicnode.com"
             "https://eth.merkle.io"
             "https://1rpc.io/eth"
+            "https://rpc.ankr.com/eth"
+            "https://eth-mainnet.public.blastapi.io"
+            "https://mainnet.gateway.tenderly.co"
+            "https://cloudflare-eth.com"
+            "https://rpc.flashbots.net"
+            "https://eth.llamarpc.com"
           )
-          for rpc in "${endpoints[@]}"; do
-            echo "Probing $rpc"
-            response=$(curl --silent --show-error --max-time 20 \
+
+          rpc_call() {
+            local rpc="$1"
+            local payload="$2"
+            curl --silent --show-error --max-time 25 \
               -H 'content-type: application/json' \
-              --data "$PAYLOAD" "$rpc" || true)
-            if python - "$response" <<'PY'
+              --data "$payload" "$rpc" || true
+          }
+
+          json_has_result() {
+            python - "$1" <<'PY'
           import json, sys
           try:
               value = json.loads(sys.argv[1])
-              ok = isinstance(value.get("result"), list) and "error" not in value
+              ok = "result" in value and "error" not in value and value["result"] is not None
           except Exception:
               ok = False
           raise SystemExit(0 if ok else 1)
           PY
-            then
-              echo "Selected $rpc"
-              echo "ETH_RPC_URL=$rpc" >> "$GITHUB_ENV"
-              exit 0
+          }
+
+          for rpc in "${endpoints[@]}"; do
+            echo "Probing $rpc"
+
+            logs_payload=$(printf '{"jsonrpc":"2.0","id":1,"method":"eth_getLogs","params":[{"address":"%s","fromBlock":"%s","toBlock":"%s"}]}' "$VAULT" "$LOG_BLOCK" "$LOG_BLOCK")
+            logs_response=$(rpc_call "$rpc" "$logs_payload")
+            if ! json_has_result "$logs_response"; then
+              echo "  rejected: historical eth_getLogs unavailable"
+              continue
             fi
+
+            latest_call_payload=$(printf '{"jsonrpc":"2.0","id":2,"method":"eth_call","params":[{"to":"%s","data":"%s"},"latest"]}' "$VAULT" "$ASSET_SELECTOR")
+            latest_call_response=$(rpc_call "$rpc" "$latest_call_payload")
+            if ! json_has_result "$latest_call_response"; then
+              echo "  rejected: latest eth_call unavailable"
+              continue
+            fi
+
+            historical_call_payload=$(printf '{"jsonrpc":"2.0","id":3,"method":"eth_call","params":[{"to":"%s","data":"%s"},"%s"]}' "$VAULT" "$ASSET_SELECTOR" "$HISTORICAL_BLOCK")
+            historical_call_response=$(rpc_call "$rpc" "$historical_call_payload")
+            if ! json_has_result "$historical_call_response"; then
+              echo "  rejected: historical archive eth_call unavailable"
+              continue
+            fi
+
+            code_payload=$(printf '{"jsonrpc":"2.0","id":4,"method":"eth_getCode","params":["%s","%s"]}' "$VAULT" "$HISTORICAL_BLOCK")
+            code_response=$(rpc_call "$rpc" "$code_payload")
+            if ! json_has_result "$code_response"; then
+              echo "  rejected: historical eth_getCode unavailable"
+              continue
+            fi
+
+            echo "Selected $rpc"
+            echo "ETH_RPC_URL=$rpc" >> "$GITHUB_ENV"
+            exit 0
           done
-          echo "No tested RPC supports the required historical eth_getLogs call" >&2
+
+          echo "No tested RPC supports historical logs plus latest/historical eth_call" >&2
           exit 1
 
       - name: Collect production evidence
