@@ -4,10 +4,17 @@ on:
   push:
     branches:
       - audit/termmax-production-evidence
+    paths:
+      - scripts/termmax_production_evidence.py
+      - .github/workflows/production-evidence.yml
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: termmax-production-evidence-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   PYTHONUNBUFFERED: "1"
