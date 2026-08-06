@@ -1,0 +1,119 @@
+name: TermMax production evidence shell-only v2
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-shell-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-production-shell-v2-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: Corrected read-only production scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Clone technical branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install dependencies
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Select archive RPC and collect corrected evidence
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, urllib.request
+          endpoints = [
+              "https://eth.drpc.org",
+              "https://ethereum.publicnode.com",
+              "https://eth.merkle.io",
+              "https://1rpc.io/eth",
+              "https://rpc.ankr.com/eth",
+              "https://eth-mainnet.public.blastapi.io",
+              "https://mainnet.gateway.tenderly.co",
+              "https://cloudflare-eth.com",
+              "https://rpc.flashbots.net",
+              "https://eth.llamarpc.com",
+          ]
+          vault = "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+          hist = hex(25420688)
+          log_block = hex(25420689)
+          def rpc(url, method, params):
+              data = json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params}).encode()
+              req = urllib.request.Request(url, data=data, headers={"Content-Type":"application/json","User-Agent":"curl/8.5.0","Accept":"application/json"})
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  value = json.loads(response.read())
+              if value.get("error") or value.get("result") is None:
+                  raise RuntimeError(value)
+              return value["result"]
+          errors=[]
+          for endpoint in endpoints:
+              try:
+                  rpc(endpoint,"eth_getLogs",[{"address":vault,"fromBlock":log_block,"toBlock":log_block}])
+                  rpc(endpoint,"eth_call",[{"to":vault,"data":"0x38d52e0f"},hist])
+                  rpc(endpoint,"eth_getCode",[vault,hist])
+                  open("/tmp/selected_rpc","w").write(endpoint)
+                  print("Selected",endpoint)
+                  break
+              except Exception as exc:
+                  errors.append(f"{endpoint}: {exc}")
+                  print("Rejected",endpoint,exc)
+          else:
+              raise SystemExit("No archive RPC passed:\n"+"\n".join(errors))
+          PY
+
+          export ETH_RPC_URL="$(cat /tmp/selected_rpc)"
+          PYTHONPATH=. python3 - <<'PY'
+          import os
+          import scripts.termmax_production_evidence as scanner
+          from web3 import HTTPProvider as BaseHTTPProvider
+
+          def provider(url, request_kwargs=None):
+              kwargs=dict(request_kwargs or {})
+              headers=dict(kwargs.pop("headers",{}) or {})
+              headers.update({"User-Agent":"curl/8.5.0","Content-Type":"application/json","Accept":"application/json"})
+              return BaseHTTPProvider(url,request_kwargs={**kwargs,"headers":headers})
+
+          scanner.HTTPProvider=provider
+          scanner.RPC_URLS=[os.environ["ETH_RPC_URL"]]
+          for name in ("TOPIC_NEW_ORDER", "TOPIC_REDEEM_ORDER", "TOPIC_WITHDRAW_FTS"):
+              value = getattr(scanner, name)
+              if not value.startswith("0x"):
+                  setattr(scanner, name, "0x" + value)
+          print("Corrected topics:", scanner.TOPIC_NEW_ORDER, scanner.TOPIC_REDEEM_ORDER, scanner.TOPIC_WITHDRAW_FTS)
+          raise SystemExit(scanner.main())
+          PY
+
+          cat production-evidence/production_evidence.md
+
+      - name: Commit evidence to technical branch
+        if: success()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/
+          if git diff --cached --quiet; then
+            echo "No evidence changes"
+            exit 0
+          fi
+          git commit -m "Record corrected TermMax production evidence"
+          git push origin HEAD:audit/termmax-production-evidence
