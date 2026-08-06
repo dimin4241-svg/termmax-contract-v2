@@ -1,0 +1,103 @@
+name: TermMax production evidence fast
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-fast.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-production-fast-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: One-pass corrected production scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Clone technical branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install dependencies
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Run one-pass archive scan
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python3 - <<'PY'
+          import os, time
+          import scripts.termmax_production_evidence as scanner
+          from web3 import HTTPProvider as BaseHTTPProvider
+
+          def provider(url, request_kwargs=None):
+              kwargs=dict(request_kwargs or {})
+              headers=dict(kwargs.pop("headers",{}) or {})
+              headers.update({"User-Agent":"curl/8.5.0","Content-Type":"application/json","Accept":"application/json"})
+              return BaseHTTPProvider(url,request_kwargs={**kwargs,"headers":headers})
+
+          scanner.HTTPProvider=provider
+          scanner.RPC_URLS=[os.environ["ETH_RPC_URL"]]
+          for name in ("TOPIC_NEW_ORDER", "TOPIC_REDEEM_ORDER", "TOPIC_WITHDRAW_FTS"):
+              value=getattr(scanner,name)
+              if not value.startswith("0x"):
+                  setattr(scanner,name,"0x"+value)
+
+          original_topics=[scanner.TOPIC_NEW_ORDER,scanner.TOPIC_REDEEM_ORDER,scanner.TOPIC_WITHDRAW_FTS]
+          cache={}
+          def normalized(log):
+              return "0x"+log["topics"][0].hex().removeprefix("0x")
+          def one_pass(w3,address,requested,start,end):
+              key=(address,start,end)
+              if key not in cache:
+                  all_logs=[]; cursor=start; chunk=9000
+                  while cursor<=end:
+                      stop=min(end,cursor+chunk-1)
+                      for attempt in range(8):
+                          try:
+                              batch=w3.eth.get_logs({"address":address,"topics":[original_topics],"fromBlock":cursor,"toBlock":stop})
+                              all_logs.extend(batch); cursor=stop+1
+                              if cursor%180000 < chunk:
+                                  print(f"one-pass progress {cursor}/{end}; logs={len(all_logs)}")
+                              break
+                          except Exception as exc:
+                              if attempt==7: raise
+                              delay=min(30,2**attempt)
+                              print(f"retry {cursor}-{stop} after {exc}; sleep={delay}")
+                              time.sleep(delay)
+                  cache[key]=all_logs
+                  print(f"one-pass complete logs={len(all_logs)}")
+              target=requested.lower()
+              return [log for log in cache[key] if normalized(log).lower()==target]
+          scanner.get_logs_chunked=one_pass
+          raise SystemExit(scanner.main())
+          PY
+
+          cat production-evidence/production_evidence.md
+
+      - name: Commit evidence
+        if: success()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record one-pass TermMax production evidence"
+          git push origin HEAD:audit/termmax-production-evidence
