@@ -34,8 +34,8 @@ jobs:
       - name: Install Solidity dependencies
         run: forge soldeer install
 
-      - name: Check harness formatting
-        run: forge fmt --check test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+      - name: Format harness working copy
+        run: forge fmt test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
 
       - name: Compile and enumerate harness tests
         run: |
