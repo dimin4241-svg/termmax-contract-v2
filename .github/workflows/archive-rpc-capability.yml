@@ -1,0 +1,97 @@
+name: TermMax archive RPC capability probe
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/archive-rpc-capability.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Probe public Ethereum RPCs for historical eth_call
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, urllib.request, time
+          from pathlib import Path
+
+          endpoints=[
+            'https://eth-mainnet.g.alchemy.com/v2/demo',
+            'https://api.zan.top/node/v1/eth/mainnet/public',
+            'https://eth-mainnet-public.unifra.io',
+            'https://rpc.mevblocker.io',
+            'https://eth.drpc.org',
+            'https://mainnet.gateway.tenderly.co',
+            'https://rpc.payload.de',
+            'https://ethereum.publicnode.com',
+            'https://1rpc.io/eth',
+            'https://eth.llamarpc.com',
+            'https://cloudflare-eth.com',
+          ]
+          vault='0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48'
+          preblock=24826645
+          latest_usdc='0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+
+          def rpc(ep,method,params,timeout=18):
+              body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+              req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+              with urllib.request.urlopen(req,timeout=timeout) as r: data=json.loads(r.read())
+              if data.get('error'): raise RuntimeError(data['error'])
+              return data.get('result')
+
+          rows=[]
+          for ep in endpoints:
+              row={'endpoint':ep}
+              for label,fn in [
+                  ('chain_id',lambda:rpc(ep,'eth_chainId',[])),
+                  ('historical_block',lambda:rpc(ep,'eth_getBlockByNumber',[hex(preblock),False])),
+                  ('historical_vault_asset',lambda:rpc(ep,'eth_call',[{'to':vault,'data':'0x38d52e0f'},hex(preblock)])),
+                  ('latest_usdc_decimals',lambda:rpc(ep,'eth_call',[{'to':latest_usdc,'data':'0x313ce567'},'latest'])),
+              ]:
+                  t=time.time()
+                  try:
+                      res=fn(); row[label]={'ok':True,'result':res,'seconds':round(time.time()-t,3)}
+                  except Exception as exc:
+                      row[label]={'ok':False,'error':repr(exc),'seconds':round(time.time()-t,3)}
+              rows.append(row)
+              print('RPC',json.dumps(row,sort_keys=True)[:6000])
+
+          good=[r['endpoint'] for r in rows if r['historical_vault_asset'].get('ok')]
+          out={'preblock':preblock,'vault':vault,'results':rows,'archive_capable_for_target':good}
+          Path('production-evidence/archive_rpc_capability.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('ARCHIVE_CAPABLE',json.dumps(good))
+          PY
+
+      - name: Commit probe result
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/archive_rpc_capability.json
+          git commit -m "Record archive RPC capability probe" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: archive-rpc-capability
+          path: repo/production-evidence/archive_rpc_capability.json
