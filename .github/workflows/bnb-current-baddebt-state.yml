@@ -1,0 +1,164 @@
+name: TermMax current BNB bad-debt state
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnb-current-baddebt-state.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install web3
+        run: python3 -m pip install --user --upgrade 'web3==7.13.0'
+
+      - name: Query latest vault state against every deployed BNB market collateral
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import glob,json,re
+          from pathlib import Path
+          from web3 import Web3
+
+          endpoints=[
+            'https://bsc-rpc.publicnode.com',
+            'https://bsc.publicnode.com',
+            'https://bsc-dataseed.bnbchain.org',
+          ]
+          w3=None; chosen=None
+          for ep in endpoints:
+            q=Web3(Web3.HTTPProvider(ep,request_kwargs={'timeout':30}))
+            try:
+              if q.is_connected(): w3=q; chosen=ep; break
+            except: pass
+          if w3 is None: raise SystemExit('no BNB RPC available')
+          latest=w3.eth.block_number
+
+          vaults=[]; markets=[]
+          for f in glob.glob('deployments/bnb-mainnet/*.env'):
+            txt=Path(f).read_text(errors='ignore')
+            for m in re.finditer(r'^VAULT_ADDRESS(?:_\d+)?=(0x[a-fA-F0-9]{40})',txt,re.M): vaults.append(m.group(1))
+            for m in re.finditer(r'^MARKET_ADDRESS(?:_\d+)?=(0x[a-fA-F0-9]{40})',txt,re.M): markets.append(m.group(1))
+          # stable dedupe
+          vaults=list(dict.fromkeys(a.lower() for a in vaults)); markets=list(dict.fromkeys(a.lower() for a in markets))
+          if not vaults: raise SystemExit('no BNB vault addresses')
+          if not markets: raise SystemExit('no BNB market addresses')
+
+          abi_market=[{'type':'function','name':'tokens','stateMutability':'view','inputs':[],'outputs':[
+            {'name':'ft','type':'address'},{'name':'xt','type':'address'},{'name':'gt','type':'address'},
+            {'name':'collateral','type':'address'},{'name':'debtToken','type':'address'}]}]
+          abi_vault=[
+            {'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+            {'type':'function','name':'totalAssets','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'totalSupply','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'pool','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+            {'type':'function','name':'badDebtMapping','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'paused','stateMutability':'view','inputs':[],'outputs':[{'type':'bool'}]},
+          ]
+          abi_token=[
+            {'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+            {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+            {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+          ]
+          abi_pool=[{'type':'function','name':'maxWithdraw','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]}]
+
+          def meta(addr):
+            c=w3.eth.contract(address=Web3.to_checksum_address(addr),abi=abi_token)
+            out={'address':addr}
+            try: out['symbol']=c.functions.symbol().call()
+            except Exception as e: out['symbol_error']=repr(e)
+            try: out['decimals']=c.functions.decimals().call()
+            except Exception as e: out['decimals_error']=repr(e)
+            return out
+
+          market_rows=[]; collaterals={}
+          for m in markets:
+            try:
+              vals=w3.eth.contract(address=Web3.to_checksum_address(m),abi=abi_market).functions.tokens().call()
+              row={'market':m,'ft':vals[0].lower(),'xt':vals[1].lower(),'gt':vals[2].lower(),'collateral':vals[3].lower(),'debt_token':vals[4].lower()}
+              collaterals[row['collateral']]=None
+              market_rows.append(row)
+            except Exception as e:
+              market_rows.append({'market':m,'error':repr(e)})
+          for c in list(collaterals): collaterals[c]=meta(c)
+
+          rows=[]; positives=[]
+          for v in vaults:
+            code=w3.eth.get_code(Web3.to_checksum_address(v))
+            vr={'vault':v,'code_bytes':len(code),'bad_debts':[]}
+            if not code:
+              rows.append(vr); continue
+            c=w3.eth.contract(address=Web3.to_checksum_address(v),abi=abi_vault)
+            try:
+              asset=c.functions.asset().call().lower(); vr['asset']=meta(asset)
+              vr['total_assets_raw']=c.functions.totalAssets().call()
+              vr['total_supply_raw']=c.functions.totalSupply().call()
+              vr['paused']=c.functions.paused().call()
+              pool=c.functions.pool().call().lower(); vr['pool']=pool
+              assetc=w3.eth.contract(address=Web3.to_checksum_address(asset),abi=abi_token)
+              direct=assetc.functions.balanceOf(Web3.to_checksum_address(v)).call(); vr['direct_asset_raw']=direct
+              poolcap=0
+              if int(pool,16)!=0:
+                try: poolcap=w3.eth.contract(address=Web3.to_checksum_address(pool),abi=abi_pool).functions.maxWithdraw(Web3.to_checksum_address(v)).call()
+                except Exception as e: vr['pool_max_withdraw_error']=repr(e)
+              vr['pool_max_withdraw_raw']=poolcap; vr['liquid_capacity_raw']=direct+poolcap
+              dec=vr['asset'].get('decimals')
+              if dec is not None:
+                vr['total_assets_asset_units']=vr['total_assets_raw']/(10**dec)
+                vr['liquid_capacity_asset_units']=vr['liquid_capacity_raw']/(10**dec)
+              for col,cm in collaterals.items():
+                try: bd=c.functions.badDebtMapping(Web3.to_checksum_address(col)).call()
+                except Exception as e:
+                  vr['bad_debts'].append({'collateral':col,'error':repr(e)}); continue
+                if bd==0: continue
+                colc=w3.eth.contract(address=Web3.to_checksum_address(col),abi=abi_token)
+                bal=colc.functions.balanceOf(Web3.to_checksum_address(v)).call()
+                item={'collateral':col,'collateral_meta':cm,'bad_debt_raw':bd,'vault_collateral_balance_raw':bal}
+                if dec is not None: item['bad_debt_asset_units']=bd/(10**dec)
+                vr['bad_debts'].append(item)
+                positives.append({'vault':v,**item,'vault_asset':vr['asset'],'total_assets_raw':vr['total_assets_raw'],'total_supply_raw':vr['total_supply_raw'],'liquid_capacity_raw':vr['liquid_capacity_raw']})
+            except Exception as e:
+              vr['vault_error']=repr(e)
+            rows.append(vr)
+
+          positives.sort(key=lambda x:x['bad_debt_asset_units'] if 'bad_debt_asset_units' in x else x['bad_debt_raw'],reverse=True)
+          out={'chain':'bnb-mainnet','rpc':chosen,'latest_block':latest,'vault_count':len(vaults),'market_count':len(markets),
+               'market_rows':market_rows,'collateral_meta':collaterals,'vaults':rows,'positive_bad_debt_rows':positives}
+          Path('production-evidence/bnb_current_baddebt_state.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('LATEST_BLOCK',latest,'VAULTS',len(vaults),'MARKETS',len(markets),'POSITIVE_ROWS',len(positives))
+          for r in rows:
+            print('VAULT',r.get('vault'),'CODE',r.get('code_bytes'),'ASSET',json.dumps(r.get('asset')),'TOTAL_ASSETS_RAW',r.get('total_assets_raw'),'LIQUID_RAW',r.get('liquid_capacity_raw'),'BAD_DEBTS',len(r.get('bad_debts',[])),'ERR',r.get('vault_error'))
+          for p in positives:
+            print('POSITIVE',json.dumps(p,sort_keys=True))
+          PY
+
+      - name: Commit state evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnb_current_baddebt_state.json
+          git commit -m "Record current BNB vault bad-debt state" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnb-current-baddebt-state
+          path: repo/production-evidence/bnb_current_baddebt_state.json

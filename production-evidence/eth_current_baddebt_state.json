@@ -1,0 +1,1431 @@
+{
+  "chain": "ethereum-mainnet",
+  "current_positive_bad_debt_rows": [
+    {
+      "bad_debt_asset_units": 0.939875,
+      "bad_debt_raw": 939875,
+      "collateral": "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770",
+      "collateral_meta": {
+        "address": "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770",
+        "decimals": 8,
+        "symbol": "wstrBTC"
+      },
+      "liquid_capacity_raw": 15165144996,
+      "total_assets_raw": 674182319553,
+      "total_supply_raw": 657085273239,
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 9267,
+      "vault_collateral_balance_units": 9.267e-05
+    },
+    {
+      "bad_debt_asset_units": 5e-06,
+      "bad_debt_raw": 5,
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "collateral_meta": {
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "decimals": 8,
+        "symbol": "WBTC"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 4e-06,
+      "bad_debt_raw": 4,
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "collateral_meta": {
+        "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+        "decimals": 8,
+        "symbol": "cbBTC"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 2e-06,
+      "bad_debt_raw": 2,
+      "collateral": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+      "collateral_meta": {
+        "address": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+        "decimals": 18,
+        "symbol": "QQQon"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 2e-06,
+      "bad_debt_raw": 2,
+      "collateral": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+      "collateral_meta": {
+        "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+        "decimals": 6,
+        "symbol": "XAUt"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 2e-06,
+      "bad_debt_raw": 2,
+      "collateral": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "collateral_meta": {
+        "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+        "decimals": 18,
+        "symbol": "wstETH"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x9a34eb848c06d438d8747060a383dd13cff33317",
+      "collateral_meta": {
+        "address": "0x9a34eb848c06d438d8747060a383dd13cff33317",
+        "decimals": 6,
+        "symbol": "PT-mEDGE-29JAN2026"
+      },
+      "liquid_capacity_raw": 5199500,
+      "total_assets_raw": 5199499,
+      "total_supply_raw": 5179305,
+      "vault": "0x97263e74912e19176a34ab32871a873a395487d9",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33",
+      "collateral_meta": {
+        "address": "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33",
+        "decimals": 18,
+        "symbol": "PT-stcUSD-29JAN2026"
+      },
+      "liquid_capacity_raw": 314233796,
+      "total_assets_raw": 292082920,
+      "total_supply_raw": 288727610,
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0xe6a934089bbee34f832060ce98848359883749b3",
+      "collateral_meta": {
+        "address": "0xe6a934089bbee34f832060ce98848359883749b3",
+        "decimals": 18,
+        "symbol": "PT-sUSDE-27NOV2025"
+      },
+      "liquid_capacity_raw": 590452,
+      "total_assets_raw": 1244112493,
+      "total_supply_raw": 1244052202,
+      "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8",
+      "collateral_meta": {
+        "address": "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8",
+        "decimals": 18,
+        "symbol": "ynRWAx"
+      },
+      "liquid_capacity_raw": 2686692,
+      "total_assets_raw": 7076450128,
+      "total_supply_raw": 7000105105,
+      "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+      "collateral_meta": {
+        "address": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+        "decimals": 18,
+        "symbol": "PT-sUSDE-7MAY2026"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "collateral_meta": {
+        "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+        "decimals": 18,
+        "symbol": "reUSD"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+      "collateral_meta": {
+        "address": "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+        "decimals": 18,
+        "symbol": "PT-apxUSD-18JUN2026"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0x9db38d74a0d29380899ad354121dfb521adb0548",
+      "collateral_meta": {
+        "address": "0x9db38d74a0d29380899ad354121dfb521adb0548",
+        "decimals": 6,
+        "symbol": "PT-USDG-28MAY2026"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+      "collateral_meta": {
+        "address": "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+        "decimals": 18,
+        "symbol": "PT-cUSDO-20NOV2025"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+      "collateral_meta": {
+        "address": "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+        "decimals": 18,
+        "symbol": "PT-sUSDE-5FEB2026"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1e-06,
+      "bad_debt_raw": 1,
+      "collateral": "0xf6b1117ec07684d3958cad8beb1b302bfd21103f",
+      "collateral_meta": {
+        "address": "0xf6b1117ec07684d3958cad8beb1b302bfd21103f",
+        "decimals": 18,
+        "symbol": "TSLAon"
+      },
+      "liquid_capacity_raw": 2791338349449,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317",
+      "vault_asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1.0182136e-11,
+      "bad_debt_raw": 10182136,
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "collateral_meta": {
+        "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+        "decimals": 18,
+        "symbol": "reUSD"
+      },
+      "liquid_capacity_raw": 501882441,
+      "total_assets_raw": 512067651,
+      "total_supply_raw": 512028987,
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+      "vault_asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 1.499564e-12,
+      "bad_debt_raw": 1499564,
+      "collateral": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+      "collateral_meta": {
+        "address": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+        "decimals": 6,
+        "symbol": "USPC"
+      },
+      "liquid_capacity_raw": 0,
+      "total_assets_raw": 20709419465356994067881244,
+      "total_supply_raw": 20622145906823659013255810,
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68",
+      "vault_asset": {
+        "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+        "decimals": 18,
+        "symbol": "RLUSD"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 4.6332e-14,
+      "bad_debt_raw": 46332,
+      "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+      "collateral_meta": {
+        "address": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+        "decimals": 18,
+        "symbol": "ynETHx"
+      },
+      "liquid_capacity_raw": 21839865183148237752,
+      "total_assets_raw": 21839865183148279586,
+      "total_supply_raw": 21651235743735521726,
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f",
+      "vault_asset": {
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "decimals": 18,
+        "symbol": "WETH"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 5.545e-15,
+      "bad_debt_raw": 5545,
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "collateral_meta": {
+        "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+        "decimals": 18,
+        "symbol": "reUSD"
+      },
+      "liquid_capacity_raw": 994457,
+      "total_assets_raw": 1000001,
+      "total_supply_raw": 1000000,
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e",
+      "vault_asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 2.102e-15,
+      "bad_debt_raw": 2102,
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "collateral_meta": {
+        "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+        "decimals": 8,
+        "symbol": "cbBTC"
+      },
+      "liquid_capacity_raw": 501882441,
+      "total_assets_raw": 512067651,
+      "total_supply_raw": 512028987,
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+      "vault_asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    },
+    {
+      "bad_debt_asset_units": 9.73e-16,
+      "bad_debt_raw": 973,
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "collateral_meta": {
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "decimals": 18,
+        "symbol": "WETH"
+      },
+      "liquid_capacity_raw": 501882441,
+      "total_assets_raw": 512067651,
+      "total_supply_raw": 512028987,
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+      "vault_asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "vault_collateral_balance_raw": 0,
+      "vault_collateral_balance_units": 0.0
+    }
+  ],
+  "historical_positive_event_count": 44,
+  "latest_block": 25701578,
+  "order_resolution": [
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 10182136,
+      "historical_block": 24187489,
+      "market": "0x7fa18408f5d0528d1706b6138113bca446131531",
+      "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "collateral": "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 939875,
+      "historical_block": 24826646,
+      "market": "0xd7e6c4fd81b72449ba2bb4cc4ca6670b31189f49",
+      "order": "0x385429223ddc9921f2491c4a16b79c0b0717c431",
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "collateral": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+      "debt_token": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+      "historical_bad_debt_raw": 578633,
+      "historical_block": 25659630,
+      "market": "0x4036493e7c6635cf0689e229b05dbab85e5b25c3",
+      "order": "0x8c506c3d59219fac4662995aac02bedc29b0a6aa",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "collateral": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+      "debt_token": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+      "historical_bad_debt_raw": 490172,
+      "historical_block": 25659621,
+      "market": "0x4036493e7c6635cf0689e229b05dbab85e5b25c3",
+      "order": "0x3e35f030836cb93276c34b89dcf6a2d32759384b",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "collateral": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+      "debt_token": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+      "historical_bad_debt_raw": 430759,
+      "historical_block": 25659627,
+      "market": "0x4036493e7c6635cf0689e229b05dbab85e5b25c3",
+      "order": "0x667c16eef2d2a904dca777432b83cb502124869b",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+      "debt_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "historical_bad_debt_raw": 20388,
+      "historical_block": 25034969,
+      "market": "0x48db8ff6a2bd430dc13123c33caceb6a5c6f7c62",
+      "order": "0xc9d4f7225118a1f8468889007eb1732fa64e2dfb",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+      "debt_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "historical_bad_debt_raw": 13177,
+      "historical_block": 25651571,
+      "market": "0x9d08e943828da4bcc9681eda5d7e4d4994cc24b8",
+      "order": "0x562046484a1f9128836bb265801c4039dabd6b7e",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+      "debt_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "historical_bad_debt_raw": 11449,
+      "historical_block": 24655418,
+      "market": "0x4ae0c4770f89a053c14deb74af483434a39fafcd",
+      "order": "0x6676a041dedba9c8c9fc4776fcac5577a2c91340",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 3346,
+      "historical_block": 25417613,
+      "market": "0x464e864a73a6709d8c10ce2c7684b4c743014131",
+      "order": "0x71ff6b4af4cef74a42760e4d41d1a8dc612d3a9b",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 2102,
+      "historical_block": 24714396,
+      "market": "0x5fdee187feae1b3927a8c991a5e5387a13047f1b",
+      "order": "0xbb7a8cd6abb11116c7571646b5f1fb8fb97e6406",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+      "debt_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "historical_bad_debt_raw": 1318,
+      "historical_block": 24655421,
+      "market": "0x2672bd427667d01b863f7737e775e0d6894aa59a",
+      "order": "0x6228c0753727d7d914145232dc5fb08d091562f7",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 1025,
+      "historical_block": 24417707,
+      "market": "0x361889d249ffb92939050fc229cdca0f7929818e",
+      "order": "0xddd412cb0022b7d6497b19147091bea69aea7041",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 950,
+      "historical_block": 24417707,
+      "market": "0x59ae7ce49bb2e429525b539c29cc25027f265462",
+      "order": "0xaa6611554d0664072d4a3c0ac7925acb742d9ac6",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 684,
+      "historical_block": 24733950,
+      "market": "0x08390658bc02c163559522a044c406d34c0ab6b8",
+      "order": "0x01651e54968d61edb8cdd2cce3af1bab1c58f2b9",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 297,
+      "historical_block": 25417613,
+      "market": "0x05fc09bde1c0d1e33c55698d10def88fa2e19c67",
+      "order": "0xcaefb801c16ea0d80891df2a51932223f0182133",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 193,
+      "historical_block": 25417613,
+      "market": "0x014f402cc0fb6c61c71c7f89168d2d2c249e8d42",
+      "order": "0x17f94ae9973d958fc8a595ce88ba82342ee7900d",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 20,
+      "historical_block": 24714396,
+      "market": "0x157ecb7290b3a9ebc0718547bebc6ae5562784d7",
+      "order": "0xbecc7f6a52866cbab78c1b4a05ff245b141cd4d8",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "debt_token": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+      "historical_bad_debt_raw": 3,
+      "historical_block": 24714396,
+      "market": "0x3b3526d52ebe9b23853f631ad9f2b095f04604c9",
+      "order": "0x8ce6afb32a42f2feb0bb54eae1c79c67ffc30215",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "collateral": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25682658,
+      "market": "0xbb9d063d37e07998317ecdcec6fc099ea034d60f",
+      "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25682624,
+      "market": "0x598f6decdf9b414f1a7ead76307aadc8682a8c70",
+      "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25682620,
+      "market": "0xc894b068d99376d6abf8a9625667cad2d6e5eab7",
+      "order": "0x9bafdf2a2d1c2bca75371d50895ac1a3a94ceb18",
+      "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c"
+    },
+    {
+      "collateral": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25682620,
+      "market": "0x38f35b56d4666013096b7aed555b82eab13ac87a",
+      "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25682605,
+      "market": "0x0ecbb252647721115985451b793c986fcba843e6",
+      "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393305,
+      "market": "0x6ccc3a0c1e3fc05144afe9b949e869973d7f757c",
+      "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393297,
+      "market": "0x7488fde35075c581c0ac74ef02cbc31eec066e3a",
+      "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393288,
+      "market": "0x134780901da7b554a492f7ce6a11f6d89be588e9",
+      "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393286,
+      "market": "0x67d3dc578989e1ea202a6909d7299b41acfb414a",
+      "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393285,
+      "market": "0x8c31d3c36932bde7e08af44196850be8c28c2f62",
+      "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393284,
+      "market": "0x92be6b4ff25485f62a06853ccca0b908f136b53b",
+      "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x9db38d74a0d29380899ad354121dfb521adb0548",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393283,
+      "market": "0xc03c089da25171c6a57e78618f58a3a82a1130a5",
+      "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xf6b1117ec07684d3958cad8beb1b302bfd21103f",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393282,
+      "market": "0x56db9b84ffe492e642dd03212a790c453749d378",
+      "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393280,
+      "market": "0x1d1d240df9f77117bdf1b5e98e56ce0c38fc5aee",
+      "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25393279,
+      "market": "0x5e4c27280f25fa416e47a150e95c0b517e6d7157",
+      "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25349832,
+      "market": "0x917e84615ced8766523660c7197a91b32f5f7476",
+      "order": "0x18f426708043782773470636a12ed422aa67f923",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25140851,
+      "market": "0xb30615dce965d4ffc86cf883a5607bc3ff283c61",
+      "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 25140848,
+      "market": "0xa4988e12444a67733e39f7938ba9d122899fd72a",
+      "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24976973,
+      "market": "0x49b88019c84d50fac372fc9391a955b8cb761f97",
+      "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24976972,
+      "market": "0xb20a66e8fed8688977c61d4f80ac6afa4a32c183",
+      "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24970816,
+      "market": "0x299e45fb698b0ddb4a064b7b7126fb98cec96fbe",
+      "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0x9a34eb848c06d438d8747060a383dd13cff33317",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24683244,
+      "market": "0xa4ad55b490637dabfe529b6df732cc6d90915beb",
+      "order": "0x406ccf3378616dd931f0d61a3f11849c05534470",
+      "vault": "0x97263e74912e19176a34ab32871a873a395487d9"
+    },
+    {
+      "collateral": "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24389192,
+      "market": "0x15147b737bee000126632652a85d7a733b7505bc",
+      "order": "0xe6690172eea7833a46964b075f98d0f438810cbf",
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    },
+    {
+      "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 24116677,
+      "market": "0x95d8867ccf8a64490dde3c4363147c53411691e8",
+      "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 23895230,
+      "market": "0xd3bad342fb73a01ce0d8af859b43e75e4bf9bad6",
+      "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "collateral": "0xe6a934089bbee34f832060ce98848359883749b3",
+      "debt_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "historical_bad_debt_raw": 1,
+      "historical_block": 23476413,
+      "market": "0x0b15573f87267c0750bdcdf641054cec2abafaa8",
+      "order": "0x40bbe019f4c66de696a4297f41bfb7887e93a42a",
+      "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842"
+    }
+  ],
+  "rpc": "https://eth.drpc.org",
+  "vault_count": 11,
+  "vaults": [
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 0.939875,
+          "bad_debt_raw": 939875,
+          "collateral": "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770",
+          "collateral_meta": {
+            "address": "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770",
+            "decimals": 8,
+            "symbol": "wstrBTC"
+          },
+          "vault_collateral_balance_raw": 9267,
+          "vault_collateral_balance_units": 9.267e-05
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0xa3ca88cfb7bbe9cfbd47df053ffa2130c7e6f770"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 15165.144996,
+      "liquid_capacity_raw": 15165144996,
+      "paused": false,
+      "pool": "0x9bdefe80d8cbd3ceda200b8cea4b2c53fc64d5f0",
+      "pool_max_withdraw_raw": 15165144996,
+      "total_assets_asset_units": 674182.319553,
+      "total_assets_raw": 674182319553,
+      "total_supply_raw": 657085273239,
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1.0182136e-11,
+          "bad_debt_raw": 10182136,
+          "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+          "collateral_meta": {
+            "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+            "decimals": 18,
+            "symbol": "reUSD"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 9.73e-16,
+          "bad_debt_raw": 973,
+          "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "collateral_meta": {
+            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "decimals": 18,
+            "symbol": "WETH"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 2.102e-15,
+          "bad_debt_raw": 2102,
+          "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+          "collateral_meta": {
+            "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+            "decimals": 8,
+            "symbol": "cbBTC"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf"
+      ],
+      "direct_asset_raw": 501882441,
+      "liquid_capacity_asset_units": 5.01882441e-10,
+      "liquid_capacity_raw": 501882441,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 5.12067651e-10,
+      "total_assets_raw": 512067651,
+      "total_supply_raw": 512028987,
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [],
+      "code_bytes": 45,
+      "collaterals_checked": [],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 254.641665,
+      "liquid_capacity_raw": 254641665,
+      "paused": false,
+      "pool": "0x4605593d0ada76786bea026e7b62af1c0619e833",
+      "pool_max_withdraw_raw": 254641665,
+      "total_assets_asset_units": 183.569158,
+      "total_assets_raw": 183569158,
+      "total_supply_raw": 183081453,
+      "vault": "0x5b98e87312487a9e09365e63dac4bdbbf9569c2f"
+    },
+    {
+      "asset": {
+        "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+        "decimals": 18,
+        "symbol": "RLUSD"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1.499564e-12,
+          "bad_debt_raw": 1499564,
+          "collateral": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+          "collateral_meta": {
+            "address": "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19",
+            "decimals": 6,
+            "symbol": "USPC"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0xbf4e3fbe8b60062a00c7a6b1d97d0d49c2971a19"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 0.0,
+      "liquid_capacity_raw": 0,
+      "paused": false,
+      "pool": "0x9e3dac7f63afa882f0237badec9bc81c50ca879e",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 20709419.465356994,
+      "total_assets_raw": 20709419465356994067881244,
+      "total_supply_raw": 20622145906823659013255810,
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "asset": {
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "decimals": 18,
+        "symbol": "WETH"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 4.6332e-14,
+          "bad_debt_raw": 46332,
+          "collateral": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+          "collateral_meta": {
+            "address": "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb",
+            "decimals": 18,
+            "symbol": "ynETHx"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 21.839865183148238,
+      "liquid_capacity_raw": 21839865183148237752,
+      "paused": false,
+      "pool": "0x7b7466d33a3843c6ec8be75986a0be26a4a524fb",
+      "pool_max_withdraw_raw": 21839865183148237752,
+      "total_assets_asset_units": 21.83986518314828,
+      "total_assets_raw": 21839865183148279586,
+      "total_supply_raw": 21651235743735521726,
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x9a34eb848c06d438d8747060a383dd13cff33317",
+          "collateral_meta": {
+            "address": "0x9a34eb848c06d438d8747060a383dd13cff33317",
+            "decimals": 6,
+            "symbol": "PT-mEDGE-29JAN2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x9a34eb848c06d438d8747060a383dd13cff33317"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 5.1995,
+      "liquid_capacity_raw": 5199500,
+      "paused": false,
+      "pool": "0x8a169ea147bb0c5c86a5b55691d24b49741b4a1c",
+      "pool_max_withdraw_raw": 5199500,
+      "total_assets_asset_units": 5.199499,
+      "total_assets_raw": 5199499,
+      "total_supply_raw": 5179305,
+      "vault": "0x97263e74912e19176a34ab32871a873a395487d9"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33",
+          "collateral_meta": {
+            "address": "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33",
+            "decimals": 18,
+            "symbol": "PT-stcUSD-29JAN2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0xc3c7e5e277d31cd24a3ac4cc9af3b6770f30ea33"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 314.233796,
+      "liquid_capacity_raw": 314233796,
+      "paused": false,
+      "pool": "0x2fcaabaac3099fe1021af6484fba3d3ca8ab3e29",
+      "pool_max_withdraw_raw": 314233796,
+      "total_assets_asset_units": 292.08292,
+      "total_assets_raw": 292082920,
+      "total_supply_raw": 288727610,
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0xe6a934089bbee34f832060ce98848359883749b3",
+          "collateral_meta": {
+            "address": "0xe6a934089bbee34f832060ce98848359883749b3",
+            "decimals": 18,
+            "symbol": "PT-sUSDE-27NOV2025"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0xe6a934089bbee34f832060ce98848359883749b3"
+      ],
+      "direct_asset_raw": 590452,
+      "liquid_capacity_asset_units": 0.590452,
+      "liquid_capacity_raw": 590452,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1244.112493,
+      "total_assets_raw": 1244112493,
+      "total_supply_raw": 1244052202,
+      "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842"
+    },
+    {
+      "asset": {
+        "address": "0xdde3ec717f220fc6a29d6a4be73f91da5b718e55",
+        "decimals": 18,
+        "symbol": "USDU"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 5.545e-15,
+          "bad_debt_raw": 5545,
+          "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+          "collateral_meta": {
+            "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+            "decimals": 18,
+            "symbol": "reUSD"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x5086bf358635b81d8c47c66d1c8b9e567db70c72"
+      ],
+      "direct_asset_raw": 994457,
+      "liquid_capacity_asset_units": 9.94457e-13,
+      "liquid_capacity_raw": 994457,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1.000001e-12,
+      "total_assets_raw": 1000001,
+      "total_supply_raw": 1000000,
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8",
+          "collateral_meta": {
+            "address": "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8",
+            "decimals": 18,
+            "symbol": "ynRWAx"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x01ba69727e2860b37bc1a2bd56999c1afb4c15d8"
+      ],
+      "direct_asset_raw": 2686692,
+      "liquid_capacity_asset_units": 2.686692,
+      "liquid_capacity_raw": 2686692,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 7076.450128,
+      "total_assets_raw": 7076450128,
+      "total_supply_raw": 7000105105,
+      "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c"
+    },
+    {
+      "asset": {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6,
+        "symbol": "USDC"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 2e-06,
+          "bad_debt_raw": 2,
+          "collateral": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+          "collateral_meta": {
+            "address": "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+            "decimals": 18,
+            "symbol": "QQQon"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 5e-06,
+          "bad_debt_raw": 5,
+          "collateral": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "collateral_meta": {
+            "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "decimals": 8,
+            "symbol": "WBTC"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+          "collateral_meta": {
+            "address": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+            "decimals": 18,
+            "symbol": "PT-sUSDE-7MAY2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+          "collateral_meta": {
+            "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+            "decimals": 18,
+            "symbol": "reUSD"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 2e-06,
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+          "collateral_meta": {
+            "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+            "decimals": 6,
+            "symbol": "XAUt"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 2e-06,
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+          "collateral_meta": {
+            "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+            "decimals": 18,
+            "symbol": "wstETH"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+          "collateral_meta": {
+            "address": "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+            "decimals": 18,
+            "symbol": "PT-apxUSD-18JUN2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38d74a0d29380899ad354121dfb521adb0548",
+          "collateral_meta": {
+            "address": "0x9db38d74a0d29380899ad354121dfb521adb0548",
+            "decimals": 6,
+            "symbol": "PT-USDG-28MAY2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+          "collateral_meta": {
+            "address": "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+            "decimals": 18,
+            "symbol": "PT-cUSDO-20NOV2025"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 4e-06,
+          "bad_debt_raw": 4,
+          "collateral": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+          "collateral_meta": {
+            "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+            "decimals": 8,
+            "symbol": "cbBTC"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+          "collateral_meta": {
+            "address": "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+            "decimals": 18,
+            "symbol": "PT-sUSDE-5FEB2026"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        },
+        {
+          "bad_debt_asset_units": 1e-06,
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684d3958cad8beb1b302bfd21103f",
+          "collateral_meta": {
+            "address": "0xf6b1117ec07684d3958cad8beb1b302bfd21103f",
+            "decimals": 18,
+            "symbol": "TSLAon"
+          },
+          "vault_collateral_balance_raw": 0,
+          "vault_collateral_balance_units": 0.0
+        }
+      ],
+      "code_bytes": 45,
+      "collaterals_checked": [
+        "0x0e397938c1aa0680954093495b70a9f5e2249aba",
+        "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
+        "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
+        "0x68749665ff8d2d112fa859aa293f07a622782f38",
+        "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+        "0x92a6a01b07984de46c24e8eba248449beb8b1dcb",
+        "0x9db38d74a0d29380899ad354121dfb521adb0548",
+        "0xb10da2f9147f9cf2b8826877cd0c95c18a0f42dc",
+        "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+        "0xe8483517077afa11a9b07f849cee2552f040d7b2",
+        "0xf6b1117ec07684d3958cad8beb1b302bfd21103f"
+      ],
+      "direct_asset_raw": 0,
+      "liquid_capacity_asset_units": 2791338.349449,
+      "liquid_capacity_raw": 2791338349449,
+      "paused": false,
+      "pool": "0x6c865ab693df85386f5c09fcc53742ab81b8721a",
+      "pool_max_withdraw_raw": 2791338349449,
+      "total_assets_asset_units": 3347848.34609,
+      "total_assets_raw": 3347848346090,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "bscscan_legacy_no_key": {
+    "http": 200,
+    "response": {
+      "message": "NOTOK",
+      "result": "You are using a deprecated V1 endpoint, switch to Etherscan API V2 using https://docs.etherscan.io/v2-migration",
+      "status": "0"
+    },
+    "url": "https://api.bscscan.com/api?module=logs&action=getLogs&fromBlock=67251219&toBlock=67256218&address=0x086c120290850E4698645A5689c2428D6E7789dE&topic0=0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242&page=1&offset=1000"
+  },
+  "etherscan_v2_no_key": {
+    "http": 200,
+    "response": {
+      "message": "NOTOK",
+      "result": "Free API access is not supported for this chain. Please upgrade your api plan for full chain coverage. https://etherscan.io/apis",
+      "status": "0"
+    },
+    "url": "https://api.etherscan.io/v2/api?chainid=56&module=logs&action=getLogs&fromBlock=67251219&toBlock=67256218&address=0x086c120290850E4698645A5689c2428D6E7789dE&topic0=0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242&page=1&offset=1000"
+  },
+  "routescan_all": {
+    "http": 200,
+    "response": {
+      "message": "An error occurred",
+      "result": null,
+      "status": "0"
+    },
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/all/etherscan/api?module=logs&action=getLogs&fromBlock=67251219&toBlock=67256218&address=0x086c120290850E4698645A5689c2428D6E7789dE&topic0=0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242&page=1&offset=1000"
+  },
+  "routescan_specific": {
+    "http": 200,
+    "response": {
+      "message": "chain not supported",
+      "result": null,
+      "status": "0"
+    },
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/56/etherscan/api?module=logs&action=getLogs&fromBlock=67251219&toBlock=67256218&address=0x086c120290850E4698645A5689c2428D6E7789dE&topic0=0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242&page=1&offset=1000"
+  }
+}

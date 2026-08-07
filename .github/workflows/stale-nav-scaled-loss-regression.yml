@@ -1,0 +1,69 @@
+name: Scaled stale-NAV realized-loss regression
+
+on:
+  push:
+    branches: [audit/termmax-production-evidence]
+    paths:
+      - test/v2/VaultBadDebtScaleAudit.t.sol
+      - .github/workflows/stale-nav-scaled-loss-regression.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: forge soldeer install
+      - name: Run scaled realized-loss regression
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          forge test \
+            --match-path 'test/v2/VaultBadDebtScaleAudit.t.sol' \
+            --match-test 'testAudit_ScaledRealizedLossIsShiftedToRemainingLPs' \
+            --isolate -vv 2>&1 | tee production-evidence/stale_nav_scaled_loss_runtime.log
+          grep -Fq '[PASS]' production-evidence/stale_nav_scaled_loss_runtime.log
+          ! grep -Fq 'No tests found' production-evidence/stale_nav_scaled_loss_runtime.log
+      - name: Extract measured impact
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          p=Path('production-evidence/stale_nav_scaled_loss_runtime.log')
+          if not p.exists(): raise SystemExit(0)
+          clean=re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',p.read_text(errors='replace'))
+          keys=('bad debt raw','delivered collateral raw','delivered collateral value in debt raw','realized net loss raw','exiting LP shares','stale redeem payout raw','fair loss-adjusted payout raw','loss shifted to remaining LPs raw','[PASS]','[FAIL]','Suite result')
+          keep=[x for x in clean.splitlines() if any(k in x for k in keys)]
+          Path('production-evidence/stale_nav_scaled_loss_excerpt.log').write_text('\n'.join(keep)+'\n')
+          print('\n'.join(keep))
+          PY
+      - name: Commit evidence
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/stale_nav_scaled_loss_runtime.log || exit 0
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f production-evidence/stale_nav_scaled_loss_runtime.log production-evidence/stale_nav_scaled_loss_excerpt.log
+          git commit -m 'Record scaled stale NAV loss proof' || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stale-nav-scaled-loss-regression
+          path: |
+            production-evidence/stale_nav_scaled_loss_runtime.log
+            production-evidence/stale_nav_scaled_loss_excerpt.log
+          if-no-files-found: warn

@@ -1,0 +1,3211 @@
+{
+  "historical_share_holders_preblock": [
+    {
+      "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+      "shares_raw": 5000000000000000000000000
+    }
+  ],
+  "internal_transactions": {
+    "items": [
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5",
+          "implementations": [
+            {
+              "address_hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+              "name": "Safe"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "SafeProxy",
+          "private_tags": [],
+          "proxy_type": "master_copy",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "423069",
+        "index": 1,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {
+                  "tagIcon ": "https://blockscout-icons.s3.us-east-1.amazonaws.com/OLI_tag_logo.svg",
+                  "textColor": "#C163D4",
+                  "tooltipAttribution": "https://www.openlabelsinitiative.org?utm_source=blockscout",
+                  "tooltipAttributionIcon": "https://blockscout-icons.s3.us-east-1.amazonaws.com/OLI_tag_logo.svg",
+                  "tooltipDescription": "Provided by OLI",
+                  "tooltipUrl": "https://safe.global/"
+                },
+                "name": "Safe 1.4.1",
+                "ordinal": 10,
+                "slug": "safe-141",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "Safe (formerly Gnosis Safe)",
+                "ordinal": 0,
+                "slug": "safe-formerly-gnosis-safe",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Smart Account by Safe",
+                "ordinal": 0,
+                "slug": "smart-account-by-safe",
+                "tagType": "generic"
+              }
+            ]
+          },
+          "name": "Safe",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5",
+          "implementations": [
+            {
+              "address_hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+              "name": "Safe"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "SafeProxy",
+          "private_tags": [],
+          "proxy_type": "master_copy",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "392904",
+        "index": 2,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "384171",
+        "index": 3,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "TermMaxVaultV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "362533",
+        "index": 4,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xAEc65F8F45b93e2De4Cde40CBEF9CAC8E3345b41",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "OrderManagerV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "351690",
+        "index": 5,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "343601",
+        "index": 6,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "TermMaxOrderV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "323508",
+        "index": 7,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "315859",
+        "index": 8,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x32E84D6DD9Bb0dFdBc980153D61E3851478d3a67",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "MintableERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "313276",
+        "index": 9,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "305781",
+        "index": 10,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "TermMaxMarketV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "286084",
+        "index": 11,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x8c0D5d1C8429bA93522b82363b663dd0fD4508b8",
+          "implementations": [
+            {
+              "address_hash": "0x09d79cb520548605713D89775c174C00469a1821",
+              "name": "GearingTokenWithERC20V2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x8c0D5d1C8429bA93522b82363b663dd0fD4508b8",
+          "implementations": [
+            {
+              "address_hash": "0x09d79cb520548605713D89775c174C00469a1821",
+              "name": "GearingTokenWithERC20V2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "279026",
+        "index": 12,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x09d79cb520548605713D89775c174C00469a1821",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GearingTokenWithERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "277814",
+        "index": 13,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "273340",
+        "index": 14,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x32E84D6DD9Bb0dFdBc980153D61E3851478d3a67",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "MintableERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "274456",
+        "index": 15,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "270022",
+        "index": 16,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x32E84D6DD9Bb0dFdBc980153D61E3851478d3a67",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "MintableERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "260999",
+        "index": 17,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "256793",
+        "index": 18,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x32E84D6DD9Bb0dFdBc980153D61E3851478d3a67",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "MintableERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "259709",
+        "index": 19,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "255506",
+        "index": 20,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x32E84D6DD9Bb0dFdBc980153D61E3851478d3a67",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "MintableERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "252894",
+        "index": 21,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x8c0D5d1C8429bA93522b82363b663dd0fD4508b8",
+          "implementations": [
+            {
+              "address_hash": "0x09d79cb520548605713D89775c174C00469a1821",
+              "name": "GearingTokenWithERC20V2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x8c0D5d1C8429bA93522b82363b663dd0fD4508b8",
+          "implementations": [
+            {
+              "address_hash": "0x09d79cb520548605713D89775c174C00469a1821",
+              "name": "GearingTokenWithERC20V2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "248803",
+        "index": 22,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x09d79cb520548605713D89775c174C00469a1821",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GearingTokenWithERC20V2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x8c0D5d1C8429bA93522b82363b663dd0fD4508b8",
+          "implementations": [
+            {
+              "address_hash": "0x09d79cb520548605713D89775c174C00469a1821",
+              "name": "GearingTokenWithERC20V2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "GT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "231755",
+        "index": 23,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "implementations": [
+            {
+              "address_hash": "0xb5276c436F65913Cd5332DE745d04feDEb4a21D4",
+              "name": "ShareToken"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {
+                  "tooltipDescription": "Re Protocol is a decentralized on-chain marketplace for reinsurance. It tokenizes real-world treaties into vehicles like reUSD and reUSDe, so investors earn insurance-backed yields and tap DeFi liquidity. Built for transparency, composability, and governed by a DAO.",
+                  "tooltipUrl": "https://re.xyz/"
+                },
+                "name": "Re Protocol: reUSD Token",
+                "ordinal": 10,
+                "slug": "re-protocol-reusd-token",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "Real World Assets",
+                "ordinal": 0,
+                "slug": "real-world-assets",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Token Contract",
+                "ordinal": 0,
+                "slug": "token-contract",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "DeFi",
+                "ordinal": 0,
+                "slug": "defi",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Re Protocol",
+                "ordinal": 0,
+                "slug": "re-protocol",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": "Re Protocol Deposit Token",
+          "private_tags": [],
+          "proxy_type": "eip1967",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "implementations": [
+            {
+              "address_hash": "0xb5276c436F65913Cd5332DE745d04feDEb4a21D4",
+              "name": "ShareToken"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {
+                  "tooltipDescription": "Re Protocol is a decentralized on-chain marketplace for reinsurance. It tokenizes real-world treaties into vehicles like reUSD and reUSDe, so investors earn insurance-backed yields and tap DeFi liquidity. Built for transparency, composability, and governed by a DAO.",
+                  "tooltipUrl": "https://re.xyz/"
+                },
+                "name": "Re Protocol: reUSD Token",
+                "ordinal": 10,
+                "slug": "re-protocol-reusd-token",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "Real World Assets",
+                "ordinal": 0,
+                "slug": "real-world-assets",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Token Contract",
+                "ordinal": 0,
+                "slug": "token-contract",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "DeFi",
+                "ordinal": 0,
+                "slug": "defi",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Re Protocol",
+                "ordinal": 0,
+                "slug": "re-protocol",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": "Re Protocol Deposit Token",
+          "private_tags": [],
+          "proxy_type": "eip1967",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "223425",
+        "index": 24,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xb5276c436F65913Cd5332DE745d04feDEb4a21D4",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "ShareToken",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "225808",
+        "index": 25,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "Stablecoin",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "222352",
+        "index": 26,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "Stablecoin",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "173350",
+        "index": 27,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "170514",
+        "index": 28,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "TermMaxOrderV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "172011",
+        "index": 29,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "169196",
+        "index": 30,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "TermMaxMarketV2",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "delegatecall",
+        "value": "0"
+      },
+      {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "143963",
+        "index": 31,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "Stablecoin",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "staticcall",
+        "value": "0"
+      }
+    ],
+    "next_page_params": null
+  },
+  "logs_v2": {
+    "items": [
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x000000000000000000000000000000000000000000000000a233a26fbbeef529",
+        "decoded": {
+          "method_call": "Transfer(address indexed from, address indexed to, uint256 value)",
+          "method_id": "ddf252ad",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address",
+              "value": "0x7fa18408f5D0528d1706B6138113BCA446131531"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address",
+              "value": "0x0000000000000000000000000000000000000000"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256",
+              "value": "11687864058734638377"
+            }
+          ]
+        },
+        "index": 233,
+        "smart_contract": null,
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000007fa18408f5d0528d1706b6138113bca446131531",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x000000000000000000000000000000000000000000001e4cc9f72df6c6c992a6",
+        "decoded": {
+          "method_call": "Transfer(address indexed from, address indexed to, uint256 value)",
+          "method_id": "ddf252ad",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address",
+              "value": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address",
+              "value": "0x0000000000000000000000000000000000000000"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256",
+              "value": "143087500186950073684646"
+            }
+          ]
+        },
+        "index": 234,
+        "smart_contract": null,
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x000000000000000000000000d260d3f76a16cf8bf7a691a9af629407d0091980",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "implementations": [],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "Stablecoin",
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x000000000000000000000000000000000000000000001e4cc9f72df6c62e34ae",
+        "decoded": {
+          "method_call": "Transfer(address indexed from, address indexed to, uint256 value)",
+          "method_id": "ddf252ad",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address",
+              "value": "0x7fa18408f5D0528d1706B6138113BCA446131531"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address",
+              "value": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256",
+              "value": "143087500186950063502510"
+            }
+          ]
+        },
+        "index": 235,
+        "smart_contract": null,
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000007fa18408f5d0528d1706b6138113bca446131531",
+          "0x00000000000000000000000018d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x000000000000000000000000000000000000000000000000002381e6bac52d3c000000000000000000000000000000000000000000001e4cc9f72df6c62e34ae000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000",
+        "decoded": {
+          "method_call": "Redeem(address indexed caller, address indexed recipient, uint128 proportion, uint128 underlyingAmt, bytes deliveryData)",
+          "method_id": "0830e859",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "caller",
+              "type": "address",
+              "value": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980"
+            },
+            {
+              "indexed": true,
+              "name": "recipient",
+              "type": "address",
+              "value": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e"
+            },
+            {
+              "indexed": false,
+              "name": "proportion",
+              "type": "uint128",
+              "value": "9994452160818492"
+            },
+            {
+              "indexed": false,
+              "name": "underlyingAmt",
+              "type": "uint128",
+              "value": "143087500186950063502510"
+            },
+            {
+              "indexed": false,
+              "name": "deliveryData",
+              "type": "bytes",
+              "value": "0x0000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ]
+        },
+        "index": 236,
+        "smart_contract": null,
+        "topics": [
+          "0x0830e859d308193a7466cf07715c0389a0c5692d9b29004dbf4a629a702a1de6",
+          "0x000000000000000000000000d260d3f76a16cf8bf7a691a9af629407d0091980",
+          "0x00000000000000000000000018d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x000000000000000000000000000000000000000000001e4cc9f72df6c62e34ae00000000000000000000000000000000000000000000000000000000009b5df8000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000",
+        "decoded": {
+          "method_call": "Redeemed(address indexed recipient, uint256 debtTokenAmount, uint256 badDebt, bytes deliveryData)",
+          "method_id": "2f1ead68",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "recipient",
+              "type": "address",
+              "value": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e"
+            },
+            {
+              "indexed": false,
+              "name": "debtTokenAmount",
+              "type": "uint256",
+              "value": "143087500186950063502510"
+            },
+            {
+              "indexed": false,
+              "name": "badDebt",
+              "type": "uint256",
+              "value": "10182136"
+            },
+            {
+              "indexed": false,
+              "name": "deliveryData",
+              "type": "bytes",
+              "value": "0x0000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ]
+        },
+        "index": 237,
+        "smart_contract": null,
+        "topics": [
+          "0x2f1ead687f88051b385d58986748ace72880f298dec383297d6d895d00a2deb6",
+          "0x00000000000000000000000018d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+          null,
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x00000000000000000000000000000000000000000000000000000000009b5df80000000000000000000000000000000000000000000000000000000000000000",
+        "decoded": {
+          "method_call": "RedeemOrder(address indexed caller, address indexed order, uint256 badDebt, uint256 diliveryAmount)",
+          "method_id": "21f71f66",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "caller",
+              "type": "address",
+              "value": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5"
+            },
+            {
+              "indexed": true,
+              "name": "order",
+              "type": "address",
+              "value": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980"
+            },
+            {
+              "indexed": false,
+              "name": "badDebt",
+              "type": "uint256",
+              "value": "10182136"
+            },
+            {
+              "indexed": false,
+              "name": "diliveryAmount",
+              "type": "uint256",
+              "value": "0"
+            }
+          ]
+        },
+        "index": 238,
+        "smart_contract": null,
+        "topics": [
+          "0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242",
+          "0x0000000000000000000000006788c8ad65e85cca7224a0b46d061ef7d81f9da5",
+          "0x000000000000000000000000d260d3f76a16cf8bf7a691a9af629407d0091980",
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      },
+      {
+        "address": {
+          "ens_domain_name": null,
+          "hash": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5",
+          "implementations": [
+            {
+              "address_hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+              "name": "Safe"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "SafeProxy",
+          "private_tags": [],
+          "proxy_type": "master_copy",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "block_timestamp": "2026-01-08T04:11:35.000000Z",
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "decoded": {
+          "method_call": "ExecutionSuccess(bytes32 indexed txHash, uint256 payment)",
+          "method_id": "442e715f",
+          "parameters": [
+            {
+              "indexed": true,
+              "name": "txHash",
+              "type": "bytes32",
+              "value": "0xa51eccf67dc96b49d87b3a9fd5e5f85eed2d031719faa40d68bd3c70c3489cae"
+            },
+            {
+              "indexed": false,
+              "name": "payment",
+              "type": "uint256",
+              "value": "0"
+            }
+          ]
+        },
+        "index": 239,
+        "smart_contract": null,
+        "topics": [
+          "0x442e715f626346e8c54381002da614f62bee8d27386535b2521ec8540898556e",
+          "0xa51eccf67dc96b49d87b3a9fd5e5f85eed2d031719faa40d68bd3c70c3489cae",
+          null,
+          null
+        ],
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56"
+      }
+    ],
+    "next_page_params": null
+  },
+  "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+  "preblock": 24187488,
+  "settlement_block": 24187489,
+  "share_transfer_log_count": 4,
+  "share_transfer_logs_raw": {
+    "message": "OK",
+    "result": [
+      {
+        "address": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+        "blockNumber": "0x16713be",
+        "data": "0x000000000000000000000000000000000000000000000000002386f26fc10000",
+        "gasPrice": "0xcb3e6d6",
+        "gasUsed": "0x40d93",
+        "logIndex": "0x327",
+        "timeStamp": "0x68e63e9b",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000170f42f224b99ccbbee673093589c5f9691dd06",
+          null
+        ],
+        "transactionHash": "0x12c217ecc28df7fc7454093a8eefdcd4151a4e08123af95f97f74291d3293e32",
+        "transactionIndex": "0x153"
+      },
+      {
+        "address": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+        "blockNumber": "0x16713e8",
+        "data": "0x0000000000000000000000000000000000000000000000008aa39c121a270000",
+        "gasPrice": "0xc9ff082",
+        "gasUsed": "0x264e9",
+        "logIndex": "0xb5",
+        "timeStamp": "0x68e64093",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000170f42f224b99ccbbee673093589c5f9691dd06",
+          null
+        ],
+        "transactionHash": "0x4f03102ee6723096c8aaedd0f69a64fb40defb8dc1165f0ee594e1c34a2af42e",
+        "transactionIndex": "0x8b"
+      },
+      {
+        "address": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+        "blockNumber": "0x168a016",
+        "data": "0x0000000000000000000000000000000000000000000422ca8b0a00a425000000",
+        "gasPrice": "0x2dba9a91",
+        "gasUsed": "0x339b6",
+        "logIndex": "0x61",
+        "timeStamp": "0x68f8f793",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000008f36bbee57acb4857cb97898020b529969fdf221",
+          null
+        ],
+        "transactionHash": "0x54dc44216cd235b85729593fa037ec3fff8e87a147726d69b394fbab31c8f2d1",
+        "transactionIndex": "0x8"
+      },
+      {
+        "address": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+        "blockNumber": "0x1690d04",
+        "data": "0x0000000000000000000000000000000000000000000000008ac7230489e80000",
+        "gasPrice": "0xa3d7fb8",
+        "gasUsed": "0x1455f",
+        "logIndex": "0xee",
+        "timeStamp": "0x68fe1d0b",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000000170f42f224b99ccbbee673093589c5f9691dd06",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          null
+        ],
+        "transactionHash": "0x94d381bc7dd5081f61f991b9a91f0c649c0603ad73a7d02b9c8f5ca71bd771a0",
+        "transactionIndex": "0x78"
+      }
+    ],
+    "status": "1"
+  },
+  "token_transfers": {
+    "items": [
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 233,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0000000000000000000000000000000000000000",
+          "implementations": [],
+          "is_contract": false,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {},
+                "name": "Null: 0x000...000",
+                "ordinal": 10,
+                "slug": "null-0x000000",
+                "tagType": "name"
+              },
+              {
+                "meta": {
+                  "main_entity": "Genesis"
+                },
+                "name": "Null Address",
+                "ordinal": 10,
+                "slug": "null-address",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "DEPOSIT ADDRESS",
+                "ordinal": 0,
+                "slug": "deposit-address",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Metamask User",
+                "ordinal": 0,
+                "slug": "metamask-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Imtoken User",
+                "ordinal": 0,
+                "slug": "imtoken-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Coinbase",
+                "ordinal": 0,
+                "slug": "coinbase",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "info": [
+                    "Blocked By USDT"
+                  ],
+                  "tooltipDescription": "Address blocked by a custodial stablecoin provider"
+                },
+                "name": "BLOCKED",
+                "ordinal": 0,
+                "slug": "blocked",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Genesis",
+                "ordinal": 0,
+                "slug": "genesis",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Miner",
+                "ordinal": 0,
+                "slug": "miner",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Burn",
+                "ordinal": 0,
+                "slug": "burn",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "alertStatus": "info",
+                  "data": "This address is commonly used by projects to burn tokens (reducing total supply) or mint tokens (increasing total supply)."
+                },
+                "name": "note_0",
+                "ordinal": 0,
+                "slug": "note0",
+                "tagType": "note"
+              },
+              {
+                "meta": {},
+                "name": "Null",
+                "ordinal": 0,
+                "slug": "null",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": null,
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "1",
+          "icon_url": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "reputation": "ok",
+          "symbol": "FT:USDU/reUSD@08JAN2026",
+          "total_supply": "79426708652741497219",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "11687864058734638377"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_burning"
+      },
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 234,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0000000000000000000000000000000000000000",
+          "implementations": [],
+          "is_contract": false,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {},
+                "name": "Null: 0x000...000",
+                "ordinal": 10,
+                "slug": "null-0x000000",
+                "tagType": "name"
+              },
+              {
+                "meta": {
+                  "main_entity": "Genesis"
+                },
+                "name": "Null Address",
+                "ordinal": 10,
+                "slug": "null-address",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "DEPOSIT ADDRESS",
+                "ordinal": 0,
+                "slug": "deposit-address",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Metamask User",
+                "ordinal": 0,
+                "slug": "metamask-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Imtoken User",
+                "ordinal": 0,
+                "slug": "imtoken-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Coinbase",
+                "ordinal": 0,
+                "slug": "coinbase",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "info": [
+                    "Blocked By USDT"
+                  ],
+                  "tooltipDescription": "Address blocked by a custodial stablecoin provider"
+                },
+                "name": "BLOCKED",
+                "ordinal": 0,
+                "slug": "blocked",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Genesis",
+                "ordinal": 0,
+                "slug": "genesis",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Miner",
+                "ordinal": 0,
+                "slug": "miner",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Burn",
+                "ordinal": 0,
+                "slug": "burn",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "alertStatus": "info",
+                  "data": "This address is commonly used by projects to burn tokens (reducing total supply) or mint tokens (increasing total supply)."
+                },
+                "name": "note_0",
+                "ordinal": 0,
+                "slug": "note0",
+                "tagType": "note"
+              },
+              {
+                "meta": {},
+                "name": "Null",
+                "ordinal": 0,
+                "slug": "null",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": null,
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "1",
+          "icon_url": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "reputation": "ok",
+          "symbol": "FT:USDU/reUSD@08JAN2026",
+          "total_supply": "79426708652741497219",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "143087500186950073684646"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_burning"
+      },
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 235,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "62",
+          "icon_url": null,
+          "name": "USDU",
+          "reputation": "ok",
+          "symbol": "USDU",
+          "total_supply": "57621714304291336662562",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "143087500186950063502510"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_transfer"
+      }
+    ],
+    "next_page_params": null
+  },
+  "transaction": {
+    "authorization_list": [],
+    "base_fee_per_gas": "35618017",
+    "block_number": 24187489,
+    "confirmation_duration": [
+      0,
+      12000.0
+    ],
+    "confirmations": 1513222,
+    "created_contract": null,
+    "decoded_input": {
+      "method_call": "execTransaction(address to, uint256 value, bytes data, uint8 operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, bytes signatures)",
+      "method_id": "6a761202",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "address",
+          "value": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e"
+        },
+        {
+          "name": "value",
+          "type": "uint256",
+          "value": "0"
+        },
+        {
+          "name": "data",
+          "type": "bytes",
+          "value": "0x988a64c4000000000000000000000000d260d3f76a16cf8bf7a691a9af629407d0091980"
+        },
+        {
+          "name": "operation",
+          "type": "uint8",
+          "value": "0"
+        },
+        {
+          "name": "safeTxGas",
+          "type": "uint256",
+          "value": "0"
+        },
+        {
+          "name": "baseGas",
+          "type": "uint256",
+          "value": "0"
+        },
+        {
+          "name": "gasPrice",
+          "type": "uint256",
+          "value": "0"
+        },
+        {
+          "name": "gasToken",
+          "type": "address",
+          "value": "0x0000000000000000000000000000000000000000"
+        },
+        {
+          "name": "refundReceiver",
+          "type": "address",
+          "value": "0x0000000000000000000000000000000000000000"
+        },
+        {
+          "name": "signatures",
+          "type": "bytes",
+          "value": "0x00000000000000000000000013b5aad975de738dee4c7c0b2793d836d62e0e45000000000000000000000000000000000000000000000000000000000000000001cefa0a3c50a257612f4e694cab3e307983fc71a8507c18db704564508c1b0f773ecc74fb754fa477d53bca6b720f23eec598ec84d5eb62e5864eb287b2c8eb401b"
+        }
+      ]
+    },
+    "exchange_rate": "1897.79",
+    "fee": {
+      "type": "actual",
+      "value": "56444416534503"
+    },
+    "fhe_operations_count": 0,
+    "from": {
+      "ens_domain_name": null,
+      "hash": "0x13B5aaD975DE738DeE4c7c0b2793D836d62E0e45",
+      "implementations": [],
+      "is_contract": false,
+      "is_scam": false,
+      "is_verified": false,
+      "metadata": {
+        "tags": [
+          {
+            "meta": {
+              "tooltipDescription": "Deployer address for Alphaping.",
+              "tooltipUrl": "https://alphaping.ch/"
+            },
+            "name": "Alphaping: Deployer",
+            "ordinal": 10,
+            "slug": "alphaping-deployer",
+            "tagType": "name"
+          },
+          {
+            "meta": {},
+            "name": "Contract Deployer",
+            "ordinal": 0,
+            "slug": "contract-deployer",
+            "tagType": "generic"
+          },
+          {
+            "meta": {},
+            "name": "Alphaping",
+            "ordinal": 0,
+            "slug": "alphaping",
+            "tagType": "protocol"
+          }
+        ]
+      },
+      "name": null,
+      "private_tags": [],
+      "proxy_type": null,
+      "public_tags": [],
+      "reputation": "ok",
+      "watchlist_names": []
+    },
+    "gas_limit": "459806",
+    "gas_price": "235618017",
+    "gas_used": "239559",
+    "has_error_in_internal_transactions": false,
+    "hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+    "historic_exchange_rate": "3106.059127932304",
+    "is_pending_update": false,
+    "max_fee_per_gas": "245200000",
+    "max_priority_fee_per_gas": "200000000",
+    "method": "execTransaction",
+    "nonce": 2682,
+    "position": 31,
+    "priority_fee": "47911800000000",
+    "raw_input": "0x6a76120200000000000000000000000018d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000024988a64c4000000000000000000000000d260d3f76a16cf8bf7a691a9af629407d009198000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008200000000000000000000000013b5aad975de738dee4c7c0b2793d836d62e0e45000000000000000000000000000000000000000000000000000000000000000001cefa0a3c50a257612f4e694cab3e307983fc71a8507c18db704564508c1b0f773ecc74fb754fa477d53bca6b720f23eec598ec84d5eb62e5864eb287b2c8eb401b000000000000000000000000000000000000000000000000000000000000",
+    "result": "success",
+    "revert_reason": null,
+    "status": "ok",
+    "timestamp": "2026-01-08T04:11:35.000000Z",
+    "to": {
+      "ens_domain_name": null,
+      "hash": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5",
+      "implementations": [
+        {
+          "address_hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+          "name": "Safe"
+        }
+      ],
+      "is_contract": true,
+      "is_scam": false,
+      "is_verified": true,
+      "metadata": null,
+      "name": "SafeProxy",
+      "private_tags": [],
+      "proxy_type": "master_copy",
+      "public_tags": [],
+      "reputation": "ok",
+      "watchlist_names": []
+    },
+    "token_transfers": [
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 233,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0000000000000000000000000000000000000000",
+          "implementations": [],
+          "is_contract": false,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {},
+                "name": "Null: 0x000...000",
+                "ordinal": 10,
+                "slug": "null-0x000000",
+                "tagType": "name"
+              },
+              {
+                "meta": {
+                  "main_entity": "Genesis"
+                },
+                "name": "Null Address",
+                "ordinal": 10,
+                "slug": "null-address",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "DEPOSIT ADDRESS",
+                "ordinal": 0,
+                "slug": "deposit-address",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Metamask User",
+                "ordinal": 0,
+                "slug": "metamask-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Imtoken User",
+                "ordinal": 0,
+                "slug": "imtoken-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Coinbase",
+                "ordinal": 0,
+                "slug": "coinbase",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "info": [
+                    "Blocked By USDT"
+                  ],
+                  "tooltipDescription": "Address blocked by a custodial stablecoin provider"
+                },
+                "name": "BLOCKED",
+                "ordinal": 0,
+                "slug": "blocked",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Genesis",
+                "ordinal": 0,
+                "slug": "genesis",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Miner",
+                "ordinal": 0,
+                "slug": "miner",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Burn",
+                "ordinal": 0,
+                "slug": "burn",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "alertStatus": "info",
+                  "data": "This address is commonly used by projects to burn tokens (reducing total supply) or mint tokens (increasing total supply)."
+                },
+                "name": "note_0",
+                "ordinal": 0,
+                "slug": "note0",
+                "tagType": "note"
+              },
+              {
+                "meta": {},
+                "name": "Null",
+                "ordinal": 0,
+                "slug": "null",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": null,
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "1",
+          "icon_url": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "reputation": "ok",
+          "symbol": "FT:USDU/reUSD@08JAN2026",
+          "total_supply": "79426708652741497219",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "11687864058734638377"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_burning"
+      },
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0xd260d3f76a16cf8bF7A691A9aF629407D0091980",
+          "implementations": [
+            {
+              "address_hash": "0xEb14A3897ab4487d6f1D90E610eD85bde40a17C4",
+              "name": "TermMaxOrderV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 234,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x0000000000000000000000000000000000000000",
+          "implementations": [],
+          "is_contract": false,
+          "is_scam": false,
+          "is_verified": false,
+          "metadata": {
+            "tags": [
+              {
+                "meta": {},
+                "name": "Null: 0x000...000",
+                "ordinal": 10,
+                "slug": "null-0x000000",
+                "tagType": "name"
+              },
+              {
+                "meta": {
+                  "main_entity": "Genesis"
+                },
+                "name": "Null Address",
+                "ordinal": 10,
+                "slug": "null-address",
+                "tagType": "name"
+              },
+              {
+                "meta": {},
+                "name": "DEPOSIT ADDRESS",
+                "ordinal": 0,
+                "slug": "deposit-address",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Metamask User",
+                "ordinal": 0,
+                "slug": "metamask-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Imtoken User",
+                "ordinal": 0,
+                "slug": "imtoken-user",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Coinbase",
+                "ordinal": 0,
+                "slug": "coinbase",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "info": [
+                    "Blocked By USDT"
+                  ],
+                  "tooltipDescription": "Address blocked by a custodial stablecoin provider"
+                },
+                "name": "BLOCKED",
+                "ordinal": 0,
+                "slug": "blocked",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Genesis",
+                "ordinal": 0,
+                "slug": "genesis",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Miner",
+                "ordinal": 0,
+                "slug": "miner",
+                "tagType": "generic"
+              },
+              {
+                "meta": {},
+                "name": "Burn",
+                "ordinal": 0,
+                "slug": "burn",
+                "tagType": "generic"
+              },
+              {
+                "meta": {
+                  "alertStatus": "info",
+                  "data": "This address is commonly used by projects to burn tokens (reducing total supply) or mint tokens (increasing total supply)."
+                },
+                "name": "note_0",
+                "ordinal": 0,
+                "slug": "note0",
+                "tagType": "note"
+              },
+              {
+                "meta": {},
+                "name": "Null",
+                "ordinal": 0,
+                "slug": "null",
+                "tagType": "protocol"
+              }
+            ]
+          },
+          "name": null,
+          "private_tags": [],
+          "proxy_type": null,
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0x0F15906BcA1bB50B0729bc45D762285f62AeC22d",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "1",
+          "icon_url": null,
+          "name": "FT:USDU/reUSD@08JAN2026",
+          "reputation": "ok",
+          "symbol": "FT:USDU/reUSD@08JAN2026",
+          "total_supply": "79426708652741497219",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "143087500186950073684646"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_burning"
+      },
+      {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 235,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "62",
+          "icon_url": null,
+          "name": "USDU",
+          "reputation": "ok",
+          "symbol": "USDU",
+          "total_supply": "57621714304291336662562",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "143087500186950063502510"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_transfer"
+      }
+    ],
+    "token_transfers_overflow": false,
+    "transaction_burnt_fee": "8532616534503",
+    "transaction_tag": null,
+    "transaction_types": [
+      "contract_call",
+      "token_transfer"
+    ],
+    "type": 2,
+    "value": "0"
+  },
+  "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+  "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e",
+  "vault_call_trace_hits": [
+    {
+      "node": {
+        "block_number": 24187489,
+        "created_contract": null,
+        "error": null,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5",
+          "implementations": [
+            {
+              "address_hash": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+              "name": "Safe"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "SafeProxy",
+          "private_tags": [],
+          "proxy_type": "master_copy",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "gas_limit": "392904",
+        "index": 2,
+        "success": true,
+        "timestamp": "2026-01-08T04:11:35.000000Z",
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "transaction_index": 31,
+        "type": "call",
+        "value": "0"
+      },
+      "path": "root.items[1]"
+    },
+    {
+      "node": {
+        "block_hash": "0xa57b861fa2dbbb0750048528a75c3419bf6a03330d0daf46b8581e59ea26482f",
+        "block_number": 24187489,
+        "from": {
+          "ens_domain_name": null,
+          "hash": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+          "implementations": [
+            {
+              "address_hash": "0x0a63f881db0C009272B980Fab80EAf666B6486bc",
+              "name": "TermMaxMarketV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": null,
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "log_index": 235,
+        "method": null,
+        "timestamp": null,
+        "to": {
+          "ens_domain_name": null,
+          "hash": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e",
+          "implementations": [
+            {
+              "address_hash": "0x9f1882FfBb007DD275C931ac302CfA97A4cEaa1D",
+              "name": "TermMaxVaultV2"
+            }
+          ],
+          "is_contract": true,
+          "is_scam": false,
+          "is_verified": true,
+          "metadata": null,
+          "name": "USDU Core",
+          "private_tags": [],
+          "proxy_type": "eip1167",
+          "public_tags": [],
+          "reputation": "ok",
+          "watchlist_names": []
+        },
+        "token": {
+          "address_hash": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+          "circulating_market_cap": null,
+          "circulating_supply": null,
+          "decimals": "18",
+          "exchange_rate": null,
+          "holders_count": "62",
+          "icon_url": null,
+          "name": "USDU",
+          "reputation": "ok",
+          "symbol": "USDU",
+          "total_supply": "57621714304291336662562",
+          "type": "ERC-20",
+          "volume_24h": null
+        },
+        "token_type": "ERC-20",
+        "total": {
+          "decimals": "18",
+          "value": "143087500186950063502510"
+        },
+        "transaction_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "type": "token_transfer"
+      },
+      "path": "root.token_transfers[2]"
+    }
+  ]
+}

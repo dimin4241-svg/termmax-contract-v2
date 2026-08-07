@@ -1,0 +1,155 @@
+name: TermMax positive bad-debt transaction forensics
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/positive-baddebt-tx-forensics.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  TX_HASH: '0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56'
+  VAULT: '0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e'
+  ORDER: '0xd260d3f76a16cf8bf7a691a9af629407d0091980'
+  SETTLEMENT_BLOCK: '24187489'
+
+jobs:
+  forensics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Query transaction, traces, logs and historical share ledger
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, time, urllib.parse, urllib.request
+          from pathlib import Path
+
+          tx = os.environ['TX_HASH'].lower()
+          vault = os.environ['VAULT'].lower()
+          order = os.environ['ORDER'].lower()
+          block = int(os.environ['SETTLEMENT_BLOCK'])
+          preblock = block - 1
+          base = 'https://eth.blockscout.com'
+
+          def get_json(url, attempts=5):
+              last=None
+              for i in range(attempts):
+                  try:
+                      req=urllib.request.Request(url, headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+                      with urllib.request.urlopen(req, timeout=60) as r:
+                          return json.loads(r.read())
+                  except Exception as exc:
+                      last=exc; time.sleep(min(16,2**i))
+              return {'_error':repr(last), '_url':url}
+
+          def compat_logs(address, topic0, to_block):
+              params={'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(to_block),'address':address,'topic0':topic0}
+              return get_json(base+'/api?'+urllib.parse.urlencode(params))
+
+          out={
+              'tx_hash':tx,'vault':vault,'order':order,'settlement_block':block,'preblock':preblock,
+              'transaction':get_json(f'{base}/api/v2/transactions/{tx}'),
+              'internal_transactions':get_json(f'{base}/api/v2/transactions/{tx}/internal-transactions'),
+              'token_transfers':get_json(f'{base}/api/v2/transactions/{tx}/token-transfers'),
+              'logs_v2':get_json(f'{base}/api/v2/transactions/{tx}/logs'),
+          }
+
+          transfer_topic='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+          transfers=compat_logs(vault, transfer_topic, preblock)
+          out['share_transfer_logs_raw']=transfers
+
+          balances={}
+          rows=[]
+          raw_logs=transfers.get('result') if isinstance(transfers,dict) else []
+          if not isinstance(raw_logs,list): raw_logs=[]
+          for log in raw_logs:
+              topics=[str(x).lower() for x in (log.get('topics') or [])]
+              if len(topics)<3: continue
+              frm='0x'+topics[1].removeprefix('0x')[-40:]
+              to='0x'+topics[2].removeprefix('0x')[-40:]
+              value=int(str(log.get('data') or '0x0'),16)
+              bn=log.get('blockNumber')
+              bn=int(bn,16) if isinstance(bn,str) and bn.startswith('0x') else int(bn or 0)
+              ti=log.get('transactionIndex'); li=log.get('logIndex')
+              ti=int(ti,16) if isinstance(ti,str) and ti.startswith('0x') else int(ti or 0)
+              li=int(li,16) if isinstance(li,str) and li.startswith('0x') else int(li or 0)
+              rows.append((bn,ti,li,frm,to,value,log.get('transactionHash')))
+          rows.sort()
+          zero='0x'+'0'*40
+          for _,_,_,frm,to,value,_ in rows:
+              if frm!=zero: balances[frm]=balances.get(frm,0)-value
+              if to!=zero: balances[to]=balances.get(to,0)+value
+          positive=[{'address':a,'shares_raw':v} for a,v in balances.items() if v>0]
+          positive.sort(key=lambda x:x['shares_raw'], reverse=True)
+          out['historical_share_holders_preblock']=positive[:50]
+          out['share_transfer_log_count']=len(rows)
+
+          def walk(obj, path='root'):
+              hits=[]
+              if isinstance(obj,dict):
+                  addr=None
+                  for k in ('to','to_address','address'):
+                      v=obj.get(k)
+                      if isinstance(v,str): addr=v.lower()
+                      elif isinstance(v,dict): addr=str(v.get('hash') or v.get('address') or '').lower()
+                      if addr: break
+                  blob=' '.join(str(obj.get(k,'')) for k in ('method','input','raw_input','decoded_input','type','call_type'))
+                  if addr==vault or 'redeemorder' in blob.lower() or 'dealbaddebt' in blob.lower():
+                      hits.append({'path':path,'node':obj})
+                  for k,v in obj.items(): hits.extend(walk(v,path+'.'+str(k)))
+              elif isinstance(obj,list):
+                  for i,v in enumerate(obj): hits.extend(walk(v,f'{path}[{i}]'))
+              return hits
+          out['vault_call_trace_hits']=walk(out['internal_transactions'])+walk(out['transaction'])
+
+          p=Path('production-evidence/positive_baddebt_tx_forensics.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+
+          txj=out['transaction'] if isinstance(out['transaction'],dict) else {}
+          frm=txj.get('from')
+          if isinstance(frm,dict): frm=frm.get('hash')
+          to=txj.get('to')
+          if isinstance(to,dict): to=to.get('hash')
+          print('TX_FROM',frm)
+          print('TX_TO',to)
+          print('TX_METHOD',txj.get('method'))
+          print('TX_STATUS',txj.get('status'))
+          print('SHARE_TRANSFER_LOGS',len(rows))
+          print('TOP_SHARE_HOLDERS_PREBLOCK')
+          for h in positive[:12]: print(json.dumps(h,sort_keys=True))
+          print('VAULT_CALL_TRACE_HITS',len(out['vault_call_trace_hits']))
+          for h in out['vault_call_trace_hits'][:30]:
+              n=h['node']; print(h['path'], json.dumps({k:n.get(k) for k in ('type','call_type','method','from','to','input','raw_input','decoded_input') if k in n},default=str)[:2500])
+          PY
+
+      - name: Commit forensic evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/positive_baddebt_tx_forensics.json
+          git commit -m "Record positive bad-debt transaction forensics" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: positive-baddebt-tx-forensics
+          path: repo/production-evidence/positive_baddebt_tx_forensics.json

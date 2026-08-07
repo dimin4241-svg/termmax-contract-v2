@@ -1,0 +1,45 @@
+name: Verify target settlement pre-tx block equivalence
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/verify-target-pretx-block.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+      - name: Verify same-block ordering
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          python3 - <<'PY'
+          import os, json
+          from web3 import Web3, HTTPProvider
+          w3=Web3(HTTPProvider(os.environ['ETH_RPC_URL'],request_kwargs={'timeout':45,'headers':{'User-Agent':'curl/8.5.0','Accept':'application/json','Content-Type':'application/json'}}))
+          txh='0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e'
+          target=w3.eth.get_transaction(txh)
+          block=w3.eth.get_block(target.blockNumber,full_transactions=True)
+          idx=int(target.transactionIndex)
+          watched={x.lower() for x in [
+            '0xF488ccdf04079cC03183cDB6A147d12Cf97F9317',
+            '0x69934e4a00133B566DD4853C65E254eA66544B34',
+          ]}
+          earlier=[]
+          for tx in block.transactions[:idx]:
+              to=(tx.get('to') or '').lower()
+              frm=(tx.get('from') or '').lower()
+              direct=to in watched or frm in watched
+              earlier.append({'hash':tx.hash.hex(),'index':int(tx.transactionIndex),'from':tx.get('from'),'to':tx.get('to'),'direct_watch_match':direct})
+          out={'block':int(target.blockNumber),'transaction_index':idx,'earlier_transaction_count':len(earlier),'earlier_transactions':earlier,'direct_watch_matches':[x for x in earlier if x['direct_watch_match']]}
+          print(json.dumps(out,indent=2))
+          PY

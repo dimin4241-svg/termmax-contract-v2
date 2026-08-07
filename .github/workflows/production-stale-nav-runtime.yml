@@ -1,0 +1,135 @@
+name: TermMax production stale-NAV fork runtime
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-stale-nav-runtime.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_PROFILE: ci
+  TEST_PATH: test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+  TEST_NAME: testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Solidity dependencies
+        working-directory: repo
+        run: forge soldeer install
+
+      - name: Run authentic zero-delivery production settlement exploit path
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          RPCS=(
+            'https://rpc.mevblocker.io'
+            'https://eth.drpc.org'
+            'https://mainnet.gateway.tenderly.co'
+          )
+          : > production-evidence/production_stale_nav_runtime.log
+          success=0
+          for rpc in "${RPCS[@]}"; do
+            echo "=== POSITIVE SCENARIO RPC $rpc ===" | tee -a production-evidence/production_stale_nav_runtime.log
+            set +e
+            MAINNET_RPC_URL="$rpc" \
+            TERM_MAX_SETTLEMENT_TX='0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56' \
+            TERM_MAX_PRE_SETTLEMENT_BLOCK='24187488' \
+            TERM_MAX_VAULT='0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e' \
+            TERM_MAX_ORDER='0xd260d3f76a16cf8bf7a691a9af629407d0091980' \
+            TERM_MAX_SETTLEMENT_CALLER='0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5' \
+            TERM_MAX_SHARE_SOURCE='0x8f36bbee57acb4857cb97898020b529969fdf221' \
+            TERM_MAX_ATTACKER_SHARES='2500000000000000000000000' \
+            TERM_MAX_EXPECTED_BAD_DEBT_RAW='10182136' \
+            TERM_MAX_EXPECTED_DELIVERY_RAW='0' \
+            forge test --match-path "$TEST_PATH" --match-test "$TEST_NAME" -vvv 2>&1 | tee -a production-evidence/production_stale_nav_runtime.log
+            rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$rc" -eq 0 ]; then
+              success=1
+              echo "POSITIVE_RUNTIME_PASS_RPC=$rpc" | tee -a production-evidence/production_stale_nav_runtime.log
+              break
+            fi
+            echo "POSITIVE_RUNTIME_FAILED_RPC=$rpc rc=$rc" | tee -a production-evidence/production_stale_nav_runtime.log
+          done
+          if [ "$success" -ne 1 ]; then
+            echo 'All archive RPCs failed the authentic positive runtime scenario.' >&2
+            exit 1
+          fi
+
+      - name: Run USDC collateral-covered production settlement as fail-closed negative control
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          RPCS=(
+            'https://rpc.mevblocker.io'
+            'https://eth.drpc.org'
+            'https://mainnet.gateway.tenderly.co'
+          )
+          : > production-evidence/usdc_baddebt_negative_control.log
+          classified=0
+          for rpc in "${RPCS[@]}"; do
+            echo "=== USDC NEGATIVE CONTROL RPC $rpc ===" | tee -a production-evidence/usdc_baddebt_negative_control.log
+            set +e
+            MAINNET_RPC_URL="$rpc" \
+            TERM_MAX_SETTLEMENT_TX='0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57' \
+            TERM_MAX_PRE_SETTLEMENT_BLOCK='24826645' \
+            TERM_MAX_VAULT='0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48' \
+            TERM_MAX_ORDER='0x385429223ddc9921f2491c4a16b79c0b0717c431' \
+            TERM_MAX_SETTLEMENT_CALLER='0x92FB952A80A2395C9eb05281cB116D3Bd391A799' \
+            TERM_MAX_SHARE_SOURCE='0xbccbc9fc2d1d9e9abd0ca132be816bd4f6051b86' \
+            TERM_MAX_ATTACKER_SHARES='192726563485' \
+            TERM_MAX_EXPECTED_BAD_DEBT_RAW='939875' \
+            TERM_MAX_EXPECTED_DELIVERY_RAW='9267' \
+            forge test --match-path "$TEST_PATH" --match-test "$TEST_NAME" -vvv 2>&1 | tee -a production-evidence/usdc_baddebt_negative_control.log
+            rc=${PIPESTATUS[0]}
+            set -e
+            if grep -q 'delivered collateral economically covers the bad debt; no realized net loss' production-evidence/usdc_baddebt_negative_control.log; then
+              classified=1
+              echo "USDC_NEGATIVE_CONTROL_CONFIRMED_RPC=$rpc rc=$rc" | tee -a production-evidence/usdc_baddebt_negative_control.log
+              break
+            fi
+            echo "USDC_CONTROL_INCONCLUSIVE_RPC=$rpc rc=$rc" | tee -a production-evidence/usdc_baddebt_negative_control.log
+          done
+          if [ "$classified" -ne 1 ]; then
+            echo 'USDC production settlement was not conclusively classified as collateral-covered.' >&2
+            exit 1
+          fi
+
+      - name: Commit runtime evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/production_stale_nav_runtime.log production-evidence/usdc_baddebt_negative_control.log
+          git commit -m "Record authentic production stale-NAV fork runtime" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: production-stale-nav-runtime
+          path: |
+            repo/production-evidence/production_stale_nav_runtime.log
+            repo/production-evidence/usdc_baddebt_negative_control.log

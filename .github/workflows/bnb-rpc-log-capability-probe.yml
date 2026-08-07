@@ -1,0 +1,85 @@
+name: TermMax BNB RPC log capability probe
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnb-rpc-log-capability-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Probe eth_getLogs ranges
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json,time,urllib.request
+          from pathlib import Path
+          endpoints=[
+            'https://bsc-rpc.publicnode.com',
+            'https://bsc.publicnode.com',
+            'https://bsc-dataseed.bnbchain.org',
+            'https://bsc-dataseed.binance.org',
+            'https://bsc-dataseed1.binance.org',
+            'https://bsc-dataseed2.binance.org',
+            'https://bsc-dataseed3.binance.org',
+            'https://bsc-dataseed4.binance.org',
+            'https://binance.llamarpc.com',
+            'https://bnb.api.onfinality.io/public',
+          ]
+          vault='0x086c120290850e4698645a5689c2428d6e7789de'
+          topic='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          def rpc(ep,method,params,timeout=25):
+            body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+            req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+            with urllib.request.urlopen(req,timeout=timeout) as r: d=json.loads(r.read())
+            if d.get('error'): raise RuntimeError(d['error'])
+            return d.get('result')
+          out=[]
+          for ep in endpoints:
+            row={'endpoint':ep}
+            try:
+              latest=int(rpc(ep,'eth_blockNumber',[]),16); row['latest']=latest
+            except Exception as e:
+              row['latest_error']=repr(e); out.append(row); print(json.dumps(row)); continue
+            for span in [1000000,200000,100000,50000,20000,10000,5000,2000,1000,500,100]:
+              lo=max(0,latest-span+1)
+              t=time.time()
+              try:
+                logs=rpc(ep,'eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(latest),'address':vault,'topics':[topic]}],timeout=30)
+                row.setdefault('tests',[]).append({'span':span,'ok':True,'count':len(logs or []),'seconds':round(time.time()-t,2)})
+                row['max_success_span']=span
+                break
+              except Exception as e:
+                row.setdefault('tests',[]).append({'span':span,'ok':False,'error':repr(e)[:500],'seconds':round(time.time()-t,2)})
+            out.append(row); print(json.dumps(row,sort_keys=True))
+          Path('production-evidence/bnb_rpc_log_capability.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnb_rpc_log_capability.json
+          git commit -m "Record BNB RPC log capability" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnb-rpc-log-capability
+          path: repo/production-evidence/bnb_rpc_log_capability.json

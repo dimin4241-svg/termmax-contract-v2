@@ -1,0 +1,100 @@
+name: TermMax find maximum real multi-holder uncovered stale deficit
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/f488-total-uncovered-deficit-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_DISABLE_NIGHTLY_WARNING: '1'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Sum all unresolved zero-collateral bad-debt mappings at each historical event block
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          RPC='https://eth.drpc.org'; VAULT='0xF488ccdf04079cC03183cDB6A147d12Cf97F9317'
+          env=dict(os.environ); env['FOUNDRY_DISABLE_NIGHTLY_WARNING']='1'
+          src=json.loads(Path('production-evidence/f488_accumulated_baddebt_scan.json').read_text())
+          rows=src['events']; asset_dec=src['asset_decimals']; asset_symbol=src['asset_symbol']
+
+          def sh(cmd,timeout=45): return subprocess.check_output(cmd,text=True,stderr=subprocess.STDOUT,timeout=timeout,env=env).strip()
+          def call(addr,sig,args,block):
+              out=sh(['cast','call',addr,sig,*args,'--block',str(block),'--rpc-url',RPC])
+              lines=[x.strip() for x in out.splitlines() if x.strip() and not x.startswith('Warning:')]
+              return lines[-1].split()[0]
+
+          seen=[]; results=[]
+          for row in rows:
+              c=row['collateral']
+              if c.lower() not in [x.lower() for x in seen]: seen.append(c)
+              block=row['block']
+              active=[]; total=0
+              for col in seen:
+                  m=int(call(VAULT,'badDebtMapping(address)(uint256)',[col],block))
+                  bal=int(call(col,'balanceOf(address)(uint256)',[VAULT],block))
+                  if m>0 and bal==0:
+                      active.append({'collateral':col,'bad_debt_raw':m,'collateral_balance_raw':bal})
+                      total+=m
+              holders=row['top_holders']; holder_count=row['holder_count_post']; total_supply=row['total_supply_post_raw']
+              best=holders[0] if holders else {'address':'0x0','shares_raw':0,'fraction_of_total_supply':0}
+              # Conservative exact-integer lower-bound predictor for a full-share redeem: floor(holderShares * totalDeficit / totalSupply).
+              predicted=(int(best['shares_raw'])*total)//int(total_supply) if total_supply else 0
+              result={'block':block,'tx_hash':row['tx_hash'],'trigger_order':row['order'],'asset_symbol':asset_symbol,'asset_decimals':asset_dec,
+                      'holder_count':holder_count,'largest_holder':best['address'],'largest_holder_shares_raw':int(best['shares_raw']),
+                      'total_supply_raw':int(total_supply),'largest_holder_fraction':best['fraction_of_total_supply'],
+                      'active_uncovered_bad_debt_mappings':active,'total_uncovered_bad_debt_raw':total,
+                      'total_uncovered_bad_debt_asset_units':total/(10**asset_dec),
+                      'predicted_cross_user_shift_raw_floor':predicted,'predicted_cross_user_shift_asset_units_floor':predicted/(10**asset_dec)}
+              results.append(result)
+              print(json.dumps({k:result[k] for k in ['block','holder_count','largest_holder','largest_holder_fraction','total_uncovered_bad_debt_raw','predicted_cross_user_shift_raw_floor','predicted_cross_user_shift_asset_units_floor']},sort_keys=True))
+
+          viable=[r for r in results if r['holder_count']>=2 and r['predicted_cross_user_shift_raw_floor']>0]
+          viable.sort(key=lambda r:(r['predicted_cross_user_shift_raw_floor'],r['total_uncovered_bad_debt_raw']),reverse=True)
+          out={'vault':VAULT,'asset_symbol':asset_symbol,'asset_decimals':asset_dec,'states':results,'viable_cross_user_states_ranked':viable,'best':viable[0] if viable else None}
+          Path('production-evidence/f488_total_uncovered_deficit_scan.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('VIABLE_STATES',len(viable))
+          if viable: print('BEST_STATE',json.dumps(viable[0],sort_keys=True))
+          PY
+
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/f488_total_uncovered_deficit_scan.json
+          git commit -m "Record maximum real multi-holder uncovered stale deficit" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f488-total-uncovered-deficit-scan
+          path: repo/production-evidence/f488_total_uncovered_deficit_scan.json

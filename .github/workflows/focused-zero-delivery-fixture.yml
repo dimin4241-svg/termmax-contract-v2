@@ -1,0 +1,197 @@
+name: TermMax focused zero-delivery fixture
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/focused-zero-delivery-fixture.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    name: Reconstruct real zero-delivery LP fixture
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Reconstruct historical LP fixture
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          from collections import defaultdict
+          from pathlib import Path
+          from eth_abi import decode
+          from web3 import HTTPProvider, Web3
+
+          VAULT=Web3.to_checksum_address('0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e')
+          TX='0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56'
+          EXPECTED_BAD=10182136
+          EXPECTED_DELIVERY=0
+          REDEEM_TOPIC='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          TRANSFER_TOPIC='0x'+Web3.keccak(text='Transfer(address,address,uint256)').hex().removeprefix('0x')
+          ZERO='0x0000000000000000000000000000000000000000'
+
+          provider=HTTPProvider(os.environ['ETH_RPC_URL'],request_kwargs={'timeout':45,'headers':{'User-Agent':'curl/8.5.0','Accept':'application/json','Content-Type':'application/json'}})
+          w3=Web3(provider)
+          assert w3.eth.chain_id==1
+          receipt=w3.eth.get_transaction_receipt(TX)
+          block=int(receipt.blockNumber); preblock=block-1
+
+          event=None
+          for log in receipt.logs:
+              if Web3.to_checksum_address(log.address)!=VAULT or not log.topics: continue
+              topic0='0x'+log.topics[0].hex().removeprefix('0x')
+              if topic0.lower()!=REDEEM_TOPIC.lower(): continue
+              bad,delivery=decode(['uint256','uint256'],bytes(log.data))
+              if int(bad)==EXPECTED_BAD and int(delivery)==EXPECTED_DELIVERY:
+                  caller=Web3.to_checksum_address('0x'+log.topics[1].hex().removeprefix('0x')[-40:])
+                  order=Web3.to_checksum_address('0x'+log.topics[2].hex().removeprefix('0x')[-40:])
+                  event={'caller':caller,'order':order,'bad_debt_raw':int(bad),'delivery_raw':int(delivery)}
+                  break
+          assert event is not None, 'expected RedeemOrder event missing'
+
+          VAULT_ABI=[
+              {'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+              {'type':'function','name':'totalAssets','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'totalSupply','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'maxRedeem','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'previewRedeem','stateMutability':'view','inputs':[{'type':'uint256'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'pool','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+          ]
+          ERC20_ABI=[
+              {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+              {'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+              {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+          ]
+          ORDER_ABI=[{'type':'function','name':'market','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]}]
+          MARKET_ABI=[{'type':'function','name':'tokens','stateMutability':'view','inputs':[],'outputs':[{'type':'address'},{'type':'address'},{'type':'address'},{'type':'address'},{'type':'address'}]}]
+
+          vault=w3.eth.contract(address=VAULT,abi=VAULT_ABI)
+          asset_addr=Web3.to_checksum_address(vault.functions.asset().call(block_identifier=preblock))
+          asset=w3.eth.contract(address=asset_addr,abi=ERC20_ABI)
+          asset_decimals=int(asset.functions.decimals().call(block_identifier=preblock))
+          try: asset_symbol=asset.functions.symbol().call(block_identifier=preblock)
+          except Exception: asset_symbol='UNKNOWN'
+          total_assets=int(vault.functions.totalAssets().call(block_identifier=preblock))
+          total_supply=int(vault.functions.totalSupply().call(block_identifier=preblock))
+          pool=Web3.to_checksum_address(vault.functions.pool().call(block_identifier=preblock))
+
+          order_contract=w3.eth.contract(address=event['order'],abi=ORDER_ABI)
+          market_addr=Web3.to_checksum_address(order_contract.functions.market().call(block_identifier=preblock))
+          market=w3.eth.contract(address=market_addr,abi=MARKET_ABI)
+          ft,xt,gt,collateral,debt=[Web3.to_checksum_address(x) for x in market.functions.tokens().call(block_identifier=preblock)]
+          assert debt==asset_addr, f'debt {debt} != asset {asset_addr}'
+
+          # Reconstruct the ERC-20 share ledger from Transfer events, then verify each
+          # candidate with archive balanceOf at the exact pre-settlement block.
+          params={'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(preblock),'address':VAULT,'topic0':TRANSFER_TOPIC}
+          url='https://eth.blockscout.com/api?'+urllib.parse.urlencode(params)
+          req=urllib.request.Request(url,headers={'User-Agent':'curl/8.5.0','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=60) as r: payload=json.loads(r.read())
+          logs=payload.get('result') or []
+          assert isinstance(logs,list), payload
+          reconstructed=defaultdict(int)
+          for log in logs:
+              topics=log.get('topics') or []
+              if len(topics)<3: continue
+              frm=Web3.to_checksum_address('0x'+str(topics[1]).removeprefix('0x')[-40:])
+              to=Web3.to_checksum_address('0x'+str(topics[2]).removeprefix('0x')[-40:])
+              raw=str(log.get('data') or '0x').removeprefix('0x')
+              if len(raw)<64: continue
+              amount=int(raw[:64],16)
+              if frm.lower()!=ZERO: reconstructed[frm]-=amount
+              if to.lower()!=ZERO: reconstructed[to]+=amount
+
+          holders=[]
+          for holder,calc in reconstructed.items():
+              if calc<=0: continue
+              actual=int(vault.functions.balanceOf(holder).call(block_identifier=preblock))
+              if actual<=0: continue
+              max_redeem=int(vault.functions.maxRedeem(holder).call(block_identifier=preblock))
+              holders.append({'holder':holder,'reconstructed_balance':calc,'onchain_balance':actual,'max_redeem':max_redeem})
+          holders.sort(key=lambda x:x['onchain_balance'],reverse=True)
+          assert len(holders)>=2, f'need at least two distinct LPs, got {holders}'
+
+          # Pick the largest real holder that can redeem a nonzero amount while at least
+          # one distinct holder remains. Cap at maxRedeem so runtime does not rely on
+          # liquidity that ERC-4626 itself says is unavailable.
+          selected=None
+          for h in holders:
+              shares=min(h['onchain_balance'],h['max_redeem'])
+              if shares<=0: continue
+              other_balances=sum(x['onchain_balance'] for x in holders if x['holder']!=h['holder'])
+              if other_balances<=0: continue
+              nominal=int(vault.functions.previewRedeem(shares).call(block_identifier=preblock))
+              fair=shares*(max(0,total_assets-EXPECTED_BAD)+1)//(total_supply+1)
+              shift=nominal-fair if nominal>=fair else 0
+              if shift>0:
+                  selected={**h,'selected_shares':shares,'nominal_preview_raw':nominal,'fair_after_loss_raw':fair,'predicted_shift_raw':shift,'other_holder_balance_raw':other_balances}
+                  break
+          assert selected is not None, f'no real holder gives measurable loss shift: {holders}'
+
+          out={
+              'vault':VAULT,'settlement_tx':TX,'settlement_block':block,'preblock':preblock,
+              'caller':event['caller'],'order':event['order'],'event_bad_debt_raw':EXPECTED_BAD,'event_delivery_raw':0,
+              'asset':asset_addr,'asset_symbol':asset_symbol,'asset_decimals':asset_decimals,
+              'total_assets_pre_raw':total_assets,'total_supply_pre_raw':total_supply,'pool':pool,
+              'market':market_addr,'ft':ft,'gt':gt,'collateral':collateral,'debt_token':debt,
+              'selected_lp':selected,'verified_holders':holders,
+          }
+          p=Path('production-evidence/focused_zero_delivery_fixture.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+          env=Path('production-evidence/focused_zero_delivery_fixture.env')
+          env.write_text('\n'.join([
+              f'TERM_MAX_VAULT={VAULT}',
+              f'TERM_MAX_SETTLEMENT_TX={TX}',
+              f'TERM_MAX_PRE_SETTLEMENT_BLOCK={preblock}',
+              f'TERM_MAX_ORDER={event["order"]}',
+              f'TERM_MAX_SETTLEMENT_CALLER={event["caller"]}',
+              f'TERM_MAX_SHARE_SOURCE={selected["holder"]}',
+              f'TERM_MAX_ATTACKER_SHARES={selected["selected_shares"]}',
+              f'TERM_MAX_EXPECTED_BAD_DEBT_RAW={EXPECTED_BAD}',
+              'TERM_MAX_EXPECTED_DELIVERY_RAW=0',
+          ])+'\n')
+          print(json.dumps(out,indent=2,sort_keys=True))
+          print(env.read_text())
+          PY
+
+      - name: Commit fixture
+        if: always()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/focused_zero_delivery_fixture.json || exit 0
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/focused_zero_delivery_fixture.*
+          git commit -m "Record real zero-delivery stale-NAV fixture" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - name: Upload fixture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: focused-zero-delivery-fixture
+          path: repo/production-evidence/focused_zero_delivery_fixture.*
+          if-no-files-found: warn

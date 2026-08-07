@@ -1,0 +1,287 @@
+{
+  "chain": "bnb-mainnet",
+  "collateral_meta": {
+    "0x0a43fc31a73013089df59194872ecae4cae14444": {
+      "address": "0x0a43fc31a73013089df59194872ecae4cae14444",
+      "decimals": 18,
+      "symbol": "4"
+    },
+    "0x55d398326f99059ff775485246999027b3197955": {
+      "address": "0x55d398326f99059ff775485246999027b3197955",
+      "decimals": 18,
+      "symbol": "USDT"
+    },
+    "0x924fa68a0fc644485b8df8abfa0a41c2e7744444": {
+      "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+      "decimals": 18,
+      "symbol": "\u5e01\u5b89\u4eba\u751f"
+    },
+    "0xda7ad9dea9397cffddae2f8a052b82f1484252b3": {
+      "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "decimals": 18,
+      "symbol": "RIVER"
+    }
+  },
+  "latest_block": 114503880,
+  "market_count": 6,
+  "market_rows": [
+    {
+      "collateral": "0x55d398326f99059ff775485246999027b3197955",
+      "debt_token": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+      "ft": "0x111601cdb36ec42839bb2ca2f142a2c4ea4a0183",
+      "gt": "0x28be79e7a1d8fe3fb7e63e8f84b1210850db4b3e",
+      "market": "0xc43e48e8ea0658754446bcd32bc6d91ebfd73c89",
+      "xt": "0x09e418cb44441ced0142e77623cc94138f19fea5"
+    },
+    {
+      "collateral": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+      "debt_token": "0x55d398326f99059ff775485246999027b3197955",
+      "ft": "0xd039864b1779684f04ac0a05441285520edfd1c3",
+      "gt": "0x17d2460d10b4cdd3c3419bab0c35f2afe116a437",
+      "market": "0x3ecaf35c5f107f24076be1f08266347ef0f2c8cd",
+      "xt": "0x7d3a3a4a36c252082b8cd92bc360dd4ef5bd0427"
+    },
+    {
+      "collateral": "0x55d398326f99059ff775485246999027b3197955",
+      "debt_token": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "ft": "0xde66185e9a9d4b8b145828179fe0ab6280326572",
+      "gt": "0x07ddc26feac6689aeb49b6cdbda39b7571e46c42",
+      "market": "0x331910970e9999629083a83dc282bb879f7a4e77",
+      "xt": "0xecf67cc9d4700a5a23be84eb029bb4179d2109a3"
+    },
+    {
+      "collateral": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "debt_token": "0x55d398326f99059ff775485246999027b3197955",
+      "ft": "0x57a1e9eb7909d1bf8903716150ae249b69804f78",
+      "gt": "0xe8044412f449f144e77595c6242f9b37fafda5a6",
+      "market": "0xe01419d7fce5dec5f358e04764283067d69d81ca",
+      "xt": "0xd84b18bd297f76c7b50cb9758a1fadfa8a17826d"
+    },
+    {
+      "collateral": "0x0a43fc31a73013089df59194872ecae4cae14444",
+      "debt_token": "0x55d398326f99059ff775485246999027b3197955",
+      "ft": "0x13ed21d087a122b0d07836590ebdf486a89af730",
+      "gt": "0xbf685a4ab87a04f82989dd9118e9f3e2b3c2ae60",
+      "market": "0x805b175109adf0ecd2ab5fb21018f540ea10e8d3",
+      "xt": "0x8a7a899ec3382218ea563abfe7ae576cbc31f3dc"
+    },
+    {
+      "collateral": "0x55d398326f99059ff775485246999027b3197955",
+      "debt_token": "0x0a43fc31a73013089df59194872ecae4cae14444",
+      "ft": "0x75b84372fa005c2f2ec1edffc3ca657580118c3c",
+      "gt": "0xe1a3b87c7e84cd731c916ab8b036a9a6fa2855e4",
+      "market": "0xacfa81fb5b1b6aa7a8e60f73b50c711ae2f3be8b",
+      "xt": "0x4970537f0f015d9e72e9b927d9f6eee4073fb549"
+    }
+  ],
+  "positive_bad_debt_rows": [
+    {
+      "bad_debt_asset_units": 0.005819775180905037,
+      "bad_debt_raw": 5819775180905037,
+      "collateral": "0x55d398326f99059ff775485246999027b3197955",
+      "collateral_meta": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "liquid_capacity_raw": 3593627534838748,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0x086c120290850e4698645a5689c2428d6e7789de",
+      "vault_asset": {
+        "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+        "decimals": 18,
+        "symbol": "RIVER"
+      },
+      "vault_collateral_balance_raw": 44633822043815810
+    },
+    {
+      "bad_debt_asset_units": 4.57e-15,
+      "bad_debt_raw": 4570,
+      "collateral": "0x55d398326f99059ff775485246999027b3197955",
+      "collateral_meta": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "liquid_capacity_raw": 216733570219144520,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0xe749d471db186a6dab068059b29498feb3a01b38",
+      "vault_asset": {
+        "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+        "decimals": 18,
+        "symbol": "\u5e01\u5b89\u4eba\u751f"
+      },
+      "vault_collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_asset_units": 1.753e-15,
+      "bad_debt_raw": 1753,
+      "collateral": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+      "collateral_meta": {
+        "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+        "decimals": 18,
+        "symbol": "\u5e01\u5b89\u4eba\u751f"
+      },
+      "liquid_capacity_raw": 31439259936629748,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0xa6d02815d3ff570b795d6c0551cfcef915609142",
+      "vault_asset": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "vault_collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_asset_units": 1.496e-15,
+      "bad_debt_raw": 1496,
+      "collateral": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "collateral_meta": {
+        "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+        "decimals": 18,
+        "symbol": "RIVER"
+      },
+      "liquid_capacity_raw": 185260704377131595,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0x41d4b8385ab112380158eac2f4cabb9baef1bb45",
+      "vault_asset": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "vault_collateral_balance_raw": 0
+    }
+  ],
+  "rpc": "https://bsc-rpc.publicnode.com",
+  "vault_count": 4,
+  "vaults": [
+    {
+      "asset": {
+        "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+        "decimals": 18,
+        "symbol": "RIVER"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 0.005819775180905037,
+          "bad_debt_raw": 5819775180905037,
+          "collateral": "0x55d398326f99059ff775485246999027b3197955",
+          "collateral_meta": {
+            "address": "0x55d398326f99059ff775485246999027b3197955",
+            "decimals": 18,
+            "symbol": "USDT"
+          },
+          "vault_collateral_balance_raw": 44633822043815810
+        }
+      ],
+      "code_bytes": 45,
+      "direct_asset_raw": 3593627534838748,
+      "liquid_capacity_asset_units": 0.003593627534838748,
+      "liquid_capacity_raw": 3593627534838748,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1e-18,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0x086c120290850e4698645a5689c2428d6e7789de"
+    },
+    {
+      "asset": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1.496e-15,
+          "bad_debt_raw": 1496,
+          "collateral": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+          "collateral_meta": {
+            "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+            "decimals": 18,
+            "symbol": "RIVER"
+          },
+          "vault_collateral_balance_raw": 0
+        }
+      ],
+      "code_bytes": 45,
+      "direct_asset_raw": 185260704377131595,
+      "liquid_capacity_asset_units": 0.1852607043771316,
+      "liquid_capacity_raw": 185260704377131595,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1e-18,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0x41d4b8385ab112380158eac2f4cabb9baef1bb45"
+    },
+    {
+      "asset": {
+        "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+        "decimals": 18,
+        "symbol": "\u5e01\u5b89\u4eba\u751f"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 4.57e-15,
+          "bad_debt_raw": 4570,
+          "collateral": "0x55d398326f99059ff775485246999027b3197955",
+          "collateral_meta": {
+            "address": "0x55d398326f99059ff775485246999027b3197955",
+            "decimals": 18,
+            "symbol": "USDT"
+          },
+          "vault_collateral_balance_raw": 0
+        }
+      ],
+      "code_bytes": 45,
+      "direct_asset_raw": 216733570219144520,
+      "liquid_capacity_asset_units": 0.21673357021914452,
+      "liquid_capacity_raw": 216733570219144520,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1e-18,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0xe749d471db186a6dab068059b29498feb3a01b38"
+    },
+    {
+      "asset": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "decimals": 18,
+        "symbol": "USDT"
+      },
+      "bad_debts": [
+        {
+          "bad_debt_asset_units": 1.753e-15,
+          "bad_debt_raw": 1753,
+          "collateral": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+          "collateral_meta": {
+            "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+            "decimals": 18,
+            "symbol": "\u5e01\u5b89\u4eba\u751f"
+          },
+          "vault_collateral_balance_raw": 0
+        }
+      ],
+      "code_bytes": 45,
+      "direct_asset_raw": 31439259936629748,
+      "liquid_capacity_asset_units": 0.03143925993662975,
+      "liquid_capacity_raw": 31439259936629748,
+      "paused": false,
+      "pool": "0x0000000000000000000000000000000000000000",
+      "pool_max_withdraw_raw": 0,
+      "total_assets_asset_units": 1e-18,
+      "total_assets_raw": 1,
+      "total_supply_raw": 0,
+      "vault": "0xa6d02815d3ff570b795d6c0551cfcef915609142"
+    }
+  ]
+}

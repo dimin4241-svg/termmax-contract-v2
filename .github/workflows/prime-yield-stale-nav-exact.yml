@@ -1,0 +1,87 @@
+name: TermMax Prime Yield exact stale-NAV proof
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/prime-yield-stale-nav-exact.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_PROFILE: 'ci'
+  MAINNET_RPC_URL: 'https://eth.drpc.org'
+  TERM_MAX_SETTLEMENT_TX: '0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57'
+  TERM_MAX_PRE_SETTLEMENT_BLOCK: '24826645'
+  TERM_MAX_VAULT: '0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48'
+  TERM_MAX_ORDER: '0x385429223ddc9921f2491c4a16b79c0b0717c431'
+  TERM_MAX_SETTLEMENT_CALLER: '0x92FB952A80A2395C9eb05281cB116D3Bd391A799'
+  TERM_MAX_SHARE_SOURCE: '0xbccbc9fc2d1d9e9abd0ca132be816bd4f6051b86'
+  TERM_MAX_ATTACKER_SHARES: '385453126971'
+  TERM_MAX_EXPECTED_BAD_DEBT_RAW: '939875'
+  TERM_MAX_EXPECTED_DELIVERY_RAW: '9267'
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install Solidity dependencies
+        run: forge soldeer install
+
+      - name: Run exact pre-transaction production PoC
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          forge test \
+            --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol \
+            --match-test testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs \
+            -vvvv 2>&1 | tee production-evidence/prime_yield_exact_stale_nav_runtime.log
+
+      - name: Record concise proof excerpt
+        if: always()
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('production-evidence/prime_yield_exact_stale_nav_runtime.log')
+          if not p.exists(): raise SystemExit(0)
+          lines=p.read_text(errors='replace').splitlines()
+          keys=('classification bad debt raw','classification delivery value in asset raw','realized net loss raw','ordinary redeem payout raw','fair economic payout raw','loss shifted to remaining LPs raw','real bad debt raw','delivered collateral raw','[PASS]','[FAIL]')
+          keep=[x for x in lines if any(k in x for k in keys)]
+          Path('production-evidence/prime_yield_exact_stale_nav_excerpt.log').write_text('\n'.join(keep)+'\n')
+          print('\n'.join(keep))
+          PY
+
+      - name: Commit proof logs
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/prime_yield_exact_stale_nav_runtime.log || exit 0
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/prime_yield_exact_stale_nav_runtime.log production-evidence/prime_yield_exact_stale_nav_excerpt.log || true
+          git commit -m "Record exact Prime Yield stale-NAV proof" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prime-yield-exact-stale-nav-proof
+          path: |
+            production-evidence/prime_yield_exact_stale_nav_runtime.log
+            production-evidence/prime_yield_exact_stale_nav_excerpt.log
+          if-no-files-found: warn

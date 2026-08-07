@@ -1,0 +1,160 @@
+name: TermMax rank cross-user stale NAV production candidates
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/rank-cross-user-stale-nav-candidates.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Rank real positive bad-debt events by human amount and independent LP count
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, subprocess, urllib.parse, urllib.request, time
+          from pathlib import Path
+
+          RPC='https://eth.drpc.org'
+          BLOCKSCOUT='https://eth.blockscout.com'
+          ZERO='0x'+'0'*40
+          TRANSFER_TOPIC='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+
+          src=json.loads(Path('production-evidence/all_mainnet_vault_baddebt.json').read_text())
+          events=src['positive_events_ranked']
+
+          def sh(cmd, timeout=45):
+              return subprocess.check_output(cmd, text=True, stderr=subprocess.STDOUT, timeout=timeout).strip()
+
+          def cast_call(addr, sig, args, block):
+              cmd=['cast','call',addr,sig,*args,'--block',str(block),'--rpc-url',RPC]
+              return sh(cmd)
+
+          def compat_logs(address, to_block):
+              q=urllib.parse.urlencode({'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(to_block),'address':address,'topic0':TRANSFER_TOPIC})
+              url=BLOCKSCOUT+'/api?'+q
+              last=None
+              for i in range(5):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+                      with urllib.request.urlopen(req,timeout=90) as r: return json.loads(r.read()).get('result') or []
+                  except Exception as exc:
+                      last=exc; time.sleep(min(12,2**i))
+              raise RuntimeError(last)
+
+          # Cache all Transfer logs for each vault once, through the latest relevant preblock.
+          latest_by_vault={}
+          for e in events: latest_by_vault[e['vault'].lower()]=max(latest_by_vault.get(e['vault'].lower(),0),e['block']-1)
+          logs_cache={}
+          for vault,to_block in latest_by_vault.items():
+              raw=compat_logs(vault,to_block)
+              parsed=[]
+              for x in raw:
+                  topics=[str(t).lower() for t in (x.get('topics') or [])]
+                  if len(topics)<3: continue
+                  frm='0x'+topics[1].removeprefix('0x')[-40:]
+                  to='0x'+topics[2].removeprefix('0x')[-40:]
+                  val=int(str(x.get('data') or '0x0'),16)
+                  bn=x.get('blockNumber'); bn=int(bn,16) if isinstance(bn,str) and bn.startswith('0x') else int(bn or 0)
+                  ti=x.get('transactionIndex'); ti=int(ti,16) if isinstance(ti,str) and ti.startswith('0x') else int(ti or 0)
+                  li=x.get('logIndex'); li=int(li,16) if isinstance(li,str) and li.startswith('0x') else int(li or 0)
+                  parsed.append((bn,ti,li,frm,to,val))
+              parsed.sort()
+              logs_cache[vault]=parsed
+
+          metadata={}
+          out=[]
+          for e in events:
+              vault=e['vault']; vl=vault.lower(); pre=e['block']-1
+              if vl not in metadata:
+                  try:
+                      asset=cast_call(vault,'asset()(address)',[],pre).split()[0]
+                      decimals=int(cast_call(asset,'decimals()(uint8)',[],pre).split()[0])
+                      try: symbol=cast_call(asset,'symbol()(string)',[],pre).strip('"')
+                      except Exception: symbol='?'
+                      metadata[vl]={'asset':asset,'asset_decimals':decimals,'asset_symbol':symbol}
+                  except Exception as exc:
+                      metadata[vl]={'error':repr(exc)}
+              meta=metadata[vl]
+
+              balances={}
+              for bn,ti,li,frm,to,val in logs_cache.get(vl,[]):
+                  if bn>pre: break
+                  if frm!=ZERO: balances[frm]=balances.get(frm,0)-val
+                  if to!=ZERO: balances[to]=balances.get(to,0)+val
+              holders=[(a,v) for a,v in balances.items() if v>0]
+              holders.sort(key=lambda x:x[1],reverse=True)
+              total=sum(v for _,v in holders)
+
+              row=dict(e)
+              row.update(meta)
+              row['preblock_holder_count']=len(holders)
+              row['preblock_total_shares_reconstructed']=total
+              row['preblock_holders_top10']=[{'address':a,'shares_raw':v,'share_fraction':(v/total if total else 0)} for a,v in holders[:10]]
+              if 'asset_decimals' in meta:
+                  row['bad_debt_asset_units']=e['bad_debt_raw']/(10**meta['asset_decimals'])
+                  # For zero delivery, realized loss equals bad debt exactly. For a real holder redeeming all its shares,
+                  # first-order cross-user loss shift is that holder's fraction of the realized loss (subject to liquidity/rounding).
+                  if e['delivery_raw']==0 and len(holders)>=2 and total>0:
+                      best=max(holders,key=lambda x:x[1])
+                      frac=best[1]/total
+                      row['zero_delivery_cross_user_candidate']=True
+                      row['largest_holder']=best[0]
+                      row['largest_holder_fraction']=frac
+                      row['estimated_loss_shift_asset_units_before_runtime']=row['bad_debt_asset_units']*frac
+                  else:
+                      row['zero_delivery_cross_user_candidate']=False
+              out.append(row)
+
+          out.sort(key=lambda r:(r.get('estimated_loss_shift_asset_units_before_runtime',-1),r.get('bad_debt_asset_units',-1)),reverse=True)
+          summary={
+              'method':'Historical production events only. Holder balances reconstructed from vault ERC20 Transfer logs at block-1. Zero-delivery candidates have realized loss exactly equal to badDebt; estimated loss shift is only a ranking heuristic until exact fork runtime.',
+              'events':out,
+              'zero_delivery_multi_holder_candidates':[r for r in out if r.get('zero_delivery_cross_user_candidate')],
+          }
+          Path('production-evidence/cross_user_stale_nav_candidate_ranking.json').write_text(json.dumps(summary,indent=2,sort_keys=True))
+          print('ZERO_DELIVERY_MULTI_HOLDER_CANDIDATES',len(summary['zero_delivery_multi_holder_candidates']))
+          for r in summary['zero_delivery_multi_holder_candidates'][:20]:
+              print(json.dumps({k:r.get(k) for k in ['vault','order','block','tx_hash','asset_symbol','asset_decimals','bad_debt_raw','bad_debt_asset_units','preblock_holder_count','largest_holder','largest_holder_fraction','estimated_loss_shift_asset_units_before_runtime']},sort_keys=True))
+          print('TOP_ALL_EVENTS')
+          for r in out[:20]:
+              print(json.dumps({k:r.get(k) for k in ['vault','order','block','asset_symbol','asset_decimals','bad_debt_raw','bad_debt_asset_units','delivery_raw','preblock_holder_count']},sort_keys=True))
+          PY
+
+      - name: Commit ranking evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/cross_user_stale_nav_candidate_ranking.json
+          git commit -m "Record cross-user stale NAV production candidate ranking" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cross-user-stale-nav-candidate-ranking
+          path: repo/production-evidence/cross_user_stale_nav_candidate_ranking.json

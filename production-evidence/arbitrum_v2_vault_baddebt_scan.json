@@ -1,0 +1,19 @@
+{
+  "chain": "arbitrum-one",
+  "latest_block": 491958154,
+  "positive_event_count": 0,
+  "positive_events_ranked": [],
+  "redeem_event_count": 0,
+  "vaults": [
+    {
+      "address": "0xCb94ABCffbF5CC76a55f9c1496632A26D19f9947",
+      "deploy_block": 385285536,
+      "source": "official arb-mainnet-v2-vaults-1759407642.env"
+    },
+    {
+      "address": "0xb6692aCb982c2dA0775c947Cb329B04EBFB4e0ac",
+      "deploy_block": 385285536,
+      "source": "official arb-mainnet-v2-vaults-1759407642.env"
+    }
+  ]
+}

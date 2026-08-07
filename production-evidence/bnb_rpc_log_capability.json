@@ -1,0 +1,540 @@
+[
+  {
+    "endpoint": "https://bsc-rpc.publicnode.com",
+    "latest": 114501368,
+    "max_success_span": 5000,
+    "tests": [
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 1000000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 200000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.15,
+        "span": 100000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.15,
+        "span": 50000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 20000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 10000
+      },
+      {
+        "count": 0,
+        "ok": true,
+        "seconds": 0.16,
+        "span": 5000
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc.publicnode.com",
+    "latest": 114501371,
+    "max_success_span": 5000,
+    "tests": [
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 1000000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 200000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 100000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 50000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.18,
+        "span": 20000
+      },
+      {
+        "error": "<HTTPError 403: 'Forbidden'>",
+        "ok": false,
+        "seconds": 0.14,
+        "span": 10000
+      },
+      {
+        "count": 0,
+        "ok": true,
+        "seconds": 0.18,
+        "span": 5000
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed.bnbchain.org",
+    "latest": 114501374,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.28,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed.binance.org",
+    "latest": 114501381,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.3,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.29,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed1.binance.org",
+    "latest": 114501388,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.28,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed2.binance.org",
+    "latest": 114501395,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.25,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.23,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.28,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.25,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.23,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.27,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.31,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed3.binance.org",
+    "latest": 114501402,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.25,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.23,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.22,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.23,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://bsc-dataseed4.binance.org",
+    "latest": 114501408,
+    "tests": [
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 1000000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 200000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.23,
+        "span": 100000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.25,
+        "span": 50000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 20000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 10000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 5000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.26,
+        "span": 2000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.24,
+        "span": 1000
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.21,
+        "span": 500
+      },
+      {
+        "error": "RuntimeError({'code': -32005, 'message': 'limit exceeded'})",
+        "ok": false,
+        "seconds": 0.25,
+        "span": 100
+      }
+    ]
+  },
+  {
+    "endpoint": "https://binance.llamarpc.com",
+    "latest_error": "URLError(gaierror(-2, 'Name or service not known'))"
+  },
+  {
+    "endpoint": "https://bnb.api.onfinality.io/public",
+    "latest_error": "<HTTPError 429: 'Too Many Requests'>"
+  }
+]

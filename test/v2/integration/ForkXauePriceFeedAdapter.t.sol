@@ -9,7 +9,7 @@ import {
 } from "contracts/v2/oracle/adapters/xaue/TermMaxXauePricefeedAdapter.sol";
 import {console} from "forge-std/console.sol";
 import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
-import {TermMaxPriceFeedFactoryV2} from "contracts/v2/factory/TermMaxPricefeedFactoryV2.sol";
+import {TermMaxPriceFeedFactoryV2} from "contracts/v2/factory/TermMaxPriceFeedFactoryV2.sol";
 
 /**
  * @title ForkXauePriceFeedAdapterTest

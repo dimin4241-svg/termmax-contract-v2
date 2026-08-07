@@ -1,0 +1,589 @@
+{
+  "event_count": 99,
+  "from_block": 22283087,
+  "global_max_bad_debt_raw": 10182136,
+  "global_max_event": {
+    "bad_debt_raw": 10182136,
+    "block": 24187489,
+    "delivery_collateral_raw": 0,
+    "log_index": 238,
+    "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+    "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+    "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+  },
+  "positive_event_count": 44,
+  "positive_events_ranked": [
+    {
+      "bad_debt_raw": 10182136,
+      "block": 24187489,
+      "delivery_collateral_raw": 0,
+      "log_index": 238,
+      "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+      "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 939875,
+      "block": 24826646,
+      "delivery_collateral_raw": 9267,
+      "log_index": 316,
+      "order": "0x385429223ddc9921f2491c4a16b79c0b0717c431",
+      "tx_hash": "0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57",
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "bad_debt_raw": 578633,
+      "block": 25659630,
+      "delivery_collateral_raw": 0,
+      "log_index": 251,
+      "order": "0x8c506c3d59219fac4662995aac02bedc29b0a6aa",
+      "tx_hash": "0x041b4144d8b1a9eebc3214d9feeda687315ebbfb81f5fa02e2d6ecb2f1361a6a",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "bad_debt_raw": 490172,
+      "block": 25659621,
+      "delivery_collateral_raw": 0,
+      "log_index": 683,
+      "order": "0x3e35f030836cb93276c34b89dcf6a2d32759384b",
+      "tx_hash": "0x8a5c64ac4e26aeaeb15da669bcbddc8faca79785780b85533e83b13f75cda999",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "bad_debt_raw": 430759,
+      "block": 25659627,
+      "delivery_collateral_raw": 0,
+      "log_index": 643,
+      "order": "0x667c16eef2d2a904dca777432b83cb502124869b",
+      "tx_hash": "0x41a60b9373960138ae476b689d6d32532cc59224ac61235797202dbcecdcc455",
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "bad_debt_raw": 20388,
+      "block": 25034969,
+      "delivery_collateral_raw": 0,
+      "log_index": 100,
+      "order": "0xc9d4f7225118a1f8468889007eb1732fa64e2dfb",
+      "tx_hash": "0x8ba7bb0bdf8ceb7f4b614b08a31c0273d14a81ad0c2a5c0c5bc0ffa72087c179",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "bad_debt_raw": 13177,
+      "block": 25651571,
+      "delivery_collateral_raw": 0,
+      "log_index": 460,
+      "order": "0x562046484a1f9128836bb265801c4039dabd6b7e",
+      "tx_hash": "0x3e8e2a3e31b456c05d31a7aabb7889cd33679e7d13580e6f8b9b25e413514766",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "bad_debt_raw": 11449,
+      "block": 24655418,
+      "delivery_collateral_raw": 0,
+      "log_index": 371,
+      "order": "0x6676a041dedba9c8c9fc4776fcac5577a2c91340",
+      "tx_hash": "0x3322e55b8f039cdf60d5d35355f06cb1f4f4bf7a1bab28915ecfb6fef0771fe7",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "bad_debt_raw": 3346,
+      "block": 25417613,
+      "delivery_collateral_raw": 0,
+      "log_index": 191,
+      "order": "0x71ff6b4af4cef74a42760e4d41d1a8dc612d3a9b",
+      "tx_hash": "0xd507cb89e89e281c1671032e160e4e865a01903aaea29f69f7c0f74dadc1d475",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "bad_debt_raw": 2102,
+      "block": 24714396,
+      "delivery_collateral_raw": 0,
+      "log_index": 424,
+      "order": "0xbb7a8cd6abb11116c7571646b5f1fb8fb97e6406",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 1318,
+      "block": 24655421,
+      "delivery_collateral_raw": 0,
+      "log_index": 234,
+      "order": "0x6228c0753727d7d914145232dc5fb08d091562f7",
+      "tx_hash": "0xd73dbfd153f5f73ef0078abb7c00dd0a4f2b4daf4d22ceaeae59fce0e3727988",
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "bad_debt_raw": 1025,
+      "block": 24417707,
+      "delivery_collateral_raw": 0,
+      "log_index": 911,
+      "order": "0xddd412cb0022b7d6497b19147091bea69aea7041",
+      "tx_hash": "0xd925881dfb1684a310a717c9cdcacfe76940f27c8c897c9653baf2ca584b52fe",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "bad_debt_raw": 950,
+      "block": 24417707,
+      "delivery_collateral_raw": 0,
+      "log_index": 904,
+      "order": "0xaa6611554d0664072d4a3c0ac7925acb742d9ac6",
+      "tx_hash": "0xd925881dfb1684a310a717c9cdcacfe76940f27c8c897c9653baf2ca584b52fe",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 684,
+      "block": 24733950,
+      "delivery_collateral_raw": 0,
+      "log_index": 676,
+      "order": "0x01651e54968d61edb8cdd2cce3af1bab1c58f2b9",
+      "tx_hash": "0xaaf5d3a6e9e5d56e7668cd81d5f4b468fe58ce5e98029cbf9a29230aa180e298",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "bad_debt_raw": 297,
+      "block": 25417613,
+      "delivery_collateral_raw": 0,
+      "log_index": 198,
+      "order": "0xcaefb801c16ea0d80891df2a51932223f0182133",
+      "tx_hash": "0xd507cb89e89e281c1671032e160e4e865a01903aaea29f69f7c0f74dadc1d475",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "bad_debt_raw": 193,
+      "block": 25417613,
+      "delivery_collateral_raw": 0,
+      "log_index": 205,
+      "order": "0x17f94ae9973d958fc8a595ce88ba82342ee7900d",
+      "tx_hash": "0xd507cb89e89e281c1671032e160e4e865a01903aaea29f69f7c0f74dadc1d475",
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "bad_debt_raw": 20,
+      "block": 24714396,
+      "delivery_collateral_raw": 0,
+      "log_index": 431,
+      "order": "0xbecc7f6a52866cbab78c1b4a05ff245b141cd4d8",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 3,
+      "block": 24714396,
+      "delivery_collateral_raw": 0,
+      "log_index": 417,
+      "order": "0x8ce6afb32a42f2feb0bb54eae1c79c67ffc30215",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682658,
+      "delivery_collateral_raw": 0,
+      "log_index": 1008,
+      "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682624,
+      "delivery_collateral_raw": 0,
+      "log_index": 779,
+      "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "tx_hash": "0x8d1a33357ccba0ce9cf49701c54cb1337f7a442f94c3c070fd355ed1c4b4c3b3",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682620,
+      "delivery_collateral_raw": 0,
+      "log_index": 338,
+      "order": "0x9bafdf2a2d1c2bca75371d50895ac1a3a94ceb18",
+      "tx_hash": "0x7df40863ce24a05c66025dbff2812663b185f65c086baf4901c75cc892ef4ee3",
+      "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682620,
+      "delivery_collateral_raw": 0,
+      "log_index": 993,
+      "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "tx_hash": "0x5fea8ceb73318c6fe86cb37c940ef75bcfdc1880ab75dd905fec2a7beca67ad5",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682605,
+      "delivery_collateral_raw": 0,
+      "log_index": 832,
+      "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "tx_hash": "0x0ee0813e925f82ac2d58f55fe606f49f7185def6309caf133c3604b77d6999ac",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393305,
+      "delivery_collateral_raw": 0,
+      "log_index": 704,
+      "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "tx_hash": "0x531909011bbc6424a2612b4b3aaf4dfa483e9fae840fb1cb4999932a35581d70",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393297,
+      "delivery_collateral_raw": 0,
+      "log_index": 21,
+      "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "tx_hash": "0x69a6a25c92f075721a0f6c9a8de8d3510962895e017720a7f514e023e39df913",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393288,
+      "delivery_collateral_raw": 0,
+      "log_index": 253,
+      "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "tx_hash": "0xa6c2a13c9058a20d006c0e98f61a4f6b44540e1c4f7a6884f4ee2c6ea56cbcf3",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393286,
+      "delivery_collateral_raw": 0,
+      "log_index": 401,
+      "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "tx_hash": "0xa332d8d1c55dfc4656ee3ddd57e286fcf91c7b902eda4c5ef5e0406c9eabf918",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393285,
+      "delivery_collateral_raw": 0,
+      "log_index": 286,
+      "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "tx_hash": "0xfdafcf127eca15a3282781f135592b4299a35111e7424a997f31e6bed9699c38",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393284,
+      "delivery_collateral_raw": 0,
+      "log_index": 203,
+      "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "tx_hash": "0x04be89db2d47ff68ff82f09c31e55272927f0567f3a106f45df7bde8d26a9ad0",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393283,
+      "delivery_collateral_raw": 0,
+      "log_index": 149,
+      "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "tx_hash": "0x4c1cc78caf4990a95d646b53da5dacf223262610cb0a4d983156cb4d3fa6acf2",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393282,
+      "delivery_collateral_raw": 0,
+      "log_index": 245,
+      "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "tx_hash": "0xf4bfe897c3cdfcc98e4a371eee8482d721d3b408bc0763b017734b61666a992d",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393280,
+      "delivery_collateral_raw": 0,
+      "log_index": 453,
+      "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "tx_hash": "0x2a0e7df07d8da109a6a06a09f573a92cfcfc3f0f714de56ef07c702a47be9d4a",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393279,
+      "delivery_collateral_raw": 0,
+      "log_index": 125,
+      "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "tx_hash": "0x0028cb2cc43ac8dd6267722bbbf5c35f365278cd2acfe39cc0c53020eac93570",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25349832,
+      "delivery_collateral_raw": 0,
+      "log_index": 132,
+      "order": "0x18f426708043782773470636a12ed422aa67f923",
+      "tx_hash": "0xbcd69f894d0a372b517187cb99483ae67578d91e5f1b578df04da3fec72861ce",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25140851,
+      "delivery_collateral_raw": 0,
+      "log_index": 218,
+      "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "tx_hash": "0xfae5ed6c538df5c125ec574ceb1a5f03dc8f6e70716a84a538857e6c3625510a",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25140848,
+      "delivery_collateral_raw": 0,
+      "log_index": 326,
+      "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "tx_hash": "0x88b7d8bd9afab956c38f403f2b71fafa6cdaf0e6d657d9ef1bab7631f51de6a1",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24976973,
+      "delivery_collateral_raw": 0,
+      "log_index": 359,
+      "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "tx_hash": "0x8c287d172c92518cef8de30f297c2c31e598db2adc1bc54abab514aeeb94d7a1",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24976972,
+      "delivery_collateral_raw": 0,
+      "log_index": 89,
+      "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "tx_hash": "0x609cd4a60a96925413a3dcd02a11a9816acce3e4a9c5a1c7c68d49d1e58b9802",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24970816,
+      "delivery_collateral_raw": 0,
+      "log_index": 191,
+      "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "tx_hash": "0x17d59ba4a19c40e0aeb61412425b058d72dd45675559fc90060fd30217c6c6ba",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24683244,
+      "delivery_collateral_raw": 0,
+      "log_index": 154,
+      "order": "0x406ccf3378616dd931f0d61a3f11849c05534470",
+      "tx_hash": "0x7601d30d5c52552c9985172fd04b91dce5d67beb92f197446384adcf66a9f5e8",
+      "vault": "0x97263e74912e19176a34ab32871a873a395487d9"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24389192,
+      "delivery_collateral_raw": 0,
+      "log_index": 480,
+      "order": "0xe6690172eea7833a46964b075f98d0f438810cbf",
+      "tx_hash": "0x7a154aeaffa94d5545f774d76d1f18be6a657f64f401b4b1fad9c49c9bbee62e",
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24116677,
+      "delivery_collateral_raw": 0,
+      "log_index": 48,
+      "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
+      "tx_hash": "0x21f18e637c4c900904781e9798303445a091929a23664c58c0253f3cf9aeba38",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 23895230,
+      "delivery_collateral_raw": 0,
+      "log_index": 30,
+      "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 23476413,
+      "delivery_collateral_raw": 0,
+      "log_index": 141,
+      "order": "0x40bbe019f4c66de696a4297f41bfb7887e93a42a",
+      "tx_hash": "0x820cf82924bd69b923f3f63f1a59c7814a72f5dc6060d0223e331a1585d32ab3",
+      "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842"
+    }
+  ],
+  "redeem_order_topic": "0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242",
+  "source": "Blockscout Etherscan-compatible topic0-only getLogs",
+  "target_summary": {
+    "max_bad_debt_raw": 1,
+    "max_event": {
+      "bad_debt_raw": 1,
+      "block": 23895230,
+      "delivery_collateral_raw": 0,
+      "log_index": 30,
+      "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10",
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    "positive_count": 22,
+    "redeems": 52
+  },
+  "vault_count": 11,
+  "vaults_ranked": [
+    {
+      "max_bad_debt_raw": 10182136,
+      "max_event": {
+        "bad_debt_raw": 10182136,
+        "block": 24187489,
+        "delivery_collateral_raw": 0,
+        "log_index": 238,
+        "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+        "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "positive_count": 5,
+      "redeems": 10,
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "max_bad_debt_raw": 939875,
+      "max_event": {
+        "bad_debt_raw": 939875,
+        "block": 24826646,
+        "delivery_collateral_raw": 9267,
+        "log_index": 316,
+        "order": "0x385429223ddc9921f2491c4a16b79c0b0717c431",
+        "tx_hash": "0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57",
+        "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+      },
+      "positive_count": 1,
+      "redeems": 9,
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "max_bad_debt_raw": 578633,
+      "max_event": {
+        "bad_debt_raw": 578633,
+        "block": 25659630,
+        "delivery_collateral_raw": 0,
+        "log_index": 251,
+        "order": "0x8c506c3d59219fac4662995aac02bedc29b0a6aa",
+        "tx_hash": "0x041b4144d8b1a9eebc3214d9feeda687315ebbfb81f5fa02e2d6ecb2f1361a6a",
+        "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+      },
+      "positive_count": 3,
+      "redeems": 4,
+      "vault": "0x7a84fcb839beb377861001c6339a986b9e6d6d68"
+    },
+    {
+      "max_bad_debt_raw": 20388,
+      "max_event": {
+        "bad_debt_raw": 20388,
+        "block": 25034969,
+        "delivery_collateral_raw": 0,
+        "log_index": 100,
+        "order": "0xc9d4f7225118a1f8468889007eb1732fa64e2dfb",
+        "tx_hash": "0x8ba7bb0bdf8ceb7f4b614b08a31c0273d14a81ad0c2a5c0c5bc0ffa72087c179",
+        "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+      },
+      "positive_count": 4,
+      "redeems": 12,
+      "vault": "0x95fb87609f80c47e3102b976455023d2b9be9b8f"
+    },
+    {
+      "max_bad_debt_raw": 3346,
+      "max_event": {
+        "bad_debt_raw": 3346,
+        "block": 25417613,
+        "delivery_collateral_raw": 0,
+        "log_index": 191,
+        "order": "0x71ff6b4af4cef74a42760e4d41d1a8dc612d3a9b",
+        "tx_hash": "0xd507cb89e89e281c1671032e160e4e865a01903aaea29f69f7c0f74dadc1d475",
+        "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+      },
+      "positive_count": 5,
+      "redeems": 5,
+      "vault": "0xe0c139b915a637a519cb71c9f80cdd1f123b192e"
+    },
+    {
+      "max_bad_debt_raw": 1,
+      "max_event": {
+        "bad_debt_raw": 1,
+        "block": 23895230,
+        "delivery_collateral_raw": 0,
+        "log_index": 30,
+        "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+        "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10",
+        "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+      },
+      "positive_count": 22,
+      "redeems": 52,
+      "vault": "0xf488ccdf04079cc03183cdb6a147d12cf97f9317"
+    },
+    {
+      "max_bad_debt_raw": 1,
+      "max_event": {
+        "bad_debt_raw": 1,
+        "block": 24389192,
+        "delivery_collateral_raw": 0,
+        "log_index": 480,
+        "order": "0xe6690172eea7833a46964b075f98d0f438810cbf",
+        "tx_hash": "0x7a154aeaffa94d5545f774d76d1f18be6a657f64f401b4b1fad9c49c9bbee62e",
+        "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+      },
+      "positive_count": 1,
+      "redeems": 2,
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    },
+    {
+      "max_bad_debt_raw": 1,
+      "max_event": {
+        "bad_debt_raw": 1,
+        "block": 24683244,
+        "delivery_collateral_raw": 0,
+        "log_index": 154,
+        "order": "0x406ccf3378616dd931f0d61a3f11849c05534470",
+        "tx_hash": "0x7601d30d5c52552c9985172fd04b91dce5d67beb92f197446384adcf66a9f5e8",
+        "vault": "0x97263e74912e19176a34ab32871a873a395487d9"
+      },
+      "positive_count": 1,
+      "redeems": 2,
+      "vault": "0x97263e74912e19176a34ab32871a873a395487d9"
+    },
+    {
+      "max_bad_debt_raw": 1,
+      "max_event": {
+        "bad_debt_raw": 1,
+        "block": 23476413,
+        "delivery_collateral_raw": 0,
+        "log_index": 141,
+        "order": "0x40bbe019f4c66de696a4297f41bfb7887e93a42a",
+        "tx_hash": "0x820cf82924bd69b923f3f63f1a59c7814a72f5dc6060d0223e331a1585d32ab3",
+        "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842"
+      },
+      "positive_count": 1,
+      "redeems": 1,
+      "vault": "0xd7977c2a74005ca3af5b201546369f0c7c177842"
+    },
+    {
+      "max_bad_debt_raw": 1,
+      "max_event": {
+        "bad_debt_raw": 1,
+        "block": 25682620,
+        "delivery_collateral_raw": 0,
+        "log_index": 338,
+        "order": "0x9bafdf2a2d1c2bca75371d50895ac1a3a94ceb18",
+        "tx_hash": "0x7df40863ce24a05c66025dbff2812663b185f65c086baf4901c75cc892ef4ee3",
+        "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c"
+      },
+      "positive_count": 1,
+      "redeems": 1,
+      "vault": "0xe3662545b96032858c72d89a124bf62c6d3a5f5c"
+    },
+    {
+      "max_bad_debt_raw": 0,
+      "max_event": null,
+      "positive_count": 0,
+      "redeems": 1,
+      "vault": "0x5b98e87312487a9e09365e63dac4bdbbf9569c2f"
+    }
+  ]
+}

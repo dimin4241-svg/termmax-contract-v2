@@ -1,0 +1,192 @@
+name: TermMax focused USDC stale-NAV fixture
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/focused-usdc-stale-nav-fixture.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    name: Reconstruct real LP and economic loss
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Reconstruct fixture
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          PYTHONPATH=. python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          from collections import defaultdict
+          from pathlib import Path
+          from eth_abi import decode
+          from web3 import HTTPProvider, Web3
+          import scripts.termmax_production_evidence as scanner
+
+          VAULT=Web3.to_checksum_address('0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48')
+          TX='0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57'
+          EXPECTED_BAD=939875
+          EXPECTED_DELIVERY=9267
+          ZERO='0x0000000000000000000000000000000000000000'
+
+          def provider(url, request_kwargs=None):
+              kw=dict(request_kwargs or {})
+              headers=dict(kw.pop('headers',{}) or {})
+              headers.update({'User-Agent':'curl/8.5.0','Content-Type':'application/json','Accept':'application/json'})
+              return HTTPProvider(url,request_kwargs={**kw,'headers':headers,'timeout':45})
+
+          w3=Web3(provider(os.environ['ETH_RPC_URL']))
+          assert w3.eth.chain_id==1
+          scanner.VAULT=VAULT
+          scanner.HTTPProvider=provider
+          scanner.RPC_URLS=[os.environ['ETH_RPC_URL']]
+          for name in ('TOPIC_NEW_ORDER','TOPIC_REDEEM_ORDER','TOPIC_WITHDRAW_FTS'):
+              v=getattr(scanner,name)
+              setattr(scanner,name,'0x'+v.removeprefix('0x'))
+
+          receipt=w3.eth.get_transaction_receipt(TX)
+          block=int(receipt.blockNumber); preblock=block-1
+          redeem_topic=scanner.TOPIC_REDEEM_ORDER.lower()
+          event_log=None
+          for log in receipt.logs:
+              if Web3.to_checksum_address(log.address)!=VAULT or not log.topics: continue
+              t='0x'+log.topics[0].hex().removeprefix('0x')
+              if t.lower()==redeem_topic:
+                  bad,delivery=decode(['uint256','uint256'],bytes(log.data))
+                  if int(bad)==EXPECTED_BAD and int(delivery)==EXPECTED_DELIVERY:
+                      event_log=log; break
+          assert event_log is not None, 'expected RedeemOrder event not found'
+
+          result=scanner.inspect_redeem_event(w3,event_log)
+          state=result.get('prestate',{})
+          assert result['event_bad_debt_raw']==EXPECTED_BAD
+          assert result['event_delivery_collateral_raw']==EXPECTED_DELIVERY
+          assert state.get('debt_symbol')=='USDC', state
+          assert int(state.get('debt_decimals'))==6, state
+          assert state.get('preview_available') is True, state
+
+          # The protocol-specific collateralData may contain more than a raw uint256.
+          # Reuse the exact deliveryData returned by deployed market.previewRedeem(),
+          # which inspect_order has already passed to deployed GT.getCollateralValue().
+          preview_delivery=int(state.get('collateral_out_raw',0))
+          delivery_usd_1e8=int(state.get('collateral_value_usd_1e8',0))
+          delivery_value_usdc_raw=int(state.get('collateral_value_debt_raw_at_usd_par',0))
+          delivery_matches_event=(preview_delivery==EXPECTED_DELIVERY)
+          net_realized_loss_raw=EXPECTED_BAD-delivery_value_usdc_raw
+
+          vault=w3.eth.contract(address=VAULT,abi=scanner.VAULT_ABI + [
+              {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'name':'account','type':'address'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+              {'type':'function','name':'previewRedeem','stateMutability':'view','inputs':[{'name':'shares','type':'uint256'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'pool','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+          ])
+          total_assets=int(vault.functions.totalAssets().call(block_identifier=preblock))
+          total_supply=int(vault.functions.totalSupply().call(block_identifier=preblock))
+          share_decimals=int(vault.functions.decimals().call(block_identifier=preblock))
+
+          transfer_topic='0x'+Web3.keccak(text='Transfer(address,address,uint256)').hex().removeprefix('0x')
+          params={'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(preblock),'address':VAULT,'topic0':transfer_topic}
+          url='https://eth.blockscout.com/api?'+urllib.parse.urlencode(params)
+          req=urllib.request.Request(url,headers={'User-Agent':'curl/8.5.0','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=60) as r: payload=json.loads(r.read())
+          logs=payload.get('result') or []
+          assert isinstance(logs,list)
+          balances=defaultdict(int)
+          for log in logs:
+              topics=log.get('topics') or []
+              if len(topics)<3: continue
+              frm=Web3.to_checksum_address('0x'+str(topics[1]).removeprefix('0x')[-40:])
+              to=Web3.to_checksum_address('0x'+str(topics[2]).removeprefix('0x')[-40:])
+              raw=str(log.get('data') or '0x').removeprefix('0x')
+              if len(raw)<64: continue
+              amount=int(raw[:64],16)
+              if frm.lower()!=ZERO: balances[frm]-=amount
+              if to.lower()!=ZERO: balances[to]+=amount
+
+          verified=[]
+          for holder,reconstructed in balances.items():
+              if reconstructed<=0: continue
+              actual=int(vault.functions.balanceOf(holder).call(block_identifier=preblock))
+              if actual>0:
+                  verified.append({'holder':holder,'reconstructed_balance':reconstructed,'onchain_balance':actual})
+          verified.sort(key=lambda x:x['onchain_balance'],reverse=True)
+          assert verified, 'no historical share holder found'
+          holder=verified[0]['holder']; holder_balance=verified[0]['onchain_balance']
+          other_supply=total_supply-holder_balance
+          attacker_shares=holder_balance if other_supply>0 else holder_balance//2
+          assert attacker_shares>0 and total_supply>attacker_shares
+
+          nominal=int(vault.functions.previewRedeem(attacker_shares).call(block_identifier=preblock))
+          economic_assets=max(0,total_assets-max(0,net_realized_loss_raw))
+          fair=attacker_shares*(economic_assets+1)//(total_supply+1)
+          predicted_shift=nominal-fair if nominal>=fair else 0
+
+          out={
+              'vault':VAULT,'settlement_tx':TX,'settlement_block':block,'preblock':preblock,
+              'caller':result['caller'],'order':result['order'],
+              'event_bad_debt_raw':EXPECTED_BAD,'event_delivery_raw':EXPECTED_DELIVERY,
+              'debt_token':state.get('debt_token'),'debt_symbol':state.get('debt_symbol'),'debt_decimals':state.get('debt_decimals'),
+              'collateral':state.get('collateral'),'collateral_symbol':state.get('collateral_symbol'),'gt':state.get('gt'),'market':state.get('market'),
+              'preview_delivery_raw':preview_delivery,'delivery_matches_event':delivery_matches_event,
+              'delivery_value_usd_1e8':delivery_usd_1e8,'delivery_value_usdc_raw':delivery_value_usdc_raw,
+              'net_realized_loss_raw':net_realized_loss_raw,
+              'vault_total_assets_pre_raw':total_assets,'vault_total_supply_pre_raw':total_supply,'share_decimals':share_decimals,
+              'selected_real_holder':holder,'selected_holder_balance_raw':holder_balance,'attacker_shares_raw':attacker_shares,
+              'other_supply_before_exit_raw':total_supply-attacker_shares,
+              'nominal_preview_redeem_raw':nominal,'fair_economic_payout_raw':fair,'predicted_loss_shift_raw':predicted_shift,
+              'holders_verified':verified[:20],
+              'scanner_prestate':state,
+          }
+          p=Path('production-evidence/focused_usdc_stale_nav_fixture.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+          env=Path('production-evidence/focused_usdc_stale_nav_fixture.env')
+          env.write_text('\n'.join([
+              f'TERM_MAX_VAULT={VAULT}',f'TERM_MAX_SETTLEMENT_TX={TX}',f'TERM_MAX_PRE_SETTLEMENT_BLOCK={preblock}',
+              f'TERM_MAX_ORDER={result["order"]}',f'TERM_MAX_SETTLEMENT_CALLER={result["caller"]}',
+              f'TERM_MAX_SHARE_SOURCE={holder}',f'TERM_MAX_ATTACKER_SHARES={attacker_shares}',
+              f'TERM_MAX_EXPECTED_BAD_DEBT_RAW={EXPECTED_BAD}',f'TERM_MAX_EXPECTED_DELIVERY_RAW={EXPECTED_DELIVERY}',
+          ])+'\n')
+          print(json.dumps(out,indent=2,sort_keys=True))
+          print(env.read_text())
+          PY
+
+      - name: Commit fixture
+        if: always()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/focused_usdc_stale_nav_fixture.json || exit 0
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/focused_usdc_stale_nav_fixture.*
+          git commit -m "Record focused real USDC stale-NAV fixture" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - name: Upload fixture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: focused-usdc-stale-nav-fixture
+          path: repo/production-evidence/focused_usdc_stale_nav_fixture.*
+          if-no-files-found: warn

@@ -1,0 +1,157 @@
+{
+  "negative_candidate_count": 0,
+  "rpc": "https://eth.drpc.org",
+  "same_asset_negative_candidate_count": 0,
+  "snapshot_block": 25701126,
+  "snapshot_timestamp": 1786082051,
+  "top_negative_candidates": [],
+  "vault_count": 9,
+  "vaults": [
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 68,
+      "registered": 0,
+      "sources": [
+        "known target"
+      ],
+      "total_assets_raw": 3347839826245,
+      "total_supply_raw": 3283857640840,
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 2,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1760344129.json",
+        "broadcast/DeployVault.s.sol/1/run-latest.json"
+      ],
+      "total_assets_raw": 292082920,
+      "total_supply_raw": 288727610,
+      "vault": "0xad58811276A0b9fB842E860774793a9663094879"
+    },
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 2,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1760344129.json",
+        "broadcast/DeployVault.s.sol/1/run-latest.json"
+      ],
+      "total_assets_raw": 201100000,
+      "total_supply_raw": 201100000,
+      "vault": "0x7FF1f331af4a90f6b14F57cB24977f74be3FF31d"
+    },
+    {
+      "asset": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+      "asset_decimals": 8,
+      "asset_symbol": "WBTC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 0,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759829054.json"
+      ],
+      "total_assets_raw": 1380,
+      "total_supply_raw": 1380,
+      "vault": "0xB3C2C8c6670bB1DbE20CD37193d7e1334730e333"
+    },
+    {
+      "asset": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+      "asset_decimals": 18,
+      "asset_symbol": "USDU",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 21,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759829054.json"
+      ],
+      "total_assets_raw": 512067651,
+      "total_supply_raw": 512028987,
+      "vault": "0x18d91B5e3218AB16Ef86fB7Cb054CB48bA1e8b8e"
+    },
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 0,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759726107.json"
+      ],
+      "total_assets_raw": 0,
+      "total_supply_raw": 0,
+      "vault": "0xfd2ddb1f5989491967c7598da1d3D65324522339"
+    },
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 9,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759726107.json"
+      ],
+      "total_assets_raw": 674177326065,
+      "total_supply_raw": 657085273239,
+      "vault": "0x17337c22CF8b7C1B6fC86F0ef7Fcf05a7fA93f48"
+    },
+    {
+      "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 0,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759762574.json"
+      ],
+      "total_assets_raw": 0,
+      "total_supply_raw": 0,
+      "vault": "0xd7114698d3d6DE7389a6cB94dc6f3F9C2eA08D03"
+    },
+    {
+      "asset": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "asset_decimals": 18,
+      "asset_symbol": "WETH",
+      "errors": [],
+      "matured_previewed": 0,
+      "negative": 0,
+      "orders": 0,
+      "registered": 0,
+      "sources": [
+        "broadcast/DeployVault.s.sol/1/run-1759762574.json"
+      ],
+      "total_assets_raw": 0,
+      "total_supply_raw": 0,
+      "vault": "0x0093e24Af6Ff1E6aC61CE756bD1F772be6187E89"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+name: TermMax BNB global vault bad-debt scan
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnb-global-vault-baddebt-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+      - name: Scan every deployed BNB V2 vault RedeemOrder event
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import glob,json,re,urllib.request
+          from pathlib import Path
+          from web3 import Web3
+          RPCS=['https://bsc-dataseed.binance.org','https://bsc-dataseed1.defibit.io','https://bsc-dataseed1.ninicoin.io']
+          topic='0x'+Web3.keccak(text='RedeemOrder(address,address,uint256,uint256)').hex().removeprefix('0x')
+          vaults={}
+          for f in glob.glob('deployments/bnb-mainnet/*vault*.env'):
+              txt=open(f).read(); bm=re.search(r'^BLOCK_NUMBER=(\d+)',txt,re.M); start=int(bm.group(1)) if bm else 0
+              for m in re.finditer(r'^VAULT_ADDRESS(?:_\d+)?=(0x[a-fA-F0-9]{40})',txt,re.M):
+                  a=m.group(1).lower(); vaults[a]=min(vaults.get(a,start),start)
+          if not vaults: raise SystemExit('no BNB vaults parsed')
+          addresses=list(vaults)
+          def rpc(method,params):
+              last=None
+              for ep in RPCS:
+                  try:
+                      body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+                      req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+                      with urllib.request.urlopen(req,timeout=45) as r: d=json.loads(r.read())
+                      if d.get('error'): raise RuntimeError(d['error'])
+                      return d.get('result')
+                  except Exception as e: last=e
+              raise last
+          latest=int(rpc('eth_blockNumber',[]),16); start=min(vaults.values())
+          logs=[]; lo=start; span=100000
+          while lo<=latest:
+              hi=min(latest,lo+span-1)
+              try:
+                  got=rpc('eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(hi),'address':addresses,'topics':[topic]}])
+                  logs.extend(got or []); lo=hi+1; span=min(200000,span*2)
+              except Exception as e:
+                  if span<=1000: raise
+                  span=max(1000,span//2); print('REDUCE_SPAN',span,'AT',lo,'ERR',repr(e)[:300])
+              if lo%1000000<span: print('PROGRESS',lo,latest,'events',len(logs),'span',span)
+          rows=[]
+          for x in logs:
+              data=str(x.get('data') or '0x')[2:].rjust(128,'0'); topics=x.get('topics') or []
+              rows.append({'block':int(x['blockNumber'],16),'tx_hash':x['transactionHash'],'vault':x['address'].lower(),
+                           'order':'0x'+topics[2][-40:] if len(topics)>2 else None,
+                           'bad_debt_raw':int(data[:64],16),'delivery_raw':int(data[64:128],16)})
+          pos=sorted((r for r in rows if r['bad_debt_raw']>0),key=lambda x:x['bad_debt_raw'],reverse=True)
+          # Raw eth_call metadata: asset() and decimals(). Dynamic symbol resolved through Web3 ABI.
+          w3=None
+          for ep in RPCS:
+              q=Web3(Web3.HTTPProvider(ep,request_kwargs={'timeout':30}))
+              if q.is_connected(): w3=q; break
+          meta={}
+          abi_v=[{'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]}]
+          abi_t=[{'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+                 {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]}]
+          if w3:
+              for v in sorted(set(r['vault'] for r in pos)):
+                  try:
+                      asset=w3.eth.contract(address=Web3.to_checksum_address(v),abi=abi_v).functions.asset().call()
+                      tok=w3.eth.contract(address=asset,abi=abi_t)
+                      meta[v]={'asset':asset,'symbol':tok.functions.symbol().call(),'decimals':tok.functions.decimals().call()}
+                  except Exception as e: meta[v]={'error':repr(e)}
+          out={'chain':'bnb-mainnet','redeem_order_topic':topic,'rpc_latest_block':latest,'vault_count':len(vaults),'scan_start_block':start,
+               'redeem_event_count':len(rows),'positive_event_count':len(pos),'positive_events_ranked':pos,'asset_meta':meta,'vault_start_blocks':vaults}
+          Path('production-evidence/bnb_all_vault_baddebt.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('VAULT_COUNT',len(vaults),'REDEEM_EVENTS',len(rows),'POSITIVE',len(pos))
+          for r in pos[:50]: print('POSITIVE',json.dumps(r,sort_keys=True),'META',json.dumps(meta.get(r['vault']),sort_keys=True))
+          PY
+      - name: Commit scan
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnb_all_vault_baddebt.json
+          git commit -m "Record BNB global vault bad-debt scan" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnb-all-vault-baddebt
+          path: repo/production-evidence/bnb_all_vault_baddebt.json

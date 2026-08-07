@@ -1,0 +1,20 @@
+{
+  "bad_debt_usdc_raw": 939875,
+  "benchmark_surplus_over_bad_debt_usdc_raw": 5418611,
+  "block": 24826645,
+  "btc_benchmark_delivery_value_usdc_raw_floor": 6358486,
+  "chainlink_btc_usd_answer_raw": 6861429623381,
+  "chainlink_btc_usd_feed": "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c",
+  "chainlink_price_decimals": 8,
+  "chainlink_round_id": 129127208515966880732,
+  "chainlink_updated_at": 1775548823,
+  "classification": "collateral benchmark value exceeds bad debt",
+  "convertToAssets_strbtc_raw": 9267,
+  "delivery_wstrbtc_raw": 9267,
+  "expected_strbtc": "0xB2723d5dF98689eCA6A4E7321121662DDB9b3017",
+  "strbtc_decimals": 8,
+  "underlying_asset": "0xb2723d5df98689eca6a4e7321121662ddb9b3017",
+  "underlying_matches_expected_strbtc": true,
+  "wstrbtc": "0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770",
+  "wstrbtc_decimals": 8
+}

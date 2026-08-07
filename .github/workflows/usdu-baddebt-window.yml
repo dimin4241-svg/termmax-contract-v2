@@ -1,0 +1,100 @@
+name: TermMax USDU bad-debt allocation window
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/usdu-baddebt-window.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  window:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Resolve market/collateral and query bad-debt state plus DealBadDebt events
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          RPC='https://rpc.mevblocker.io'
+          VAULT='0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e'
+          ORDER='0xd260d3f76a16cf8bf7a691a9af629407d0091980'
+          BLOCK='24187489'
+
+          MARKET=$(cast call "$ORDER" 'market()(address)' --block $((BLOCK-1)) --rpc-url "$RPC" | tr -d '[:space:]')
+          TOKENS=$(cast call "$MARKET" 'tokens()(address,address,address,address,address)' --block $((BLOCK-1)) --rpc-url "$RPC")
+          COLLATERAL=$(printf '%s\n' "$TOKENS" | sed -n '4p' | awk '{print $1}' | tr -d '[:space:]')
+          DEBT=$(printf '%s\n' "$TOKENS" | sed -n '5p' | awk '{print $1}' | tr -d '[:space:]')
+          HIST=$(cast call "$VAULT" 'badDebtMapping(address)(uint256)' "$COLLATERAL" --block "$BLOCK" --rpc-url "$RPC" | awk '{print $1}')
+          CURRENT=$(cast call "$VAULT" 'badDebtMapping(address)(uint256)' "$COLLATERAL" --rpc-url "$RPC" | awk '{print $1}')
+          TOPIC=$(cast keccak 'DealBadDebt(address,address,address,uint256,uint256,uint256)')
+
+          export MARKET COLLATERAL DEBT HIST CURRENT TOPIC VAULT ORDER BLOCK
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request, time
+          from pathlib import Path
+          base='https://eth.blockscout.com'
+          params={
+            'module':'logs','action':'getLogs','fromBlock':os.environ['BLOCK'],'toBlock':'latest',
+            'address':os.environ['VAULT'],'topic0':os.environ['TOPIC']
+          }
+          url=base+'/api?'+urllib.parse.urlencode(params)
+          req=urllib.request.Request(url,headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+          try:
+              with urllib.request.urlopen(req,timeout=90) as r: logs=json.loads(r.read())
+          except Exception as exc:
+              logs={'_error':repr(exc),'_url':url}
+          result=logs.get('result') if isinstance(logs,dict) else None
+          if not isinstance(result,list): result=[]
+          parsed=[]
+          for x in result:
+              bn=x.get('blockNumber'); bn=int(bn,16) if isinstance(bn,str) and bn.startswith('0x') else int(bn or 0)
+              parsed.append({'block':bn,'tx_hash':x.get('transactionHash'),'topics':x.get('topics'),'data':x.get('data')})
+          parsed.sort(key=lambda x:x['block'])
+          out={
+            'settlement_block':int(os.environ['BLOCK']),'vault':os.environ['VAULT'],'order':os.environ['ORDER'],
+            'market':os.environ['MARKET'],'collateral':os.environ['COLLATERAL'],'debt_token':os.environ['DEBT'],
+            'bad_debt_mapping_at_end_of_settlement_block_raw':os.environ['HIST'],
+            'bad_debt_mapping_current_raw':os.environ['CURRENT'],
+            'deal_bad_debt_topic0':os.environ['TOPIC'],'deal_bad_debt_events_after_settlement':parsed,
+            'raw_query':logs,
+          }
+          Path('production-evidence/usdu_baddebt_window.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('MARKET',os.environ['MARKET']); print('COLLATERAL',os.environ['COLLATERAL']); print('DEBT',os.environ['DEBT'])
+          print('BAD_DEBT_AT_SETTLEMENT_BLOCK_RAW',os.environ['HIST']); print('BAD_DEBT_CURRENT_RAW',os.environ['CURRENT'])
+          print('DEAL_BAD_DEBT_EVENT_COUNT_AFTER_SETTLEMENT',len(parsed))
+          for x in parsed[:20]: print('DEAL_EVENT',json.dumps(x,sort_keys=True))
+          PY
+
+      - name: Commit window evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/usdu_baddebt_window.json
+          git commit -m "Record production bad-debt allocation window" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: usdu-baddebt-window
+          path: repo/production-evidence/usdu_baddebt_window.json

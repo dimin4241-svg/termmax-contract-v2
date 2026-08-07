@@ -1,0 +1,98 @@
+name: Prime Yield historical wstrBTC valuation
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/prime-yield-wstrbtc-value.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  value:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+      - run: python3 -m pip install --user --upgrade 'web3==7.13.0'
+      - name: Query exact historical ERC4626 conversion
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from web3 import Web3, HTTPProvider
+
+          BLOCK=24826646
+          WSTR=Web3.to_checksum_address('0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770')
+          AMT=9267
+          RPCS=['https://eth.drpc.org','https://ethereum.publicnode.com','https://eth.merkle.io','https://1rpc.io/eth','https://rpc.ankr.com/eth']
+          ABI=[
+            {'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+            {'type':'function','name':'convertToAssets','stateMutability':'view','inputs':[{'type':'uint256'}],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'previewRedeem','stateMutability':'view','inputs':[{'type':'uint256'}],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'totalAssets','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'totalSupply','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+            {'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+          ]
+          ERC20=[
+            {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+            {'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+          ]
+          errors=[]
+          for url in RPCS:
+            try:
+              w3=Web3(HTTPProvider(url,request_kwargs={'timeout':40,'headers':{'User-Agent':'termmax-audit/1.0'}}))
+              if w3.eth.chain_id != 1: raise RuntimeError('wrong chain')
+              c=w3.eth.contract(address=WSTR,abi=ABI)
+              asset=Web3.to_checksum_address(c.functions.asset().call(block_identifier=BLOCK))
+              u=w3.eth.contract(address=asset,abi=ERC20)
+              out={
+                'rpc':url,'block':BLOCK,'wstrbtc':WSTR,
+                'wstrbtc_symbol':c.functions.symbol().call(block_identifier=BLOCK),
+                'wstrbtc_decimals':int(c.functions.decimals().call(block_identifier=BLOCK)),
+                'delivery_wstrbtc_raw':AMT,
+                'delivery_wstrbtc_units':AMT/(10**int(c.functions.decimals().call(block_identifier=BLOCK))),
+                'underlying':asset,
+                'underlying_symbol':u.functions.symbol().call(block_identifier=BLOCK),
+                'underlying_decimals':int(u.functions.decimals().call(block_identifier=BLOCK)),
+                'convert_to_assets_raw':int(c.functions.convertToAssets(AMT).call(block_identifier=BLOCK)),
+                'preview_redeem_raw':int(c.functions.previewRedeem(AMT).call(block_identifier=BLOCK)),
+                'wrapper_total_assets_raw':int(c.functions.totalAssets().call(block_identifier=BLOCK)),
+                'wrapper_total_supply_raw':int(c.functions.totalSupply().call(block_identifier=BLOCK)),
+                'bad_debt_usdc_raw':939875,
+                'bad_debt_usdc_units':0.939875,
+              }
+              out['underlying_units']=out['convert_to_assets_raw']/(10**out['underlying_decimals'])
+              out['break_even_usd_per_underlying']=out['bad_debt_usdc_units']/out['underlying_units'] if out['underlying_units'] else None
+              Path('production-evidence/prime_yield_wstrbtc_value.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+              print(json.dumps(out,indent=2,sort_keys=True))
+              break
+            except Exception as e:
+              errors.append(f'{url}: {e}')
+          else:
+            raise RuntimeError('all RPCs failed: '+' | '.join(errors))
+          PY
+      - name: Commit evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f production-evidence/prime_yield_wstrbtc_value.json
+          git commit -m 'Record historical wstrBTC conversion' || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prime-yield-wstrbtc-value
+          path: production-evidence/prime_yield_wstrbtc_value.json
+          if-no-files-found: warn

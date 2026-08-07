@@ -1,0 +1,371 @@
+No files changed, compilation skipped
+
+Ran 1 test for test/v2/VaultV2.t.sol:VaultTestV2
+[PASS] testBadDebt() (gas: 1943951)
+Traces:
+  [2162649] VaultTestV2::testBadDebt()
+    ├─ [0] VM::warp(1734958967 [1.734e9])
+    │   └─ ← [Return]
+    ├─ [0] VM::randomAddress()
+    │   └─ ← [Return] 0x6B162aaBA19A7526Eed6daD2048486508915Fc18
+    ├─ [50985] debt token::mint(0x6B162aaBA19A7526Eed6daD2048486508915Fc18, 4821917800 [4.821e9])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, amount: 4821917800 [4.821e9])
+    │   └─ ← [Stop]
+    ├─ [0] VM::startPrank(0x6B162aaBA19A7526Eed6daD2048486508915Fc18)
+    │   └─ ← [Return]
+    ├─ [45945] debt token::approve(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9])
+    │   ├─ emit Approval(owner: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, spender: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 4821917800 [4.821e9])
+    │   └─ ← [Return] true
+    ├─ [304263] order::swapExactTokenToToken(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], 0x609fA1595317bA8292765Ea384854fA0eC2d606c, 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, 4821917800 [4.821e9], 100000000000 [1e11], 1734962567 [1.734e9])
+    │   ├─ [354918] MockOrderV2::swapExactTokenToToken(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], 0x609fA1595317bA8292765Ea384854fA0eC2d606c, 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, 4821917800 [4.821e9], 100000000000 [1e11], 1734962567 [1.734e9]) [delegatecall]
+    │   │   ├─ [5297] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [staticcall]
+    │   │   │   ├─ [2625] MintableERC20V2::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [2797] 0x609fA1595317bA8292765Ea384854fA0eC2d606c::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [staticcall]
+    │   │   │   ├─ [2625] MintableERC20V2::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [209188] vault::afterSwap(0, 0, 4821917800 [4.821e9], -95178082200 [-9.517e10])
+    │   │   │   ├─ [206501] TermMaxVaultV2::afterSwap(0, 0, 4821917800 [4.821e9], -95178082200 [-9.517e10]) [delegatecall]
+    │   │   │   │   ├─ [197278] OrderManagerV2::afterSwap(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], 0, 0, 4821917800 [4.821e9], -95178082200 [-9.517e10]) [delegatecall]
+    │   │   │   │   │   ├─ emit AccruedInterest(newAccretingPrincipal: 10000000000000000000000000000 [1e28], newPerformanceFee: 0)
+    │   │   │   │   │   ├─ [2825] order::market() [staticcall]
+    │   │   │   │   │   │   ├─ [2659] MockOrderV2::market() [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]
+    │   │   │   │   │   │   └─ ← [Return] market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]
+    │   │   │   │   │   ├─ [2768] debt token::allowance(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   ├─ [22225] debt token::approve(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], 95178082200 [9.517e10])
+    │   │   │   │   │   │   ├─ emit Approval(owner: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], spender: market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], amount: 95178082200 [9.517e10])
+    │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   ├─ [92943] market::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10])
+    │   │   │   │   │   │   ├─ [90268] TermMaxMarketV2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10]) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [13123] debt token::transferFrom(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   ├─ emit Transfer(from: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], to: market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], amount: 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   ├─ [29861] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   ├─ [29686] MintableERC20V2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   │   │   │   ├─ [29861] 0x609fA1595317bA8292765Ea384854fA0eC2d606c::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   ├─ [29686] MintableERC20V2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 95178082200 [9.517e10]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   │   │   │   ├─ emit Mint(caller: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], receiver: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 95178082200 [9.517e10])
+    │   │   │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   └─ ← [Return]
+    │   │   ├─ [35023] debt token::transferFrom(0x6B162aaBA19A7526Eed6daD2048486508915Fc18, order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9])
+    │   │   │   ├─ emit Transfer(from: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, to: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 4821917800 [4.821e9])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ [2768] debt token::allowance(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [22225] debt token::approve(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], 4821917800 [4.821e9])
+    │   │   │   ├─ emit Approval(owner: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], spender: market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], amount: 4821917800 [4.821e9])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ [17443] market::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9])
+    │   │   │   ├─ [17268] TermMaxMarketV2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9]) [delegatecall]
+    │   │   │   │   ├─ [3523] debt token::transferFrom(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], 4821917800 [4.821e9])
+    │   │   │   │   │   ├─ emit Transfer(from: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], to: market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], amount: 4821917800 [4.821e9])
+    │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   ├─ [3161] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9])
+    │   │   │   │   │   ├─ [2986] MintableERC20V2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9]) [delegatecall]
+    │   │   │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 4821917800 [4.821e9])
+    │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   ├─ [3161] 0x609fA1595317bA8292765Ea384854fA0eC2d606c::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9])
+    │   │   │   │   │   ├─ [2986] MintableERC20V2::mint(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 4821917800 [4.821e9]) [delegatecall]
+    │   │   │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 4821917800 [4.821e9])
+    │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   ├─ emit Mint(caller: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], receiver: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], amount: 4821917800 [4.821e9])
+    │   │   │   │   └─ ← [Return]
+    │   │   │   └─ ← [Return]
+    │   │   ├─ [25200] 0x609fA1595317bA8292765Ea384854fA0eC2d606c::transfer(0x6B162aaBA19A7526Eed6daD2048486508915Fc18, 100000000000 [1e11])
+    │   │   │   ├─ [25022] MintableERC20V2::transfer(0x6B162aaBA19A7526Eed6daD2048486508915Fc18, 100000000000 [1e11]) [delegatecall]
+    │   │   │   │   ├─ emit Transfer(from: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], to: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, amount: 100000000000 [1e11])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ emit SwapExactTokenToToken(tokenIn: debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], tokenOut: 0x609fA1595317bA8292765Ea384854fA0eC2d606c, caller: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, recipient: 0x6B162aaBA19A7526Eed6daD2048486508915Fc18, tokenAmtIn: 4821917800 [4.821e9], netTokenOut: 100000000000 [1e11], feeAmt: 0)
+    │   │   └─ ← [Return] 100000000000 [1e11]
+    │   └─ ← [Return] 100000000000 [1e11]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    ├─ [0] VM::warp(1735045367 [1.735e9])
+    │   └─ ← [Return]
+    ├─ [0] VM::randomAddress()
+    │   └─ ← [Return] lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]
+    ├─ [0] VM::label(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], "lper2")
+    │   └─ ← [Return]
+    ├─ [50973] debt token::mint(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], 1000000000000 [1e12])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], amount: 1000000000000 [1e12])
+    │   └─ ← [Stop]
+    ├─ [0] VM::startPrank(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   └─ ← [Return]
+    ├─ [2537] debt token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 904821917800 [9.048e11]
+    ├─ [45933] debt token::approve(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], spender: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], amount: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [132703] vault::deposit(1000000000000 [1e12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   ├─ [120817] TermMaxVaultV2::deposit(1000000000000 [1e12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]) [delegatecall]
+    │   │   ├─ [17923] debt token::transferFrom(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], 1000000000000 [1e12])
+    │   │   │   ├─ emit Transfer(from: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], to: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], amount: 1000000000000 [1e12])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ [36896] OrderManagerV2::depositAssets(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], 1000000000000 [1e12]) [delegatecall]
+    │   │   │   ├─ emit AccruedInterest(newAccretingPrincipal: 10000273972602272727272727273 [1e28], newPerformanceFee: 273972602272727272727272 [2.739e23])
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], amount: 999972603490 [9.999e11])
+    │   │   ├─ emit Deposit(sender: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], owner: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], assets: 1000000000000 [1e12], shares: 999972603490 [9.999e11])
+    │   │   └─ ← [Return] 999972603490 [9.999e11]
+    │   └─ ← [Return] 999972603490 [9.999e11]
+    ├─ [2537] debt token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 1904821917800 [1.904e12]
+    ├─ [0] VM::assertEq(1904821917800 [1.904e12], 1904821917800 [1.904e12]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    ├─ [0] VM::randomAddress()
+    │   └─ ← [Return] 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC
+    ├─ [0] VM::startPrank(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC)
+    │   └─ ← [Return]
+    ├─ [68097] collateral token::mint(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 1000000000000000000 [1e18])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, amount: 1000000000000000000 [1e18])
+    │   └─ ← [Stop]
+    ├─ [45957] collateral token::approve(0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, 1000000000000000000 [1e18])
+    │   ├─ emit Approval(owner: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, spender: 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, amount: 1000000000000000000 [1e18])
+    │   └─ ← [Return] true
+    ├─ [450734] market::issueFt(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 100000000000 [1e11], 0x0000000000000000000000000000000000000000000000000de0b6b3a7640000)
+    │   ├─ [438347] TermMaxMarketV2::issueFt(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 100000000000 [1e11], 0x0000000000000000000000000000000000000000000000000de0b6b3a7640000) [delegatecall]
+    │   │   ├─ [351859] 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B::mint(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 100000000000 [1e11], 0x0000000000000000000000000000000000000000000000000de0b6b3a7640000)
+    │   │   │   ├─ [349157] GearingTokenWithERC20V2::mint(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 100000000000 [1e11], 0x0000000000000000000000000000000000000000000000000de0b6b3a7640000) [delegatecall]
+    │   │   │   │   ├─ [2537] collateral token::balanceOf(0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B) [staticcall]
+    │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   ├─ [33023] collateral token::transferFrom(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, 1000000000000000000 [1e18])
+    │   │   │   │   │   ├─ emit Transfer(from: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, to: 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, amount: 1000000000000000000 [1e18])
+    │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   ├─ [26370] OracleAggregatorV2::getPrice(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   │   │   │   │   ├─ [11028] MockPriceFeed::latestRoundData() [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 1, 200000000000 [2e11], 1730391800 [1.73e9], 1730391900 [1.73e9], 0
+    │   │   │   │   │   ├─ [148] MockPriceFeed::decimals() [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 8
+    │   │   │   │   │   └─ ← [Return] 200000000000 [2e11], 8
+    │   │   │   │   ├─ [26370] OracleAggregatorV2::getPrice(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe]) [staticcall]
+    │   │   │   │   │   ├─ [11028] MockPriceFeed::latestRoundData() [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 1, 100000000 [1e8], 1730391800 [1.73e9], 1730391900 [1.73e9], 0
+    │   │   │   │   │   ├─ [148] MockPriceFeed::decimals() [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 8
+    │   │   │   │   │   └─ ← [Return] 100000000 [1e8], 8
+    │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, tokenId: 1)
+    │   │   │   │   └─ ← [Return] 1
+    │   │   │   └─ ← [Return] 1
+    │   │   ├─ [34361] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::mint(0x341f04674e70747965982b27C0241d50cfaaFa84, 4744000 [4.744e6])
+    │   │   │   ├─ [31686] MintableERC20V2::mint(0x341f04674e70747965982b27C0241d50cfaaFa84, 4744000 [4.744e6]) [delegatecall]
+    │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x341f04674e70747965982b27C0241d50cfaaFa84, amount: 4744000 [4.744e6])
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   └─ ← [Return]
+    │   │   ├─ [25061] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::mint(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 99995256000 [9.999e10])
+    │   │   │   ├─ [24886] MintableERC20V2::mint(0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, 99995256000 [9.999e10]) [delegatecall]
+    │   │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, amount: 99995256000 [9.999e10])
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   └─ ← [Return]
+    │   │   ├─ emit IssueFt(caller: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, recipient: 0x322d0ec2eD0CDc64b6dDd16Fc09F7AE436e52AeC, gtId: 1, debtAmt: 100000000000 [1e11], ftAmt: 99995256000 [9.999e10], fee: 4744000 [4.744e6], collateralData: 0x0000000000000000000000000000000000000000000000000de0b6b3a7640000)
+    │   │   └─ ← [Return] 1, 99995256000 [9.999e10]
+    │   └─ ← [Return] 1, 99995256000 [9.999e10]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    ├─ [0] VM::warp(1742648567 [1.742e9])
+    │   └─ ← [Return]
+    ├─ [5297] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [staticcall]
+    │   ├─ [2625] MintableERC20V2::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   └─ ← [Return] 100000000000 [1e11]
+    │   └─ ← [Return] 100000000000 [1e11]
+    ├─ [5031] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::totalSupply() [staticcall]
+    │   ├─ [2365] MintableERC20V2::totalSupply() [delegatecall]
+    │   │   └─ ← [Return] 10000000000200000000000 [1e22]
+    │   └─ ← [Return] 10000000000200000000000 [1e22]
+    ├─ [5297] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   ├─ [2625] MintableERC20V2::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [delegatecall]
+    │   │   └─ ← [Return] 0
+    │   └─ ← [Return] 0
+    ├─ [2537] debt token::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   └─ ← [Return] 10000000000100000000000 [1e22]
+    ├─ [5297] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [staticcall]
+    │   ├─ [2625] MintableERC20V2::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   └─ ← [Return] 100000000000 [1e11]
+    │   └─ ← [Return] 100000000000 [1e11]
+    ├─ [0] VM::prank(curator: [0x0E9c4dfE62e01126d96362fde89fAa5dD0d0E3ec])
+    │   └─ ← [Return]
+    ├─ [341733] vault::redeemOrder(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7])
+    │   ├─ [403059] TermMaxVaultV2::redeemOrder(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   ├─ [386515] OrderManagerV2::redeemOrder(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   │   ├─ [342561] order::redeemAll(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6])
+    │   │   │   │   ├─ [339874] MockOrderV2::redeemAll(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [delegatecall]
+    │   │   │   │   │   ├─ [5297] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [staticcall]
+    │   │   │   │   │   │   ├─ [2625] MintableERC20V2::balanceOf(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 100000000000 [1e11]
+    │   │   │   │   │   │   └─ ← [Return] 100000000000 [1e11]
+    │   │   │   │   │   ├─ [112970] market::redeem(100000000000 [1e11], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6])
+    │   │   │   │   │   │   ├─ [110280] TermMaxMarketV2::redeem(100000000000 [1e11], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [5715] 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B::liquidatable() [staticcall]
+    │   │   │   │   │   │   │   │   ├─ [3049] GearingTokenWithERC20V2::liquidatable() [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   ├─ [2797] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   │   │   │   │   │   │   │   ├─ [2625] MintableERC20V2::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   ├─ [2531] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::totalSupply() [staticcall]
+    │   │   │   │   │   │   │   │   ├─ [2365] MintableERC20V2::totalSupply() [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 10000000000200000000000 [1e22]
+    │   │   │   │   │   │   │   │   └─ ← [Return] 10000000000200000000000 [1e22]
+    │   │   │   │   │   │   │   ├─ [11213] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305::burn(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 100000000000 [1e11])
+    │   │   │   │   │   │   │   │   ├─ [11032] MintableERC20V2::burn(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], 100000000000 [1e11]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], to: 0x0000000000000000000000000000000000000000, amount: 100000000000 [1e11])
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   └─ ← [Return]
+    │   │   │   │   │   │   │   ├─ [45400] 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B::delivery(99999 [9.999e4], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6])
+    │   │   │   │   │   │   │   │   ├─ [45216] GearingTokenWithERC20V2::delivery(99999 [9.999e4], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [2537] collateral token::balanceOf(0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1000000000000000000 [1e18]
+    │   │   │   │   │   │   │   │   │   ├─ [27630] collateral token::transfer(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], 9999900 [9.999e6])
+    │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, to: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], amount: 9999900 [9.999e6])
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   │   │   │   │   ├─ [2537] debt token::balanceOf(market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]) [staticcall]
+    │   │   │   │   │   │   │   │   └─ ← [Return] 10000000000100000000000 [1e22]
+    │   │   │   │   │   │   │   ├─ [10530] debt token::transfer(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], 99999000000 [9.999e10])
+    │   │   │   │   │   │   │   │   ├─ emit Transfer(from: market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3], to: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], amount: 99999000000 [9.999e10])
+    │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   ├─ emit Redeem(caller: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], recipient: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], proportion: 99999 [9.999e4], underlyingAmt: 99999000000 [9.999e10], deliveryData: 0x000000000000000000000000000000000000000000000000000000000098961c)
+    │   │   │   │   │   │   │   └─ ← [Return] 99999000000 [9.999e10], 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   │   │   │   └─ ← [Return] 99999000000 [9.999e10], 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   │   │   ├─ emit Redeemed(recipient: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], debtTokenAmount: 99999000000 [9.999e10], badDebt: 1000000 [1e6], deliveryData: 0x000000000000000000000000000000000000000000000000000000000098961c)
+    │   │   │   │   │   └─ ← [Return] 1000000 [1e6], 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   │   └─ ← [Return] 1000000 [1e6], 0x000000000000000000000000000000000000000000000000000000000098961c
+    │   │   │   ├─ [825] order::market() [staticcall]
+    │   │   │   │   ├─ [659] MockOrderV2::market() [delegatecall]
+    │   │   │   │   │   └─ ← [Return] market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]
+    │   │   │   │   └─ ← [Return] market: [0x4B040662a3bffE1Cac221cBA549A19737Cb320b3]
+    │   │   │   ├─ [5435] market::tokens() [staticcall]
+    │   │   │   │   ├─ [5245] TermMaxMarketV2::tokens() [delegatecall]
+    │   │   │   │   │   └─ ← [Return] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305, 0x609fA1595317bA8292765Ea384854fA0eC2d606c, 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe]
+    │   │   │   │   └─ ← [Return] 0x6713c219E7007Af9BCC0729BA94a3fDc600B6305, 0x609fA1595317bA8292765Ea384854fA0eC2d606c, 0x7a69C507212B37F7f7C24c8492DDb9eDEdCA755B, collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe]
+    │   │   │   ├─ [537] debt token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   │   │   │   └─ ← [Return] 2004820917800 [2.004e12]
+    │   │   │   ├─ emit RedeemOrder(caller: curator: [0x0E9c4dfE62e01126d96362fde89fAa5dD0d0E3ec], order: order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7], badDebt: 1000000 [1e6], diliveryAmount: 9999900 [9.999e6])
+    │   │   │   └─ ← [Return] 1000000 [1e6], 9999900 [9.999e6]
+    │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000f4240000000000000000000000000000000000000000000000000000000000098961c
+    │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000f4240000000000000000000000000000000000000000000000000000000000098961c
+    ├─ [0] VM::startPrank(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   └─ ← [Return]
+    ├─ [114699] vault::redeem(100000000000 [1e11], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   ├─ [107239] TermMaxVaultV2::redeem(100000000000 [1e11], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]) [delegatecall]
+    │   │   ├─ [62904] OrderManagerV2::withdrawAssets(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], 100121919440 [1.001e11]) [delegatecall]
+    │   │   │   ├─ emit AccruedInterest(newAccretingPrincipal: 20024109589000000000000000000 [2.002e28], newPerformanceFee: 24109588999999999999999999 [2.41e25])
+    │   │   │   ├─ [29630] debt token::transfer(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], 100121919440 [1.001e11])
+    │   │   │   │   ├─ emit Transfer(from: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], to: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], amount: 100121919440 [1.001e11])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ emit Transfer(from: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], to: 0x0000000000000000000000000000000000000000, amount: 100000000000 [1e11])
+    │   │   ├─ emit Withdraw(sender: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], receiver: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], owner: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], assets: 100121919440 [1.001e11], shares: 100000000000 [1e11])
+    │   │   └─ ← [Return] 100121919440 [1.001e11]
+    │   └─ ← [Return] 100121919440 [1.001e11]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+    │   │   └─ ← [Return] 1000000 [1e6]
+    │   └─ ← [Return] 1000000 [1e6]
+    ├─ [0] VM::assertEq(1000000 [1e6], 1000000 [1e6]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 9999900 [9.999e6]
+    ├─ [0] VM::assertEq(9999900 [9.999e6], 9999900 [9.999e6]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [16510] vault::previewWithdraw(500000 [5e5]) [staticcall]
+    │   ├─ [13838] TermMaxVaultV2::previewWithdraw(500000 [5e5]) [delegatecall]
+    │   │   └─ ← [Return] 499392 [4.993e5]
+    │   └─ ← [Return] 499392 [4.993e5]
+    ├─ [0] VM::startPrank(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   └─ ← [Return]
+    ├─ [109303] vault::dealBadDebt(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   ├─ [87090] TermMaxVaultV2::dealBadDebt(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]) [delegatecall]
+    │   │   ├─ emit Transfer(from: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], to: 0x0000000000000000000000000000000000000000, amount: 499392 [4.993e5])
+    │   │   ├─ [48134] OrderManagerV2::dealBadDebt(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5]) [delegatecall]
+    │   │   │   ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   │   │   │   └─ ← [Return] 9999900 [9.999e6]
+    │   │   │   ├─ [27630] collateral token::transfer(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], 4999950 [4.999e6])
+    │   │   │   │   ├─ emit Transfer(from: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], to: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], amount: 4999950 [4.999e6])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] 4999950 [4.999e6]
+    │   │   ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    │   │   └─ ← [Return] 499392 [4.993e5], 4999950 [4.999e6]
+    │   └─ ← [Return] 499392 [4.993e5], 4999950 [4.999e6]
+    ├─ [0] VM::assertEq(499392 [4.993e5], 499392 [4.993e5]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] VM::assertEq(4999950 [4.999e6], 4999950 [4.999e6]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+    │   │   └─ ← [Return] 500000 [5e5]
+    │   └─ ← [Return] 500000 [5e5]
+    ├─ [0] VM::assertEq(500000 [5e5], 500000 [5e5]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 4999950 [4.999e6]
+    ├─ [0] VM::assertEq(4999950 [4.999e6], 4999950 [4.999e6]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    ├─ [0] VM::startPrank(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   └─ ← [Return]
+    ├─ [16510] vault::previewWithdraw(500000 [5e5]) [staticcall]
+    │   ├─ [13838] TermMaxVaultV2::previewWithdraw(500000 [5e5]) [delegatecall]
+    │   │   └─ ← [Return] 499392 [4.993e5]
+    │   └─ ← [Return] 499392 [4.993e5]
+    ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 4999950 [4.999e6]
+    ├─ [0] VM::expectEmit()
+    │   └─ ← [Return]
+    ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    ├─ [82603] vault::dealBadDebt(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   ├─ [69990] TermMaxVaultV2::dealBadDebt(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]) [delegatecall]
+    │   │   ├─ emit Transfer(from: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], to: 0x0000000000000000000000000000000000000000, amount: 499392 [4.993e5])
+    │   │   ├─ [31034] OrderManagerV2::dealBadDebt(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], 500000 [5e5]) [delegatecall]
+    │   │   │   ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   │   │   │   └─ ← [Return] 4999950 [4.999e6]
+    │   │   │   ├─ [10530] collateral token::transfer(lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], 4999950 [4.999e6])
+    │   │   │   │   ├─ emit Transfer(from: vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6], to: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], amount: 4999950 [4.999e6])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] 4999950 [4.999e6]
+    │   │   ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    │   │   └─ ← [Return] 499392 [4.993e5], 4999950 [4.999e6]
+    │   └─ ← [Return] 499392 [4.993e5], 4999950 [4.999e6]
+    ├─ [0] VM::assertEq(499392 [4.993e5], 499392 [4.993e5]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] VM::assertEq(4999950 [4.999e6], 4999950 [4.999e6]) [staticcall]
+    │   └─ ← [Return]
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+    │   │   └─ ← [Return] 0
+    │   └─ ← [Return] 0
+    ├─ [0] VM::assertEq(0, 0) [staticcall]
+    │   └─ ← [Return]
+    ├─ [2537] collateral token::balanceOf(vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [0] VM::assertEq(0, 0) [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return]
+    └─ ← [Return]
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 20.74ms (1.71ms CPU time)
+
+Ran 1 test suite in 26.37ms (20.74ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)

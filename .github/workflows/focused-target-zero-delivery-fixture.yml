@@ -1,0 +1,156 @@
+name: TermMax target USDC zero-delivery fixture
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/focused-target-zero-delivery-fixture.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    name: Reconstruct real target-vault LP fixture
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Reconstruct target fixture
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          from collections import defaultdict
+          from pathlib import Path
+          from eth_abi import decode
+          from web3 import HTTPProvider, Web3
+
+          VAULT=Web3.to_checksum_address('0xF488ccdf04079cC03183cDB6A147d12Cf97F9317')
+          TX='0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e'
+          REDEEM_TOPIC='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          TRANSFER_TOPIC='0x'+Web3.keccak(text='Transfer(address,address,uint256)').hex().removeprefix('0x')
+          ZERO='0x0000000000000000000000000000000000000000'
+
+          w3=Web3(HTTPProvider(os.environ['ETH_RPC_URL'],request_kwargs={'timeout':45,'headers':{'User-Agent':'curl/8.5.0','Accept':'application/json','Content-Type':'application/json'}}))
+          assert w3.eth.chain_id==1
+          receipt=w3.eth.get_transaction_receipt(TX)
+          block=int(receipt.blockNumber); preblock=block-1
+          event=None
+          for log in receipt.logs:
+              if Web3.to_checksum_address(log.address)!=VAULT or not log.topics: continue
+              topic0='0x'+log.topics[0].hex().removeprefix('0x')
+              if topic0.lower()!=REDEEM_TOPIC.lower(): continue
+              bad,delivery=decode(['uint256','uint256'],bytes(log.data))
+              if int(bad)==1 and int(delivery)==0:
+                  event={'caller':Web3.to_checksum_address('0x'+log.topics[1].hex().removeprefix('0x')[-40:]),'order':Web3.to_checksum_address('0x'+log.topics[2].hex().removeprefix('0x')[-40:])}
+                  break
+          assert event is not None, 'expected RedeemOrder missing'
+
+          ABI=[
+              {'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+              {'type':'function','name':'totalAssets','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'totalSupply','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'maxRedeem','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+              {'type':'function','name':'previewRedeem','stateMutability':'view','inputs':[{'type':'uint256'}],'outputs':[{'type':'uint256'}]},
+          ]
+          vault=w3.eth.contract(address=VAULT,abi=ABI)
+          total_assets=int(vault.functions.totalAssets().call(block_identifier=preblock))
+          total_supply=int(vault.functions.totalSupply().call(block_identifier=preblock))
+          asset=Web3.to_checksum_address(vault.functions.asset().call(block_identifier=preblock))
+
+          params={'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(preblock),'address':VAULT,'topic0':TRANSFER_TOPIC}
+          url='https://eth.blockscout.com/api?'+urllib.parse.urlencode(params)
+          req=urllib.request.Request(url,headers={'User-Agent':'curl/8.5.0','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=60) as r: payload=json.loads(r.read())
+          logs=payload.get('result') or []
+          assert isinstance(logs,list), payload
+          balances=defaultdict(int)
+          for log in logs:
+              topics=log.get('topics') or []
+              if len(topics)<3: continue
+              frm=Web3.to_checksum_address('0x'+str(topics[1]).removeprefix('0x')[-40:])
+              to=Web3.to_checksum_address('0x'+str(topics[2]).removeprefix('0x')[-40:])
+              raw=str(log.get('data') or '0x').removeprefix('0x')
+              if len(raw)<64: continue
+              amt=int(raw[:64],16)
+              if frm.lower()!=ZERO: balances[frm]-=amt
+              if to.lower()!=ZERO: balances[to]+=amt
+
+          # First rank from the complete reconstructed ledger, then perform archive
+          # calls only for the 20 largest positive balances. This preserves the real
+          # holder proof while avoiding hundreds of slow historical RPC calls.
+          ranked=sorted(((h,b) for h,b in balances.items() if b>0),key=lambda x:x[1],reverse=True)[:20]
+          holders=[]
+          for holder,calc in ranked:
+              actual=int(vault.functions.balanceOf(holder).call(block_identifier=preblock))
+              if actual<=0: continue
+              max_redeem=int(vault.functions.maxRedeem(holder).call(block_identifier=preblock))
+              holders.append({'holder':holder,'onchain_balance':actual,'reconstructed_balance':calc,'max_redeem':max_redeem})
+          holders.sort(key=lambda x:x['onchain_balance'],reverse=True)
+          assert len(holders)>=2, {'ranked':ranked,'verified':holders}
+
+          candidates=[]
+          for h in holders:
+              other=sum(x['onchain_balance'] for x in holders if x['holder']!=h['holder'])
+              if other<=0 or h['max_redeem']<=0: continue
+              base=min(h['onchain_balance'],h['max_redeem'])
+              sizes={base}
+              for d in (2,3,4,10,100):
+                  if base//d>0: sizes.add(base//d)
+              for shares in sorted(sizes,reverse=True):
+                  nominal=int(vault.functions.previewRedeem(shares).call(block_identifier=preblock))
+                  # For a one-raw-unit delivery=0 loss: economicAssets=totalAssets-1,
+                  # so the OZ +1 virtual-asset numerator becomes exactly totalAssets.
+                  fair=shares*total_assets//(total_supply+1)
+                  shift=nominal-fair if nominal>=fair else 0
+                  candidates.append({'holder':h['holder'],'shares':shares,'nominal':nominal,'fair_after_one_raw_loss':fair,'predicted_shift':shift,'holder_balance':h['onchain_balance'],'max_redeem':h['max_redeem'],'other_holders_balance':other})
+          candidates.sort(key=lambda x:(x['predicted_shift'],x['nominal']),reverse=True)
+          selected=next((x for x in candidates if x['predicted_shift']>0),None)
+          assert selected is not None, {'holders':holders,'candidates':candidates[:30]}
+
+          out={'vault':VAULT,'settlement_tx':TX,'settlement_block':block,'preblock':preblock,'caller':event['caller'],'order':event['order'],'bad_debt_raw':1,'delivery_raw':0,'asset':asset,'total_assets_pre_raw':total_assets,'total_supply_pre_raw':total_supply,'selected':selected,'holders':holders,'top_candidates':candidates[:30]}
+          p=Path('production-evidence/focused_target_zero_delivery_fixture.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+          env=Path('production-evidence/focused_target_zero_delivery_fixture.env')
+          env.write_text('\n'.join([f'TERM_MAX_VAULT={VAULT}',f'TERM_MAX_SETTLEMENT_TX={TX}',f'TERM_MAX_PRE_SETTLEMENT_BLOCK={preblock}',f'TERM_MAX_ORDER={event["order"]}',f'TERM_MAX_SETTLEMENT_CALLER={event["caller"]}',f'TERM_MAX_SHARE_SOURCE={selected["holder"]}',f'TERM_MAX_ATTACKER_SHARES={selected["shares"]}','TERM_MAX_EXPECTED_BAD_DEBT_RAW=1','TERM_MAX_EXPECTED_DELIVERY_RAW=0'])+'\n')
+          print(json.dumps(out,indent=2,sort_keys=True)); print(env.read_text())
+          PY
+
+      - name: Commit fixture
+        if: always()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/focused_target_zero_delivery_fixture.json || exit 0
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/focused_target_zero_delivery_fixture.*
+          git commit -m "Record target USDC zero-delivery fixture" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - name: Upload fixture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: focused-target-zero-delivery-fixture
+          path: repo/production-evidence/focused_target_zero_delivery_fixture.*
+          if-no-files-found: warn

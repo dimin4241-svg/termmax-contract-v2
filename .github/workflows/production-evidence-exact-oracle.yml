@@ -1,0 +1,67 @@
+name: TermMax production RedeemOrder dump
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-exact-oracle.yml
+      - scripts/termmax_production_evidence_exact_debt_oracle.py
+  pull_request:
+    paths:
+      - .github/workflows/production-evidence-exact-oracle.yml
+      - scripts/termmax_production_evidence_exact_debt_oracle.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-redeem-event-dump-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: Decode production RedeemOrder events
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade "web3==7.13.0"
+
+      - name: Dump target-vault settlement events
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import scripts.termmax_production_evidence_exact_debt_oracle as exact
+          raise SystemExit(exact.scanner.main())
+          PY
+          cat production-evidence/production_evidence.md
+
+      - name: Upload decoded event evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: termmax-redeem-events
+          path: production-evidence/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit decoded evidence
+        if: success() && github.event_name == 'push'
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record decoded TermMax RedeemOrder events"
+          git push origin HEAD:audit/termmax-production-evidence

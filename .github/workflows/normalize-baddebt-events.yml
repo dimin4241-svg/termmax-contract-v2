@@ -1,0 +1,127 @@
+name: TermMax normalize bad-debt events
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/normalize-baddebt-events.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Resolve vault assets and normalize raw bad debt
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, time, urllib.request
+          from decimal import Decimal, getcontext
+          from pathlib import Path
+          getcontext().prec=80
+
+          src=json.load(open('production-evidence/all_mainnet_vault_baddebt.json'))
+          events=src.get('positive_events_ranked') or []
+          endpoints=[
+            'https://ethereum-rpc.publicnode.com',
+            'https://rpc.flashbots.net',
+            'https://eth.llamarpc.com',
+            'https://cloudflare-eth.com',
+            'https://1rpc.io/eth',
+          ]
+
+          def rpc(endpoint, method, params, timeout=20):
+              body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+              req=urllib.request.Request(endpoint,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+              with urllib.request.urlopen(req,timeout=timeout) as r:
+                  data=json.loads(r.read())
+              if data.get('error'): raise RuntimeError(data['error'])
+              return data.get('result')
+
+          def eth_call(to,data,block):
+              errors=[]
+              for ep in endpoints:
+                  try:
+                      res=rpc(ep,'eth_call',[{'to':to,'data':data},hex(block)])
+                      if isinstance(res,str) and res.startswith('0x'):
+                          return res,ep
+                  except Exception as exc:
+                      errors.append(f'{ep}: {exc!r}')
+              raise RuntimeError('; '.join(errors))
+
+          def decode_address(word):
+              h=word.removeprefix('0x').rjust(64,'0')
+              return '0x'+h[-40:]
+
+          vault_asset={}
+          rows=[]
+          for ev in events:
+              vault=ev['vault']
+              block=int(ev['block'])
+              key=vault.lower()
+              if key not in vault_asset:
+                  try:
+                      raw,ep=eth_call(vault,'0x38d52e0f',block-1) # asset()
+                      asset=decode_address(raw)
+                      decraw,ep2=eth_call(asset,'0x313ce567',block-1) # decimals()
+                      decimals=int(decraw,16)
+                      token={}
+                      try:
+                          req=urllib.request.Request(f'https://eth.blockscout.com/api/v2/tokens/{asset}',headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+                          with urllib.request.urlopen(req,timeout=30) as r: token=json.loads(r.read())
+                      except Exception as exc:
+                          token={'_error':repr(exc)}
+                      vault_asset[key]={'vault':vault,'asset':asset,'decimals':decimals,'rpc_asset':ep,'rpc_decimals':ep2,'token':token}
+                  except Exception as exc:
+                      vault_asset[key]={'vault':vault,'error':repr(exc)}
+              meta=vault_asset[key]
+              row=dict(ev)
+              row['asset_meta']=meta
+              if 'decimals' in meta:
+                  d=int(meta['decimals'])
+                  row['bad_debt_asset_units']=str(Decimal(int(ev['bad_debt_raw']))/(Decimal(10)**d))
+                  row['delivery_raw_asset_scale_only']=str(Decimal(int(ev['delivery_raw']))/(Decimal(10)**d))
+              rows.append(row)
+              print('EVENT',json.dumps({k:row.get(k) for k in ('vault','tx_hash','block','order','bad_debt_raw','delivery_raw','bad_debt_asset_units')},sort_keys=True))
+              if 'asset' in meta:
+                  print('ASSET',vault,meta['asset'],meta['decimals'],(meta.get('token') or {}).get('symbol'),(meta.get('token') or {}).get('name'))
+              else:
+                  print('ASSET_ERROR',vault,meta.get('error'))
+
+          rows.sort(key=lambda x: Decimal(x.get('bad_debt_asset_units','-1')),reverse=True)
+          out={'vault_assets':vault_asset,'events_normalized_ranked':rows,'rpc_endpoints_tried':endpoints}
+          Path('production-evidence/normalized_baddebt_events.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('NORMALIZED_TOP')
+          for x in rows[:20]:
+              print(json.dumps({k:x.get(k) for k in ('vault','tx_hash','block','order','bad_debt_raw','delivery_raw','bad_debt_asset_units')},sort_keys=True))
+          PY
+
+      - name: Commit normalized evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/normalized_baddebt_events.json
+          git commit -m "Normalize mainnet bad-debt events by asset decimals" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normalized-baddebt-events
+          path: repo/production-evidence/normalized_baddebt_events.json

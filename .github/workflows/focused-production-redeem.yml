@@ -1,0 +1,98 @@
+name: TermMax focused historical RedeemOrder evidence
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/focused-production-redeem.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: termmax-focused-redeem-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: Inspect one real production settlement
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone technical branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install dependencies
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
+      - name: Inspect known production RedeemOrder transaction
+        working-directory: repo
+        env:
+          ETH_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          import scripts.termmax_production_evidence as scanner
+          from web3 import HTTPProvider as BaseHTTPProvider, Web3
+
+          def provider(url, request_kwargs=None):
+              kwargs=dict(request_kwargs or {})
+              headers=dict(kwargs.pop("headers",{}) or {})
+              headers.update({"User-Agent":"curl/8.5.0","Content-Type":"application/json","Accept":"application/json"})
+              return BaseHTTPProvider(url,request_kwargs={**kwargs,"headers":headers})
+
+          scanner.HTTPProvider=provider
+          scanner.RPC_URLS=[os.environ["ETH_RPC_URL"]]
+          for name in ("TOPIC_NEW_ORDER", "TOPIC_REDEEM_ORDER", "TOPIC_WITHDRAW_FTS"):
+              value=getattr(scanner,name)
+              if not value.startswith("0x"):
+                  setattr(scanner,name,"0x"+value)
+
+          w3,_=scanner.connect()
+          receipt=w3.eth.get_transaction_receipt(scanner.KNOWN_REDEEM_TX)
+          target=scanner.TOPIC_REDEEM_ORDER.lower()
+          logs=[]
+          for log in receipt.logs:
+              if Web3.to_checksum_address(log.address) != scanner.VAULT or not log.topics:
+                  continue
+              topic="0x"+log.topics[0].hex().removeprefix("0x")
+              if topic.lower()==target:
+                  logs.append(log)
+          if not logs:
+              raise SystemExit(f"RedeemOrder event not found; expected {target}")
+          result=scanner.inspect_redeem_event(w3,logs[0])
+          out=Path("focused-production-evidence"); out.mkdir(exist_ok=True)
+          (out/"focused_redeem_tx_evidence.json").write_text(json.dumps(result,indent=2,sort_keys=True))
+          state=result.get("prestate",{})
+          decimals=int(state.get("debt_decimals",6))
+          unit=10**decimals
+          attack=result.get("fresh_attack",{})
+          def human(value):
+              return "n/a" if value is None else f"{int(value)/unit:,.{decimals}f}"
+          md=f'''# Focused historical production RedeemOrder evidence\n\n- Transaction: `{result.get("tx_hash")}`\n- Settlement block: `{result.get("block")}`\n- Pre-settlement block: `{result.get("preblock")}`\n- Order: `{result.get("order")}`\n- Market: `{state.get("market")}`\n\n```text\nFT face:                    {human(state.get("ft_face_raw"))}\ndebt output:                {human(state.get("debt_out_raw"))}\ncollateral value:           {human(state.get("collateral_value_debt_raw_at_usd_par"))}\neconomic recovery:          {human(state.get("economic_recovery_raw"))}\nexact fresh capital:        {human(attack.get("capital"))}\nconservative attacker P&L:  {human(result.get("fresh_attack_conservative_profit_raw"))}\nfull fresh entry feasible:  {result.get("fresh_attack_full_amount_feasible")}\nevent bad debt raw:         {result.get("event_bad_debt_raw")}\nevent delivery raw:         {result.get("event_delivery_collateral_raw")}\n```\n'''
+          (out/"focused_redeem_tx_evidence.md").write_text(md)
+          print(md); print(json.dumps(result,indent=2,sort_keys=True))
+          PY
+
+      - name: Commit focused evidence
+        if: success()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add focused-production-evidence/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record focused historical RedeemOrder evidence"
+          git push origin HEAD:audit/termmax-production-evidence

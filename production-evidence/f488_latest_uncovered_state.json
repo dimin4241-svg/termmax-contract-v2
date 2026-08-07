@@ -1,0 +1,79 @@
+{
+  "active_uncovered": [
+    {
+      "bad_debt_raw": 2,
+      "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 5,
+      "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 2,
+      "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 2,
+      "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 4,
+      "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+      "collateral_balance_raw": 0
+    },
+    {
+      "bad_debt_raw": 1,
+      "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+      "collateral_balance_raw": 0
+    }
+  ],
+  "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "asset_decimals": 6,
+  "asset_symbol": "USDC",
+  "block": 25682658,
+  "holder_count": 723,
+  "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+  "largest_holder_shares_raw": 2977331245978,
+  "predicted_cross_user_shift_asset_units_floor": 1.9e-05,
+  "predicted_cross_user_shift_raw_floor": 19,
+  "total_supply_raw": 3316301401353,
+  "total_uncovered_bad_debt_asset_units": 2.2e-05,
+  "total_uncovered_bad_debt_raw": 22,
+  "trigger_order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+  "trigger_tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e",
+  "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+}

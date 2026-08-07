@@ -1,0 +1,104 @@
+{
+  "chains": {
+    "arb-mainnet": {
+      "chain_id": 42161,
+      "vault_count": 1,
+      "vaults": [
+        {
+          "api_error": null,
+          "api_message": "chain not supported",
+          "api_status": "0",
+          "event_count": 0,
+          "events": [],
+          "positive_count": 0,
+          "start_block": 385285536,
+          "vault": "0xb6692acb982c2da0775c947cb329b04ebfb4e0ac"
+        }
+      ]
+    },
+    "b2-mainnet": {
+      "chain_id": 223,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "base-mainnet": {
+      "chain_id": 8453,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "bera-mainnet": {
+      "chain_id": 80094,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "bnb-mainnet": {
+      "chain_id": 56,
+      "vault_count": 4,
+      "vaults": [
+        {
+          "api_error": null,
+          "api_message": "chain not supported",
+          "api_status": "0",
+          "event_count": 0,
+          "events": [],
+          "positive_count": 0,
+          "start_block": 67251219,
+          "vault": "0x086c120290850e4698645a5689c2428d6e7789de"
+        },
+        {
+          "api_error": null,
+          "api_message": "chain not supported",
+          "api_status": "0",
+          "event_count": 0,
+          "events": [],
+          "positive_count": 0,
+          "start_block": 67251219,
+          "vault": "0x41d4b8385ab112380158eac2f4cabb9baef1bb45"
+        },
+        {
+          "api_error": null,
+          "api_message": "chain not supported",
+          "api_status": "0",
+          "event_count": 0,
+          "events": [],
+          "positive_count": 0,
+          "start_block": 67251219,
+          "vault": "0xa6d02815d3ff570b795d6c0551cfcef915609142"
+        },
+        {
+          "api_error": null,
+          "api_message": "chain not supported",
+          "api_status": "0",
+          "event_count": 0,
+          "events": [],
+          "positive_count": 0,
+          "start_block": 67251219,
+          "vault": "0xe749d471db186a6dab068059b29498feb3a01b38"
+        }
+      ]
+    },
+    "eth-mainnet": {
+      "chain_id": 1,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "hyperevm-mainnet": {
+      "chain_id": 999,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "pharos-mainnet": {
+      "chain_id": 688688,
+      "vault_count": 0,
+      "vaults": []
+    },
+    "plasma-mainnet": {
+      "chain_id": 9745,
+      "vault_count": 0,
+      "vaults": []
+    }
+  },
+  "positive_events_ranked_raw": [],
+  "source": "Routescan Etherscan-compatible keyless API",
+  "topic0": "0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242"
+}

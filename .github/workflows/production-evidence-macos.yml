@@ -1,0 +1,110 @@
+name: TermMax production evidence macOS
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-evidence-macos.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: termmax-production-evidence-macos-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    name: Read-only Ethereum production scan on macOS
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade "web3==7.13.0"
+
+      - name: Select archive RPC
+        run: |
+          python - <<'PY' >> "$GITHUB_ENV"
+          import json, urllib.request
+
+          endpoints = [
+              "https://eth.drpc.org",
+              "https://ethereum.publicnode.com",
+              "https://eth.merkle.io",
+              "https://1rpc.io/eth",
+              "https://rpc.ankr.com/eth",
+              "https://eth-mainnet.public.blastapi.io",
+              "https://mainnet.gateway.tenderly.co",
+              "https://cloudflare-eth.com",
+              "https://rpc.flashbots.net",
+              "https://eth.llamarpc.com",
+          ]
+          vault = "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+          hist = hex(25420688)
+          log_block = hex(25420689)
+
+          def rpc(url, method, params):
+              payload = json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params}).encode()
+              req = urllib.request.Request(url, data=payload, headers={
+                  "Content-Type":"application/json",
+                  "User-Agent":"curl/8.5.0",
+                  "Accept":"application/json",
+              })
+              with urllib.request.urlopen(req, timeout=25) as response:
+                  value = json.loads(response.read())
+              if "error" in value or value.get("result") is None:
+                  raise RuntimeError(value)
+              return value["result"]
+
+          errors = []
+          for endpoint in endpoints:
+              try:
+                  rpc(endpoint, "eth_getLogs", [{"address":vault,"fromBlock":log_block,"toBlock":log_block}])
+                  rpc(endpoint, "eth_call", [{"to":vault,"data":"0x38d52e0f"}, hist])
+                  rpc(endpoint, "eth_getCode", [vault, hist])
+                  print(f"ETH_RPC_URL={endpoint}")
+                  break
+              except Exception as exc:
+                  errors.append(f"{endpoint}: {exc}")
+          else:
+              raise SystemExit("No archive RPC passed probes:\n" + "\n".join(errors))
+          PY
+
+      - name: Collect production evidence
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import os
+          import scripts.termmax_production_evidence as scanner
+          from web3 import HTTPProvider as BaseHTTPProvider
+
+          def provider(url, request_kwargs=None):
+              kwargs = dict(request_kwargs or {})
+              headers = dict(kwargs.pop("headers", {}) or {})
+              headers.update({"User-Agent":"curl/8.5.0","Content-Type":"application/json","Accept":"application/json"})
+              return BaseHTTPProvider(url, request_kwargs={**kwargs, "headers":headers})
+
+          scanner.HTTPProvider = provider
+          scanner.RPC_URLS = [os.environ["ETH_RPC_URL"]]
+          raise SystemExit(scanner.main())
+          PY
+
+      - name: Show evidence
+        if: always()
+        run: test ! -f production-evidence/production_evidence.md || cat production-evidence/production_evidence.md
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: termmax-production-evidence-macos
+          path: production-evidence/
+          if-no-files-found: warn
+          retention-days: 30
