@@ -15,7 +15,7 @@ jobs:
   scan:
     name: Decode target-vault RedeemOrder badDebt
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Clone audit branch
         env:
@@ -34,69 +34,105 @@ jobs:
           set -euo pipefail
           mkdir -p production-evidence
           python3 - <<'PY'
-          import json, urllib.parse, urllib.request
+          import json, time, urllib.parse, urllib.request
           from pathlib import Path
           from web3 import Web3
 
-          VAULT='0xF488ccdf04079cC03183cDB6A147d12Cf97F9317'
-          FROM_BLOCK=23490022
-          TOPIC='0x'+Web3.keccak(text='RedeemOrder(address,address,uint256,uint256)').hex().removeprefix('0x')
-          query=urllib.parse.urlencode({
-              'module':'logs',
-              'action':'getLogs',
-              'fromBlock':str(FROM_BLOCK),
-              'toBlock':'latest',
-              'address':VAULT,
-              'topic0':TOPIC,
-          })
-          url='https://eth.blockscout.com/api?'+query
-          req=urllib.request.Request(url,headers={'User-Agent':'curl/8.5.0','Accept':'application/json'})
-          with urllib.request.urlopen(req,timeout=60) as response:
-              payload=json.loads(response.read())
-          items=payload.get('result')
-          if not isinstance(items,list):
-              raise RuntimeError(f"Blockscout status={payload.get('status')} message={payload.get('message')} result={items}")
+          VAULT="0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+          TOPIC=('0x'+Web3.keccak(text="RedeemOrder(address,address,uint256,uint256)").hex().removeprefix('0x')).lower()
 
-          rows=[]
+          # Blockscout v2 address log endpoint. We page the full address log stream,
+          # then match the cryptographic topic locally. This is read-only and does
+          # not depend on ABI decoding by the explorer.
+          base=f"https://eth.blockscout.com/api/v2/addresses/{VAULT}/logs"
+          params={}
+          all_items=[]
+          seen=set()
+          for page in range(500):
+              url=base + (("?"+urllib.parse.urlencode(params)) if params else "")
+              req=urllib.request.Request(url,headers={"User-Agent":"curl/8.5.0","Accept":"application/json"})
+              payload=None
+              for attempt in range(6):
+                  try:
+                      with urllib.request.urlopen(req,timeout=45) as r:
+                          payload=json.loads(r.read())
+                      break
+                  except Exception as exc:
+                      print(f"blockscout attempt={attempt+1} error={exc}", flush=True)
+                      if attempt==5: raise
+                      time.sleep(min(30,2**attempt))
+              batch=payload.get('items',[])
+              for item in batch:
+                  key=(item.get('transaction_hash') or item.get('transactionHash'), item.get('index'), item.get('block_number') or item.get('blockNumber'))
+                  if key not in seen:
+                      seen.add(key); all_items.append(item)
+              nxt=payload.get('next_page_params')
+              print(f"page={page+1} batch={len(batch)} total_logs={len(all_items)} next={bool(nxt)}", flush=True)
+              if not nxt: break
+              params=nxt
+          else:
+              raise RuntimeError('pagination exceeded 500 pages')
+
+          def norm_topic(x):
+              if isinstance(x,dict): x=x.get('value') or x.get('hex')
+              if x is None: return None
+              s=str(x)
+              return ('0x'+s.removeprefix('0x')).lower()
+
+          redeems=[]
           positives=[]
-          for item in items:
-              data=str(item.get('data','0x')).removeprefix('0x')
-              if len(data)<128:
+          for item in all_items:
+              topics=[norm_topic(x) for x in (item.get('topics') or [])]
+              topics=[x for x in topics if x]
+              if not topics or topics[0] != TOPIC:
                   continue
-              topics=item.get('topics') or []
-              order='0x'+str(topics[2]).removeprefix('0x')[-40:] if len(topics)>=3 else None
-              log_index=item.get('logIndex')
+              data=item.get('data') or '0x'
+              if isinstance(data,dict): data=data.get('value') or data.get('hex') or '0x'
+              raw=str(data).removeprefix('0x')
+              if len(raw) < 128:
+                  print('skip short data', item.get('transaction_hash'), len(raw), flush=True)
+                  continue
+              bad_debt=int(raw[0:64],16)
+              delivery=int(raw[64:128],16)
+              order=None
+              caller=None
+              if len(topics) >= 2:
+                  caller='0x'+topics[1].removeprefix('0x')[-40:]
+              if len(topics) >= 3:
+                  order='0x'+topics[2].removeprefix('0x')[-40:]
+              tx=item.get('transaction_hash') or item.get('transactionHash')
+              block=int(item.get('block_number') or item.get('blockNumber'))
               row={
-                  'tx_hash':item.get('transactionHash'),
-                  'block':int(item.get('blockNumber','0x0'),16),
-                  'log_index':int(log_index,16) if log_index else None,
+                  'tx_hash':tx,
+                  'block':block,
+                  'caller':caller,
                   'order':order,
-                  'bad_debt_raw':int(data[0:64],16),
-                  'delivery_collateral_raw':int(data[64:128],16),
+                  'bad_debt_raw':bad_debt,
+                  'delivery_collateral_raw':delivery,
+                  'log_index':item.get('index') or item.get('log_index') or item.get('logIndex'),
               }
-              rows.append(row)
-              if row['bad_debt_raw']>0:
-                  positives.append(row)
+              redeems.append(row)
+              if bad_debt > 0: positives.append(row)
 
-          rows.sort(key=lambda x:(x['block'],x['log_index'] or 0))
-          positives.sort(key=lambda x:(x['bad_debt_raw'],x['block']),reverse=True)
+          redeems.sort(key=lambda x:(x['block'], str(x.get('log_index'))))
+          positives.sort(key=lambda x:(x['bad_debt_raw'],x['block']), reverse=True)
           out={
-              'source':'Blockscout topic0-filtered logs',
               'vault':VAULT,
-              'from_block':FROM_BLOCK,
               'redeem_order_topic':TOPIC,
-              'redeem_order_events':len(rows),
+              'all_address_logs':len(all_items),
+              'redeem_order_events':len(redeems),
               'positive_bad_debt_events':len(positives),
               'positive_events':positives,
-              'all_redeem_events':rows,
+              'all_redeem_events':redeems,
           }
-          path=Path('production-evidence/target_vault_redeem_baddebt_scan.json')
-          path.write_text(json.dumps(out,indent=2,sort_keys=True))
-          print(f"REDEEM_ORDER_EVENTS={len(rows)}")
+          p=Path('production-evidence/target_vault_redeem_baddebt_scan.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+          print(f"TOPIC={TOPIC}")
+          print(f"REDEEM_ORDER_EVENTS={len(redeems)}")
           print(f"POSITIVE_BAD_DEBT_EVENTS={len(positives)}")
-          for row in positives:
-              print('POSITIVE',json.dumps(row,sort_keys=True))
-          print(path.read_text())
+          for x in positives:
+              print('POSITIVE',json.dumps(x,sort_keys=True))
+          print(f"WROTE={p}")
           PY
 
       - name: Commit scan result
