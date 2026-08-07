@@ -1,0 +1,17 @@
+{
+  "bad_debt_mapping_at_end_of_settlement_block_raw": "10182136",
+  "bad_debt_mapping_current_raw": "10182136",
+  "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+  "deal_bad_debt_events_after_settlement": [],
+  "deal_bad_debt_topic0": "0xaf2e30fae2dfd1a90059cf53415e90c4ee9d151c1b1861df8f8a5963069c47f4",
+  "debt_token": "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+  "market": "0x7fa18408f5D0528d1706B6138113BCA446131531",
+  "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+  "raw_query": {
+    "message": "No logs found",
+    "result": [],
+    "status": "0"
+  },
+  "settlement_block": 24187489,
+  "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+}
