@@ -1,0 +1,95 @@
+name: TermMax Arbitrum V2 vault bad-debt scan
+
+on:
+  push:
+    branches: [audit/termmax-production-evidence]
+    paths: [.github/workflows/arbitrum-v2-vault-baddebt-scan.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Scan official Arbitrum V2 vault deployments
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json,time,urllib.request
+          from pathlib import Path
+
+          RPCS=['https://arb1.arbitrum.io/rpc','https://arbitrum-one-rpc.publicnode.com','https://arbitrum.drpc.org']
+          TOPIC='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          VAULTS=[
+            {'address':'0xCb94ABCffbF5CC76a55f9c1496632A26D19f9947','deploy_block':385285536,'source':'official arb-mainnet-v2-vaults-1759407642.env'},
+            {'address':'0xb6692aCb982c2dA0775c947Cb329B04EBFB4e0ac','deploy_block':385285536,'source':'official arb-mainnet-v2-vaults-1759407642.env'},
+          ]
+
+          def rpc(method,params):
+            last=None
+            for ep in RPCS:
+              try:
+                body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+                req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+                with urllib.request.urlopen(req,timeout=30) as r: d=json.loads(r.read())
+                if d.get('error'): raise RuntimeError(d['error'])
+                return d['result'],ep
+              except Exception as e: last=e
+            raise last
+
+          latest_hex,used=rpc('eth_blockNumber',[]); latest=int(latest_hex,16)
+          print('LATEST',latest,'RPC',used)
+          rows=[]
+          chunk=200000
+          for v in VAULTS:
+            start=v['deploy_block']; addr=v['address']
+            for lo in range(start,latest+1,chunk):
+              hi=min(latest,lo+chunk-1)
+              try:
+                logs,ep=rpc('eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(hi),'address':addr,'topics':[TOPIC]}])
+              except Exception as exc:
+                print('CHUNK_ERROR',addr,lo,hi,repr(exc)); continue
+              for log in logs:
+                raw=(log.get('data') or '0x')[2:]
+                if len(raw)<128: continue
+                bad=int(raw[:64],16); delivery=int(raw[64:128],16)
+                topics=log.get('topics') or []
+                order='0x'+topics[2][-40:] if len(topics)>2 else None
+                row={'vault':addr,'block':int(log['blockNumber'],16),'tx_hash':log['transactionHash'],'order':order,'bad_debt_raw':bad,'delivery_raw':delivery,'source':v['source']}
+                rows.append(row)
+                if bad>0: print('POSITIVE',json.dumps(row,sort_keys=True))
+          positives=sorted([x for x in rows if x['bad_debt_raw']>0],key=lambda x:x['bad_debt_raw'],reverse=True)
+          out={'chain':'arbitrum-one','latest_block':latest,'vaults':VAULTS,'redeem_event_count':len(rows),'positive_event_count':len(positives),'positive_events_ranked':positives}
+          Path('production-evidence/arbitrum_v2_vault_baddebt_scan.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('REDEEMS',len(rows),'POSITIVES',len(positives))
+          for x in positives[:50]: print('TOP',json.dumps(x,sort_keys=True))
+          PY
+
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/arbitrum_v2_vault_baddebt_scan.json
+          git commit -m "Record Arbitrum V2 vault bad-debt scan" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arbitrum-v2-vault-baddebt-scan
+          path: repo/production-evidence/arbitrum_v2_vault_baddebt_scan.json
