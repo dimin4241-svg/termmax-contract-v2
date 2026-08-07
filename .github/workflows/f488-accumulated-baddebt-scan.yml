@@ -1,0 +1,137 @@
+name: TermMax multi-holder accumulated bad-debt scan
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/f488-accumulated-baddebt-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_DISABLE_NIGHTLY_WARNING: '1'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Resolve asset, collateral, mapping and LP distribution at every positive event
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, subprocess, urllib.parse, urllib.request, time
+          from pathlib import Path
+
+          RPC='https://eth.drpc.org'; BS='https://eth.blockscout.com'; VAULT='0xF488ccdf04079cC03183cDB6A147d12Cf97F9317'
+          ZERO='0x'+'0'*40; TRANSFER_TOPIC='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+          env=dict(os.environ); env['FOUNDRY_DISABLE_NIGHTLY_WARNING']='1'
+          src=json.loads(Path('production-evidence/all_mainnet_vault_baddebt.json').read_text())
+          events=sorted([e for e in src['positive_events_ranked'] if e['vault'].lower()==VAULT.lower()],key=lambda e:(e['block'],e['tx_hash'],e['order']))
+          assert events
+
+          def sh(cmd,timeout=45): return subprocess.check_output(cmd,text=True,stderr=subprocess.STDOUT,timeout=timeout,env=env).strip()
+          def call(addr,sig,args,block):
+              out=sh(['cast','call',addr,sig,*args,'--block',str(block),'--rpc-url',RPC])
+              # Foundry may still print informational lines; use the last nonempty output line(s).
+              return [x.strip() for x in out.splitlines() if x.strip() and not x.startswith('Warning:')]
+
+          asset=call(VAULT,'asset()(address)',[],events[0]['block']-1)[-1].split()[0]
+          dec=int(call(asset,'decimals()(uint8)',[],events[0]['block']-1)[-1].split()[0])
+          try: symbol=call(asset,'symbol()(string)',[],events[0]['block']-1)[-1].strip('"')
+          except Exception: symbol='?'
+          print('ASSET',asset,'SYMBOL',symbol,'DECIMALS',dec)
+
+          # One full transfer-log fetch through latest event, then reconstruct balances per pre/post block.
+          q=urllib.parse.urlencode({'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(events[-1]['block']),'address':VAULT,'topic0':TRANSFER_TOPIC})
+          req=urllib.request.Request(BS+'/api?'+q,headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=90) as r: raw=json.loads(r.read()).get('result') or []
+          logs=[]
+          for x in raw:
+              t=[str(z).lower() for z in x.get('topics',[])];
+              if len(t)<3: continue
+              frm='0x'+t[1].removeprefix('0x')[-40:]; to='0x'+t[2].removeprefix('0x')[-40:]; val=int(str(x.get('data') or '0x0'),16)
+              bn=x.get('blockNumber'); bn=int(bn,16) if isinstance(bn,str) and bn.startswith('0x') else int(bn or 0)
+              ti=x.get('transactionIndex'); ti=int(ti,16) if isinstance(ti,str) and ti.startswith('0x') else int(ti or 0)
+              li=x.get('logIndex'); li=int(li,16) if isinstance(li,str) and li.startswith('0x') else int(li or 0)
+              logs.append((bn,ti,li,frm,to,val))
+          logs.sort()
+
+          def holders_at(block):
+              b={}
+              for bn,ti,li,frm,to,val in logs:
+                  if bn>block: break
+                  if frm!=ZERO: b[frm]=b.get(frm,0)-val
+                  if to!=ZERO: b[to]=b.get(to,0)+val
+              hs=[(a,v) for a,v in b.items() if v>0]; hs.sort(key=lambda x:x[1],reverse=True); total=sum(v for _,v in hs)
+              return hs,total
+
+          rows=[]
+          for e in events:
+              pre=e['block']-1; post=e['block']
+              market=call(e['order'],'market()(address)',[],pre)[-1].split()[0]
+              toks=call(market,'tokens()(address,address,address,address,address)',[],pre)
+              # cast prints tuple return one item per line with this ABI.
+              vals=[]
+              for line in toks:
+                  tok=line.split()[0]
+                  if tok.startswith('0x') and len(tok)>=42: vals.append(tok[:42])
+              if len(vals)<5:
+                  raise RuntimeError(f'tokens parse failed {e["order"]}: {toks}')
+              collateral=vals[3]; debt=vals[4]
+              mapping_post=int(call(VAULT,'badDebtMapping(address)(uint256)',[collateral],post)[-1].split()[0])
+              collateral_bal=int(call(collateral,'balanceOf(address)(uint256)',[VAULT],post)[-1].split()[0])
+              total_assets=int(call(VAULT,'totalAssets()(uint256)',[],post)[-1].split()[0])
+              total_supply=int(call(VAULT,'totalSupply()(uint256)',[],post)[-1].split()[0])
+              hs,total_recon=holders_at(post)
+              best=hs[0] if hs else (ZERO,0); frac=(best[1]/total_supply if total_supply else 0)
+              # Only a lower-bound candidate when collateral balance is exactly zero: the entire mapping is economically uncovered by delivered collateral held by this vault for this token.
+              estimated=(mapping_post/(10**dec))*frac if collateral_bal==0 and len(hs)>=2 else None
+              row=dict(e,asset=asset,asset_symbol=symbol,asset_decimals=dec,market=market,collateral=collateral,debt_token=debt,
+                       bad_debt_mapping_post_raw=mapping_post,collateral_balance_post_raw=collateral_bal,total_assets_post_raw=total_assets,total_supply_post_raw=total_supply,
+                       holder_count_post=len(hs),largest_holder=best[0],largest_holder_shares_raw=best[1],largest_holder_fraction=frac,
+                       estimated_cross_user_loss_asset_units_if_full_redeem=estimated,
+                       top_holders=[{'address':a,'shares_raw':v,'fraction_of_total_supply':(v/total_supply if total_supply else 0)} for a,v in hs[:10]])
+              rows.append(row)
+              print(json.dumps({k:row[k] for k in ['block','tx_hash','order','bad_debt_raw','delivery_raw','asset_symbol','asset_decimals','collateral','bad_debt_mapping_post_raw','collateral_balance_post_raw','holder_count_post','largest_holder','largest_holder_fraction','estimated_cross_user_loss_asset_units_if_full_redeem']},sort_keys=True))
+
+          ranked=sorted([r for r in rows if r['estimated_cross_user_loss_asset_units_if_full_redeem'] is not None],key=lambda r:r['estimated_cross_user_loss_asset_units_if_full_redeem'],reverse=True)
+          out={'vault':VAULT,'asset':asset,'asset_symbol':symbol,'asset_decimals':dec,'events':rows,'ranked_zero_collateral_multi_holder_states':ranked}
+          Path('production-evidence/f488_accumulated_baddebt_scan.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('RANKED_CANDIDATES',len(ranked))
+          if ranked:
+              print('BEST',json.dumps(ranked[0],sort_keys=True))
+          PY
+
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/f488_accumulated_baddebt_scan.json
+          git commit -m "Record multi-holder unresolved bad-debt production states" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f488-accumulated-baddebt-scan
+          path: repo/production-evidence/f488_accumulated_baddebt_scan.json
