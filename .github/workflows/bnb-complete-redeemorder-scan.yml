@@ -1,0 +1,135 @@
+name: TermMax complete BNB RedeemOrder scan
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnb-complete-redeemorder-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Scan all four deployed BNB vaults over full history
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json,time,urllib.request,concurrent.futures,threading
+          from pathlib import Path
+
+          endpoints=['https://bsc-rpc.publicnode.com','https://bsc.publicnode.com']
+          vaults=[
+            '0x086c120290850e4698645a5689c2428d6e7789de',
+            '0x41d4b8385ab112380158eac2f4cabb9baef1bb45',
+            '0xe749d471db186a6dab068059b29498feb3a01b38',
+            '0xa6d02815d3ff570b795d6c0551cfcef915609142',
+          ]
+          start=67251219
+          topic='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          lock=threading.Lock(); counter=0
+
+          def rpc(ep,method,params,timeout=30):
+            body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+            req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+            with urllib.request.urlopen(req,timeout=timeout) as r: d=json.loads(r.read())
+            if d.get('error'): raise RuntimeError(d['error'])
+            return d.get('result')
+
+          latest=int(rpc(endpoints[0],'eth_blockNumber',[]),16)
+          # publicnode accepts a maximum 5,000-block getLogs range in the capability probe.
+          chunks=[(lo,min(latest,lo+4999)) for lo in range(start,latest+1,5000)]
+          print('LATEST',latest,'CHUNKS',len(chunks),'VAULTS',len(vaults))
+
+          def one(pair):
+            global counter
+            lo,hi=pair; last=None
+            # Try multi-address first. If provider rejects address arrays, fall back to four address-specific calls.
+            for attempt in range(4):
+              ep=endpoints[(lo//5000+attempt)%len(endpoints)]
+              try:
+                got=rpc(ep,'eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(hi),'address':vaults,'topics':[topic]}])
+                with lock:
+                  counter+=1
+                  if counter%250==0: print('PROGRESS',counter,'/',len(chunks),'range',lo,hi,'events',len(got or []))
+                return got or []
+              except Exception as e:
+                last=e; time.sleep(0.15*(attempt+1))
+            # Address-array fallback.
+            all_logs=[]
+            for v in vaults:
+              ok=False
+              for attempt in range(4):
+                ep=endpoints[(lo//5000+attempt)%len(endpoints)]
+                try:
+                  all_logs.extend(rpc(ep,'eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(hi),'address':v,'topics':[topic]}]) or [])
+                  ok=True; break
+                except Exception as e:
+                  last=e; time.sleep(0.15*(attempt+1))
+              if not ok: raise RuntimeError(f'failed range {lo}-{hi} vault {v}: {last!r}')
+            with lock:
+              counter+=1
+              if counter%250==0: print('PROGRESS',counter,'/',len(chunks),'range',lo,hi,'events',len(all_logs))
+            return all_logs
+
+          logs=[]
+          # Conservative concurrency: enough to finish full history while avoiding abusive request rates.
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
+            for got in ex.map(one,chunks): logs.extend(got)
+
+          # Deduplicate in case fallback/provider retries returned the same log.
+          uniq={}
+          for x in logs:
+            key=(x.get('transactionHash'),x.get('logIndex'))
+            uniq[key]=x
+          logs=list(uniq.values())
+          rows=[]
+          for x in logs:
+            data=str(x.get('data') or '0x').removeprefix('0x').rjust(128,'0')
+            topics=x.get('topics') or []
+            rows.append({
+              'block':int(x.get('blockNumber','0x0'),16),
+              'tx_hash':x.get('transactionHash'),
+              'log_index':int(x.get('logIndex','0x0'),16),
+              'vault':str(x.get('address','')).lower(),
+              'order':'0x'+str(topics[2]).removeprefix('0x')[-40:] if len(topics)>2 else None,
+              'bad_debt_raw':int(data[:64],16),
+              'delivery_raw':int(data[64:128],16),
+            })
+          rows.sort(key=lambda r:(r['block'],r['log_index']))
+          pos=sorted((r for r in rows if r['bad_debt_raw']>0),key=lambda r:r['bad_debt_raw'],reverse=True)
+          out={'chain':'bnb-mainnet','start_block':start,'latest_block':latest,'vaults':vaults,'chunk_size':5000,
+               'redeem_event_count':len(rows),'positive_event_count':len(pos),'positive_events_ranked':pos,'all_events':rows}
+          Path('production-evidence/bnb_complete_redeemorder_scan.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('REDEEM_EVENTS',len(rows),'POSITIVE',len(pos))
+          for r in pos[:100]: print('POSITIVE',json.dumps(r,sort_keys=True))
+          PY
+
+      - name: Commit full scan
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnb_complete_redeemorder_scan.json
+          git commit -m "Record complete BNB RedeemOrder scan" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnb-complete-redeemorder-scan
+          path: repo/production-evidence/bnb_complete_redeemorder_scan.json
