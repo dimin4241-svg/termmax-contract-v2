@@ -1,0 +1,41 @@
+name: Parse upstream bad-debt proof log
+on:
+  push:
+    branches: [audit/termmax-production-evidence]
+    paths: [.github/workflows/parse-upstream-baddebt-log.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+      - name: Parse committed runtime log
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          p=Path('production-evidence/upstream_baddebt_scale_runtime.log')
+          text=p.read_text(errors='replace')
+          # Strip ANSI so matching is deterministic.
+          clean=re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',text)
+          lines=clean.splitlines()
+          keys=('testBadDebt','redeemOrder','badDebtMapping','previewRedeem','principal after redeem','new principal','DealBadDebt','Suite result','No tests','Ran 1 test')
+          matches=[x for x in lines if any(k in x for k in keys)]
+          out={'line_count':len(lines),'match_count':len(matches),'matches':matches[-250:],'tail':lines[-120:]}
+          Path('production-evidence/upstream_baddebt_scale_parsed.json').write_text(json.dumps(out,indent=2))
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Commit parsed proof
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f production-evidence/upstream_baddebt_scale_parsed.json
+          git commit -m 'Parse upstream bad-debt scale log' || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
