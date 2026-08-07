@@ -1,0 +1,63 @@
+name: Upstream bad-debt scale proof
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/upstream-baddebt-scale-proof.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: forge soldeer install
+      - name: Run upstream testBadDebt unchanged
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          forge test --match-path test/v2/VaultV2.t.sol --match-test '^testBadDebt$' -vvvv 2>&1 | tee production-evidence/upstream_baddebt_scale_runtime.log
+      - name: Extract key state transitions
+        if: always()
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('production-evidence/upstream_baddebt_scale_runtime.log')
+          if not p.exists(): raise SystemExit(0)
+          lines=p.read_text(errors='replace').splitlines()
+          keys=('testBadDebt','::redeemOrder(','::redeem(','badDebtMapping(','DealBadDebt','Suite result:')
+          keep=[x for x in lines if any(k in x for k in keys)]
+          Path('production-evidence/upstream_baddebt_scale_excerpt.log').write_text('\n'.join(keep)+'\n')
+          print('\n'.join(keep))
+          PY
+      - name: Commit proof logs
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/upstream_baddebt_scale_runtime.log || exit 0
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f production-evidence/upstream_baddebt_scale_runtime.log production-evidence/upstream_baddebt_scale_excerpt.log
+          git commit -m 'Record upstream bad-debt scale proof' || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upstream-baddebt-scale-proof
+          path: |
+            production-evidence/upstream_baddebt_scale_runtime.log
+            production-evidence/upstream_baddebt_scale_excerpt.log
+          if-no-files-found: warn
