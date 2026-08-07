@@ -208,6 +208,11 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         );
         assertEq(state.vault.totalSupply(), state.totalSupplyBefore, "settlement changed share supply");
 
+        // Emit the exact protocol-oracle classification before the fail-closed loss check so
+        // non-exploitable production settlements also serve as explicit negative controls.
+        emit log_named_uint("classification bad debt raw", state.badDebtDelta);
+        emit log_named_uint("classification delivery value in asset raw", state.deliveryValueInAsset);
+
         assertGt(
             state.badDebtDelta,
             state.deliveryValueInAsset,
