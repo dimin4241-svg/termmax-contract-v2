@@ -41,4 +41,5 @@ jobs:
         run: |
           forge test \
             --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol \
+            --no-match-path test/v2/integration/ForkXauePriceFeedAdapter.t.sol \
             --list
