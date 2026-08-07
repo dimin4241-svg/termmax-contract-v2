@@ -1,0 +1,72 @@
+name: TermMax BNB indexed API probe
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnb-indexer-api-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clone
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Probe indexed APIs
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json,urllib.parse,urllib.request
+          from pathlib import Path
+          v='0x086c120290850E4698645A5689c2428D6E7789dE'
+          t='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          q={'module':'logs','action':'getLogs','fromBlock':'67251219','toBlock':'67256218','address':v,'topic0':t,'page':'1','offset':'1000'}
+          urls={
+            'etherscan_v2_no_key':'https://api.etherscan.io/v2/api?chainid=56&'+urllib.parse.urlencode(q),
+            'bscscan_legacy_no_key':'https://api.bscscan.com/api?'+urllib.parse.urlencode(q),
+            'routescan_specific':'https://api.routescan.io/v2/network/mainnet/evm/56/etherscan/api?'+urllib.parse.urlencode(q),
+            'routescan_all':'https://api.routescan.io/v2/network/mainnet/evm/all/etherscan/api?'+urllib.parse.urlencode(q),
+          }
+          out={}
+          for name,url in urls.items():
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=45) as r:
+                body=r.read().decode(errors='replace')
+                try: parsed=json.loads(body)
+                except: parsed=body[:5000]
+                out[name]={'http':r.status,'url':url,'response':parsed}
+            except Exception as e:
+              body=''
+              if hasattr(e,'read'):
+                try: body=e.read().decode(errors='replace')[:5000]
+                except: pass
+              out[name]={'error':repr(e),'body':body,'url':url}
+            print(name,json.dumps(out[name],default=str)[:6000])
+          Path('production-evidence/bnb_indexer_api_probe.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - name: Commit
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnb_indexer_api_probe.json
+          git commit -m "Record BNB indexer API probe" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnb-indexer-api-probe
+          path: repo/production-evidence/bnb_indexer_api_probe.json
