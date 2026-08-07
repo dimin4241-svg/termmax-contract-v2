@@ -1,0 +1,20 @@
+{
+  "bad_debt_usdc_raw": 939875,
+  "bad_debt_usdc_units": 0.939875,
+  "block": 24826646,
+  "break_even_usd_per_underlying": 10142.171144922844,
+  "convert_to_assets_raw": 9267,
+  "delivery_wstrbtc_raw": 9267,
+  "delivery_wstrbtc_units": 9.267e-05,
+  "preview_redeem_raw": 9267,
+  "rpc": "https://eth.drpc.org",
+  "underlying": "0xB2723d5dF98689eCA6A4E7321121662DDB9b3017",
+  "underlying_decimals": 8,
+  "underlying_symbol": "strBTC",
+  "underlying_units": 9.267e-05,
+  "wrapper_total_assets_raw": 51024,
+  "wrapper_total_supply_raw": 51024,
+  "wstrbtc": "0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770",
+  "wstrbtc_decimals": 8,
+  "wstrbtc_symbol": "wstrBTC"
+}
