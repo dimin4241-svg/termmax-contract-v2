@@ -86,7 +86,7 @@ jobs:
         run: |
           git config user.name "termmax-evidence-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add production-evidence/production_stale_nav_positive_runtime.log production-evidence/production_stale_nav_positive_runtime_excerpt.log
+          git add -f production-evidence/production_stale_nav_positive_runtime.log production-evidence/production_stale_nav_positive_runtime_excerpt.log
           git commit -m "Record positive production stale-NAV runtime" || exit 0
           git pull --rebase origin audit/termmax-production-evidence
           git push origin HEAD:audit/termmax-production-evidence
