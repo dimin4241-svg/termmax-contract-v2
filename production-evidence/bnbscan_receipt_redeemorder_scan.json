@@ -1,0 +1,35 @@
+{
+  "all_redeem_events": [],
+  "chain": "bnb-mainnet",
+  "index_summary": {
+    "0x086c120290850e4698645a5689c2428d6e7789de": {
+      "pages": 1,
+      "returned": 0
+    },
+    "0x41d4b8385ab112380158eac2f4cabb9baef1bb45": {
+      "pages": 1,
+      "returned": 0
+    },
+    "0xa6d02815d3ff570b795d6c0551cfcef915609142": {
+      "pages": 1,
+      "returned": 0
+    },
+    "0xe749d471db186a6dab068059b29498feb3a01b38": {
+      "pages": 1,
+      "returned": 0
+    }
+  },
+  "positive_event_count": 0,
+  "positive_events_ranked": [],
+  "receipt_error_count": 0,
+  "receipt_errors": [],
+  "redeem_event_count": 0,
+  "source": "BNBScan flexible transaction index + publicnode receipts",
+  "unique_indexed_transactions": 0,
+  "vaults": [
+    "0x086c120290850e4698645a5689c2428d6e7789de",
+    "0x41d4b8385ab112380158eac2f4cabb9baef1bb45",
+    "0xe749d471db186a6dab068059b29498feb3a01b38",
+    "0xa6d02815d3ff570b795d6c0551cfcef915609142"
+  ]
+}
