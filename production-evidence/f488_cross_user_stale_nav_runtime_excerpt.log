@@ -1,0 +1,14 @@
+  historical block: 25682658
+  vault: 0xF488ccdf04079cC03183cDB6A147d12Cf97F9317
+  real exiting LP: 0xB355F88FB60E3fca64dD94E0932144069f2671a9
+  historical LP total shares raw: 2977331245978
+  shares redeemed raw: 2700000000000
+  other shares remaining raw: 616301401353
+  active uncovered bad debt raw: 22
+  real liquid capacity raw: 2760480360941
+  ordinary redeem payout raw: 2752322524563
+  fair economic payout raw: 2752322524545
+  cross-user loss shifted raw: 18
+  additional loss on remaining shares raw: 18
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 15.12s (15.12s CPU time)
+Ran 1 test suite in 15.12s (15.12s CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
