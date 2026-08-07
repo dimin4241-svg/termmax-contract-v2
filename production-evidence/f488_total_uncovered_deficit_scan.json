@@ -1,0 +1,2498 @@
+{
+  "asset_decimals": 6,
+  "asset_symbol": "USDC",
+  "best": {
+    "active_uncovered_bad_debt_mappings": [
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 5,
+        "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 2,
+        "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 4,
+        "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 2,
+        "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 2,
+        "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+        "collateral_balance_raw": 0
+      },
+      {
+        "bad_debt_raw": 1,
+        "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+        "collateral_balance_raw": 0
+      }
+    ],
+    "asset_decimals": 6,
+    "asset_symbol": "USDC",
+    "block": 25682658,
+    "holder_count": 723,
+    "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+    "largest_holder_fraction": 0.8977866863257045,
+    "largest_holder_shares_raw": 2977331245978,
+    "predicted_cross_user_shift_asset_units_floor": 1.9e-05,
+    "predicted_cross_user_shift_raw_floor": 19,
+    "total_supply_raw": 3316301401353,
+    "total_uncovered_bad_debt_asset_units": 2.2e-05,
+    "total_uncovered_bad_debt_raw": 22,
+    "trigger_order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+    "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e"
+  },
+  "states": [
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 23895230,
+      "holder_count": 23,
+      "largest_holder": "0xfa558c6cadda84505336de917079edcc767a1350",
+      "largest_holder_fraction": 0.31972636369105994,
+      "largest_holder_shares_raw": 619512298481,
+      "predicted_cross_user_shift_asset_units_floor": 0.0,
+      "predicted_cross_user_shift_raw_floor": 0,
+      "total_supply_raw": 1937632828676,
+      "total_uncovered_bad_debt_asset_units": 1e-06,
+      "total_uncovered_bad_debt_raw": 1,
+      "trigger_order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24116677,
+      "holder_count": 16,
+      "largest_holder": "0xfa558c6cadda84505336de917079edcc767a1350",
+      "largest_holder_fraction": 0.32248622797456733,
+      "largest_holder_shares_raw": 516650174206,
+      "predicted_cross_user_shift_asset_units_floor": 0.0,
+      "predicted_cross_user_shift_raw_floor": 0,
+      "total_supply_raw": 1602084459392,
+      "total_uncovered_bad_debt_asset_units": 2e-06,
+      "total_uncovered_bad_debt_raw": 2,
+      "trigger_order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
+      "tx_hash": "0x21f18e637c4c900904781e9798303445a091929a23664c58c0253f3cf9aeba38"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24970816,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119254009303267,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1e-06,
+      "predicted_cross_user_shift_raw_floor": 1,
+      "total_supply_raw": 7227840864520,
+      "total_uncovered_bad_debt_asset_units": 3e-06,
+      "total_uncovered_bad_debt_raw": 3,
+      "trigger_order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "tx_hash": "0x17d59ba4a19c40e0aeb61412425b058d72dd45675559fc90060fd30217c6c6ba"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24976972,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119451923864224,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1e-06,
+      "predicted_cross_user_shift_raw_floor": 1,
+      "total_supply_raw": 7227493610813,
+      "total_uncovered_bad_debt_asset_units": 4e-06,
+      "total_uncovered_bad_debt_raw": 4,
+      "trigger_order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "tx_hash": "0x609cd4a60a96925413a3dcd02a11a9816acce3e4a9c5a1c7c68d49d1e58b9802"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24976973,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119451923864224,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7227493610813,
+      "total_uncovered_bad_debt_asset_units": 5e-06,
+      "total_uncovered_bad_debt_raw": 5,
+      "trigger_order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "tx_hash": "0x8c287d172c92518cef8de30f297c2c31e598db2adc1bc54abab514aeeb94d7a1"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25140848,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.41291541564767115,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7210511240681,
+      "total_uncovered_bad_debt_asset_units": 6e-06,
+      "total_uncovered_bad_debt_raw": 6,
+      "trigger_order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "tx_hash": "0x88b7d8bd9afab956c38f403f2b71fafa6cdaf0e6d657d9ef1bab7631f51de6a1"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25140851,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.41291541564767115,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7210511240681,
+      "total_uncovered_bad_debt_asset_units": 7e-06,
+      "total_uncovered_bad_debt_raw": 7,
+      "trigger_order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "tx_hash": "0xfae5ed6c538df5c125ec574ceb1a5f03dc8f6e70716a84a538857e6c3625510a"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25349832,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.47265826665438915,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 3e-06,
+      "predicted_cross_user_shift_raw_floor": 3,
+      "total_supply_raw": 6299120222846,
+      "total_uncovered_bad_debt_asset_units": 8e-06,
+      "total_uncovered_bad_debt_raw": 8,
+      "trigger_order": "0x18f426708043782773470636a12ed422aa67f923",
+      "tx_hash": "0xbcd69f894d0a372b517187cb99483ae67578d91e5f1b578df04da3fec72861ce"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393279,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 4e-06,
+      "predicted_cross_user_shift_raw_floor": 4,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 9e-06,
+      "total_uncovered_bad_debt_raw": 9,
+      "trigger_order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "tx_hash": "0x0028cb2cc43ac8dd6267722bbbf5c35f365278cd2acfe39cc0c53020eac93570"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393280,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 5e-06,
+      "predicted_cross_user_shift_raw_floor": 5,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1e-05,
+      "total_uncovered_bad_debt_raw": 10,
+      "trigger_order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "tx_hash": "0x2a0e7df07d8da109a6a06a09f573a92cfcfc3f0f714de56ef07c702a47be9d4a"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393282,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 5e-06,
+      "predicted_cross_user_shift_raw_floor": 5,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.1e-05,
+      "total_uncovered_bad_debt_raw": 11,
+      "trigger_order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "tx_hash": "0xf4bfe897c3cdfcc98e4a371eee8482d721d3b408bc0763b017734b61666a992d"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393283,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 6e-06,
+      "predicted_cross_user_shift_raw_floor": 6,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.2e-05,
+      "total_uncovered_bad_debt_raw": 12,
+      "trigger_order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "tx_hash": "0x4c1cc78caf4990a95d646b53da5dacf223262610cb0a4d983156cb4d3fa6acf2"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393284,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 6e-06,
+      "predicted_cross_user_shift_raw_floor": 6,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.3e-05,
+      "total_uncovered_bad_debt_raw": 13,
+      "trigger_order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "tx_hash": "0x04be89db2d47ff68ff82f09c31e55272927f0567f3a106f45df7bde8d26a9ad0"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393285,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 7e-06,
+      "predicted_cross_user_shift_raw_floor": 7,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.4e-05,
+      "total_uncovered_bad_debt_raw": 14,
+      "trigger_order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "tx_hash": "0xfdafcf127eca15a3282781f135592b4299a35111e7424a997f31e6bed9699c38"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393286,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 7e-06,
+      "predicted_cross_user_shift_raw_floor": 7,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.5e-05,
+      "total_uncovered_bad_debt_raw": 15,
+      "trigger_order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "tx_hash": "0xa332d8d1c55dfc4656ee3ddd57e286fcf91c7b902eda4c5ef5e0406c9eabf918"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393288,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 8e-06,
+      "predicted_cross_user_shift_raw_floor": 8,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.6e-05,
+      "total_uncovered_bad_debt_raw": 16,
+      "trigger_order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "tx_hash": "0xa6c2a13c9058a20d006c0e98f61a4f6b44540e1c4f7a6884f4ee2c6ea56cbcf3"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393297,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 8e-06,
+      "predicted_cross_user_shift_raw_floor": 8,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.7e-05,
+      "total_uncovered_bad_debt_raw": 17,
+      "trigger_order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "tx_hash": "0x69a6a25c92f075721a0f6c9a8de8d3510962895e017720a7f514e023e39df913"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393305,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 9e-06,
+      "predicted_cross_user_shift_raw_floor": 9,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.8e-05,
+      "total_uncovered_bad_debt_raw": 18,
+      "trigger_order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "tx_hash": "0x531909011bbc6424a2612b4b3aaf4dfa483e9fae840fb1cb4999932a35581d70"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682605,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.7e-05,
+      "predicted_cross_user_shift_raw_floor": 17,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 1.9e-05,
+      "total_uncovered_bad_debt_raw": 19,
+      "trigger_order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "tx_hash": "0x0ee0813e925f82ac2d58f55fe606f49f7185def6309caf133c3604b77d6999ac"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682620,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.7e-05,
+      "predicted_cross_user_shift_raw_floor": 17,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2e-05,
+      "total_uncovered_bad_debt_raw": 20,
+      "trigger_order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "tx_hash": "0x5fea8ceb73318c6fe86cb37c940ef75bcfdc1880ab75dd905fec2a7beca67ad5"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 5,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682624,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.8e-05,
+      "predicted_cross_user_shift_raw_floor": 18,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2.1e-05,
+      "total_uncovered_bad_debt_raw": 21,
+      "trigger_order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "tx_hash": "0x8d1a33357ccba0ce9cf49701c54cb1337f7a442f94c3c070fd355ed1c4b4c3b3"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 5,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682658,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.9e-05,
+      "predicted_cross_user_shift_raw_floor": 19,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2.2e-05,
+      "total_uncovered_bad_debt_raw": 22,
+      "trigger_order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e"
+    }
+  ],
+  "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317",
+  "viable_cross_user_states_ranked": [
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 5,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682658,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.9e-05,
+      "predicted_cross_user_shift_raw_floor": 19,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2.2e-05,
+      "total_uncovered_bad_debt_raw": 22,
+      "trigger_order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 5,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682624,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.8e-05,
+      "predicted_cross_user_shift_raw_floor": 18,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2.1e-05,
+      "total_uncovered_bad_debt_raw": 21,
+      "trigger_order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "tx_hash": "0x8d1a33357ccba0ce9cf49701c54cb1337f7a442f94c3c070fd355ed1c4b4c3b3"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682620,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.7e-05,
+      "predicted_cross_user_shift_raw_floor": 17,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 2e-05,
+      "total_uncovered_bad_debt_raw": 20,
+      "trigger_order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "tx_hash": "0x5fea8ceb73318c6fe86cb37c940ef75bcfdc1880ab75dd905fec2a7beca67ad5"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25682605,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.8977866863257045,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1.7e-05,
+      "predicted_cross_user_shift_raw_floor": 17,
+      "total_supply_raw": 3316301401353,
+      "total_uncovered_bad_debt_asset_units": 1.9e-05,
+      "total_uncovered_bad_debt_raw": 19,
+      "trigger_order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "tx_hash": "0x0ee0813e925f82ac2d58f55fe606f49f7185def6309caf133c3604b77d6999ac"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393305,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 9e-06,
+      "predicted_cross_user_shift_raw_floor": 9,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.8e-05,
+      "total_uncovered_bad_debt_raw": 18,
+      "trigger_order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "tx_hash": "0x531909011bbc6424a2612b4b3aaf4dfa483e9fae840fb1cb4999932a35581d70"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 4,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393297,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 8e-06,
+      "predicted_cross_user_shift_raw_floor": 8,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.7e-05,
+      "total_uncovered_bad_debt_raw": 17,
+      "trigger_order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "tx_hash": "0x69a6a25c92f075721a0f6c9a8de8d3510962895e017720a7f514e023e39df913"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xE8483517077afa11A9B07f849cee2552f040d7b2",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393288,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 8e-06,
+      "predicted_cross_user_shift_raw_floor": 8,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.6e-05,
+      "total_uncovered_bad_debt_raw": 16,
+      "trigger_order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "tx_hash": "0xa6c2a13c9058a20d006c0e98f61a4f6b44540e1c4f7a6884f4ee2c6ea56cbcf3"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393286,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 7e-06,
+      "predicted_cross_user_shift_raw_floor": 7,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.5e-05,
+      "total_uncovered_bad_debt_raw": 15,
+      "trigger_order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "tx_hash": "0xa332d8d1c55dfc4656ee3ddd57e286fcf91c7b902eda4c5ef5e0406c9eabf918"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x0e397938C1Aa0680954093495B70A9F5e2249aBa",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393285,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 7e-06,
+      "predicted_cross_user_shift_raw_floor": 7,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.4e-05,
+      "total_uncovered_bad_debt_raw": 14,
+      "trigger_order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "tx_hash": "0xfdafcf127eca15a3282781f135592b4299a35111e7424a997f31e6bed9699c38"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393284,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 6e-06,
+      "predicted_cross_user_shift_raw_floor": 6,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.3e-05,
+      "total_uncovered_bad_debt_raw": 13,
+      "trigger_order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "tx_hash": "0x04be89db2d47ff68ff82f09c31e55272927f0567f3a106f45df7bde8d26a9ad0"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x9db38D74a0D29380899aD354121DfB521aDb0548",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393283,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 6e-06,
+      "predicted_cross_user_shift_raw_floor": 6,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.2e-05,
+      "total_uncovered_bad_debt_raw": 12,
+      "trigger_order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "tx_hash": "0x4c1cc78caf4990a95d646b53da5dacf223262610cb0a4d983156cb4d3fa6acf2"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xf6b1117ec07684D3958caD8BEb1b302bfD21103f",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393282,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 5e-06,
+      "predicted_cross_user_shift_raw_floor": 5,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1.1e-05,
+      "total_uncovered_bad_debt_raw": 11,
+      "trigger_order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "tx_hash": "0xf4bfe897c3cdfcc98e4a371eee8482d721d3b408bc0763b017734b61666a992d"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 3,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393280,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 5e-06,
+      "predicted_cross_user_shift_raw_floor": 5,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 1e-05,
+      "total_uncovered_bad_debt_raw": 10,
+      "trigger_order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "tx_hash": "0x2a0e7df07d8da109a6a06a09f573a92cfcfc3f0f714de56ef07c702a47be9d4a"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25393279,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.52086212563227,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 4e-06,
+      "predicted_cross_user_shift_raw_floor": 4,
+      "total_supply_raw": 5716159996014,
+      "total_uncovered_bad_debt_asset_units": 9e-06,
+      "total_uncovered_bad_debt_raw": 9,
+      "trigger_order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "tx_hash": "0x0028cb2cc43ac8dd6267722bbbf5c35f365278cd2acfe39cc0c53020eac93570"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25349832,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.47265826665438915,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 3e-06,
+      "predicted_cross_user_shift_raw_floor": 3,
+      "total_supply_raw": 6299120222846,
+      "total_uncovered_bad_debt_asset_units": 8e-06,
+      "total_uncovered_bad_debt_raw": 8,
+      "trigger_order": "0x18f426708043782773470636a12ed422aa67f923",
+      "tx_hash": "0xbcd69f894d0a372b517187cb99483ae67578d91e5f1b578df04da3fec72861ce"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25140851,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.41291541564767115,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7210511240681,
+      "total_uncovered_bad_debt_asset_units": 7e-06,
+      "total_uncovered_bad_debt_raw": 7,
+      "trigger_order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "tx_hash": "0xfae5ed6c538df5c125ec574ceb1a5f03dc8f6e70716a84a538857e6c3625510a"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x3de0ff76E8b528C092d47b9DaC775931cef80F49",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 25140848,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.41291541564767115,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7210511240681,
+      "total_uncovered_bad_debt_asset_units": 6e-06,
+      "total_uncovered_bad_debt_raw": 6,
+      "trigger_order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "tx_hash": "0x88b7d8bd9afab956c38f403f2b71fafa6cdaf0e6d657d9ef1bab7631f51de6a1"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 2,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24976973,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119451923864224,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 2e-06,
+      "predicted_cross_user_shift_raw_floor": 2,
+      "total_supply_raw": 7227493610813,
+      "total_uncovered_bad_debt_asset_units": 5e-06,
+      "total_uncovered_bad_debt_raw": 5,
+      "trigger_order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "tx_hash": "0x8c287d172c92518cef8de30f297c2c31e598db2adc1bc54abab514aeeb94d7a1"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24976972,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119451923864224,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1e-06,
+      "predicted_cross_user_shift_raw_floor": 1,
+      "total_supply_raw": 7227493610813,
+      "total_uncovered_bad_debt_asset_units": 4e-06,
+      "total_uncovered_bad_debt_raw": 4,
+      "trigger_order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "tx_hash": "0x609cd4a60a96925413a3dcd02a11a9816acce3e4a9c5a1c7c68d49d1e58b9802"
+    },
+    {
+      "active_uncovered_bad_debt_mappings": [
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0xB10DA2F9147f9cf2B8826877Cd0c95c18A0f42dc",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+          "collateral_balance_raw": 0
+        },
+        {
+          "bad_debt_raw": 1,
+          "collateral": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+          "collateral_balance_raw": 0
+        }
+      ],
+      "asset_decimals": 6,
+      "asset_symbol": "USDC",
+      "block": 24970816,
+      "holder_count": 723,
+      "largest_holder": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+      "largest_holder_fraction": 0.4119254009303267,
+      "largest_holder_shares_raw": 2977331245978,
+      "predicted_cross_user_shift_asset_units_floor": 1e-06,
+      "predicted_cross_user_shift_raw_floor": 1,
+      "total_supply_raw": 7227840864520,
+      "total_uncovered_bad_debt_asset_units": 3e-06,
+      "total_uncovered_bad_debt_raw": 3,
+      "trigger_order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "tx_hash": "0x17d59ba4a19c40e0aeb61412425b058d72dd45675559fc90060fd30217c6c6ba"
+    }
+  ]
+}
