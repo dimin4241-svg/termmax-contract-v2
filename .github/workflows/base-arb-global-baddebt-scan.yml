@@ -1,0 +1,85 @@
+name: TermMax Base Arbitrum global bad-debt scan
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/base-arb-global-baddebt-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Scan Blockscout topic logs and filter to deployed vaults
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import glob,json,re,urllib.parse,urllib.request
+          from pathlib import Path
+          eth=json.load(open('production-evidence/global_redeem_baddebt_scan.json'))
+          topic=eth['redeem_order_topic']
+          chains=[
+            ('base-mainnet','https://base.blockscout.com'),
+            ('arb-mainnet','https://arbitrum.blockscout.com'),
+          ]
+          result={}
+          def getj(url):
+              req=urllib.request.Request(url,headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=120) as r:return json.loads(r.read())
+          for directory,explorer in chains:
+              vaults={}
+              for f in glob.glob(f'deployments/{directory}/*vault*.env'):
+                  txt=open(f).read(); bm=re.search(r'^BLOCK_NUMBER=(\d+)',txt,re.M); start=int(bm.group(1)) if bm else 0
+                  for m in re.finditer(r'^VAULT_ADDRESS(?:_\d+)?=(0x[a-fA-F0-9]{40})',txt,re.M):
+                      a=m.group(1).lower(); vaults[a]=min(vaults.get(a,start),start)
+              if not vaults:
+                  result[directory]={'vault_count':0,'error':'no vault env addresses'}; continue
+              start=min(vaults.values())
+              q=urllib.parse.urlencode({'module':'logs','action':'getLogs','fromBlock':str(start),'toBlock':'latest','topic0':topic})
+              payload=getj(explorer+'/api?'+q); raw=payload.get('result')
+              if not isinstance(raw,list):
+                  result[directory]={'vault_count':len(vaults),'scan_start_block':start,'error':payload}; continue
+              rows=[]
+              for x in raw:
+                  v=str(x.get('address','')).lower()
+                  if v not in vaults: continue
+                  data=str(x.get('data') or '0x').removeprefix('0x')
+                  if len(data)<128: continue
+                  ts=x.get('topics') or []
+                  rows.append({'vault':v,'block':int(x.get('blockNumber','0x0'),16),'tx_hash':x.get('transactionHash'),
+                               'order':'0x'+str(ts[2]).removeprefix('0x')[-40:] if len(ts)>=3 else None,
+                               'bad_debt_raw':int(data[:64],16),'delivery_raw':int(data[64:128],16)})
+              pos=sorted([x for x in rows if x['bad_debt_raw']>0],key=lambda x:x['bad_debt_raw'],reverse=True)
+              result[directory]={'vault_count':len(vaults),'scan_start_block':start,'vault_start_blocks':vaults,'redeem_event_count':len(rows),
+                                 'positive_event_count':len(pos),'positive_events_ranked':pos,'explorer':explorer}
+              print(directory,'VAULTS',len(vaults),'REDEEMS',len(rows),'POS',len(pos))
+              for x in pos[:30]: print(directory,'POSITIVE',json.dumps(x,sort_keys=True))
+          Path('production-evidence/base_arb_global_baddebt.json').write_text(json.dumps(result,indent=2,sort_keys=True))
+          PY
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/base_arb_global_baddebt.json
+          git commit -m "Record Base and Arbitrum bad-debt scan" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: base-arb-global-baddebt
+          path: repo/production-evidence/base_arb_global_baddebt.json
