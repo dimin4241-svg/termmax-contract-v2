@@ -23,20 +23,29 @@ jobs:
         with:
           version: stable
       - run: forge soldeer install
+      - name: Confirm test discovery
+        run: |
+          set -euo pipefail
+          forge test --list --match-path 'test/v2/VaultV2.t.sol' | tee /tmp/test-list.txt
+          grep -F 'testBadDebt' /tmp/test-list.txt
       - name: Run upstream testBadDebt unchanged
         run: |
           set -euo pipefail
           mkdir -p production-evidence
-          forge test --match-path test/v2/VaultV2.t.sol --match-test '^testBadDebt$' -vvvv 2>&1 | tee production-evidence/upstream_baddebt_scale_runtime.log
+          forge test --match-path 'test/v2/VaultV2.t.sol' --match-contract 'VaultTestV2' --match-test 'testBadDebt' --isolate -vvvv 2>&1 | tee production-evidence/upstream_baddebt_scale_runtime.log
+          grep -Eq 'Ran [1-9][0-9]* test|\[PASS\].*testBadDebt' production-evidence/upstream_baddebt_scale_runtime.log
+          ! grep -Fq 'No tests found' production-evidence/upstream_baddebt_scale_runtime.log
       - name: Extract key state transitions
         if: always()
         run: |
           python3 - <<'PY'
+          import re
           from pathlib import Path
           p=Path('production-evidence/upstream_baddebt_scale_runtime.log')
           if not p.exists(): raise SystemExit(0)
-          lines=p.read_text(errors='replace').splitlines()
-          keys=('testBadDebt','::redeemOrder(','::redeem(','badDebtMapping(','DealBadDebt','Suite result:')
+          clean=re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',p.read_text(errors='replace'))
+          lines=clean.splitlines()
+          keys=('testBadDebt','::redeemOrder(','::redeem(','badDebtMapping(','DealBadDebt','Suite result:','previewRedeem:','new principal:','principal after redeem:')
           keep=[x for x in lines if any(k in x for k in keys)]
           Path('production-evidence/upstream_baddebt_scale_excerpt.log').write_text('\n'.join(keep)+'\n')
           print('\n'.join(keep))
