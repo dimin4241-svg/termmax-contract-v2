@@ -12,9 +12,9 @@ permissions:
   contents: write
 
 env:
-  TX_HASH: 0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56
-  VAULT: 0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e
-  ORDER: 0xd260d3f76a16cf8bf7a691a9af629407d0091980
+  TX_HASH: '0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56'
+  VAULT: '0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e'
+  ORDER: '0xd260d3f76a16cf8bf7a691a9af629407d0091980'
   SETTLEMENT_BLOCK: '24187489'
 
 jobs:
@@ -68,7 +68,6 @@ jobs:
               'logs_v2':get_json(f'{base}/api/v2/transactions/{tx}/logs'),
           }
 
-          # ERC-20 Transfer(address,address,uint256)
           transfer_topic='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
           transfers=compat_logs(vault, transfer_topic, preblock)
           out['share_transfer_logs_raw']=transfers
@@ -99,7 +98,6 @@ jobs:
           out['historical_share_holders_preblock']=positive[:50]
           out['share_transfer_log_count']=len(rows)
 
-          # Collect transaction-local vault calls visible in Blockscout call traces.
           def walk(obj, path='root'):
               hits=[]
               if isinstance(obj,dict):
