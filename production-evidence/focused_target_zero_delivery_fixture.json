@@ -1,0 +1,225 @@
+{
+  "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "bad_debt_raw": 1,
+  "caller": "0x008c7DC790fA31E6CA19D8Cb6d11C53f6A88DF6c",
+  "delivery_raw": 0,
+  "holders": [
+    {
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "max_redeem": 2977331245978,
+      "onchain_balance": 2977331245978,
+      "reconstructed_balance": 2977331245978
+    },
+    {
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "max_redeem": 248172327990,
+      "onchain_balance": 248172327990,
+      "reconstructed_balance": 248172327990
+    },
+    {
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "max_redeem": 32542877606,
+      "onchain_balance": 32542877606,
+      "reconstructed_balance": 251361653115
+    }
+  ],
+  "order": "0x69934e4a00133B566DD4853C65E254eA66544B34",
+  "preblock": 25682657,
+  "selected": {
+    "fair_after_one_raw_loss": 3035028076369,
+    "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+    "holder_balance": 2977331245978,
+    "max_redeem": 2977331245978,
+    "nominal": 3035028076370,
+    "other_holders_balance": 280715205596,
+    "predicted_shift": 1,
+    "shares": 2977331245978
+  },
+  "settlement_block": 25682658,
+  "settlement_tx": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e",
+  "top_candidates": [
+    {
+      "fair_after_one_raw_loss": 3035028076369,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 3035028076370,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 1,
+      "shares": 2977331245978
+    },
+    {
+      "fair_after_one_raw_loss": 1517514038184,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 1517514038185,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 1,
+      "shares": 1488665622989
+    },
+    {
+      "fair_after_one_raw_loss": 758757019091,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 758757019092,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 1,
+      "shares": 744332811494
+    },
+    {
+      "fair_after_one_raw_loss": 1011676025456,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 1011676025456,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 0,
+      "shares": 992443748659
+    },
+    {
+      "fair_after_one_raw_loss": 303502807636,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 303502807636,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 0,
+      "shares": 297733124597
+    },
+    {
+      "fair_after_one_raw_loss": 252981586864,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 252981586864,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 248172327990
+    },
+    {
+      "fair_after_one_raw_loss": 126490793432,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 126490793432,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 124086163995
+    },
+    {
+      "fair_after_one_raw_loss": 84327195621,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 84327195621,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 82724109330
+    },
+    {
+      "fair_after_one_raw_loss": 63245396715,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 63245396715,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 62043081997
+    },
+    {
+      "fair_after_one_raw_loss": 33173516501,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 33173516501,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 32542877606
+    },
+    {
+      "fair_after_one_raw_loss": 30350280762,
+      "holder": "0xB355F88FB60E3fca64dD94E0932144069f2671a9",
+      "holder_balance": 2977331245978,
+      "max_redeem": 2977331245978,
+      "nominal": 30350280762,
+      "other_holders_balance": 280715205596,
+      "predicted_shift": 0,
+      "shares": 29773312459
+    },
+    {
+      "fair_after_one_raw_loss": 25298158686,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 25298158686,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 24817232799
+    },
+    {
+      "fair_after_one_raw_loss": 16586758250,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 16586758250,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 16271438803
+    },
+    {
+      "fair_after_one_raw_loss": 11057838833,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 11057838833,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 10847625868
+    },
+    {
+      "fair_after_one_raw_loss": 8293379124,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 8293379124,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 8135719401
+    },
+    {
+      "fair_after_one_raw_loss": 3317351649,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 3317351649,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 3254287760
+    },
+    {
+      "fair_after_one_raw_loss": 2529815867,
+      "holder": "0xaebb8FDBD5E52F99630cEBB80D0a1c19892EB4C2",
+      "holder_balance": 248172327990,
+      "max_redeem": 248172327990,
+      "nominal": 2529815867,
+      "other_holders_balance": 3009874123584,
+      "predicted_shift": 0,
+      "shares": 2481723279
+    },
+    {
+      "fair_after_one_raw_loss": 331735164,
+      "holder": "0x53cfae9AF39Fa1eeD00D4402ed6cEAbB112a3724",
+      "holder_balance": 32542877606,
+      "max_redeem": 32542877606,
+      "nominal": 331735164,
+      "other_holders_balance": 3225503573968,
+      "predicted_shift": 0,
+      "shares": 325428776
+    }
+  ],
+  "total_assets_pre_raw": 3380567035129,
+  "total_supply_pre_raw": 3316301401353,
+  "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+}
