@@ -35,10 +35,10 @@ jobs:
           set -euo pipefail
           mkdir -p production-evidence
           PYTHONPATH=. python3 - <<'PY'
-          import json, os, time, urllib.parse, urllib.request
+          import json, os, urllib.parse, urllib.request
           from collections import defaultdict
           from pathlib import Path
-          from eth_abi import decode, encode
+          from eth_abi import decode
           from web3 import HTTPProvider, Web3
           import scripts.termmax_production_evidence as scanner
 
@@ -82,15 +82,15 @@ jobs:
           assert result['event_delivery_collateral_raw']==EXPECTED_DELIVERY
           assert state.get('debt_symbol')=='USDC', state
           assert int(state.get('debt_decimals'))==6, state
+          assert state.get('preview_available') is True, state
 
-          # Value the exact delivered collateral amount using the deployed GT at the
-          # historical pre-settlement state. getCollateralValue returns USD_BASE=1e8.
-          gt=w3.eth.contract(address=Web3.to_checksum_address(state['gt']),abi=[
-              {'type':'function','name':'getCollateralValue','stateMutability':'view','inputs':[{'name':'collateralData','type':'bytes'}],'outputs':[{'type':'uint256'}]}
-          ])
-          delivery_data=encode(['uint256'],[EXPECTED_DELIVERY])
-          delivery_usd_1e8=int(gt.functions.getCollateralValue(delivery_data).call(block_identifier=preblock)) if EXPECTED_DELIVERY else 0
-          delivery_value_usdc_raw=delivery_usd_1e8*10**6//10**8
+          # The protocol-specific collateralData may contain more than a raw uint256.
+          # Reuse the exact deliveryData returned by deployed market.previewRedeem(),
+          # which inspect_order has already passed to deployed GT.getCollateralValue().
+          preview_delivery=int(state.get('collateral_out_raw',0))
+          delivery_usd_1e8=int(state.get('collateral_value_usd_1e8',0))
+          delivery_value_usdc_raw=int(state.get('collateral_value_debt_raw_at_usd_par',0))
+          delivery_matches_event=(preview_delivery==EXPECTED_DELIVERY)
           net_realized_loss_raw=EXPECTED_BAD-delivery_value_usdc_raw
 
           vault=w3.eth.contract(address=VAULT,abi=scanner.VAULT_ABI + [
@@ -103,7 +103,6 @@ jobs:
           total_supply=int(vault.functions.totalSupply().call(block_identifier=preblock))
           share_decimals=int(vault.functions.decimals().call(block_identifier=preblock))
 
-          # Reconstruct actual share holders from ERC20 Transfer logs before the settlement.
           transfer_topic='0x'+Web3.keccak(text='Transfer(address,address,uint256)').hex().removeprefix('0x')
           params={'module':'logs','action':'getLogs','fromBlock':'0','toBlock':str(preblock),'address':VAULT,'topic0':transfer_topic}
           url='https://eth.blockscout.com/api?'+urllib.parse.urlencode(params)
@@ -147,6 +146,7 @@ jobs:
               'event_bad_debt_raw':EXPECTED_BAD,'event_delivery_raw':EXPECTED_DELIVERY,
               'debt_token':state.get('debt_token'),'debt_symbol':state.get('debt_symbol'),'debt_decimals':state.get('debt_decimals'),
               'collateral':state.get('collateral'),'collateral_symbol':state.get('collateral_symbol'),'gt':state.get('gt'),'market':state.get('market'),
+              'preview_delivery_raw':preview_delivery,'delivery_matches_event':delivery_matches_event,
               'delivery_value_usd_1e8':delivery_usd_1e8,'delivery_value_usdc_raw':delivery_value_usdc_raw,
               'net_realized_loss_raw':net_realized_loss_raw,
               'vault_total_assets_pre_raw':total_assets,'vault_total_supply_pre_raw':total_supply,'share_decimals':share_decimals,
