@@ -1,0 +1,856 @@
+Compiling 315 files with Solc 0.8.35
+Solc 0.8.35 finished in 59.12s
+Compiler run successful with warnings:
+Warning (6335): "error" will be promoted to keyword in the future and will not be allowed as an identifier anymore.
+  --> contracts/v2/tokens/StableERC4626ForVenus.sol:67:9:
+   |
+67 |         uint256 error = thirdPool.accrueInterest();
+   |         ^^^^^^^^^^^^^
+
+Warning (6335): "error" will be promoted to keyword in the future and will not be allowed as an identifier anymore.
+  --> contracts/v2/tokens/StableERC4626ForVenus.sol:97:9:
+   |
+97 |         uint256 error = thirdPool.accrueInterest();
+   |         ^^^^^^^^^^^^^
+
+Warning (6335): "error" will be promoted to keyword in the future and will not be allowed as an identifier anymore.
+   --> contracts/v2/tokens/StableERC4626ForVenus.sol:136:9:
+    |
+136 |         uint256 error = thirdPool.accrueInterest();
+    |         ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:330:13:
+    |
+330 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:337:17:
+    |
+337 |             if (tokenIn == ft && tokenOut == debtToken) {
+    |                 ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:337:34:
+    |
+337 |             if (tokenIn == ft && tokenOut == debtToken) {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:339:24:
+    |
+339 |             } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                        ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:339:41:
+    |
+339 |             } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                                         ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:341:24:
+    |
+341 |             } else if (tokenIn == debtToken && tokenOut == ft) {
+    |                        ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:341:48:
+    |
+341 |             } else if (tokenIn == debtToken && tokenOut == ft) {
+    |                                                ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:343:24:
+    |
+343 |             } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                        ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:343:48:
+    |
+343 |             } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                                                ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:438:13:
+    |
+438 |         if (tokenOut == ft) {
+    |             ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:490:13:
+    |
+490 |         if (tokenIn == xt) {
+    |             ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:540:13:
+    |
+540 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:548:17:
+    |
+548 |             if (tokenIn == debtToken && tokenOut == ft) {
+    |                 ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:548:41:
+    |
+548 |             if (tokenIn == debtToken && tokenOut == ft) {
+    |                                         ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:550:24:
+    |
+550 |             } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                        ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:550:48:
+    |
+550 |             } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                                                ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:552:24:
+    |
+552 |             } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                        ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:552:41:
+    |
+552 |             } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                                         ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:554:24:
+    |
+554 |             } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                        ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:554:41:
+    |
+554 |             } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                                         ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:625:13:
+    |
+625 |         if (tokenOut == ft) {
+    |             ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/TermMaxOrder.sol:706:13:
+    |
+706 |         if (tokenIn == xt) {
+    |             ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:342:33:
+    |
+342 |         IERC20 remainingToken = tokenOut == debtToken ? IERC20(collateralAddr) : debtToken;
+    |                                 ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+  --> contracts/v1/router/swapAdapters/PendleSwapV3Adapter.sol:38:13:
+   |
+38 |         if (tokenOut == PT) {
+   |             ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+  --> contracts/v1/test/MockFlashLoanReceiver.sol:28:16:
+   |
+28 |         assert(asset == underlying);
+   |                ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:232:13:
+    |
+232 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:238:13:
+    |
+238 |         if (tokenIn == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:242:13:
+    |
+242 |         if (tokenOut == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:272:13:
+    |
+272 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:278:13:
+    |
+278 |         if (tokenIn == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v1/test/MockOrder.sol:282:13:
+    |
+282 |         if (tokenOut == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+  --> contracts/v1/vault/OrderManager.sol:97:13:
+   |
+97 |         if (asset != debtToken) revert InconsistentAsset();
+   |             ^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:247:13:
+    |
+247 |         if (pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:505:13:
+    |
+505 |         if (asset == _debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:539:17:
+    |
+539 |             if (asset == _debtToken) {
+    |                 ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:612:13:
+    |
+612 |         if (_pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:675:13:
+    |
+675 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:685:17:
+    |
+685 |             if (tokenIn == _ft && tokenOut == _debtToken) {
+    |                 ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:685:35:
+    |
+685 |             if (tokenIn == _ft && tokenOut == _debtToken) {
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:688:24:
+    |
+688 |             } else if (tokenIn == _xt && tokenOut == _debtToken) {
+    |                        ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:688:42:
+    |
+688 |             } else if (tokenIn == _xt && tokenOut == _debtToken) {
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:691:24:
+    |
+691 |             } else if (tokenIn == _debtToken && tokenOut == _ft) {
+    |                        ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:691:49:
+    |
+691 |             } else if (tokenIn == _debtToken && tokenOut == _ft) {
+    |                                                 ^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:694:24:
+    |
+694 |             } else if (tokenIn == _debtToken && tokenOut == _xt) {
+    |                        ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:694:49:
+    |
+694 |             } else if (tokenIn == _debtToken && tokenOut == _xt) {
+    |                                                 ^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:703:17:
+    |
+703 |             if (orderConfig_.swapTrigger != ISwapCallback(address(0))) {
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:743:13:
+    |
+743 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:753:17:
+    |
+753 |             if (tokenIn == _debtToken && tokenOut == _ft) {
+    |                 ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:753:42:
+    |
+753 |             if (tokenIn == _debtToken && tokenOut == _ft) {
+    |                                          ^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:756:24:
+    |
+756 |             } else if (tokenIn == _debtToken && tokenOut == _xt) {
+    |                        ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:756:49:
+    |
+756 |             } else if (tokenIn == _debtToken && tokenOut == _xt) {
+    |                                                 ^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:759:24:
+    |
+759 |             } else if (tokenIn == _ft && tokenOut == _debtToken) {
+    |                        ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:759:42:
+    |
+759 |             } else if (tokenIn == _ft && tokenOut == _debtToken) {
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:762:24:
+    |
+762 |             } else if (tokenIn == _xt && tokenOut == _debtToken) {
+    |                        ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:762:42:
+    |
+762 |             } else if (tokenIn == _xt && tokenOut == _debtToken) {
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:769:17:
+    |
+769 |             if (orderConfig_.swapTrigger != ISwapCallback(address(0))) {
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:818:17:
+    |
+818 |             if (pool_ == IERC4626(address(0))) {
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/TermMaxOrderV2.sol:825:13:
+    |
+825 |         if (tokenOut == _debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/oracle/OracleAggregatorV2.sol:122:36:
+    |
+122 |         if (asset == address(0) || oracle.aggregator == AggregatorV3Interface(address(0))) {
+    |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/oracle/OracleAggregatorV2.sol:128:13:
+    |
+128 |         if (oldOracle.aggregator == oracle.aggregator && oldOracle.backupAggregator == oracle.backupAggregator) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/oracle/OracleAggregatorV2.sol:128:58:
+    |
+128 |         if (oldOracle.aggregator == oracle.aggregator && oldOracle.backupAggregator == oracle.backupAggregator) {
+    |                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/oracle/OracleAggregatorV2.sol:202:13:
+    |
+202 |         if (oracle.aggregator == AggregatorV3Interface(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/router/MakerHelper.sol:136:17:
+    |
+136 |             if (initialParams.pool != IERC4626(address(0))) {
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+  --> contracts/v2/router/swapAdapters/PendleSwapV3AdapterV2.sol:41:13:
+   |
+41 |         if (tokenOut == PT) {
+   |             ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:234:13:
+    |
+234 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:239:13:
+    |
+239 |         if (tokenIn == debtToken && tokenOut == ft) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:239:37:
+    |
+239 |         if (tokenIn == debtToken && tokenOut == ft) {
+    |                                     ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:242:20:
+    |
+242 |         } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                    ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:242:44:
+    |
+242 |         } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                                            ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:245:20:
+    |
+245 |         } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                    ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:245:37:
+    |
+245 |         } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                                     ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:248:20:
+    |
+248 |         } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                    ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:248:37:
+    |
+248 |         } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                                     ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:260:13:
+    |
+260 |         if (tokenIn == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:264:13:
+    |
+264 |         if (tokenOut == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:283:13:
+    |
+283 |         if (tokenIn == tokenOut) revert CantSwapSameToken();
+    |             ^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:288:13:
+    |
+288 |         if (tokenIn == debtToken && tokenOut == ft) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:288:37:
+    |
+288 |         if (tokenIn == debtToken && tokenOut == ft) {
+    |                                     ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:291:20:
+    |
+291 |         } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                    ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:291:44:
+    |
+291 |         } else if (tokenIn == debtToken && tokenOut == xt) {
+    |                                            ^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:294:20:
+    |
+294 |         } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                    ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:294:37:
+    |
+294 |         } else if (tokenIn == ft && tokenOut == debtToken) {
+    |                                     ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:297:20:
+    |
+297 |         } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                    ^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:297:37:
+    |
+297 |         } else if (tokenIn == xt && tokenOut == debtToken) {
+    |                                     ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:309:13:
+    |
+309 |         if (tokenIn == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:313:13:
+    |
+313 |         if (tokenOut == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:325:13:
+    |
+325 |         if (token == debtToken) {
+    |             ^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/test/MockOrderV2.sol:426:13:
+    |
+426 |         if (_pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/vault/OrderManagerV2.sol:165:13:
+    |
+165 |         if (pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/vault/OrderManagerV2.sol:175:13:
+    |
+175 |         if (pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/vault/OrderManagerV2.sol:332:13:
+    |
+332 |         if (pool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (9170): Comparison of variables of contract type is deprecated and scheduled for removal. Use an explicit cast to address type and compare the addresses instead.
+   --> contracts/v2/vault/TermMaxVaultV2.sol:545:13:
+    |
+545 |         if (oldPool != IERC4626(address(0))) {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5740): Unreachable code.
+  --> dependencies/@openzeppelin-contracts-upgradeable-5.2.0/utils/ReentrancyGuardUpgradeable.sol:79:9:
+   |
+79 |         _nonReentrantAfter();
+   |         ^^^^^^^^^^^^^^^^^^^^
+
+Warning (5740): Unreachable code.
+   --> dependencies/@openzeppelin-contracts-upgradeable-5.2.0/proxy/utils/Initializable.sol:128:9:
+    |
+128 |         if (isTopLevelCall) {
+    |         ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2072): Unused local variable.
+   --> contracts/v1/router/TermMaxRouter.sol:424:23:
+    |
+424 |         (IERC20 ft,,, address collateralAddr, IERC20 debtToken) = market.tokens();
+    |                       ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> contracts/v1/router/TermMaxRouter_Repay_Gt.sol:459:23:
+    |
+459 |         (IERC20 ft,,, address collateralAddr, IERC20 debtToken) = market.tokens();
+    |                       ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:471:9:
+    |
+471 |         address recipient,
+    |         ^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:473:9:
+    |
+473 |         uint256 gtId,
+    |         ^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:474:9:
+    |
+474 |         ITermMaxOrder[] memory orders,
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:475:9:
+    |
+475 |         uint128[] memory amtsToBuyFt,
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:476:9:
+    |
+476 |         bool byDebtToken,
+    |         ^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:477:9:
+    |
+477 |         SwapUnit[] memory units,
+    |         ^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:478:9:
+    |
+478 |         uint256 deadline
+    |         ^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:479:85:
+    |
+479 |     ) external nonReentrant whenNotPaused onlyWhitelisted(address(market)) returns (uint256 netTokenOut) {
+    |                                                                                     ^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> contracts/v1/router/TermMaxRouter_V1_1_2.sol:550:23:
+    |
+550 |         (IERC20 ft,,, address collateralAddr, IERC20 debtToken) = market.tokens();
+    |                       ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/TermMaxOrderV2.sol:313:26:
+    |
+313 |     function updateOrder(OrderConfig memory newOrderConfig, int256 ftChangeAmt, int256 xtChangeAmt)
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/TermMaxOrderV2.sol:313:61:
+    |
+313 |     function updateOrder(OrderConfig memory newOrderConfig, int256 ftChangeAmt, int256 xtChangeAmt)
+    |                                                             ^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/TermMaxOrderV2.sol:313:81:
+    |
+313 |     function updateOrder(OrderConfig memory newOrderConfig, int256 ftChangeAmt, int256 xtChangeAmt)
+    |                                                                                 ^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/TermMaxOrderV2.sol:456:30:
+    |
+456 |     function updateFeeConfig(FeeConfig memory newFeeConfig) external virtual override onlyMarket {
+    |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/access/AccessManagerV2.sol:144:27:
+    |
+144 |     function renounceRole(bytes32 role, address callerConfirmation) public override {
+    |                           ^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> contracts/v2/access/AccessManagerV2.sol:144:41:
+    |
+144 |     function renounceRole(bytes32 role, address callerConfirmation) public override {
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:27:27:
+   |
+27 |     function getRoundData(uint80 _roundId)
+   |                           ^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:31:18:
+   |
+31 |         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)
+   |                  ^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:43:18:
+   |
+43 |         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)
+   |                  ^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/oracle/priceFeeds/TermMaxWeETHPriceCapAdapter.sol:23:18:
+   |
+23 |         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)
+   |                  ^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/oracle/priceFeeds/TermMaxWeETHPriceCapAdapter.sol:23:87:
+   |
+23 |         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)
+   |                                                                                       ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/test/MockAave.sol:65:21:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |                     ^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/test/MockAave.sol:65:36:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |                                    ^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/test/MockAave.sol:65:52:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |                                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/test/MockAave.sol:65:78:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |                                                                              ^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/v2/test/MockAave.sol:65:99:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |                                                                                                   ^^^^^^^^^^^^^^^^^^
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> contracts/mocks/MockVToken.sol:206:5:
+    |
+206 |     function accrueInterest() external override returns (uint256) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PendleHelper.sol:19:5:
+   |
+19 |     function createTokenInputStruct(address tokenIn, uint256 netTokenIn)
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PendleHelper.sol:31:5:
+   |
+31 |     function createTokenOutputStruct(address tokenOut, uint256 minTokenOut)
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PriceFeedConverter.sol:24:5:
+   |
+24 |     function decimals() public view returns (uint8) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PriceFeedConverter.sol:38:5:
+   |
+38 |     function getRoundData(uint80 /* _roundId */ )
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PriceFeedWithERC4626.sol:27:5:
+   |
+27 |     function decimals() public view returns (uint8) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v1/extensions/PriceFeedWithERC4626.sol:39:5:
+   |
+39 |     function getRoundData(uint80 /* _roundId */ )
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> contracts/v2/access/AccessManagerV2.sol:144:5:
+    |
+144 |     function renounceRole(bytes32 role, address callerConfirmation) public override {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol:32:5:
+   |
+32 |     function decimals() public view returns (uint8) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol:45:5:
+   |
+45 |     function getRoundData(uint80 /* _roundId */ )
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol:30:5:
+   |
+30 |     function decimals() public view returns (uint8) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol:43:5:
+   |
+43 |     function getRoundData(uint80 /* _roundId */ )
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:15:5:
+   |
+15 |     function decimals() external view override returns (uint8) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:19:5:
+   |
+19 |     function description() external view override returns (string memory) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:23:5:
+   |
+23 |     function version() external view override returns (uint256) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol:51:5:
+   |
+51 |     function asset() external view override returns (address) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/oracle/adapters/xaue/TermMaxXauePricefeedAdapter.sol:25:5:
+   |
+25 |     function description() external view override returns (string memory) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/v2/test/MockAave.sol:65:5:
+   |
+65 |     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+No tests found in project! Forge looks for functions that start with `test`
