@@ -1,0 +1,11 @@
+  real bad debt raw: 10182136
+  delivered collateral raw: 0
+  delivered collateral value in asset raw: 0
+  realized net loss raw: 10182136
+  existing LP shares redeemed: 2500000000000000000000000
+  ordinary redeem payout raw: 2500188576954679599849599
+  fair economic payout raw: 2500188576954679594758531
+  loss shifted to remaining LPs raw: 5091068
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 36.35s (36.35s CPU time)
+Ran 1 test suite in 36.37s (36.35s CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
+POSITIVE_RUNTIME_PASS_RPC=https://eth.drpc.org
