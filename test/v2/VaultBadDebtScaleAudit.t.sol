@@ -12,6 +12,12 @@ import {VaultTestV2} from "./VaultV2.t.sol";
 ///      The oracle update models an exogenous collateral-price move; it is not an attacker step.
 contract VaultBadDebtScaleAudit is VaultTestV2 {
     function testAudit_ScaledRealizedLossIsShiftedToRemainingLPs() public {
+        // VaultTestV2.setUp() creates a 10_000e18 FT/XT seed position only to fund unrelated
+        // tests. Burn that seed through the real market API so it cannot dilute this scenario's
+        // maturity redemption fraction. No storage or balances are overwritten.
+        vm.prank(deployer);
+        res.market.burn(deployer, 10_000e18);
+
         // Create real order exposure exactly through the upstream helper used by testBadDebt().
         vm.warp(currentTime + 2 days);
         buyXt(48.219178e8, 1000e8);
@@ -25,11 +31,11 @@ contract VaultBadDebtScaleAudit is VaultTestV2 {
         vault.deposit(lpDeposit, exitingLp);
         vm.stopPrank();
 
-        // Create a much larger legitimate secured FT issuance. This does not alter vault storage.
-        // At the initial ~$2,000 collateral price, 100 ETH backs 100,000 DAI of debt at ~50% LTV.
+        // Create a legitimate secured FT issuance. At the initial ~$2,000 collateral price,
+        // 1 ETH backs 1,000 DAI debt at ~50% LTV.
         address borrower = vm.randomAddress();
         vm.startPrank(borrower);
-        LoanUtils.fastMintGt(res, borrower, 100_000e8, 100e18);
+        LoanUtils.fastMintGt(res, borrower, 1000e8, 1e18);
         vm.stopPrank();
 
         // Model an external collateral-price shock before maturity. The attacker does NOT perform
@@ -108,7 +114,6 @@ contract VaultBadDebtScaleAudit is VaultTestV2 {
         emit log_named_uint("delivered collateral raw", deliveredCollateral);
         emit log_named_uint("delivered collateral value in debt raw", deliveredValueInDebt);
         emit log_named_uint("realized net loss raw", realizedLoss);
-        emit log_named_uint("vault nominal assets after settlement raw", vault.totalAssets() + assetsOut);
         emit log_named_uint("exiting LP shares", lpShares);
         emit log_named_uint("stale redeem payout raw", stalePayout);
         emit log_named_uint("fair loss-adjusted payout raw", fairPayout);
