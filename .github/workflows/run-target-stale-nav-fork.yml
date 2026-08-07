@@ -1,0 +1,62 @@
+name: TermMax target stale-NAV mainnet fork proof
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/run-target-stale-nav-fork.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  prove:
+    name: Replay real bad-debt settlement and LP exit
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: audit/termmax-production-evidence
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Solidity dependencies
+        run: forge soldeer install
+
+      - name: Format harness working copy
+        run: forge fmt test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+
+      - name: Show production fixture
+        run: |
+          cat production-evidence/focused_target_zero_delivery_fixture.json
+          cat production-evidence/focused_target_zero_delivery_fixture.env
+
+      - name: Run exact production mainnet-fork PoC
+        env:
+          MAINNET_RPC_URL: https://eth.drpc.org
+        run: |
+          set -euo pipefail
+          set -a
+          source production-evidence/focused_target_zero_delivery_fixture.env
+          set +a
+          forge test \
+            --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol \
+            --match-test testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs \
+            -vvvv | tee production-evidence/target_stale_nav_fork_runtime.log
+
+      - name: Upload fork proof log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-stale-nav-fork-runtime
+          path: production-evidence/target_stale_nav_fork_runtime.log
+          if-no-files-found: warn
