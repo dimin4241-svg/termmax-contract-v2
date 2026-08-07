@@ -1,0 +1,78 @@
+name: TermMax production stale-NAV positive runtime
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/production-stale-nav-positive-only.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_PROFILE: ci
+  TEST_PATH: test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol
+  TEST_NAME: testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs
+
+jobs:
+  positive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Solidity dependencies
+        working-directory: repo
+        run: forge soldeer install
+
+      - name: Execute authentic mainnet settlement and ordinary LP exit
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          RPC='https://rpc.mevblocker.io'
+          MAINNET_RPC_URL="$RPC" \
+          TERM_MAX_SETTLEMENT_TX='0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56' \
+          TERM_MAX_PRE_SETTLEMENT_BLOCK='24187488' \
+          TERM_MAX_VAULT='0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e' \
+          TERM_MAX_ORDER='0xd260d3f76a16cf8bf7a691a9af629407d0091980' \
+          TERM_MAX_SETTLEMENT_CALLER='0x6788c8ad65E85CCa7224a0B46D061EF7D81F9Da5' \
+          TERM_MAX_SHARE_SOURCE='0x8f36bbee57acb4857cb97898020b529969fdf221' \
+          TERM_MAX_ATTACKER_SHARES='2500000000000000000000000' \
+          TERM_MAX_EXPECTED_BAD_DEBT_RAW='10182136' \
+          TERM_MAX_EXPECTED_DELIVERY_RAW='0' \
+          forge test --match-path "$TEST_PATH" --match-test "$TEST_NAME" -vvv 2>&1 \
+            | tee production-evidence/production_stale_nav_positive_runtime.log
+          grep -E 'real bad debt raw|delivered collateral raw|delivered collateral value in asset raw|realized net loss raw|existing LP shares redeemed|ordinary redeem payout raw|fair economic payout raw|loss shifted to remaining LPs raw|Suite result|passed' \
+            production-evidence/production_stale_nav_positive_runtime.log \
+            | tee production-evidence/production_stale_nav_positive_runtime_excerpt.log
+
+      - name: Commit runtime evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/production_stale_nav_positive_runtime.log production-evidence/production_stale_nav_positive_runtime_excerpt.log
+          git commit -m "Record positive production stale-NAV runtime" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: production-stale-nav-positive-runtime
+          path: |
+            repo/production-evidence/production_stale_nav_positive_runtime.log
+            repo/production-evidence/production_stale_nav_positive_runtime_excerpt.log
