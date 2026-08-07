@@ -1,0 +1,1573 @@
+{
+  "events": [
+    {
+      "bad_debt_raw": 10182136,
+      "block": 24187489,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24187488', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+      "preblock_holder_count": 1,
+      "preblock_holders_top10": [
+        {
+          "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+          "share_fraction": 1.0,
+          "shares_raw": 5000000000000000000000000
+        }
+      ],
+      "preblock_total_shares_reconstructed": 5000000000000000000000000,
+      "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 939875,
+      "block": 24826646,
+      "delivery_raw": 9267,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24826645', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x385429223ddc9921f2491c4a16b79c0b0717c431",
+      "preblock_holder_count": 5,
+      "preblock_holders_top10": [
+        {
+          "address": "0xbccbc9fc2d1d9e9abd0ca132be816bd4f6051b86",
+          "share_fraction": 0.77392038498502,
+          "shares_raw": 385453126971
+        },
+        {
+          "address": "0x40e0e194bcf8cb5f876b92827503eee84727a3a3",
+          "share_fraction": 0.1393510783410205,
+          "shares_raw": 69404178951
+        },
+        {
+          "address": "0x20b20eae302c821b53018037b0f3c1ec90c0af5b",
+          "share_fraction": 0.08650334242240074,
+          "shares_raw": 43083222095
+        },
+        {
+          "address": "0xaf96b0a1f6c294cffad0a6be13735f7601d12c82",
+          "share_fraction": 0.00021919644835389444,
+          "shares_raw": 109171380
+        },
+        {
+          "address": "0x786e561b7f4b38df11687774e18304466915763d",
+          "share_fraction": 5.997803204874915e-06,
+          "shares_raw": 2987222
+        }
+      ],
+      "preblock_total_shares_reconstructed": 498052686619,
+      "tx_hash": "0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57",
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "bad_debt_raw": 2102,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24187488', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xbb7a8cd6abb11116c7571646b5f1fb8fb97e6406",
+      "preblock_holder_count": 1,
+      "preblock_holders_top10": [
+        {
+          "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+          "share_fraction": 1.0,
+          "shares_raw": 2000226289068064512028987
+        }
+      ],
+      "preblock_total_shares_reconstructed": 2000226289068064512028987,
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 950,
+      "block": 24417707,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24187488', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xaa6611554d0664072d4a3c0ac7925acb742d9ac6",
+      "preblock_holder_count": 1,
+      "preblock_holders_top10": [
+        {
+          "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+          "share_fraction": 1.0,
+          "shares_raw": 2000226289068064512028987
+        }
+      ],
+      "preblock_total_shares_reconstructed": 2000226289068064512028987,
+      "tx_hash": "0xd925881dfb1684a310a717c9cdcacfe76940f27c8c897c9653baf2ca584b52fe",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 20,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24187488', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xbecc7f6a52866cbab78c1b4a05ff245b141cd4d8",
+      "preblock_holder_count": 1,
+      "preblock_holders_top10": [
+        {
+          "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+          "share_fraction": 1.0,
+          "shares_raw": 2000226289068064512028987
+        }
+      ],
+      "preblock_total_shares_reconstructed": 2000226289068064512028987,
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 3,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24187488', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x8ce6afb32a42f2feb0bb54eae1c79c67ffc30215",
+      "preblock_holder_count": 1,
+      "preblock_holders_top10": [
+        {
+          "address": "0x8f36bbee57acb4857cb97898020b529969fdf221",
+          "share_fraction": 1.0,
+          "shares_raw": 2000226289068064512028987
+        }
+      ],
+      "preblock_total_shares_reconstructed": 2000226289068064512028987,
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 23895230,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "preblock_holder_count": 23,
+      "preblock_holders_top10": [
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.31972636369105994,
+          "shares_raw": 619512298481
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.2632842287579264,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.2602787947062236,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.11751737010029552,
+          "shares_raw": 227705514246
+        },
+        {
+          "address": "0xa4334d4c2714f4a89c304f6d2e58118ecc26c6b1",
+          "share_fraction": 0.01487576937406429,
+          "shares_raw": 28823779091
+        },
+        {
+          "address": "0x16e5f88685012df718d602b4f9e6ba92d3fe04cd",
+          "share_fraction": 0.010490379997271858,
+          "shares_raw": 20326504668
+        },
+        {
+          "address": "0x889f4f8113b87c5829857e4b51f403bcaed2c9b0",
+          "share_fraction": 0.005160256839698665,
+          "shares_raw": 9998683057
+        },
+        {
+          "address": "0x90153be2ac32633fc9a7cc53cdf01d348e875555",
+          "share_fraction": 0.0036327697352288293,
+          "shares_raw": 7038973898
+        },
+        {
+          "address": "0xc73f10bf467318b0e85944cea9d3abb5a2595eb6",
+          "share_fraction": 0.0018146234812725388,
+          "shares_raw": 3516074029
+        },
+        {
+          "address": "0xad9d019f0e5adc7228eb51f0dac9e7ac3fb8add4",
+          "share_fraction": 0.0007740485487257358,
+          "shares_raw": 1499821879
+        }
+      ],
+      "preblock_total_shares_reconstructed": 1937632828676,
+      "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24116677,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
+      "preblock_holder_count": 16,
+      "preblock_holders_top10": [
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.32248622797456733,
+          "shares_raw": 516650174206
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.31842775948753915,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.31479285269541535,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0xa4334d4c2714f4a89c304f6d2e58118ecc26c6b1",
+          "share_fraction": 0.03403990128566396,
+          "shares_raw": 54534796849
+        },
+        {
+          "address": "0x889f4f8113b87c5829857e4b51f403bcaed2c9b0",
+          "share_fraction": 0.006241046156077536,
+          "shares_raw": 9998683057
+        },
+        {
+          "address": "0xb72e9008c61faeacd25d179d251609dacb0f0f7e",
+          "share_fraction": 0.0013625085757516212,
+          "shares_raw": 2182853815
+        },
+        {
+          "address": "0xad9d019f0e5adc7228eb51f0dac9e7ac3fb8add4",
+          "share_fraction": 0.0009361690454005096,
+          "shares_raw": 1499821879
+        },
+        {
+          "address": "0xfb773d8289925b66570df0d337ac891d9833b77c",
+          "share_fraction": 0.0006242444817045043,
+          "shares_raw": 1000092383
+        },
+        {
+          "address": "0x506549a8b2616dd2e08cbd78ad95c8a133bcbde3",
+          "share_fraction": 0.0006207994685732399,
+          "shares_raw": 994573181
+        },
+        {
+          "address": "0xef7bbb109322f392a0ae3078ee68b1f90f2ea52d",
+          "share_fraction": 0.00018717833085641716,
+          "shares_raw": 299875495
+        }
+      ],
+      "preblock_total_shares_reconstructed": 1602084459392,
+      "tx_hash": "0x21f18e637c4c900904781e9798303445a091929a23664c58c0253f3cf9aeba38",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24970816,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x17d59ba4a19c40e0aeb61412425b058d72dd45675559fc90060fd30217c6c6ba",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24976972,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x609cd4a60a96925413a3dcd02a11a9816acce3e4a9c5a1c7c68d49d1e58b9802",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24976973,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x8c287d172c92518cef8de30f297c2c31e598db2adc1bc54abab514aeeb94d7a1",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25140848,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x88b7d8bd9afab956c38f403f2b71fafa6cdaf0e6d657d9ef1bab7631f51de6a1",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25140851,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xfae5ed6c538df5c125ec574ceb1a5f03dc8f6e70716a84a538857e6c3625510a",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25349832,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x18f426708043782773470636a12ed422aa67f923",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xbcd69f894d0a372b517187cb99483ae67578d91e5f1b578df04da3fec72861ce",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393279,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x0028cb2cc43ac8dd6267722bbbf5c35f365278cd2acfe39cc0c53020eac93570",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393280,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x2a0e7df07d8da109a6a06a09f573a92cfcfc3f0f714de56ef07c702a47be9d4a",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393282,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xf4bfe897c3cdfcc98e4a371eee8482d721d3b408bc0763b017734b61666a992d",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393283,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x4c1cc78caf4990a95d646b53da5dacf223262610cb0a4d983156cb4d3fa6acf2",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393284,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x04be89db2d47ff68ff82f09c31e55272927f0567f3a106f45df7bde8d26a9ad0",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393285,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xfdafcf127eca15a3282781f135592b4299a35111e7424a997f31e6bed9699c38",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393286,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xa332d8d1c55dfc4656ee3ddd57e286fcf91c7b902eda4c5ef5e0406c9eabf918",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393288,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xa6c2a13c9058a20d006c0e98f61a4f6b44540e1c4f7a6884f4ee2c6ea56cbcf3",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393297,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x69a6a25c92f075721a0f6c9a8de8d3510962895e017720a7f514e023e39df913",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25393305,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x531909011bbc6424a2612b4b3aaf4dfa483e9fae840fb1cb4999932a35581d70",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682605,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x0ee0813e925f82ac2d58f55fe606f49f7185def6309caf133c3604b77d6999ac",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682620,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x5fea8ceb73318c6fe86cb37c940ef75bcfdc1880ab75dd905fec2a7beca67ad5",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682624,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0x8d1a33357ccba0ce9cf49701c54cb1337f7a442f94c3c070fd355ed1c4b4c3b3",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 25682658,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '23895229', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "preblock_holder_count": 723,
+      "preblock_holders_top10": [
+        {
+          "address": "0xb355f88fb60e3fca64dd94e0932144069f2671a9",
+          "share_fraction": 0.32820738542127875,
+          "shares_raw": 2977331245978
+        },
+        {
+          "address": "0xa75e961e9c81f44cc07ae23c99e27711aa51a072",
+          "share_fraction": 0.21898567469843802,
+          "shares_raw": 1986527179650
+        },
+        {
+          "address": "0xfa558c6cadda84505336de917079edcc767a1350",
+          "share_fraction": 0.07405317628754372,
+          "shares_raw": 671772925956
+        },
+        {
+          "address": "0xa58627a29bb59743ce1d781b1072c59bb1dda86d",
+          "share_fraction": 0.05623640151228389,
+          "shares_raw": 510148164914
+        },
+        {
+          "address": "0x8e234a6fe4ee15ea4b15088b64af80db26c8ae69",
+          "share_fraction": 0.05559445346682901,
+          "shares_raw": 504324737231
+        },
+        {
+          "address": "0x405dbf6606336ab3d6574f78eddfa68038e9f9a1",
+          "share_fraction": 0.05474635648347368,
+          "shares_raw": 496631230746
+        },
+        {
+          "address": "0x0e1230c1dfd58b2382672695bc50450f4ff3a7a6",
+          "share_fraction": 0.04301860960597486,
+          "shares_raw": 390243048230
+        },
+        {
+          "address": "0xd0815894515178c5a44b7bd2e88bef3e4a26a1da",
+          "share_fraction": 0.03832244856679446,
+          "shares_raw": 347641852708
+        },
+        {
+          "address": "0x53cfae9af39fa1eed00d4402ed6ceabb112a3724",
+          "share_fraction": 0.02770895951718171,
+          "shares_raw": 251361653115
+        },
+        {
+          "address": "0xaebb8fdbd5e52f99630cebb80d0a1c19892eb4c2",
+          "share_fraction": 0.027357382895685973,
+          "shares_raw": 248172327990
+        }
+      ],
+      "preblock_total_shares_reconstructed": 9071493751295,
+      "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "bad_debt_raw": 1,
+      "block": 24389192,
+      "delivery_raw": 0,
+      "error": "CalledProcessError(2, ['cast', 'call', 'Warning:', 'decimals()(uint8)', '--block', '24389191', '--rpc-url', 'https://eth.drpc.org'])",
+      "order": "0xe6690172eea7833a46964b075f98d0f438810cbf",
+      "preblock_holder_count": 8,
+      "preblock_holders_top10": [
+        {
+          "address": "0xecd8502dad148ed042d5c3e06c543649084f3c46",
+          "share_fraction": 0.880481220168619,
+          "shares_raw": 10175017456
+        },
+        {
+          "address": "0x0579704631f4042da4ed7eb5d5b808bcb15143d1",
+          "share_fraction": 0.08845497792318448,
+          "shares_raw": 1022203454
+        },
+        {
+          "address": "0x1cc221d84a0c1621ad6b462a84d1bd69c5b94a58",
+          "share_fraction": 0.022988824794639803,
+          "shares_raw": 265663467
+        },
+        {
+          "address": "0x175185eb20e93df8359da6eabfa569c5c8efd93a",
+          "share_fraction": 0.002619792827302166,
+          "shares_raw": 30274851
+        },
+        {
+          "address": "0x20c492e9b55cd11141c9c8b54a3d7c261e6eba99",
+          "share_fraction": 0.0019872470313335292,
+          "shares_raw": 22965025
+        },
+        {
+          "address": "0xa1406199484382d1913b6fc3cbfe70440c533b68",
+          "share_fraction": 0.001729685299190533,
+          "shares_raw": 19988590
+        },
+        {
+          "address": "0x57f004d8f85fec6ff25c5b1903d149586f04af59",
+          "share_fraction": 0.0017296749151546453,
+          "shares_raw": 19988470
+        },
+        {
+          "address": "0xba42d1d5e31c13427c0f554574d35fa7016fec20",
+          "share_fraction": 8.577040575906917e-06,
+          "shares_raw": 99118
+        }
+      ],
+      "preblock_total_shares_reconstructed": 11556200431,
+      "tx_hash": "0x7a154aeaffa94d5545f774d76d1f18be6a657f64f401b4b1fad9c49c9bbee62e",
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    }
+  ],
+  "method": "Historical production events only. Holder balances reconstructed from vault ERC20 Transfer logs at block-1. Zero-delivery candidates have realized loss exactly equal to badDebt; estimated loss shift is only a ranking heuristic until exact fork runtime.",
+  "zero_delivery_multi_holder_candidates": []
+}
