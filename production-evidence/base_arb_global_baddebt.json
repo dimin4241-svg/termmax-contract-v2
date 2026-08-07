@@ -1,0 +1,17 @@
+{
+  "arb-mainnet": {
+    "explorer": "https://arbitrum.blockscout.com",
+    "positive_event_count": 0,
+    "positive_events_ranked": [],
+    "redeem_event_count": 0,
+    "scan_start_block": 385285536,
+    "vault_count": 1,
+    "vault_start_blocks": {
+      "0xb6692acb982c2da0775c947cb329b04ebfb4e0ac": 385285536
+    }
+  },
+  "base-mainnet": {
+    "error": "no vault env addresses",
+    "vault_count": 0
+  }
+}
