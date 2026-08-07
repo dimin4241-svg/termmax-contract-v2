@@ -1,0 +1,76 @@
+name: TermMax Ethereum positive bad-debt economic rank
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/eth-positive-event-economic-rank.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Normalize every positive event by vault asset metadata and holder count
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, urllib.request
+          from pathlib import Path
+          data=json.load(open('production-evidence/global_redeem_baddebt_scan.json'))
+          events=data['positive_events_ranked']; rpc='https://eth.drpc.org'
+          def rpccall(to,calldata,block):
+              body=json.dumps({'jsonrpc':'2.0','id':1,'method':'eth_call','params':[{'to':to,'data':calldata},hex(block)]}).encode()
+              req=urllib.request.Request(rpc,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+              with urllib.request.urlopen(req,timeout=45) as r:d=json.loads(r.read())
+              if d.get('error'): raise RuntimeError(d['error'])
+              return d['result'][2:]
+          def u(raw):return int(raw[:64],16)
+          def decstr(raw):
+              try:
+                  b=bytes.fromhex(raw); off=int.from_bytes(b[:32],'big'); ln=int.from_bytes(b[off:off+32],'big'); return b[off+32:off+32+ln].decode(errors='replace')
+              except:return None
+          cache={}; rows=[]
+          for e in events:
+              v=e['vault']; b=e['block']-1; key=(v,b)
+              try:
+                  asset='0x'+rpccall(v,'0x38d52e0f',b)[-40:]
+                  decimals=u(rpccall(asset,'0x313ce567',b))
+                  symbol=decstr(rpccall(asset,'0x95d89b41',b))
+                  total_supply=u(rpccall(v,'0x18160ddd',b))
+                  normalized=e['bad_debt_raw']/(10**decimals)
+                  row={**e,'asset':asset,'asset_decimals':decimals,'asset_symbol':symbol,'bad_debt_asset_units':normalized,'preblock_total_supply_raw':total_supply}
+              except Exception as ex:
+                  row={**e,'error':repr(ex)}
+              rows.append(row)
+          rows.sort(key=lambda x:x.get('bad_debt_asset_units',-1),reverse=True)
+          out={'events_by_asset_units_desc':rows}
+          Path('production-evidence/eth_positive_event_economic_rank.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          for r in rows[:50]:print(json.dumps(r,sort_keys=True))
+          PY
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/eth_positive_event_economic_rank.json
+          git commit -m "Normalize Ethereum bad-debt events by asset decimals" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eth-positive-event-economic-rank
+          path: repo/production-evidence/eth_positive_event_economic_rank.json
