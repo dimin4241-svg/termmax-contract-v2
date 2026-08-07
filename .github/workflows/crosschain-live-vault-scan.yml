@@ -1,0 +1,78 @@
+name: Cross-chain live vault scan
+
+on:
+  push:
+    branches:
+      - security/crosschain-live-vault-scan
+    paths:
+      - security/crosschain_live_vault_scan.py
+      - .github/workflows/crosschain-live-vault-scan.yml
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: scan-${{ matrix.network }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        network: [bera, hyperevm, b2, pharos]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install scanner dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'web3>=7,<8'
+          python -m pip freeze > scan-${{ matrix.network }}-python-packages.txt
+
+      - name: Run read-only production-state scan
+        run: |
+          mkdir -p scan-results
+          python security/crosschain_live_vault_scan.py \
+            --network '${{ matrix.network }}' \
+            --output 'scan-results/${{ matrix.network }}.json' \
+            | tee 'scan-results/${{ matrix.network }}.log'
+
+      - name: Print compact result
+        if: always()
+        run: |
+          if [ -f 'scan-results/${{ matrix.network }}.json' ]; then
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('scan-results/${{ matrix.network }}.json')
+          x = json.loads(p.read_text())
+          print(json.dumps({
+              'network': x.get('network'),
+              'status': x.get('status'),
+              'rpc': x.get('rpc'),
+              'scan_end_block': x.get('scan_end_block'),
+              'factory_code_bytes': x.get('vault_factory_code_bytes'),
+              'vault_count': x.get('vault_count'),
+              'candidate_count': x.get('candidate_count'),
+              'best_candidate': x.get('best_candidate'),
+              'error': x.get('error'),
+              'factory_log_scan': x.get('factory_log_scan'),
+          }, indent=2))
+          PY
+          fi
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crosschain-live-vault-scan-${{ matrix.network }}
+          path: |
+            scan-results/${{ matrix.network }}.json
+            scan-results/${{ matrix.network }}.log
+            scan-${{ matrix.network }}-python-packages.txt
+          if-no-files-found: warn
+          retention-days: 14
