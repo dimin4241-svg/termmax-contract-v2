@@ -20,57 +20,43 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
-      - uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
-      - name: Classify exact delivery economically
+      - name: Classify exact delivery economically using raw archive RPC calls
         working-directory: repo
         run: |
           set -euo pipefail
           mkdir -p production-evidence
           python3 - <<'PY'
-          import json, subprocess
+          import json, urllib.request
           from pathlib import Path
-          rpc='https://eth.drpc.org'
-          block=24826645
-          wstr='0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770'
-          strbtc='0xB2723d5dF98689eCA6A4E7321121662DDB9b3017'
-          btcusd='0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c'
-          delivery=9267
-          baddebt=939875 # USDC 6 decimals
-          def call(addr,sig,*args):
-              out=subprocess.check_output(['cast','call',addr,sig,*map(str,args),'--block',str(block),'--rpc-url',rpc],text=True,stderr=subprocess.STDOUT)
-              lines=[x.strip() for x in out.splitlines() if x.strip() and not x.startswith('Warning:')]
-              return lines[-1]
-          def firstint(s): return int(s.split()[0],0)
-          wdec=firstint(call(wstr,'decimals()(uint8)'))
-          asset=call(wstr,'asset()(address)').split()[0]
-          sdec=firstint(call(strbtc,'decimals()(uint8)'))
-          converted=firstint(call(wstr,'convertToAssets(uint256)(uint256)',delivery))
-          # Chainlink BTC/USD canonical Ethereum feed; latestRoundData at pinned block gives historical onchain benchmark.
-          rd=call(btcusd,'latestRoundData()(uint80,int256,uint256,uint256,uint80)')
-          # cast prints tuple over multiple lines in some versions, so issue individual raw eth_call and ABI decode instead.
-          raw=subprocess.check_output(['cast','call',btcusd,'latestRoundData()(uint80,int256,uint256,uint256,uint80)','--block',str(block),'--rpc-url',rpc],text=True,stderr=subprocess.STDOUT)
-          vals=[]
-          for line in raw.splitlines():
-              line=line.strip()
-              if not line or line.startswith('Warning:'): continue
-              tok=line.split()[0]
-              try: vals.append(int(tok,0))
-              except: pass
-          if len(vals)<5: raise RuntimeError('could not decode Chainlink round: '+raw)
-          roundid,answer,started,updated,answered=vals[:5]
-          pdec=firstint(call(btcusd,'decimals()(uint8)'))
-          # strBTC/wBTC denomination is BTC-like with 8 decimals. Official Stroom docs describe WBTC<->strBTC converter;
-          # this calculation is deliberately a conservative BTC benchmark, not the broken TermMax collateral oracle.
-          usd_value_e6=(converted * answer * 10**6)//(10**sdec * 10**pdec)
+          rpc='https://eth.drpc.org'; block=24826645
+          wstr='0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770'; strbtc='0xB2723d5dF98689eCA6A4E7321121662DDB9b3017'
+          btcusd='0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c'; delivery=9267; baddebt=939875
+          def rpc_call(addr,data):
+              body=json.dumps({'jsonrpc':'2.0','id':1,'method':'eth_call','params':[{'to':addr,'data':data},hex(block)]}).encode()
+              req=urllib.request.Request(rpc,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+              with urllib.request.urlopen(req,timeout=60) as r: d=json.loads(r.read())
+              if d.get('error'): raise RuntimeError(d['error'])
+              return d['result'][2:]
+          def u256(raw,word=0): return int(raw[word*64:(word+1)*64],16)
+          # decimals()=0x313ce567, asset()=0x38d52e0f, convertToAssets(uint256)=0x07a2d13a,
+          # latestRoundData()=0xfeaf968c.
+          wdec=u256(rpc_call(wstr,'0x313ce567'))
+          asset='0x'+rpc_call(wstr,'0x38d52e0f')[-40:]
+          sdec=u256(rpc_call(strbtc,'0x313ce567'))
+          calldata='0x07a2d13a'+delivery.to_bytes(32,'big').hex()
+          converted=u256(rpc_call(wstr,calldata))
+          rd=rpc_call(btcusd,'0xfeaf968c')
+          vals=[u256(rd,i) for i in range(5)]
+          roundid,answer,started,updated,answered=vals
+          pdec=u256(rpc_call(btcusd,'0x313ce567'))
+          usd_value_e6=(converted*answer*10**6)//(10**sdec*10**pdec)
           out={
-            'block':block,'wstrbtc':wstr,'wstrbtc_decimals':wdec,'underlying_asset':asset,'strbtc':strbtc,
-            'strbtc_decimals':sdec,'delivery_wstrbtc_raw':delivery,'convertToAssets_strbtc_raw':converted,
+            'block':block,'wstrbtc':wstr,'wstrbtc_decimals':wdec,'underlying_asset':asset,'expected_strbtc':strbtc,
+            'underlying_matches_expected_strbtc':asset.lower()==strbtc.lower(),'strbtc_decimals':sdec,
+            'delivery_wstrbtc_raw':delivery,'convertToAssets_strbtc_raw':converted,
             'chainlink_btc_usd_feed':btcusd,'chainlink_round_id':roundid,'chainlink_btc_usd_answer_raw':answer,
             'chainlink_price_decimals':pdec,'chainlink_updated_at':updated,
-            'btc_benchmark_delivery_value_usdc_raw_floor':usd_value_e6,
-            'bad_debt_usdc_raw':baddebt,
+            'btc_benchmark_delivery_value_usdc_raw_floor':usd_value_e6,'bad_debt_usdc_raw':baddebt,
             'benchmark_surplus_over_bad_debt_usdc_raw':usd_value_e6-baddebt,
             'classification':'collateral benchmark value exceeds bad debt' if usd_value_e6>baddebt else 'possible uncovered deficit'
           }
