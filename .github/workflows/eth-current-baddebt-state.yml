@@ -1,0 +1,178 @@
+name: TermMax current Ethereum bad-debt state
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/eth-current-baddebt-state.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Install web3
+        run: python3 -m pip install --user --upgrade 'web3==7.13.0'
+
+      - name: Resolve every historical positive collateral and query current vault state
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json,time
+          from pathlib import Path
+          from web3 import Web3
+
+          endpoints=['https://eth.drpc.org','https://mainnet.gateway.tenderly.co','https://ethereum.publicnode.com']
+          w3=None; chosen=None
+          for ep in endpoints:
+            q=Web3(Web3.HTTPProvider(ep,request_kwargs={'timeout':45}))
+            try:
+              if q.is_connected(): w3=q; chosen=ep; break
+            except Exception: pass
+          if w3 is None: raise SystemExit('no Ethereum RPC available')
+          latest=w3.eth.block_number
+
+          scan=json.load(open('production-evidence/global_redeem_baddebt_scan.json'))
+          positives=scan.get('positive_events_ranked') or []
+          if not positives: raise SystemExit('global scan contains no positive events')
+
+          abi_order=[{'type':'function','name':'market','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]}]
+          abi_market=[{'type':'function','name':'tokens','stateMutability':'view','inputs':[],'outputs':[
+            {'name':'ft','type':'address'},{'name':'xt','type':'address'},{'name':'gt','type':'address'},
+            {'name':'collateral','type':'address'},{'name':'debtToken','type':'address'}]}]
+          abi_vault=[
+            {'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+            {'type':'function','name':'totalAssets','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'totalSupply','stateMutability':'view','inputs':[],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'pool','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]},
+            {'type':'function','name':'badDebtMapping','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+            {'type':'function','name':'paused','stateMutability':'view','inputs':[],'outputs':[{'type':'bool'}]},
+          ]
+          abi_token=[
+            {'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+            {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]},
+            {'type':'function','name':'balanceOf','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]},
+          ]
+          abi_pool=[{'type':'function','name':'maxWithdraw','stateMutability':'view','inputs':[{'type':'address'}],'outputs':[{'type':'uint256'}]}]
+
+          def token_meta(addr):
+            c=w3.eth.contract(address=Web3.to_checksum_address(addr),abi=abi_token)
+            out={'address':addr.lower()}
+            try: out['symbol']=c.functions.symbol().call()
+            except Exception as e: out['symbol_error']=repr(e)
+            try: out['decimals']=c.functions.decimals().call()
+            except Exception as e: out['decimals_error']=repr(e)
+            return out
+
+          # A badDebtMapping can be nonzero only for collateral that appeared in a positive settlement.
+          # Resolve collateral from each historical positive Order on current chain state.
+          vault_collaterals={}; resolution=[]
+          for i,e in enumerate(positives,1):
+            v=str(e['vault']).lower(); order=str(e.get('order') or '').lower()
+            row={'vault':v,'order':order,'historical_block':e.get('block'),'historical_bad_debt_raw':e.get('bad_debt_raw')}
+            try:
+              oc=w3.eth.contract(address=Web3.to_checksum_address(order),abi=abi_order)
+              market=oc.functions.market().call().lower(); row['market']=market
+              vals=w3.eth.contract(address=Web3.to_checksum_address(market),abi=abi_market).functions.tokens().call()
+              collateral=vals[3].lower(); debt=vals[4].lower()
+              row['collateral']=collateral; row['debt_token']=debt
+              vault_collaterals.setdefault(v,set()).add(collateral)
+            except Exception as ex:
+              row['error']=repr(ex)
+            resolution.append(row)
+            if i%10==0: print('RESOLVED',i,'/',len(positives))
+
+          # Add every vault observed in the global scan, even if it has no currently-resolvable positive collateral.
+          all_vaults=set(vault_collaterals)
+          for x in scan.get('vaults_ranked') or []:
+            if x.get('vault'): all_vaults.add(str(x['vault']).lower())
+
+          rows=[]; current_positive=[]
+          for v in sorted(all_vaults):
+            vr={'vault':v,'collaterals_checked':sorted(vault_collaterals.get(v,set())),'bad_debts':[]}
+            try:
+              code=w3.eth.get_code(Web3.to_checksum_address(v)); vr['code_bytes']=len(code)
+              if not code:
+                rows.append(vr); continue
+              c=w3.eth.contract(address=Web3.to_checksum_address(v),abi=abi_vault)
+              asset=c.functions.asset().call().lower(); am=token_meta(asset); vr['asset']=am
+              supply=c.functions.totalSupply().call(); assets=c.functions.totalAssets().call()
+              vr['total_supply_raw']=supply; vr['total_assets_raw']=assets
+              try: vr['paused']=c.functions.paused().call()
+              except Exception as ex: vr['paused_error']=repr(ex)
+              pool=c.functions.pool().call().lower(); vr['pool']=pool
+              assetc=w3.eth.contract(address=Web3.to_checksum_address(asset),abi=abi_token)
+              direct=assetc.functions.balanceOf(Web3.to_checksum_address(v)).call(); vr['direct_asset_raw']=direct
+              poolcap=0
+              if int(pool,16)!=0:
+                try: poolcap=w3.eth.contract(address=Web3.to_checksum_address(pool),abi=abi_pool).functions.maxWithdraw(Web3.to_checksum_address(v)).call()
+                except Exception as ex: vr['pool_max_withdraw_error']=repr(ex)
+              vr['pool_max_withdraw_raw']=poolcap; vr['liquid_capacity_raw']=direct+poolcap
+              dec=am.get('decimals')
+              if dec is not None:
+                vr['total_assets_asset_units']=assets/(10**dec)
+                vr['liquid_capacity_asset_units']=(direct+poolcap)/(10**dec)
+              for col in sorted(vault_collaterals.get(v,set())):
+                item={'collateral':col}
+                try:
+                  bd=c.functions.badDebtMapping(Web3.to_checksum_address(col)).call(); item['bad_debt_raw']=bd
+                  if bd==0: continue
+                  cm=token_meta(col); item['collateral_meta']=cm
+                  bal=w3.eth.contract(address=Web3.to_checksum_address(col),abi=abi_token).functions.balanceOf(Web3.to_checksum_address(v)).call()
+                  item['vault_collateral_balance_raw']=bal
+                  if dec is not None: item['bad_debt_asset_units']=bd/(10**dec)
+                  cdec=cm.get('decimals')
+                  if cdec is not None: item['vault_collateral_balance_units']=bal/(10**cdec)
+                  vr['bad_debts'].append(item)
+                  current_positive.append({
+                    'vault':v,'vault_asset':am,'total_supply_raw':supply,'total_assets_raw':assets,
+                    'liquid_capacity_raw':direct+poolcap,**item
+                  })
+                except Exception as ex:
+                  item['error']=repr(ex); vr['bad_debts'].append(item)
+            except Exception as ex:
+              vr['vault_error']=repr(ex)
+            rows.append(vr)
+
+          current_positive.sort(key=lambda x:x.get('bad_debt_asset_units',x.get('bad_debt_raw',0)),reverse=True)
+          out={
+            'chain':'ethereum-mainnet','rpc':chosen,'latest_block':latest,
+            'historical_positive_event_count':len(positives),'vault_count':len(all_vaults),
+            'order_resolution':resolution,'vaults':rows,'current_positive_bad_debt_rows':current_positive,
+          }
+          Path('production-evidence/eth_current_baddebt_state.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('LATEST_BLOCK',latest,'VAULTS',len(all_vaults),'CURRENT_POSITIVE_ROWS',len(current_positive))
+          for r in rows:
+            print('VAULT',r['vault'],'ASSET',json.dumps(r.get('asset')),'SUPPLY',r.get('total_supply_raw'),'ASSETS',r.get('total_assets_raw'),'LIQUID',r.get('liquid_capacity_raw'),'BAD_DEBTS',len(r.get('bad_debts',[])),'ERR',r.get('vault_error'))
+          for p in current_positive:
+            print('CURRENT_POSITIVE',json.dumps(p,sort_keys=True))
+          PY
+
+      - name: Commit current-state evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/eth_current_baddebt_state.json
+          git commit -m "Record current Ethereum bad-debt state" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eth-current-baddebt-state
+          path: repo/production-evidence/eth_current_baddebt_state.json
