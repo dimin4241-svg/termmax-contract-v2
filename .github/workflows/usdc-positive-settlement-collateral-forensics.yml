@@ -1,0 +1,138 @@
+name: TermMax USDC positive settlement collateral forensics
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/usdc-positive-settlement-collateral-forensics.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  VAULT: '0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48'
+  ORDER: '0x385429223ddc9921f2491c4a16b79c0b0717c431'
+  COLLATERAL: '0xA3Ca88cfb7bBe9CfBd47df053ffA2130C7E6f770'
+  SETTLEMENT_BLOCK: '24826646'
+  BAD_DEBT_RAW: '939875'
+  DELIVERY_RAW: '9267'
+
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Query token metadata, wrappers, and DealBadDebt history
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, subprocess, urllib.parse, urllib.request, time
+          from pathlib import Path
+
+          vault=os.environ['VAULT']; collateral=os.environ['COLLATERAL']; block=int(os.environ['SETTLEMENT_BLOCK'])
+          rpc='https://eth.drpc.org'; base='https://eth.blockscout.com'
+
+          def sh(args):
+              try:
+                  return {'ok':True,'out':subprocess.check_output(args,text=True,stderr=subprocess.STDOUT,timeout=50).strip()}
+              except Exception as e:
+                  out=getattr(e,'output','')
+                  return {'ok':False,'error':repr(e),'out':out.strip() if isinstance(out,str) else str(out)}
+
+          def call(sig,*args,at=None):
+              cmd=['cast','call',collateral,sig,*map(str,args),'--rpc-url',rpc]
+              if at is not None: cmd += ['--block',str(at)]
+              return sh(cmd)
+
+          probes={}
+          for sig,args in [
+              ('name()(string)',()),('symbol()(string)',()),('decimals()(uint8)',()),
+              ('asset()(address)',()),('underlying()(address)',()),('token()(address)',()),
+              ('convertToAssets(uint256)(uint256)',(10**18,)),('previewRedeem(uint256)(uint256)',(10**18,)),
+              ('exchangeRate()(uint256)',()),('exchangeRateStored()(uint256)',()),('getRate()(uint256)',()),
+              ('pricePerShare()(uint256)',()),('totalAssets()(uint256)',()),('totalSupply()(uint256)',()),
+          ]:
+              probes[sig]={'preblock':call(sig,*args,at=block-1),'latest':call(sig,*args)}
+
+          code_pre=sh(['cast','code',collateral,'--block',str(block-1),'--rpc-url',rpc])
+          code_latest=sh(['cast','code',collateral,'--rpc-url',rpc])
+
+          # Blockscout address/token metadata and verified contract information.
+          def getj(url):
+              req=urllib.request.Request(url,headers={'User-Agent':'termmax-security-validation/1.0','Accept':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=60) as r: return json.loads(r.read())
+              except Exception as e: return {'_error':repr(e),'_url':url}
+          address_info=getj(f'{base}/api/v2/addresses/{collateral}')
+          token_info=getj(f'{base}/api/v2/tokens/{collateral}')
+
+          # DealBadDebt(address,address,address,uint256,uint256,uint256)
+          topic=sh(['cast','keccak','DealBadDebt(address,address,address,uint256,uint256,uint256)'])
+          topic0=topic.get('out','')
+          q=urllib.parse.urlencode({'module':'logs','action':'getLogs','fromBlock':str(block),'toBlock':'latest','address':vault,'topic0':topic0})
+          deal_logs=getj(base+'/api?'+q) if topic0 else {'_error':'topic unavailable'}
+
+          # All collateral transfers to/from vault from settlement onward to see whether the 9267 units were later moved/sold/dealt.
+          transfer_topic='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+          q2=urllib.parse.urlencode({'module':'logs','action':'getLogs','fromBlock':str(block),'toBlock':'latest','address':collateral,'topic0':transfer_topic})
+          transfer_logs=getj(base+'/api?'+q2)
+          vault_topic='0x'+'0'*24+vault.lower().removeprefix('0x')
+          relevant=[]
+          raw=transfer_logs.get('result') if isinstance(transfer_logs,dict) else []
+          if isinstance(raw,list):
+              for x in raw:
+                  t=[str(v).lower() for v in (x.get('topics') or [])]
+                  if len(t)>=3 and (t[1]==vault_topic.lower() or t[2]==vault_topic.lower()):
+                      relevant.append(x)
+
+          out={
+            'vault':vault,'order':os.environ['ORDER'],'collateral':collateral,'settlement_block':block,
+            'bad_debt_raw':int(os.environ['BAD_DEBT_RAW']),'delivery_raw':int(os.environ['DELIVERY_RAW']),
+            'function_probes':probes,'code_preblock':code_pre,'code_latest':code_latest,
+            'blockscout_address_info':address_info,'blockscout_token_info':token_info,
+            'deal_bad_debt_topic0':topic0,'deal_bad_debt_logs':deal_logs,
+            'collateral_transfer_logs_involving_vault':relevant,
+          }
+          Path('production-evidence/usdc_positive_settlement_collateral_forensics.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('COLLATERAL',collateral)
+          print('BLOCKSCOUT_TOKEN',json.dumps(token_info,sort_keys=True)[:5000])
+          for k,v in probes.items(): print('PROBE',k,json.dumps(v,sort_keys=True)[:3000])
+          dl=deal_logs.get('result') if isinstance(deal_logs,dict) else None
+          print('DEAL_BAD_DEBT_LOG_COUNT',len(dl) if isinstance(dl,list) else 'unknown')
+          if isinstance(dl,list):
+              for x in dl: print('DEAL_LOG',json.dumps(x,sort_keys=True)[:5000])
+          print('COLLATERAL_VAULT_TRANSFER_COUNT',len(relevant))
+          for x in relevant[:30]: print('COLLATERAL_TRANSFER',json.dumps(x,sort_keys=True)[:5000])
+          PY
+
+      - name: Commit forensic evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/usdc_positive_settlement_collateral_forensics.json
+          git commit -m "Record USDC positive settlement collateral forensics" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: usdc-positive-settlement-collateral-forensics
+          path: repo/production-evidence/usdc_positive_settlement_collateral_forensics.json
