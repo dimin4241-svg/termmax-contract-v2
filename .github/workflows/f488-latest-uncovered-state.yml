@@ -1,0 +1,85 @@
+name: TermMax latest multi-holder unresolved deficit state
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/f488-latest-uncovered-state.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_DISABLE_NIGHTLY_WARNING: '1'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - name: Query all known bad-debt collaterals concurrently at latest positive event block
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import json, os, subprocess
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          from pathlib import Path
+          RPC='https://eth.drpc.org'; VAULT='0xF488ccdf04079cC03183cDB6A147d12Cf97F9317'
+          env=dict(os.environ); env['FOUNDRY_DISABLE_NIGHTLY_WARNING']='1'
+          src=json.loads(Path('production-evidence/f488_accumulated_baddebt_scan.json').read_text())
+          rows=sorted(src['events'],key=lambda r:r['block'])
+          target=rows[-1]; block=target['block']
+          collaterals=[]
+          for r in rows:
+              c=r['collateral']
+              if c.lower() not in [x.lower() for x in collaterals]: collaterals.append(c)
+          def call(addr,sig,args):
+              out=subprocess.check_output(['cast','call',addr,sig,*args,'--block',str(block),'--rpc-url',RPC],text=True,stderr=subprocess.STDOUT,timeout=45,env=env)
+              ls=[x.strip() for x in out.splitlines() if x.strip() and not x.startswith('Warning:')]
+              return int(ls[-1].split()[0])
+          def one(c): return c,call(VAULT,'badDebtMapping(address)(uint256)',[c]),call(c,'balanceOf(address)(uint256)',[VAULT])
+          active=[]
+          with ThreadPoolExecutor(max_workers=8) as ex:
+              futs=[ex.submit(one,c) for c in collaterals]
+              for f in as_completed(futs):
+                  c,m,b=f.result()
+                  if m>0 and b==0: active.append({'collateral':c,'bad_debt_raw':m,'collateral_balance_raw':b})
+          active.sort(key=lambda x:x['collateral'].lower())
+          total=sum(x['bad_debt_raw'] for x in active)
+          holder=target['top_holders'][0]; shares=int(holder['shares_raw']); supply=int(target['total_supply_post_raw'])
+          predicted=(shares*total)//supply
+          out={'vault':VAULT,'asset':src['asset'],'asset_symbol':src['asset_symbol'],'asset_decimals':src['asset_decimals'],'block':block,
+               'trigger_tx_hash':target['tx_hash'],'trigger_order':target['order'],'holder_count':target['holder_count_post'],
+               'largest_holder':holder['address'],'largest_holder_shares_raw':shares,'total_supply_raw':supply,'active_uncovered':active,
+               'total_uncovered_bad_debt_raw':total,'total_uncovered_bad_debt_asset_units':total/(10**src['asset_decimals']),
+               'predicted_cross_user_shift_raw_floor':predicted,'predicted_cross_user_shift_asset_units_floor':predicted/(10**src['asset_decimals'])}
+          Path('production-evidence/f488_latest_uncovered_state.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/f488_latest_uncovered_state.json
+          git commit -m "Record latest multi-holder unresolved deficit state" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f488-latest-uncovered-state
+          path: repo/production-evidence/f488_latest_uncovered_state.json
