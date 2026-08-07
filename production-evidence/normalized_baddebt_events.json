@@ -1,0 +1,377 @@
+{
+  "events_normalized_ranked": [
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "bad_debt_raw": 10182136,
+      "block": 24187489,
+      "delivery_raw": 0,
+      "order": "0xd260d3f76a16cf8bf7a691a9af629407d0091980",
+      "tx_hash": "0xff4eb11eccc47802c7e24b17e83cb19a75dbb24b843d5fa4869f74beabc04d56",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+      },
+      "bad_debt_raw": 939875,
+      "block": 24826646,
+      "delivery_raw": 9267,
+      "order": "0x385429223ddc9921f2491c4a16b79c0b0717c431",
+      "tx_hash": "0x0d94a01690d1c246365a439a6a049e678df8003d1d7800c8ded7f42bed697c57",
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "bad_debt_raw": 2102,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "order": "0xbb7a8cd6abb11116c7571646b5f1fb8fb97e6406",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "bad_debt_raw": 950,
+      "block": 24417707,
+      "delivery_raw": 0,
+      "order": "0xaa6611554d0664072d4a3c0ac7925acb742d9ac6",
+      "tx_hash": "0xd925881dfb1684a310a717c9cdcacfe76940f27c8c897c9653baf2ca584b52fe",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "bad_debt_raw": 20,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "order": "0xbecc7f6a52866cbab78c1b4a05ff245b141cd4d8",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+        "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+      },
+      "bad_debt_raw": 3,
+      "block": 24714396,
+      "delivery_raw": 0,
+      "order": "0x8ce6afb32a42f2feb0bb54eae1c79c67ffc30215",
+      "tx_hash": "0xb4b9f6f7c776b6c88db634e4fc727c60a070037b76b0a58473aa8708889b7320",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 23895230,
+      "delivery_raw": 0,
+      "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
+      "tx_hash": "0xe854e09ec94cfb733431337ea091b2dfaeaf1458613cd6649bf8570a13fadd10",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 24116677,
+      "delivery_raw": 0,
+      "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
+      "tx_hash": "0x21f18e637c4c900904781e9798303445a091929a23664c58c0253f3cf9aeba38",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 24970816,
+      "delivery_raw": 0,
+      "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
+      "tx_hash": "0x17d59ba4a19c40e0aeb61412425b058d72dd45675559fc90060fd30217c6c6ba",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 24976972,
+      "delivery_raw": 0,
+      "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
+      "tx_hash": "0x609cd4a60a96925413a3dcd02a11a9816acce3e4a9c5a1c7c68d49d1e58b9802",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 24976973,
+      "delivery_raw": 0,
+      "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
+      "tx_hash": "0x8c287d172c92518cef8de30f297c2c31e598db2adc1bc54abab514aeeb94d7a1",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25140848,
+      "delivery_raw": 0,
+      "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
+      "tx_hash": "0x88b7d8bd9afab956c38f403f2b71fafa6cdaf0e6d657d9ef1bab7631f51de6a1",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25140851,
+      "delivery_raw": 0,
+      "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
+      "tx_hash": "0xfae5ed6c538df5c125ec574ceb1a5f03dc8f6e70716a84a538857e6c3625510a",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25349832,
+      "delivery_raw": 0,
+      "order": "0x18f426708043782773470636a12ed422aa67f923",
+      "tx_hash": "0xbcd69f894d0a372b517187cb99483ae67578d91e5f1b578df04da3fec72861ce",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393279,
+      "delivery_raw": 0,
+      "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
+      "tx_hash": "0x0028cb2cc43ac8dd6267722bbbf5c35f365278cd2acfe39cc0c53020eac93570",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393280,
+      "delivery_raw": 0,
+      "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
+      "tx_hash": "0x2a0e7df07d8da109a6a06a09f573a92cfcfc3f0f714de56ef07c702a47be9d4a",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393282,
+      "delivery_raw": 0,
+      "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
+      "tx_hash": "0xf4bfe897c3cdfcc98e4a371eee8482d721d3b408bc0763b017734b61666a992d",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393283,
+      "delivery_raw": 0,
+      "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
+      "tx_hash": "0x4c1cc78caf4990a95d646b53da5dacf223262610cb0a4d983156cb4d3fa6acf2",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393284,
+      "delivery_raw": 0,
+      "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
+      "tx_hash": "0x04be89db2d47ff68ff82f09c31e55272927f0567f3a106f45df7bde8d26a9ad0",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393285,
+      "delivery_raw": 0,
+      "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
+      "tx_hash": "0xfdafcf127eca15a3282781f135592b4299a35111e7424a997f31e6bed9699c38",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393286,
+      "delivery_raw": 0,
+      "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
+      "tx_hash": "0xa332d8d1c55dfc4656ee3ddd57e286fcf91c7b902eda4c5ef5e0406c9eabf918",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393288,
+      "delivery_raw": 0,
+      "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
+      "tx_hash": "0xa6c2a13c9058a20d006c0e98f61a4f6b44540e1c4f7a6884f4ee2c6ea56cbcf3",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393297,
+      "delivery_raw": 0,
+      "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
+      "tx_hash": "0x69a6a25c92f075721a0f6c9a8de8d3510962895e017720a7f514e023e39df913",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25393305,
+      "delivery_raw": 0,
+      "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
+      "tx_hash": "0x531909011bbc6424a2612b4b3aaf4dfa483e9fae840fb1cb4999932a35581d70",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25682605,
+      "delivery_raw": 0,
+      "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
+      "tx_hash": "0x0ee0813e925f82ac2d58f55fe606f49f7185def6309caf133c3604b77d6999ac",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25682620,
+      "delivery_raw": 0,
+      "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
+      "tx_hash": "0x5fea8ceb73318c6fe86cb37c940ef75bcfdc1880ab75dd905fec2a7beca67ad5",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25682624,
+      "delivery_raw": 0,
+      "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
+      "tx_hash": "0x8d1a33357ccba0ce9cf49701c54cb1337f7a442f94c3c070fd355ed1c4b4c3b3",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+        "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+      },
+      "bad_debt_raw": 1,
+      "block": 25682658,
+      "delivery_raw": 0,
+      "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
+      "tx_hash": "0xe5957d2f7422782f6ecaefa263177896330bb24b611653bb35d2f28c22896e0e",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    },
+    {
+      "asset_meta": {
+        "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 503: 'Service Unavailable'>\")",
+        "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+      },
+      "bad_debt_raw": 1,
+      "block": 24389192,
+      "delivery_raw": 0,
+      "order": "0xe6690172eea7833a46964b075f98d0f438810cbf",
+      "tx_hash": "0x7a154aeaffa94d5545f774d76d1f18be6a657f64f401b4b1fad9c49c9bbee62e",
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    }
+  ],
+  "rpc_endpoints_tried": [
+    "https://ethereum-rpc.publicnode.com",
+    "https://rpc.flashbots.net",
+    "https://eth.llamarpc.com",
+    "https://cloudflare-eth.com",
+    "https://1rpc.io/eth"
+  ],
+  "vault_assets": {
+    "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48": {
+      "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+      "vault": "0x17337c22cf8b7c1b6fc86f0ef7fcf05a7fa93f48"
+    },
+    "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e": {
+      "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 429: 'Too Many Requests'>\")",
+      "vault": "0x18d91b5e3218ab16ef86fb7cb054cb48ba1e8b8e"
+    },
+    "0xad58811276a0b9fb842e860774793a9663094879": {
+      "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: <HTTPError 503: 'Service Unavailable'>\")",
+      "vault": "0xad58811276a0b9fb842e860774793a9663094879"
+    },
+    "0xf488ccdf04079cc03183cdb6a147d12cf97f9317": {
+      "error": "RuntimeError(\"https://ethereum-rpc.publicnode.com: <HTTPError 403: 'Forbidden'>; https://rpc.flashbots.net: <HTTPError 403: 'Forbidden'>; https://eth.llamarpc.com: <HTTPError 521: '<none>'>; https://cloudflare-eth.com: RuntimeError({'code': -32603, 'message': 'Internal error'}); https://1rpc.io/eth: RuntimeError({'code': -32000, 'message': 'historical state c44567ac01b34cd65937f9d54920108758d2e8adb4d43da56da41f613b537741 is not available'})\")",
+      "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
+    }
+  }
+}
