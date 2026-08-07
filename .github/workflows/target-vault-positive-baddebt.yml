@@ -25,6 +25,9 @@ jobs:
           git clone --depth 1 --branch audit/termmax-production-evidence \
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
 
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
+
       - name: Scan RedeemOrder events
         working-directory: repo
         run: |
@@ -33,22 +36,10 @@ jobs:
           python3 - <<'PY'
           import json, time, urllib.parse, urllib.request
           from pathlib import Path
-          from hashlib import sha3_256
+          from web3 import Web3
 
           VAULT="0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
-          # Ethereum Keccak differs from hashlib.sha3_256; use the exact topic already
-          # established by the repository scanner when available.
-          import sys
-          sys.path.insert(0,'.')
-          try:
-              from web3 import Web3
-              TOPIC=Web3.keccak(text="RedeemOrder(address,address,uint256,uint256)").hex().lower()
-          except Exception:
-              # Known keccak is read from the repository scanner in the fallback below.
-              import re
-              text=Path('scripts/termmax_production_evidence.py').read_text()
-              raise RuntimeError('web3 unavailable; workflow setup changed unexpectedly')
-
+          TOPIC=Web3.keccak(text="RedeemOrder(address,address,uint256,uint256)").hex().lower()
           base=f"https://eth.blockscout.com/api/v2/addresses/{VAULT}/logs"
           params={}
           all_items=[]
