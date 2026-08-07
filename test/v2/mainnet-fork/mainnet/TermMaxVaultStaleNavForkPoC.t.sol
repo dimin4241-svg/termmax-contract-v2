@@ -23,10 +23,7 @@ interface IProductionTermMaxOrder {
 
 /// @notice Minimal ABI shared by deployed TermMaxMarketV2 instances.
 interface IProductionTermMaxMarket {
-    function tokens()
-        external
-        view
-        returns (address ft, address xt, address gt, address collateral, address debtToken);
+    function tokens() external view returns (address ft, address xt, address gt, address collateral, address debtToken);
 }
 
 /// @title TermMaxVaultV2 realized-loss / stale-NAV production fork PoC
@@ -77,12 +74,8 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         // This computes the amount the same shares would represent if the already-realized
         // loss had been recognized in totalAssets before redemption.
         uint256 economicAssets = state.vault.totalAssets() - state.realizedLoss;
-        uint256 fairEconomicPayout = Math.mulDiv(
-            state.attackerShares,
-            economicAssets + 1,
-            state.totalSupplyBefore + 1,
-            Math.Rounding.Floor
-        );
+        uint256 fairEconomicPayout =
+            Math.mulDiv(state.attackerShares, economicAssets + 1, state.totalSupplyBefore + 1, Math.Rounding.Floor);
         uint256 lossShift = nominalPayout - fairEconomicPayout;
         assertGt(lossShift, 0, "settlement does not create a profitable stale-NAV exit");
 
@@ -126,10 +119,7 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         // This is the end-to-end conservation check: every extra raw unit paid to the exiting
         // LP is removed from the aggregate economic claim of all remaining share holders.
         assertApproxEqAbs(
-            additionalLossForcedOnRemainingLPs,
-            lossShift,
-            2,
-            "early-exit gain is not conserved as remaining-LP loss"
+            additionalLossForcedOnRemainingLPs, lossShift, 2, "early-exit gain is not conserved as remaining-LP loss"
         );
 
         emit log_named_address("vault", VAULT);
@@ -152,7 +142,8 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         // A transaction-hash fork replays every transaction earlier in the same block and
         // stops immediately before the selected settlement. Some public RPC providers do
         // not support this Foundry feature, so the exact pre-block remains an explicit fallback.
-        try vm.createSelectFork(rpc, settlementTx) returns (uint256) {} catch {
+        try vm.createSelectFork(rpc, settlementTx) returns (uint256) {}
+        catch {
             vm.createSelectFork(rpc, fallbackPreBlock);
         }
 
@@ -181,8 +172,7 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         assertEq(state.vault.balanceOf(attacker), state.attackerShares, "attacker shares not funded");
 
         address market = IProductionTermMaxOrder(order).market();
-        (,, address gtAddress, address collateral, address debtToken) =
-            IProductionTermMaxMarket(market).tokens();
+        (,, address gtAddress, address collateral, address debtToken) = IProductionTermMaxMarket(market).tokens();
         assertEq(debtToken, address(state.asset), "order debt token differs from vault asset");
 
         state.gt = IGearingToken(gtAddress);
