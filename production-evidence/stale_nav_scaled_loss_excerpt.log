@@ -1,10 +1,10 @@
-[PASS] testAudit_ScaledRealizedLossIsShiftedToRemainingLPs() (gas: 2010337)
-  bad debt raw: 50000000000
-  delivered collateral raw: 500000000000000000
-  delivered collateral value in debt raw: 25000000000
-  realized net loss raw: 25000000000
-  exiting LP shares: 1000000000000
-  stale redeem payout raw: 1001205479449
-  fair loss-adjusted payout raw: 988705479450
-  loss shifted to remaining LPs raw: 12499999999
-Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 18.52ms (1.68ms CPU time)
+[PASS] testAudit_ScaledRealizedLossIsShiftedToRemainingLPs() (gas: 2387065)
+  bad debt raw: 40000000000000
+  delivered collateral raw: 400000000000000000000
+  delivered collateral value in debt raw: 20000000000000
+  realized net loss raw: 20000000000000
+  exiting LP shares: 50000000000000
+  stale redeem payout raw: 50954835207920
+  fair loss-adjusted payout raw: 41053845108910
+  loss shifted to remaining LPs raw: 9900990099010
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 13.42ms (1.54ms CPU time)
