@@ -1,0 +1,133 @@
+name: TermMax all mainnet vault bad debt
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/all-mainnet-vault-baddebt.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    name: Rank deployed mainnet vaults by RedeemOrder badDebt
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Enumerate vault deployments and scan RedeemOrder events
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import glob, json, urllib.parse, urllib.request, time
+          from pathlib import Path
+
+          TOPIC='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          TARGET='0xF488ccdf04079cC03183cDB6A147d12Cf97F9317'
+          vaults={TARGET.lower(): {'address':TARGET,'sources':['known target']}}
+
+          for fn in glob.glob('broadcast/DeployVault.s.sol/1/*.json'):
+              try:
+                  doc=json.load(open(fn))
+              except Exception:
+                  continue
+              for tx in doc.get('transactions',[]):
+                  if tx.get('contractName')!='TermMaxVaultFactoryV2' or not str(tx.get('function','')).startswith('createVault('):
+                      continue
+                  for extra in tx.get('additionalContracts') or []:
+                      addr=extra.get('address')
+                      if not addr: continue
+                      key=addr.lower()
+                      vaults.setdefault(key,{'address':addr,'sources':[]})['sources'].append(fn)
+
+          print('VAULTS',len(vaults))
+          for v in vaults.values(): print('VAULT',v['address'])
+
+          def get_logs(address):
+              params={
+                  'module':'logs','action':'getLogs','fromBlock':'0','toBlock':'latest',
+                  'address':address,'topic0':TOPIC,
+              }
+              url='https://eth.blockscout.com/api?'+urllib.parse.urlencode(params)
+              req=urllib.request.Request(url,headers={'User-Agent':'curl/8.5.0','Accept':'application/json'})
+              last=None
+              for attempt in range(5):
+                  try:
+                      with urllib.request.urlopen(req,timeout=60) as r:
+                          payload=json.loads(r.read())
+                      result=payload.get('result') or []
+                      if isinstance(result,list): return result
+                      raise RuntimeError(str(payload))
+                  except Exception as exc:
+                      last=exc; time.sleep(min(16,2**attempt))
+              raise last
+
+          results=[]
+          global_positives=[]
+          for i,v in enumerate(vaults.values(),1):
+              addr=v['address']
+              try:
+                  logs=get_logs(addr)
+                  rows=[]
+                  for log in logs:
+                      raw=str(log.get('data') or '0x').removeprefix('0x')
+                      if len(raw)<128: continue
+                      bad=int(raw[:64],16); delivery=int(raw[64:128],16)
+                      topics=[str(x).lower() for x in (log.get('topics') or [])]
+                      order='0x'+topics[2].removeprefix('0x')[-40:] if len(topics)>=3 else None
+                      blockv=log.get('blockNumber')
+                      block=int(blockv,16) if isinstance(blockv,str) and blockv.startswith('0x') else int(blockv or 0)
+                      row={'vault':addr,'tx_hash':log.get('transactionHash'),'block':block,'order':order,'bad_debt_raw':bad,'delivery_raw':delivery}
+                      rows.append(row)
+                      if bad>0: global_positives.append(row)
+                  positives=[x for x in rows if x['bad_debt_raw']>0]
+                  max_bad=max([x['bad_debt_raw'] for x in positives],default=0)
+                  result={'vault':addr,'sources':v['sources'],'redeem_events':len(rows),'positive_events':len(positives),'max_bad_debt_raw':max_bad}
+              except Exception as exc:
+                  result={'vault':addr,'sources':v['sources'],'error':str(exc)}
+              results.append(result)
+              print(f"SCAN {i}/{len(vaults)} {addr} redeems={result.get('redeem_events')} positives={result.get('positive_events')} max={result.get('max_bad_debt_raw')} error={result.get('error')}",flush=True)
+
+          results.sort(key=lambda x:int(x.get('max_bad_debt_raw') or 0),reverse=True)
+          global_positives.sort(key=lambda x:x['bad_debt_raw'],reverse=True)
+          out={'vault_count':len(vaults),'vaults_ranked':results,'positive_events_ranked':global_positives}
+          p=Path('production-evidence/all_mainnet_vault_baddebt.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('TOP_VAULTS')
+          for x in results[:20]: print(json.dumps(x,sort_keys=True))
+          print('TOP_EVENTS')
+          for x in global_positives[:30]: print(json.dumps(x,sort_keys=True))
+          PY
+
+      - name: Commit result
+        if: always()
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f production-evidence/all_mainnet_vault_baddebt.json || exit 0
+          git config user.name "termmax-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add production-evidence/all_mainnet_vault_baddebt.json
+          git commit -m "Record all mainnet vault bad-debt ranking" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-mainnet-vault-baddebt
+          path: repo/production-evidence/all_mainnet_vault_baddebt.json
+          if-no-files-found: warn
