@@ -48,6 +48,7 @@ jobs:
           set -a
           source production-evidence/focused_target_zero_delivery_fixture.env
           set +a
+          echo "Liquidity-safe real LP shares: ${TERM_MAX_ATTACKER_SHARES}"
           forge test \
             --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultStaleNavForkPoC.t.sol \
             --match-test testFork_RealSettlementLetsExistingLPShiftRealizedLossToRemainingLPs \
