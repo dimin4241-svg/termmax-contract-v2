@@ -1,8 +1,10 @@
 {
+  "all_address_logs": 12147,
   "all_redeem_events": [
     {
       "bad_debt_raw": 0,
       "block": 23706067,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 217,
       "order": "0x44e7e552c0f329f23be526a0428839335e5d8c69",
@@ -11,6 +13,7 @@
     {
       "bad_debt_raw": 0,
       "block": 23740601,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 121,
       "order": "0x1331cbb021f9fcdaf78491b274070a7a2685d987",
@@ -19,6 +22,7 @@
     {
       "bad_debt_raw": 0,
       "block": 23895227,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 387,
       "order": "0xe9edaf8762c302e15c4b61e75ece45cfffc37d5e",
@@ -27,6 +31,7 @@
     {
       "bad_debt_raw": 0,
       "block": 23895229,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 28,
       "order": "0x0956030dc05ce7456f2290712334f174e2126ce6",
@@ -35,6 +40,7 @@
     {
       "bad_debt_raw": 1,
       "block": 23895230,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 30,
       "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
@@ -43,6 +49,7 @@
     {
       "bad_debt_raw": 0,
       "block": 23938911,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 90,
       "order": "0x96701747be53d3744b8724159f345f98fdefae54",
@@ -51,6 +58,7 @@
     {
       "bad_debt_raw": 0,
       "block": 23993842,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 20,
       "order": "0x8a8b0d5f4750534eec71ec0355874b1e36e71ddc",
@@ -59,6 +67,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24116677,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 48,
       "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
@@ -67,6 +76,7 @@
     {
       "bad_debt_raw": 0,
       "block": 24116678,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 119,
       "order": "0xd20e4610ff5ae4d4fe59042b41a01f1ab35c2a58",
@@ -75,6 +85,7 @@
     {
       "bad_debt_raw": 0,
       "block": 24116681,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 171,
       "order": "0x3cbed6cf2860c84eb17870f47147fc5b99e63c8d",
@@ -83,6 +94,7 @@
     {
       "bad_debt_raw": 0,
       "block": 24116681,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 187,
       "order": "0xa83c5f765793ddf05651144e3ae52cf1ba78b4a0",
@@ -91,6 +103,7 @@
     {
       "bad_debt_raw": 0,
       "block": 24748625,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 288,
       "order": "0x02b26e1d575da87113553dcb3bf18d47234d487c",
@@ -99,6 +112,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24970816,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 191,
       "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
@@ -107,6 +121,7 @@
     {
       "bad_debt_raw": 0,
       "block": 24976971,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 150,
       "order": "0x0379a4c17c6382efacf86b2cf2d13dbf7181a58f",
@@ -115,6 +130,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24976972,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 89,
       "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
@@ -123,6 +139,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24976973,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 359,
       "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
@@ -131,6 +148,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25140848,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 326,
       "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
@@ -139,6 +157,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25140851,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 218,
       "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
@@ -147,6 +166,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25349832,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 132,
       "order": "0x18f426708043782773470636a12ed422aa67f923",
@@ -155,6 +175,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393279,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 125,
       "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
@@ -163,6 +184,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393280,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 453,
       "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
@@ -171,6 +193,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393282,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 245,
       "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
@@ -179,6 +202,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393283,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 149,
       "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
@@ -187,6 +211,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393284,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 203,
       "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
@@ -195,6 +220,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393285,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 286,
       "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
@@ -203,6 +229,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393286,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 401,
       "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
@@ -211,6 +238,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393288,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 253,
       "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
@@ -219,6 +247,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393297,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 21,
       "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
@@ -227,6 +256,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25393302,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 550,
       "order": "0x9cac213cbc2acfc722e19db2294b93e756e0a6f5",
@@ -235,6 +265,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25393304,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 696,
       "order": "0x619c336c9ad2d6b344413d42f5c6118c08d99bb5",
@@ -243,6 +274,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393305,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 704,
       "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
@@ -251,6 +283,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25420689,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 2557,
       "order": "0x87cd21059f568fc9e029968ed3b1ec9f98f8901c",
@@ -259,6 +292,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682601,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 503,
       "order": "0x0519027436d3b1ad4692ed5dcd3580db33c044aa",
@@ -267,6 +301,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682605,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 832,
       "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
@@ -275,6 +310,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682608,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1273,
       "order": "0xf94b80e686d5696c8161d2dd3cdf39d9d6c6a067",
@@ -283,6 +319,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682619,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 898,
       "order": "0x380bf8c25c44caf81a1922991cb9af169c5bebc9",
@@ -291,6 +328,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682620,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 993,
       "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
@@ -299,6 +337,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682621,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 825,
       "order": "0x1054688e4be7e267ec791f91c9ecbdeeeade325c",
@@ -307,6 +346,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682622,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 742,
       "order": "0x21f7a85ba392592f32f2a451e2829f5ad076b890",
@@ -315,6 +355,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682623,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 879,
       "order": "0xfa95a72cfc788aa974ed59332e37c03569b23937",
@@ -323,6 +364,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682624,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 779,
       "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
@@ -331,6 +373,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682627,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 896,
       "order": "0x1fb6b83566e2424ab8cecd751bb378f09666182d",
@@ -339,6 +382,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682642,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 974,
       "order": "0x742809322e0f6211c1a4373ae85832a188fc0a05",
@@ -347,6 +391,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682646,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 940,
       "order": "0x7db3bacaa83d7d3f074293ca2763885fbdc1174a",
@@ -355,6 +400,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682658,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1008,
       "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
@@ -363,6 +409,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682660,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 761,
       "order": "0x667ddd85358e8765814f07efd1c4a9cad67521d7",
@@ -371,6 +418,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682666,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1000,
       "order": "0x735c10d23803ea4251c30275c4b29ca88db97b4e",
@@ -379,6 +427,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682668,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 660,
       "order": "0xcfec3572264f411002a53d3b8f84b7eff8c2aa13",
@@ -387,6 +436,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682671,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1282,
       "order": "0x7cc039088a7919e3d66eecab8b8ce9db962f130f",
@@ -395,6 +445,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682675,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 586,
       "order": "0x5dddc667594b50785f036df0b109285df52b7086",
@@ -403,6 +454,7 @@
     {
       "bad_debt_raw": 0,
       "block": 25682677,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 694,
       "order": "0xab6189102a112fce6bb128c908b627513c50c0e2",
@@ -411,18 +463,19 @@
     {
       "bad_debt_raw": 0,
       "block": 25682681,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1229,
       "order": "0x27ce3d3d4dbf9838db207f4ae0a5322471c3466b",
       "tx_hash": "0xb5f1aca00c41b28e859ac312bf5dd9a468ccc18469c2b75c7d0e510ff7529138"
     }
   ],
-  "from_block": 23490022,
   "positive_bad_debt_events": 22,
   "positive_events": [
     {
       "bad_debt_raw": 1,
       "block": 25682658,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 1008,
       "order": "0x69934e4a00133b566dd4853c65e254ea66544b34",
@@ -431,6 +484,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682624,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 779,
       "order": "0x66197a8bb9621a6da48e9c28fd6f23341901af8d",
@@ -439,6 +493,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682620,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 993,
       "order": "0xe7059ddd2dc6f7d54088628655d8c3a096804448",
@@ -447,6 +502,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25682605,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 832,
       "order": "0xd8409caa2497dfee072722a8155503f744514ca7",
@@ -455,6 +511,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393305,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 704,
       "order": "0x8f704a4f154176ec3a17d4ee45e2338bba458b25",
@@ -463,6 +520,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393297,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 21,
       "order": "0x792919f7bba6a98f21281eb93d89414b5b9bb4f9",
@@ -471,6 +529,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393288,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 253,
       "order": "0x2882592f0303c65ca5303c48aced67a338dbbdc5",
@@ -479,6 +538,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393286,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 401,
       "order": "0x21df10a0b75b4748ea7c88d0ee5ecdb5b0f2aa2f",
@@ -487,6 +547,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393285,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 286,
       "order": "0xf3eb43bdefa01f3903940add1f09318c3b52426f",
@@ -495,6 +556,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393284,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 203,
       "order": "0xd1ec528726896209c913739d8cfc7f62c2e274e9",
@@ -503,6 +565,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393283,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 149,
       "order": "0x20e7b14afed0a880a76bc850670d53f1d5307286",
@@ -511,6 +574,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393282,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 245,
       "order": "0xefd78219dc2430eaa08f351bcaea0dbef4946c8a",
@@ -519,6 +583,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393280,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 453,
       "order": "0xfae2c32fd6db66fdbc551dfb408bbc9a73111d5a",
@@ -527,6 +592,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25393279,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 125,
       "order": "0xdc53b62a9bfc750b3d50c0948c4fc0613a6b5afc",
@@ -535,6 +601,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25349832,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 132,
       "order": "0x18f426708043782773470636a12ed422aa67f923",
@@ -543,6 +610,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25140851,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 218,
       "order": "0xdb3c2c9118c058c017c009eba206ad3df2be1618",
@@ -551,6 +619,7 @@
     {
       "bad_debt_raw": 1,
       "block": 25140848,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 326,
       "order": "0xd273921475bc7be99eac729cf5e37bac8ec65bf7",
@@ -559,6 +628,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24976973,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 359,
       "order": "0xf90be8cc5557149e0b2898cb208824545ba5d008",
@@ -567,6 +637,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24976972,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 89,
       "order": "0x85427aa64d6f7480e7c99b5d840d3e344b107ad4",
@@ -575,6 +646,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24970816,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 191,
       "order": "0x176c1b646305bd00ac2053bdea684ae980eec3fb",
@@ -583,6 +655,7 @@
     {
       "bad_debt_raw": 1,
       "block": 24116677,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 48,
       "order": "0xc23925b8f357a94b914abb82bc74db6858b61415",
@@ -591,6 +664,7 @@
     {
       "bad_debt_raw": 1,
       "block": 23895230,
+      "caller": "0x008c7dc790fa31e6ca19d8cb6d11c53f6a88df6c",
       "delivery_collateral_raw": 0,
       "log_index": 30,
       "order": "0x6f381a975b343a5bbd7c551d8017be0a884be197",
@@ -599,6 +673,5 @@
   ],
   "redeem_order_events": 52,
   "redeem_order_topic": "0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242",
-  "source": "Blockscout topic0-filtered logs",
   "vault": "0xF488ccdf04079cC03183cDB6A147d12Cf97F9317"
 }
