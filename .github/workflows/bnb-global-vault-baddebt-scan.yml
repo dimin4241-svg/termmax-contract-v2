@@ -20,23 +20,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
-      - uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
+      - name: Install Web3
+        run: python3 -m pip install --user --upgrade "web3==7.13.0"
       - name: Scan every deployed BNB V2 vault RedeemOrder event
         working-directory: repo
         run: |
           set -euo pipefail
           mkdir -p production-evidence
           python3 - <<'PY'
-          import glob,json,os,re,time,urllib.request
+          import glob,json,re,urllib.request
           from pathlib import Path
+          from web3 import Web3
           RPCS=['https://bsc-dataseed.binance.org','https://bsc-dataseed1.defibit.io','https://bsc-dataseed1.ninicoin.io']
-          topic='0x'+__import__('subprocess').check_output(['cast','keccak','RedeemOrder(address,address,uint256,uint256)'],text=True).strip().splitlines()[-1].removeprefix('0x')
+          topic='0x'+Web3.keccak(text='RedeemOrder(address,address,uint256,uint256)').hex().removeprefix('0x')
           vaults={}
           for f in glob.glob('deployments/bnb-mainnet/*vault*.env'):
-              txt=open(f).read()
-              bm=re.search(r'^BLOCK_NUMBER=(\d+)',txt,re.M); start=int(bm.group(1)) if bm else 0
+              txt=open(f).read(); bm=re.search(r'^BLOCK_NUMBER=(\d+)',txt,re.M); start=int(bm.group(1)) if bm else 0
               for m in re.finditer(r'^VAULT_ADDRESS(?:_\d+)?=(0x[a-fA-F0-9]{40})',txt,re.M):
                   a=m.group(1).lower(); vaults[a]=min(vaults.get(a,start),start)
           if not vaults: raise SystemExit('no BNB vaults parsed')
@@ -52,51 +51,45 @@ jobs:
                       return d.get('result')
                   except Exception as e: last=e
               raise last
-          latest=int(rpc('eth_blockNumber',[]),16)
-          start=min(vaults.values())
+          latest=int(rpc('eth_blockNumber',[]),16); start=min(vaults.values())
           logs=[]; lo=start; span=100000
           while lo<=latest:
               hi=min(latest,lo+span-1)
               try:
                   got=rpc('eth_getLogs',[{'fromBlock':hex(lo),'toBlock':hex(hi),'address':addresses,'topics':[topic]}])
-                  logs.extend(got or [])
-                  if span<200000: span=min(200000,span*2)
-                  lo=hi+1
+                  logs.extend(got or []); lo=hi+1; span=min(200000,span*2)
               except Exception as e:
-                  if span<=2000: raise
-                  span=max(2000,span//2)
-                  print('REDUCE_SPAN',span,'AT',lo,'ERR',repr(e)[:500])
-              if len(logs)%50==0: print('PROGRESS',lo,latest,'events',len(logs),'span',span)
+                  if span<=1000: raise
+                  span=max(1000,span//2); print('REDUCE_SPAN',span,'AT',lo,'ERR',repr(e)[:300])
+              if lo%1000000<span: print('PROGRESS',lo,latest,'events',len(logs),'span',span)
           rows=[]
           for x in logs:
-              data=str(x.get('data') or '0x')[2:].rjust(128,'0')
-              bad=int(data[0:64],16) if len(data)>=64 else 0
-              delivery=int(data[64:128],16) if len(data)>=128 else 0
-              topics=x.get('topics') or []
-              order='0x'+topics[2][-40:] if len(topics)>2 else None
-              rows.append({'block':int(x['blockNumber'],16),'tx_hash':x['transactionHash'],'vault':x['address'],'order':order,'bad_debt_raw':bad,'delivery_raw':delivery})
-          pos=[r for r in rows if r['bad_debt_raw']>0]
-          pos.sort(key=lambda x:x['bad_debt_raw'],reverse=True)
-          # Resolve asset metadata for candidate vaults at latest state.
-          import subprocess
-          def cast(addr,sig):
-              for ep in RPCS:
-                  try:
-                      out=subprocess.check_output(['cast','call',addr,sig,'--rpc-url',ep],text=True,stderr=subprocess.STDOUT,timeout=30)
-                      ls=[q.strip() for q in out.splitlines() if q.strip() and not q.startswith('Warning:')]
-                      return ls[-1]
-                  except: pass
-              return None
+              data=str(x.get('data') or '0x')[2:].rjust(128,'0'); topics=x.get('topics') or []
+              rows.append({'block':int(x['blockNumber'],16),'tx_hash':x['transactionHash'],'vault':x['address'].lower(),
+                           'order':'0x'+topics[2][-40:] if len(topics)>2 else None,
+                           'bad_debt_raw':int(data[:64],16),'delivery_raw':int(data[64:128],16)})
+          pos=sorted((r for r in rows if r['bad_debt_raw']>0),key=lambda x:x['bad_debt_raw'],reverse=True)
+          # Raw eth_call metadata: asset() and decimals(). Dynamic symbol resolved through Web3 ABI.
+          w3=None
+          for ep in RPCS:
+              q=Web3(Web3.HTTPProvider(ep,request_kwargs={'timeout':30}))
+              if q.is_connected(): w3=q; break
           meta={}
-          for v in sorted(set(r['vault'].lower() for r in pos)):
-              asset=cast(v,'asset()(address)')
-              symbol=cast(asset,'symbol()(string)') if asset else None
-              dec=cast(asset,'decimals()(uint8)') if asset else None
-              meta[v]={'asset':asset,'symbol':symbol,'decimals':dec}
-          out={'chain':'bnb-mainnet','rpc_latest_block':latest,'vault_count':len(vaults),'scan_start_block':start,'redeem_event_count':len(rows),'positive_event_count':len(pos),'positive_events_ranked':pos,'asset_meta':meta,'vault_start_blocks':vaults}
+          abi_v=[{'type':'function','name':'asset','stateMutability':'view','inputs':[],'outputs':[{'type':'address'}]}]
+          abi_t=[{'type':'function','name':'symbol','stateMutability':'view','inputs':[],'outputs':[{'type':'string'}]},
+                 {'type':'function','name':'decimals','stateMutability':'view','inputs':[],'outputs':[{'type':'uint8'}]}]
+          if w3:
+              for v in sorted(set(r['vault'] for r in pos)):
+                  try:
+                      asset=w3.eth.contract(address=Web3.to_checksum_address(v),abi=abi_v).functions.asset().call()
+                      tok=w3.eth.contract(address=asset,abi=abi_t)
+                      meta[v]={'asset':asset,'symbol':tok.functions.symbol().call(),'decimals':tok.functions.decimals().call()}
+                  except Exception as e: meta[v]={'error':repr(e)}
+          out={'chain':'bnb-mainnet','redeem_order_topic':topic,'rpc_latest_block':latest,'vault_count':len(vaults),'scan_start_block':start,
+               'redeem_event_count':len(rows),'positive_event_count':len(pos),'positive_events_ranked':pos,'asset_meta':meta,'vault_start_blocks':vaults}
           Path('production-evidence/bnb_all_vault_baddebt.json').write_text(json.dumps(out,indent=2,sort_keys=True))
           print('VAULT_COUNT',len(vaults),'REDEEM_EVENTS',len(rows),'POSITIVE',len(pos))
-          for r in pos[:50]: print('POSITIVE',json.dumps(r,sort_keys=True),'META',json.dumps(meta.get(r['vault'].lower()),sort_keys=True))
+          for r in pos[:50]: print('POSITIVE',json.dumps(r,sort_keys=True),'META',json.dumps(meta.get(r['vault']),sort_keys=True))
           PY
       - name: Commit scan
         working-directory: repo
