@@ -2,6 +2,7 @@
 pragma solidity ^0.8.27;
 
 import {Test} from "forge-std/Test.sol";
+import {Vm} from "forge-std/Vm.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import {IERC4626} from "@openzeppelin/contracts/interfaces/IERC4626.sol";
@@ -21,7 +22,6 @@ interface IProductionTermMaxOrder {
 
 interface IProductionTermMaxMarket {
     function tokens() external view returns (address ft, address xt, address gt, address collateral, address debtToken);
-    function previewRedeem(uint256 ftAmount) external view returns (uint256 debtTokenAmt, bytes memory deliveryData);
 }
 
 /// @title TermMaxVaultV2 realized-loss / stale-NAV production fork PoC
@@ -32,6 +32,7 @@ interface IProductionTermMaxMarket {
 ///      liquidity, a historical-event mismatch, or zero measurable loss shift fails the test.
 contract TermMaxVaultStaleNavForkPoC is Test {
     uint256 internal constant USD_BASE = 1e8;
+    bytes32 internal constant ORDER_REDEEMED_TOPIC = keccak256("Redeemed(address,uint256,uint256,bytes)");
 
     struct SettlementState {
         address vaultAddress;
@@ -81,7 +82,6 @@ contract TermMaxVaultStaleNavForkPoC is Test {
             nominalPayout,
             "real LP did not receive liquid underlying"
         );
-
         assertEq(
             state.vault.badDebtMapping(state.collateral),
             badDebtBeforeExit,
@@ -149,28 +149,40 @@ contract TermMaxVaultStaleNavForkPoC is Test {
 
         address marketAddress = IProductionTermMaxOrder(order).market();
         IProductionTermMaxMarket market = IProductionTermMaxMarket(marketAddress);
-        (address ft,, address gtAddress, address collateral, address debtToken) = market.tokens();
+        (, , address gtAddress, address collateral, address debtToken) = market.tokens();
         assertEq(debtToken, address(state.asset), "order debt token differs from vault asset");
 
         state.gt = IGearingToken(gtAddress);
         state.collateral = collateral;
 
-        // A zero-delivery historical settlement needs no oracle or preview at all: by the
-        // deployed order implementation, badDebt = FT face - debt tokens received and there
-        // is no collateral recovery to value. This is the cleanest production control.
-        if (expectedDelivery == 0) {
-            state.deliveryValueInAsset = 0;
-        } else {
-            uint256 ftAmount = IERC20(ft).balanceOf(order);
-            (, bytes memory deliveryData) = market.previewRedeem(ftAmount);
-            state.deliveryValueInAsset = _deliveryValueInAsset(state.gt, address(state.asset), deliveryData);
-        }
-
         uint256 badDebtBefore = state.vault.badDebtMapping(collateral);
         uint256 collateralBefore = IERC20(collateral).balanceOf(state.vaultAddress);
 
+        // Capture the exact opaque deliveryData emitted by the deployed Order during the
+        // real settlement. This avoids previewRedeem assumptions and avoids reconstructing
+        // protocol-specific collateralData off-chain.
+        vm.recordLogs();
         vm.prank(settlementCaller);
         (uint256 badDebtReturned, uint256 deliveryReturned) = state.vault.redeemOrder(order);
+        Vm.Log[] memory entries = vm.getRecordedLogs();
+
+        bytes memory actualDeliveryData;
+        bool orderRedeemedEventFound;
+        for (uint256 i; i < entries.length; ++i) {
+            Vm.Log memory entry = entries[i];
+            if (entry.emitter != order || entry.topics.length < 2 || entry.topics[0] != ORDER_REDEEMED_TOPIC) continue;
+
+            address eventRecipient = address(uint160(uint256(entry.topics[1])));
+            (uint256 orderDebtTokenAmount, uint256 orderBadDebt, bytes memory deliveryData) =
+                abi.decode(entry.data, (uint256, uint256, bytes));
+            orderDebtTokenAmount;
+            assertEq(eventRecipient, state.vaultAddress, "Order Redeemed recipient is not the vault");
+            assertEq(orderBadDebt, expectedBadDebt, "Order Redeemed badDebt differs from vault event");
+            actualDeliveryData = deliveryData;
+            orderRedeemedEventFound = true;
+            break;
+        }
+        assertTrue(orderRedeemedEventFound, "deployed Order Redeemed event not observed");
 
         state.badDebtDelta = state.vault.badDebtMapping(collateral) - badDebtBefore;
         state.deliveryDelta = IERC20(collateral).balanceOf(state.vaultAddress) - collateralBefore;
@@ -180,6 +192,14 @@ contract TermMaxVaultStaleNavForkPoC is Test {
         assertEq(state.badDebtDelta, expectedBadDebt, "bad-debt mapping delta differs from event");
         assertEq(state.deliveryDelta, expectedDelivery, "collateral balance delta differs from event");
         assertGt(state.badDebtDelta, 0, "selected production settlement has zero bad debt");
+
+        // For zero delivery this is exactly zero. For nonzero delivery this values the exact
+        // bytes produced by the real deployed settlement through TermMax's own GT/oracle path.
+        if (expectedDelivery == 0) {
+            state.deliveryValueInAsset = 0;
+        } else {
+            state.deliveryValueInAsset = _deliveryValueInAsset(state.gt, address(state.asset), actualDeliveryData);
+        }
 
         assertEq(
             state.vault.totalAssets(),
