@@ -1,0 +1,75 @@
+name: TermMax exact multi-holder cross-user stale NAV production proof
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/f488-cross-user-stale-nav-runtime.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FOUNDRY_PROFILE: ci
+  FOUNDRY_DISABLE_NIGHTLY_WARNING: '1'
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - name: Install dependencies
+        working-directory: repo
+        run: forge soldeer install
+      - name: Load exact production state from committed scan
+        working-directory: repo
+        run: |
+          python3 - <<'PY' >> "$GITHUB_ENV"
+          import json
+          d=json.load(open('production-evidence/f488_latest_uncovered_state.json'))
+          print('TERM_MAX_POST_SETTLEMENT_BLOCK='+str(d['block']))
+          print('TERM_MAX_VAULT='+d['vault'])
+          print('TERM_MAX_SHARE_HOLDER='+d['largest_holder'])
+          print('TERM_MAX_EXPECTED_TOTAL_UNCOVERED_BAD_DEBT_RAW='+str(d['total_uncovered_bad_debt_raw']))
+          print('TERM_MAX_COLLATERALS='+','.join(x['collateral'] for x in d['active_uncovered']))
+          PY
+      - name: Execute ordinary redeem from real historical LP
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          MAINNET_RPC_URL='https://eth.drpc.org' \
+            forge test \
+              --match-path test/v2/mainnet-fork/mainnet/TermMaxVaultAccumulatedBadDebtCrossUserPoC.t.sol \
+              --match-test testFork_RealMultiHolderState_RedeemShiftsAccumulatedUncoveredLoss \
+              -vvv 2>&1 | tee production-evidence/f488_cross_user_stale_nav_runtime.log
+          grep -E 'historical block|vault:|real exiting LP|other shares remaining raw|active uncovered bad debt raw|ordinary redeem payout raw|fair economic payout raw|cross-user loss shifted raw|additional loss on remaining shares raw|Suite result|tests passed|passed;' \
+            production-evidence/f488_cross_user_stale_nav_runtime.log \
+            | tee production-evidence/f488_cross_user_stale_nav_runtime_excerpt.log
+      - name: Commit proof
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f production-evidence/f488_cross_user_stale_nav_runtime.log production-evidence/f488_cross_user_stale_nav_runtime_excerpt.log
+          git commit -m "Record exact multi-holder cross-user stale NAV production proof" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f488-cross-user-stale-nav-runtime
+          path: |
+            repo/production-evidence/f488_cross_user_stale_nav_runtime.log
+            repo/production-evidence/f488_cross_user_stale_nav_runtime_excerpt.log
