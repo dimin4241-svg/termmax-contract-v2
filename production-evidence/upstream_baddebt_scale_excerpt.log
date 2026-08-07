@@ -1,1 +1,19 @@
-
+[PASS] testBadDebt() (gas: 1943951)
+  [2162649] VaultTestV2::testBadDebt()
+    ├─ [341733] vault::redeemOrder(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7])
+    │   ├─ [403059] TermMaxVaultV2::redeemOrder(order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   ├─ [386515] OrderManagerV2::redeemOrder(debt token: [0x73379bEEdccB30bb783465Df0fd37E1074295cAe], order: [0xbd3d1Ee177e1ccD54FdbA20FaF37cF56CBC24ec7]) [delegatecall]
+    │   │   │   │   │   ├─ [112970] market::redeem(100000000000 [1e11], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6])
+    │   │   │   │   │   │   ├─ [110280] TermMaxMarketV2::redeem(100000000000 [1e11], vault: [0x2d064eD12AFA98535a1aC0817Dc651F3DAa07Bd6]) [delegatecall]
+    ├─ [114699] vault::redeem(100000000000 [1e11], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12])
+    │   ├─ [107239] TermMaxVaultV2::redeem(100000000000 [1e11], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12]) [delegatecall]
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+    │   │   ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+    ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    │   │   ├─ emit DealBadDebt(caller: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], recipient: lper2: [0x0278A3F53dde6Ba2Ecb626Bc0ed97FE06E425B12], collateral: collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44], badDebt: 500000 [5e5], shares: 499392 [4.993e5], collateralOut: 4999950 [4.999e6])
+    ├─ [5783] vault::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [staticcall]
+    │   ├─ [3111] TermMaxVaultV2::badDebtMapping(collateral token: [0x3Aad75D9B85eBBF98D22Ed152Bb30038Ae9B9a44]) [delegatecall]
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 20.74ms (1.71ms CPU time)
