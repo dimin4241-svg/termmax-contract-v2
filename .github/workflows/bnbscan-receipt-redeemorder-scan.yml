@@ -1,0 +1,143 @@
+name: TermMax BNBScan receipt RedeemOrder scan
+
+on:
+  push:
+    branches:
+      - audit/termmax-production-evidence
+    paths:
+      - .github/workflows/bnbscan-receipt-redeemorder-scan.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone audit branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git clone --depth 1 --branch audit/termmax-production-evidence "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Enumerate indexed vault transactions then inspect receipts
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          mkdir -p production-evidence
+          python3 - <<'PY'
+          import concurrent.futures,json,math,time,urllib.parse,urllib.request
+          from pathlib import Path
+
+          vaults=[
+            '0x086c120290850e4698645a5689c2428d6e7789de',
+            '0x41d4b8385ab112380158eac2f4cabb9baef1bb45',
+            '0xe749d471db186a6dab068059b29498feb3a01b38',
+            '0xa6d02815d3ff570b795d6c0551cfcef915609142',
+          ]
+          vaultset=set(vaults)
+          topic='0x21f71f6609f50b01dbe90a67add86958b134ef6fa7e8c668df45730004806242'
+          rpc_eps=['https://bsc-rpc.publicnode.com','https://bsc.publicnode.com']
+
+          def get_json(url,tries=5):
+            last=None
+            for i in range(tries):
+              try:
+                req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'})
+                with urllib.request.urlopen(req,timeout=45) as r: return json.loads(r.read())
+              except Exception as e:
+                last=e; time.sleep(1.0+0.5*i)
+            raise last
+
+          # BNBScan is an indexed explorer; this avoids millions of archival eth_getLogs calls.
+          txs={}
+          index_summary={}
+          for v in vaults:
+            first=get_json('https://bnbscan.com/api/v1/transactions?'+urllib.parse.urlencode({'page':1,'limit':100,'address':v}))
+            total=int(first.get('total') or 0); pages=max(1,math.ceil(total/100))
+            items=list(first.get('transactions') or [])
+            print('VAULT',v,'TOTAL_TX',total,'PAGES',pages)
+            for page in range(2,pages+1):
+              time.sleep(0.7)  # stay well below anonymous explorer rate limits
+              d=get_json('https://bnbscan.com/api/v1/transactions?'+urllib.parse.urlencode({'page':page,'limit':100,'address':v}))
+              items.extend(d.get('transactions') or [])
+            for x in items:
+              h=str(x.get('hash') or '').lower()
+              if h: txs[h]=x
+            index_summary[v]={'total':total,'pages':pages,'returned':len(items)}
+
+          print('UNIQUE_INDEXED_TX',len(txs))
+
+          def rpc(ep,method,params,timeout=30):
+            body=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
+            req=urllib.request.Request(ep,data=body,headers={'Content-Type':'application/json','User-Agent':'termmax-security-validation/1.0'})
+            with urllib.request.urlopen(req,timeout=timeout) as r: d=json.loads(r.read())
+            if d.get('error'): raise RuntimeError(d['error'])
+            return d.get('result')
+
+          def receipt(h):
+            last=None
+            for attempt in range(5):
+              ep=rpc_eps[attempt%len(rpc_eps)]
+              try:
+                r=rpc(ep,'eth_getTransactionReceipt',[h])
+                if r is not None: return r
+              except Exception as e: last=e
+              time.sleep(0.15*(attempt+1))
+            return {'_error':repr(last),'transactionHash':h}
+
+          receipts=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
+            for i,r in enumerate(ex.map(receipt,txs.keys()),1):
+              receipts.append(r)
+              if i%100==0: print('RECEIPTS',i,'/',len(txs))
+
+          events=[]; receipt_errors=[]
+          for r in receipts:
+            if r.get('_error'):
+              receipt_errors.append(r); continue
+            for log in r.get('logs') or []:
+              if str(log.get('address') or '').lower() not in vaultset: continue
+              topics=[str(x).lower() for x in (log.get('topics') or [])]
+              if not topics or topics[0]!=topic: continue
+              data=str(log.get('data') or '0x').removeprefix('0x').rjust(128,'0')
+              events.append({
+                'block':int(log.get('blockNumber','0x0'),16),
+                'tx_hash':r.get('transactionHash'),
+                'log_index':int(log.get('logIndex','0x0'),16),
+                'vault':str(log.get('address')).lower(),
+                'order':'0x'+topics[2][-40:] if len(topics)>2 else None,
+                'bad_debt_raw':int(data[:64],16),
+                'delivery_raw':int(data[64:128],16),
+              })
+          events.sort(key=lambda x:(x['block'],x['log_index']))
+          positives=sorted((e for e in events if e['bad_debt_raw']>0),key=lambda e:e['bad_debt_raw'],reverse=True)
+          out={
+            'chain':'bnb-mainnet','source':'BNBScan indexed address transactions + publicnode transaction receipts',
+            'vaults':vaults,'index_summary':index_summary,'unique_indexed_transactions':len(txs),
+            'receipt_error_count':len(receipt_errors),'receipt_errors':receipt_errors[:50],
+            'redeem_event_count':len(events),'positive_event_count':len(positives),
+            'positive_events_ranked':positives,'all_redeem_events':events,
+          }
+          Path('production-evidence/bnbscan_receipt_redeemorder_scan.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print('REDEEM_EVENTS',len(events),'POSITIVE',len(positives),'RECEIPT_ERRORS',len(receipt_errors))
+          for e in positives[:100]: print('POSITIVE',json.dumps(e,sort_keys=True))
+          PY
+
+      - name: Commit evidence
+        working-directory: repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name termmax-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add production-evidence/bnbscan_receipt_redeemorder_scan.json
+          git commit -m "Record BNBScan receipt RedeemOrder scan" || exit 0
+          git pull --rebase origin audit/termmax-production-evidence
+          git push origin HEAD:audit/termmax-production-evidence
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bnbscan-receipt-redeemorder-scan
+          path: repo/production-evidence/bnbscan_receipt_redeemorder_scan.json
